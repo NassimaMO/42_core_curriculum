@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:12:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/07 14:13:54 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/15 16:11:48 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/15 16:11:50 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
 
-void	ft_putchar(char c, int fd, int *i)
+t_list	*ft_lstnew(void *content)
 {
-	write(fd, &c, 1);
-	(*i)++;
+	t_list	*new_list;
+
+	new_list = malloc(sizeof(t_list));
+	new_list->content = content;
+	new_list->next = NULL;
+	return (new_list);
 }
 
-void	ft_putnbr_fd(long long int n, int fd, int *i)
+/*
+int main()
 {
-	long long int	nbr;
-
-	nbr = n;
-	if (fd == -1)
-		return ;
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		ft_putchar('-', fd, i);
-	}
-	if (nbr >= 0 && nbr <= 9)
-		ft_putchar(nbr + 48, fd, i);
-	if (nbr > 9)
-	{
-		ft_putnbr_fd(nbr / 10, fd, i);
-		nbr = nbr % 10;
-		ft_putchar(nbr + 48, fd, i);
-	}
-}
+	t_list *nlist = ft_lstnew((void *)"");
+	printf("%s\n", (char *)nlist->content);
+	printf("%s", (char *)nlist->next);
+}*/

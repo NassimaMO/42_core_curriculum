@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:12:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/07 14:13:54 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/16 16:50:49 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/16 16:50:51 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 #include "libft.h"
 
-void	ft_putchar(char c, int fd, int *i)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	write(fd, &c, 1);
-	(*i)++;
-}
+	t_list	*tmp;
+	t_list	*tmpts;
 
-void	ft_putnbr_fd(long long int n, int fd, int *i)
-{
-	long long int	nbr;
-
-	nbr = n;
-	if (fd == -1)
-		return ;
-	if (nbr < 0)
+	tmpts = NULL;
+	while (lst)
 	{
-		nbr = -nbr;
-		ft_putchar('-', fd, i);
+		tmp = ft_lstnew((*f)(lst->content));
+		if (!tmp)
+			ft_lstclear(&tmpts, del);
+		ft_lstadd_back(&tmpts, tmp);
+		lst = lst->next;
 	}
-	if (nbr >= 0 && nbr <= 9)
-		ft_putchar(nbr + 48, fd, i);
-	if (nbr > 9)
-	{
-		ft_putnbr_fd(nbr / 10, fd, i);
-		nbr = nbr % 10;
-		ft_putchar(nbr + 48, fd, i);
-	}
+	return (tmpts);
 }

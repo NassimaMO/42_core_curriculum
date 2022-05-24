@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:12:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/07 14:13:54 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/16 15:25:31 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/16 15:25:33 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
 
-void	ft_putchar(char c, int fd, int *i)
+int	ft_lstsize(t_list *lst)
 {
-	write(fd, &c, 1);
-	(*i)++;
+	t_list	*cur;
+	int		i;
+
+	i = 0;
+	cur = lst;
+	while (cur)
+	{
+		cur = cur->next;
+		i++;
+	}
+	return (i);
 }
 
-void	ft_putnbr_fd(long long int n, int fd, int *i)
+/*int main()
 {
-	long long int	nbr;
+	t_list *lst = malloc(sizeof(t_list) * 2);
+	t_list new;
 
-	nbr = n;
-	if (fd == -1)
-		return ;
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		ft_putchar('-', fd, i);
-	}
-	if (nbr >= 0 && nbr <= 9)
-		ft_putchar(nbr + 48, fd, i);
-	if (nbr > 9)
-	{
-		ft_putnbr_fd(nbr / 10, fd, i);
-		nbr = nbr % 10;
-		ft_putchar(nbr + 48, fd, i);
-	}
-}
+	lst[0].content = "11111";
+	lst[0].next = lst + 1;
+	lst[1].content = "22222";
+	lst[1].next = NULL;
+	printf("%d", ft_lstsize(lst));
+}*/

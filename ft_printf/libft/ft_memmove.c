@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:12:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/07 14:13:54 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/03 14:36:49 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/04 15:06:14 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stddef.h>
 #include "libft.h"
 
-void	ft_putchar(char c, int fd, int *i)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	write(fd, &c, 1);
-	(*i)++;
-}
+	long unsigned int	i;
 
-void	ft_putnbr_fd(long long int n, int fd, int *i)
+	i = 0;
+	while (i != n && dest > src)
+	{
+		n--;
+		((char *)dest)[n] = ((char *)src)[n];
+	}
+	while (i != n && dest < src)
+	{
+		((char *)dest)[i] = ((char *)src)[i];
+		i++;
+	}
+	return (dest);
+}
+/*
+int main(void)
 {
-	long long int	nbr;
-
-	nbr = n;
-	if (fd == -1)
-		return ;
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		ft_putchar('-', fd, i);
-	}
-	if (nbr >= 0 && nbr <= 9)
-		ft_putchar(nbr + 48, fd, i);
-	if (nbr > 9)
-	{
-		ft_putnbr_fd(nbr / 10, fd, i);
-		nbr = nbr % 10;
-		ft_putchar(nbr + 48, fd, i);
-	}
+	char	*s = ft_strdup("abcdefgh");
+	ft_memmove(s + 1, s, 2);
+	printf("%s", s);
 }
+*/
