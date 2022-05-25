@@ -27,7 +27,7 @@ char	*ft_line(char *l)
 	return (new);
 }
 
-void	ft_rm_bn(char *buf)
+void	ft_rm_bn(char **buf)
 {
 	int	i;
 	int	j;
@@ -49,20 +49,21 @@ void	ft_rm_bn(char *buf)
 
 char    *get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE + 1] = {0};
+	static char	*buf[FOPEN_MAX];
 	char	*nl;
 	int		c;
 	
+	buf[fd] = ft_calloc(1, BUFFER_SIZE);
 	if (BUFFER_SIZE <= 0 || read(fd, "", 0) == -1)
 		return (NULL);
 	nl = ft_strdup("");
-	nl = ft_strjoin(nl, buf);
+	nl = ft_strjoin(nl, buf[fd]);
 	c = 1;
 	while (ft_strchr(nl, '\n') == 0 && c)
 	{
-		c = read(fd, buf, BUFFER_SIZE);
+		c = read(fd, buf[fd], BUFFER_SIZE);
 		buf[c] = '\0';
-		nl = ft_strjoin(nl, buf);
+		nl = ft_strjoin(nl, buf[fd]);
 	}
 	if (!c && nl[0] == 0)
 	{
@@ -70,7 +71,7 @@ char    *get_next_line(int fd)
 		return (NULL);
 	}
 	nl = ft_line(nl);
-	ft_rm_bn(buf);
+	ft_rm_bn(buf[fd]);
 	return (nl);
 }
 /*#include <fcntl.h>
