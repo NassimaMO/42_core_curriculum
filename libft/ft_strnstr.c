@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include "libft.h"
 
-int	ft_ftt(const char *big, const char *little, size_t len, \
+static int	ft_ftt(const char *big, const char *little, size_t len, \
 									long unsigned int *i)
 {
 	long unsigned int	j;
@@ -55,36 +55,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-
-/*char	*ft_strnstr(const char *big, const char *little, size_t len)
-{
-	long unsigned int	i;
-	long unsigned int	j;
-	long unsigned int	temp;
-
-	i = 0;
-	if (!little[i])
-		return ((char *)big);
-	while (big[i] && i <= len)
-	{
-		j = 0;
-		if (big[i] == little[j])
-		{
-			temp = i;
-			while (little[j])
-			{
-				if (little[j] != big[i] || i >= len)
-				{
-					i = temp;
-					break ;
-				}
-				j++;
-				i++;
-			}
-			if (j == ft_strlen(little))
-				return (((char *)big) + temp);
-		}
-		i++;
-	}
-	return (NULL);
-}*/

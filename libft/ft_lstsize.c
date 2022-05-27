@@ -28,15 +28,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
-
-/*int main()
-{
-	t_list *lst = malloc(sizeof(t_list) * 2);
-	t_list new;
-
-	lst[0].content = "11111";
-	lst[0].next = lst + 1;
-	lst[1].content = "22222";
-	lst[1].next = NULL;
-	printf("%d", ft_lstsize(lst));
-}*/

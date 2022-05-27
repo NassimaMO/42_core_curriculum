@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-int	ft_isspace(char c)
+static int	ft_isspace(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\f' || c == '\v' \
 		|| c == '\r' || c == ' ')
@@ -20,7 +20,7 @@ int	ft_isspace(char c)
 	return (0);
 }
 
-int	ft_try(char s, char const *set)
+static int	ft_try(char s, char const *set)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ int	ft_try(char s, char const *set)
 	return (0);
 }
 
-void	ft_fill2(char const *s1, char const *set, char *temp, int n)
+static void	ft_fill2(char const *s1, char const *set, char *temp, int n)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ void	ft_fill2(char const *s1, char const *set, char *temp, int n)
 	temp[j] = '\0';
 }
 
-char	*ft_errors(void)
+static char	*ft_errors(void)
 {
 	char	*tmp;
 
@@ -87,48 +87,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_fill2(s1, set, temp, i + j);
 	return (temp);
 }
-/*
-int	ft_try(char s, char const *set)
-{
-	int	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (s == set[i] || s == ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	char	*temp;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (s1[j])
-	{
-		if (!ft_try(s1[j], set))
-			i++;
-		j++;
-	}
-	temp = malloc(sizeof(char) * i + 1);
-	if (!temp)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		if (!ft_try(s1[i], set))
-		{
-			temp[j] = s1[i];
-			j++;
-		}
-		i++;
-	}
-	temp[j] = '\0';
-	return (temp);
-}*/

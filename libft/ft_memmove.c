@@ -30,11 +30,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*
-int main(void)
-{
-	char	*s = ft_strdup("abcdefgh");
-	ft_memmove(s + 1, s, 2);
-	printf("%s", s);
-}
-*/

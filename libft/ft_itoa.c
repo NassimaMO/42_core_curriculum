@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-int	ft_nbr_tab(int n)
+static int	ft_nbr_tab(int n)
 {
 	int				j;
 	long long int	nbr;
@@ -35,7 +35,7 @@ int	ft_nbr_tab(int n)
 	return (j);
 }
 
-void	ft_neg(long long int *nbr, char *temp, long long int *i)
+static void	ft_neg(long long int *nbr, char *temp, long long int *i)
 {
 	(*nbr) = (*nbr) * -1;
 	temp[*i] = '-';
@@ -67,50 +67,3 @@ char	*ft_itoa(int n)
 	}
 	return (temp);
 }
-
-/*char	*ft_itoa(int n)
-{
-	long long int	i;
-	long long int	j;
-	long long int	nbr;
-	char			*temp;
-
-	j = 0;
-	nbr = n;
-	i = 0;
-	if (nbr < 0)
-	{
-		nbr = nbr * -1;
-		j++;
-	}
-	if (nbr == 0)
-		j++;
-	else
-	{
-		while (nbr)
-		{
-			nbr = nbr / 10;
-			j++;
-		}
-	}
-	temp = malloc(sizeof(char) * (j + 1));
-	if (!temp)
-		return (NULL);
-	nbr = n;
-	if (nbr < 0)
-	{
-		nbr = nbr * -1;
-		temp[i] = '-';
-		i++;
-	}
-	temp[j] = '\0';
-	j--;
-	while (i <= j)
-	{
-		temp[j] = (nbr % 10) + 48;
-		nbr = nbr / 10;
-		j--;
-	}
-	return (temp);
-}
-*/

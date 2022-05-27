@@ -23,11 +23,3 @@ t_list	*ft_lstnew(void *content)
 	new_list->next = NULL;
 	return (new_list);
 }
-
-/*
-int main()
-{
-	t_list *nlist = ft_lstnew((void *)"");
-	printf("%s\n", (char *)nlist->content);
-	printf("%s", (char *)nlist->next);
-}*/
