@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 10:11:13 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/27 10:11:23 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/27 10:11:31 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/27 10:11:33 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,20 @@ void	ft_rm_bn(char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE + 1] = {0};
+	static char	buf[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*nl;
 	int			c;
 
 	if (BUFFER_SIZE <= 0 || read(fd, "", 0) == -1)
 		return (NULL);
 	nl = ft_strdup("");
-	nl = ft_strjoin(nl, buf);
+	nl = ft_strjoin(nl, buf[fd]);
 	c = 1;
 	while (ft_strchr(nl, '\n') == 0 && c)
 	{
-		c = read(fd, buf, BUFFER_SIZE);
-		buf[c] = '\0';
-		nl = ft_strjoin(nl, buf);
+		c = read(fd, buf[fd], BUFFER_SIZE);
+		buf[fd][c] = '\0';
+		nl = ft_strjoin(nl, buf[fd]);
 	}
 	if (!c && nl[0] == 0)
 	{
@@ -83,6 +83,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	nl = ft_line(nl);
-	ft_rm_bn(buf);
+	ft_rm_bn(buf[fd]);
 	return (nl);
 }
