@@ -60,6 +60,22 @@ void	ft_rm_bn(char *buf)
 	buf[j] = '\0';
 }
 
+char	*ft_norminetteuh(char *buf, int fd, int *c)
+{
+	char	*nl;
+
+	nl = ft_strdup("");
+	nl = ft_strjoin(nl, buf);
+	*c = 1;
+	while (nl && ft_strchr(nl, '\n') == 0 && *c)
+	{
+		*c = read(fd, buf, BUFFER_SIZE);
+		buf[*c] = '\0';
+		nl = ft_strjoin(nl, buf);
+	}
+	return (nl);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1] = {0};
@@ -68,15 +84,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || read(fd, "", 0) == -1)
 		return (NULL);
-	nl = ft_strdup("");
-	nl = ft_strjoin(nl, buf);
-	c = 1;
-	while (nl && ft_strchr(nl, '\n') == 0 && c)
-	{
-		c = read(fd, buf, BUFFER_SIZE);
-		buf[c] = '\0';
-		nl = ft_strjoin(nl, buf);
-	}
+	nl = ft_norminetteuh(buf, fd, &c);
 	if (!c && nl[0] == 0 && nl)
 	{
 		free(nl);

@@ -60,23 +60,31 @@ void	ft_rm_bn(char *buf)
 	buf[j] = '\0';
 }
 
+char	*ft_norminetteuh(char **buf, int fd, int *c) // pb with buf (char (*)[2]????????????)
+{
+	char	*nl;
+
+	nl = ft_strdup("");
+	nl = ft_strjoin(nl, buf[fd]);
+	*c = 1;
+	while (nl && ft_strchr(nl, '\n') == 0 && *c)
+	{
+		*c = read(fd, buf[fd], BUFFER_SIZE);
+		buf[fd][*c] = '\0';
+		nl = ft_strjoin(nl, buf[fd]);
+	}
+	return (nl);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	buf[FOPEN_MAX][BUFFER_SIZE + 1];
+	static char	buf[FOPEN_MAX][BUFFER_SIZE + 1] = {0};
 	char		*nl;
 	int			c;
 
 	if (BUFFER_SIZE <= 0 || read(fd, "", 0) == -1)
 		return (NULL);
-	nl = ft_strdup("");
-	nl = ft_strjoin(nl, buf[fd]);
-	c = 1;
-	while (nl && ft_strchr(nl, '\n') == 0 && c)
-	{
-		c = read(fd, buf[fd], BUFFER_SIZE);
-		buf[fd][c] = '\0';
-		nl = ft_strjoin(nl, buf[fd]);
-	}
+	nl = ft_norminetteuh(buf, fd, &c);
 	if (!c && nl[0] == 0 && nl)
 	{
 		free(nl);
