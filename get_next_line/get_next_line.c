@@ -71,18 +71,21 @@ char	*get_next_line(int fd)
 	nl = ft_strdup("");
 	nl = ft_strjoin(nl, buf);
 	c = 1;
-	while (ft_strchr(nl, '\n') == 0 && c)
+	while (nl && ft_strchr(nl, '\n') == 0 && c)
 	{
 		c = read(fd, buf, BUFFER_SIZE);
 		buf[c] = '\0';
 		nl = ft_strjoin(nl, buf);
 	}
-	if (!c && nl[0] == 0)
+	if (!c && nl[0] == 0 && nl)
 	{
 		free(nl);
 		return (NULL);
 	}
-	nl = ft_line(nl);
+	if (nl)
+		nl = ft_line(nl);
+	if (!nl)
+		return (NULL);
 	ft_rm_bn(buf);
 	return (nl);
 }
