@@ -5,22 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 11:02:11 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/02/20 11:18:36 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/30 14:43:01 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/30 14:43:04 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <limits.h>
 #include "libft/libft.h"
-void	ft_recursive(long int nbr, char *base, int *i, int n)
-{
-	long long	nb;
 
-	nb = nbr;
-	if (nb < 0)
+static void	ft_nb_neg(long long *nb, int n, int *i)
+{
+	if (*nb < 0)
 	{
-		nb = -nb;
+		*nb = -(*nb);
 		if (n)
 		{
 			ft_putchar_fd('-', 1);
@@ -29,6 +27,14 @@ void	ft_recursive(long int nbr, char *base, int *i, int n)
 		else
 			ft_putstr_fd("ffffffff", 1, i);
 	}
+}
+
+static void	ft_recursive(long int nbr, char *base, int *i, int n)
+{
+	long long	nb;
+
+	nb = nbr;
+	ft_nb_neg(&nb, n, i);
 	if (nb >= 0 && nb <= 15)
 	{
 		nb = nb % 16;
@@ -43,6 +49,7 @@ void	ft_recursive(long int nbr, char *base, int *i, int n)
 		(*i)++;
 	}
 }
+
 int	ft_putnbr_base(long int nbr, char *base, int n, int *i)
 {
 	if (nbr && n)
@@ -60,21 +67,3 @@ int	ft_putnbr_base(long int nbr, char *base, int n, int *i)
 		ft_recursive(nbr, base, i, n);
 	return (0);
 }
-/*#include <stdio.h>
-int		main(void)
-{
-	write(1, "42:", 3);
-	ft_putnbr_base(42, "0123456789");
-	write(1, "\n2a:", 4);
-	ft_putnbr_base(42, "abcdefghijklmnop");
-	write(1, "\n-2a:", 5);
-	ft_putnbr_base(-42, "0123456789abcdef");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "0");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "+-0123456789abcdef");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "\t0123456789abcdef");
-}*/

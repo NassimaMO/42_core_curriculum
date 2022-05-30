@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int	ft_percent(const char *str)
+static int	ft_percent(const char *str)
 {
 	int	i;
 	int	percent;
@@ -34,72 +34,84 @@ int	ft_percent(const char *str)
 	return (percent);
 }
 
-int ft_printf(const char *str, ...)
+static void	ft_conditions(char c, int *count, va_list args)
 {
-	va_list args;
+	if (c == 'c')
+	{
+		ft_putchar_fd(va_arg(args, int), 1);
+		(*count)++;
+	}
+	else if (c == 's')
+		ft_putstr_fd(va_arg(args, char *), 1, count);
+	else if (c == 'p')
+		ft_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, count);
+	else if (c == 'd')
+		ft_putnbr_fd(va_arg(args, int), 1, count);
+	else if (c == 'i')
+		ft_putnbr_fd(va_arg(args, int), 1, count);
+	else if (c == 'u')
+		ft_putnbr_fd(va_arg(args, unsigned int), 1, count);
+	else if (c == 'x')
+		ft_putnbr_base(va_arg(args, unsigned int), \
+		"0123456789abcdefg", 0, count);
+	else if (c == 'X')
+		ft_putnbr_base(va_arg(args, unsigned int), \
+		"0123456789ABCDEFG", 0, count);
+}
+
+static void	ft_print_str(char *str, int *j, int *count)
+{
+	while (str[*j] != '%')
+	{
+		ft_putchar_fd(str[*j], 1);
+		(*count)++;
+		(*j)++;
+	}
+}
+
+static int	ft_loop(va_list args, char *str, int *no, int *count)
+{
 	int	i;
 	int	j;
-	int count;
-	int	no;
 
 	i = 0;
 	j = 0;
-	count = 0;
-	no = 0;
-	va_start(args, str);
 	while (i < ft_percent(str))
 	{
-		while (str[j] != '%')
-        {
-            ft_putchar_fd(str[j], 1);
-			count++;
-            j++;
-        }
+		ft_print_str(str, &j, count);
 		j++;
-		//%c
-		if (str[j] == 'c')
-		{
-			ft_putchar_fd(va_arg(args, int), 1);
-			count++;
-		}
-		//%s
-		else if (str[j] == 's') //SIGSEGV NULL SAME FOR PRINTF
-			ft_putstr_fd(va_arg(args, char *), 1, &count);
-		//%p
-		else if (str[j] == 'p') //ULONG_MAX, LONG MIN
-			ft_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, &count); //HUHHH
-		//%d
-		else if (str[j] == 'd') //NOTHING WRONG??
-			ft_putnbr_fd(va_arg(args, int), 1, &count); //HHHUH
-		//%i
-		else if (str[j] == 'i')
-			ft_putnbr_fd(va_arg(args, int), 1, &count);
-		//%u
-		else if (str[j] == 'u')
-			ft_putnbr_fd(va_arg(args, unsigned int), 1, &count);
-		//%x
-		else if (str[j] == 'x')
-			ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdefg", 0, &count);
-		//%X
-		else if (str[j] == 'X')
-			ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEFG", 0, &count);
-		//%%
-		else if (str[j] == '%')
+		ft_conditions(str[j], count, args);
+		if (str[j] == '%')
 		{
 			ft_putchar_fd('%', 1);
-			count++;
+			(*count)++;
 			if (str[j + 1] == '%')
-				no++;
+				(*no)++;
 		}
 		j++;
 		i++;
 	}
+	return (j);
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	args;
+	int		no;
+	int		j;
+	int		count;
+
+	no = 0;
+	count = 0;
+	j = 0;
+	va_start(args, str);
+	j = ft_loop(args, (char *)str, &no, &count);
 	while (str[j])
-	 {
-            ft_putchar_fd(str[j], 1);
-			count++;
-            j++;
-    }
+	{
+		ft_putchar_fd(str[j], 1);
+		count++;
+		j++;
+	}
 	if (no % 2 == 1 && no != 1)
 		return (-1);
 	return (count);
