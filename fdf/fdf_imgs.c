@@ -67,18 +67,18 @@ int	render(t_data *data)
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(&data->img, BLACK_PIXEL);
-	while (x < width_size_map() || y < height_size_map())
+	while (y < height_size_map())
 	{
 		x = 0;
 		i = 0;
-		while (x < width_size_map())
+		while (x <= width_size_map())
 		{
 			d = value();
-			/*if (d == 0)
+			if (d == 0)
 				render_rect(&data->img, (t_rect){i, j, 2, 2, WHITE_PIXEL});
 			else if (d > 0 && d <= 5)
 				render_rect(&data->img, (t_rect){i, j, 2, 2, ORANGE_PIXEL});
-			else*/
+			else
 				render_rect(&data->img, (t_rect){i, j, 2, 2, RED_PIXEL});
 			i += WINDOW_WIDTH / width_size_map();
 			x++;
@@ -87,6 +87,11 @@ int	render(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-
 	return (0);
+}
+
+void	free_data_imgs(t_imgs imgs)
+{
+	free(imgs.mlx_img);
+	free(imgs.addr);
 }

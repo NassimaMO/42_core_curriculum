@@ -17,8 +17,9 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <stdio.h>
-# define BUFFER_SIZE 10
- 
+
+# define BUFFER_SIZE 1
+
 char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);

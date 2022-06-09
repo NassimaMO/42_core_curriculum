@@ -52,6 +52,7 @@ void	img_pix_put(t_imgs *img, int x, int y, int color);
 int		render_rect(t_imgs *img, t_rect rect);
 void	render_background(t_imgs *img, int color);
 int		render(t_data *data);
+void	free_data_imgs(t_imgs imgs);
 
 //gnl
 char	*get_next_line(int fd);
