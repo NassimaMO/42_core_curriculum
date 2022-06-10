@@ -23,7 +23,7 @@ int main()
 	
 	mlx_loop(win_param.mlx_ptr);
 	
-	free_data_imgs(win_param.img.mlx_img);
+	free_data_imgs(win_param.img);
 	mlx_destroy_display(win_param.mlx_ptr);
 	free(win_param.mlx_ptr);
 	return (0);

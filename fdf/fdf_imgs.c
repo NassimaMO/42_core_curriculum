@@ -53,6 +53,81 @@ void	render_background(t_imgs *img, int color)
 	}
 }
 
+void	put_columns(int i, int j, int d, t_data *data)
+{
+	int	tmp;
+
+	tmp = i;
+	while (tmp != i + WINDOW_WIDTH / width_size_map())
+	{
+		if (d == 0)
+			render_rect(&data->img, (t_rect){i / 2, j / 2, 2, 2, WHITE_PIXEL});
+		else if (d > 0 && d <= 5)
+			render_rect(&data->img, (t_rect){i / 2, j / 2, 2, 2, ORANGE_PIXEL});
+		else
+			render_rect(&data->img, (t_rect){i / 2, j / 2, 2, 2, RED_PIXEL});
+		tmp++;
+		j += 2;
+	}
+}
+
+void	put_lines(int i, int j, int d, t_data *data)
+{
+	int	tmp;
+
+	tmp = j;
+	while (tmp != j + WINDOW_HEIGHT / height_size_map())
+	{
+		if (d == 0)
+			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, WHITE_PIXEL});
+		else if (d > 0 && d <= 5)
+			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, ORANGE_PIXEL});
+		else
+			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, RED_PIXEL});
+		tmp++;
+		i += 2;
+	}
+}
+
+/*int	render(t_data *data)
+{
+	int	x;
+	int	y;
+	int i;
+	int	j;
+	int d;
+
+	y = 0;
+	x = 0;
+	j = WINDOW_HEIGHT / height_size_map();
+	i = (WINDOW_WIDTH / width_size_map()) * (height_size_map() * 2);
+	if (data->win_ptr == NULL)
+		return (1);
+	render_background(&data->img, BLACK_PIXEL);
+	while (y < height_size_map())
+	{
+		x = 0;
+		while (x <= width_size_map())
+		{
+			d = value();
+			if (d == 0)
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, WHITE_PIXEL});
+			else if (d > 0 && d <= 5)
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, ORANGE_PIXEL});
+			else
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, RED_PIXEL});
+			i -= WINDOW_WIDTH / width_size_map();
+			x++;
+		}
+		y++;
+		i = (WINDOW_WIDTH / width_size_map()) * (height_size_map() * 2);
+		i -= (((WINDOW_WIDTH / width_size_map()) / 2) * y);
+		j += WINDOW_HEIGHT / height_size_map();
+	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	return (0);
+}*/
+
 int	render(t_data *data)
 {
 	int	x;
@@ -64,34 +139,38 @@ int	render(t_data *data)
 	y = 0;
 	x = 0;
 	j = 0;
+	i = (WINDOW_WIDTH / width_size_map()) * (height_size_map() * 2);
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(&data->img, BLACK_PIXEL);
 	while (y < height_size_map())
 	{
 		x = 0;
-		i = 0;
+		j += ((WINDOW_HEIGHT / height_size_map()) * width_size_map());
 		while (x <= width_size_map())
 		{
 			d = value();
 			if (d == 0)
-				render_rect(&data->img, (t_rect){i, j, 2, 2, WHITE_PIXEL});
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, WHITE_PIXEL});
 			else if (d > 0 && d <= 5)
-				render_rect(&data->img, (t_rect){i, j, 2, 2, ORANGE_PIXEL});
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, ORANGE_PIXEL});
 			else
-				render_rect(&data->img, (t_rect){i, j, 2, 2, RED_PIXEL});
-			i += WINDOW_WIDTH / width_size_map();
+				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, RED_PIXEL});
+			i -= WINDOW_WIDTH / width_size_map();
+			j -= WINDOW_HEIGHT / height_size_map();
 			x++;
 		}
-		j += WINDOW_HEIGHT / height_size_map();
 		y++;
+		i = (WINDOW_WIDTH / width_size_map()) * (height_size_map() * 2);
+		i -= (((WINDOW_WIDTH / width_size_map()) / 2) * y);
+		j = (WINDOW_HEIGHT / height_size_map()) * y;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
 
-void	free_data_imgs(t_imgs imgs)
+void	free_data_imgs(void	*img)
 {
-	free(imgs.mlx_img);
-	free(imgs.addr);
+	XDestroyImage(((t_img *)img)->image);
+	free(img);
 }

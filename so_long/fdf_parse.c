@@ -34,11 +34,11 @@ int height_size_map()
     line = get_next_line(fd);
     while (line)
     {
-        free(line);
         line = get_next_line(fd);
         y++;
     }
     close(fd);
+    free(line);
     return (y);
 }
 
@@ -55,14 +55,12 @@ int value()
     line = get_next_line(fd);
     while (line && i < l)
     {
-        free(line);
         line = get_next_line(fd);
         i++;
     }
     if (line && !line[d + 1])
     {
         d = 0;
-        free(line);
         line = get_next_line(fd);
         l++;
     }
