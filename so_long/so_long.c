@@ -1,9 +1,18 @@
-#include "fdf.h"
+#include "so_long.h"
 
-int main()
+int	no_event(t_data *data)
+{
+	(void) data;
+	return (0);
+}
+
+int main(int argc, char *argv)
 {
 	t_data win_param;
 
+	if (argc > 2)
+		return (-1);
+	win_param.map_file = argv;
 	win_param.mlx_ptr = mlx_init();
 	if (!win_param.mlx_ptr)
 		return (MLX_ERROR);
@@ -23,7 +32,7 @@ int main()
 	
 	mlx_loop(win_param.mlx_ptr);
 	
-	free_data_imgs(win_param.img);
+	free_data_imgs(win_param.img.mlx_img);
 	mlx_destroy_display(win_param.mlx_ptr);
 	free(win_param.mlx_ptr);
 	return (0);

@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "so_long.h"
 
 int width_size_map()
 {
@@ -42,15 +42,16 @@ int height_size_map()
     return (y);
 }
 
-int value()
+char *value(char *file)
 {
     static int d = 0;
     static int l = 0;
     int fd;
     char *line;
     int i;
+    char    c;
 
-    fd = open("elem.fdf", O_RDONLY);
+    fd = open(file, O_RDONLY);
     i = 0;
     line = get_next_line(fd);
     while (line && i < l)
@@ -69,24 +70,17 @@ int value()
         d = 0;
         l = 0;
         close(fd);
-        fd = open("elem.fdf", O_RDONLY);
+        fd = open(file, O_RDONLY);
         line = get_next_line(fd);
 
     }
-    while (line && line[d])
+    if (line && line[d])
     {
-        if (ft_isdigit(line[d]))
-        {
-            i = ft_atoi(line + d);
-            if (i > 9)
-                d += 2;
-            else
-                d++;
-            break ;
-        }
         d++;
+        break ;
     }
+    c = line[d];
     close(fd);
     free(line);
-    return (i);
+    return (c);
 }

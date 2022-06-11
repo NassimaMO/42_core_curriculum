@@ -1,8 +1,8 @@
-SRCS		=  fdf.c get_next_line/*.c fdf_*.c
+SRCS		=  so_long.c get_next_line/*.c so_long_*.c
 
 OBJS		= *.o
 
-NAME		= fdf
+NAME		= so_long
 
 CC		= gcc
 

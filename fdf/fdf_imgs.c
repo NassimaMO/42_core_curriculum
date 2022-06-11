@@ -71,22 +71,26 @@ void	put_columns(int i, int j, int d, t_data *data)
 	}
 }
 
-void	put_lines(int i, int j, int d, t_data *data)
+void	put_lines(int *i, int *j, int d, t_data *data)
 {
-	int	tmp;
+	int tmp_i;
+	int tmp_j;
 
-	tmp = j;
-	while (tmp != j + WINDOW_HEIGHT / height_size_map())
+	tmp_i = i;
+	tmp_j = j;
+	while (tmp_i && tmp_j && tmp_i != i - WINDOW_WIDTH / width_size_map() && tmp_j != j - WINDOW_HEIGHT / height_size_map())
 	{
 		if (d == 0)
-			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, WHITE_PIXEL});
+			render_rect(&data->img, (t_rect){tmp_i / 4, tmp_j / 2, 2, 2, WHITE_PIXEL});
 		else if (d > 0 && d <= 5)
-			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, ORANGE_PIXEL});
+			render_rect(&data->img, (t_rect){tmp_i / 4, tmp_j / 2, 2, 2, ORANGE_PIXEL});
 		else
-			render_rect(&data->img, (t_rect){i / 2, tmp / 2, 2, 2, RED_PIXEL});
-		tmp++;
-		i += 2;
+			render_rect(&data->img, (t_rect){tmp_i / 4, tmp_j / 2, 2, 2, RED_PIXEL});
+		tmp_i--;
+		tmp_j--;
 	}
+	i = tmp_i;
+	(*j) = tmp_j;
 }
 
 /*int	render(t_data *data)
@@ -135,6 +139,8 @@ int	render(t_data *data)
 	int i;
 	int	j;
 	int d;
+	int 	tmp_i;
+	int		tmp_j;
 
 	y = 0;
 	x = 0;
@@ -156,8 +162,7 @@ int	render(t_data *data)
 				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, ORANGE_PIXEL});
 			else
 				render_rect(&data->img, (t_rect){i / 4, j / 2, 2, 2, RED_PIXEL});
-			i -= WINDOW_WIDTH / width_size_map();
-			j -= WINDOW_HEIGHT / height_size_map();
+	//		put_lines(i, j, d, data);
 			x++;
 		}
 		y++;
