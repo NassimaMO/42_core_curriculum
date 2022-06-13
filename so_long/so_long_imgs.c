@@ -1,7 +1,7 @@
 #include "so_long.h"
 
 
-void	img_pix_put(t_imgs *img, int x, int y, int color)
+/*void	img_pix_put(t_imgs *img, int x, int y, int color)
 {
 	char    *pixel;
 	int		i;
@@ -10,10 +10,10 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
-		/* big endian, MSB is the leftmost bit */
+		 big endian, MSB is the leftmost bit 
 		if (img->endian != 0)
 			*pixel++ = (color >> i) & 0xFF;
-		/* little endian, LSB is the leftmost bit */
+		 little endian, LSB is the leftmost bit 
 		else
 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
@@ -51,62 +51,72 @@ void	render_background(t_imgs *img, int color)
 		}
 		++i;
 	}
-}
+}*/
 
-void	print_img(t_imgs *img)
+void	print_img(t_lil_imgs *img, t_data *data, int x, int y)
 {
-	int	x;
-	int	y;
+	char	*dst;
+	char	*src;
+	int		i;
+	int		j;
 
-	y = 0; 
-    while (y < SIZE_IMG)
-    {
-        x = 0;
-        while (x < SIZE_IMG)
-        {
-            printf("[%d] %d\n", SIZE_IMG * y + x, img->addr[SIZE_IMG * y + x]);
-            x++;
-        }
-        y++;
-    }
-}
-
-void	image_ntr(char c, t_data *data, int x, int y)
-{
-	if (c == '1')
+	if (!img)
+		return ;
+	dst = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
+	src = img->addr;
+	i = 0;
+	while (i < img->hei)
 	{
-		mlx_xpm_file_to_image(data->mlx_ptr, "", SIZE_IMG, SIZE_IMG);
-		print_img(&data->img);
+		j = 0;
+		while (j < img->len)
+		{
+			if (*((int *)src) >= 0)
+				*((int *)dst) = *((int *)src);
+			src += (data->img.bpp / 8);
+			dst += (data->img.bpp / 8);
+			j++;
+		}
+		i++;
+		dst += data->img.line_len - img->len;
 	}
-	else if (c == '0')
-		mlx_xpm_file_to_image(data->mlx_ptr, "", SIZE_IMG, SIZE_IMG);
-	else if (c == 'C')
-		mlx_xpm_file_to_image(data->mlx_ptr, "", SIZE_IMG, SIZE_IMG);
-	else if (c == 'E')
-		mlx_xpm_file_to_image(data->mlx_ptr, "", SIZE_IMG, SIZE_IMG);
-	else if (c == 'P')
-		mlx_xpm_file_to_image(data->mlx_ptr, "", SIZE_IMG, SIZE_IMG);
 }
 
-int	render(t_data *data)
+t_lil_imgs	*get_img_ntr(char c, t_data *data)
+{
+	if (c == '0')
+		return (&data->img_background);
+	else if (c == '1')
+		return (&data->img_wall);
+	else if (c == 'C')
+		return (&data->img_item);
+	else if (c == 'E')
+		return (&data->img_exit);
+	else if (c == 'P')
+		return (&data->img_user);
+	return (NULL);
+}
+
+int	render(t_data *data, char *file)
 {
 	int	x;
 	int	y;
 	int i;
 	int	j;
+	int	l;
 
 	j = 0;
 	if (data->win_ptr == NULL)
 		return (1);
-	render_background(&data->img, ORANGE_PIXEL);
-	while (j < height_size_map())
+	//render_background(&data->img, BROWN_PIXEL);
+	while (j < height_size_map(file))
 	{
 		i = 0;
 		y = (WINDOW_HEIGHT / SIZE_IMG) * j;
-		while (i <= width_size_map())
+		while (i <= width_size_map(file))
 		{
 			x = (WINDOW_WIDTH / SIZE_IMG) * i;
-			image_ntr(value(data->map_file), data, x, y);
+			print_img(get_img_ntr(data->map[l], data), data, x, y);
+			l++;
 			i++;
 		}
 		j++;
