@@ -7,8 +7,6 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define WINDOW_WIDTH 2560
-# define WINDOW_HEIGHT 1440
 # define SIZE_IMG 64
 
 # define RED_PIXEL 0xFF0000
@@ -54,6 +52,8 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	*map_file;
+	int		hei_map;
+	int		len_map;
 	char	*map;
 	t_imgs	img;
 	t_lil_imgs	img_wall;
@@ -75,8 +75,8 @@ int		close_window(t_data *data);
 //so_long_imgs.c
 void	img_pix_put(t_imgs *img, int x, int y, int color);
 int		render_rect(t_imgs *img, t_rect rect);
-void	render_background(t_imgs *img, int color);
-int		render(t_data *data, char *file);
+void	render_background(t_data *data, int color);
+int		render(t_data *data);
 void	free_data_imgs(void	*img);
 
 //gnl
@@ -89,8 +89,8 @@ char	*ft_strchr(const char *s, int c);
 int	ft_atoi(const char *nptr);
 
 //so_long_parse.c
-int map_verif(char *file);
-char    *put_map_in_tab(char *file);
+int map_verif(t_data *data);
+char    *put_map_in_tab(t_data *data);
 int height_size_map(char *file);
 int width_size_map(char *file);
 char value(char *file);

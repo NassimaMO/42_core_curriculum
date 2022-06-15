@@ -12,24 +12,29 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		return (FILE_ERROR);
+	win_param.hei_map = height_size_map(argv[1]);
+	win_param.len_map = width_size_map(argv[1]);
 	win_param.map_file = argv[1];
-	//if (!map_verif(win_param.map_file))
-	//	return (MAP_ERROR);
-	if (!(win_param.map = put_map_in_tab(win_param.map_file)))
+	if (!(win_param.map = put_map_in_tab(&win_param)))
 	{
 		free(win_param.map);
 		return (MALLOC_ERROR);
 	}
+	if (!map_verif(&win_param))
+	{
+		free(win_param.map);
+		return (MAP_ERROR);
+	}
 	win_param.mlx_ptr = mlx_init();
 	if (!win_param.mlx_ptr)
 		return (MLX_ERROR);
-	win_param.win_ptr = mlx_new_window(win_param.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Fil De Soie");
+	win_param.win_ptr = mlx_new_window(win_param.mlx_ptr, SIZE_IMG * win_param.len_map, SIZE_IMG * win_param.hei_map, "Very Short");
 	if (!win_param.win_ptr)
 	{
 		free(win_param.win_ptr);
 		return (MLX_ERROR);
 	}
-	win_param.img.mlx_img = mlx_new_image(win_param.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	win_param.img.mlx_img = mlx_new_image(win_param.mlx_ptr, SIZE_IMG * win_param.len_map, SIZE_IMG * win_param.hei_map);
 	win_param.img.addr = mlx_get_data_addr(win_param.img.mlx_img, &win_param.img.bpp, &win_param.img.line_len, &win_param.img.endian);
 	img_init(&win_param);
 	

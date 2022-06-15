@@ -17,7 +17,6 @@ int width_size_map(char *file)
             x++;
         i++;
     }
-    x--;
     close(fd);
     free(line);
     return (x);
@@ -76,51 +75,70 @@ char value(char *file)
 
     }
     if (line && line[d])
+    {
+        c = line[d];
         d++;
-    c = line[d];
+    }
+   // printf("%d\n", d);
     close(fd);
     free(line);
     return (c);
 }
 
-int map_verif(char *file)
+int map_verif(t_data *data)
 {
     int x;
     int y;
     char d;
+    int i;
+    int l;
 
     y = 0;
-    while (y != height_size_map(file))
+    i = 0;
+    while(data->map_file[y])
+        y++;
+    if (data->map_file[y - 1] != 'r' || data->map_file[y - 2] != 'e' || data->map_file[y - 3] != 'b')
+        return (0);
+    y = 0;
+    l = 0;
+    while (y != data->hei_map)
     {
         x = 0;
-        while (x <= width_size_map(file))
+        while (x < data->len_map)
         {
-            d = value(file);
+            d = data->map[l];
             if ((y == 0 && d != '1')\
-                || (x == width_size_map(file) && d != '1')\
+                || (x == data->len_map && d != '1')\
                 || (x == 0 && d != '1')\
-                || (y == height_size_map(file) && d != '1')\
+                || (y == data->hei_map && d != '1')\
                 || (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P'))
                 return (0);
+            if (d == 'C')
+                i++;
             x++;
+            l++;
         }
         y++;
     }
+    if (x == y || i == 0)
+        return (0);
     return (1);
 }
 
-char    *put_map_in_tab(char *file)
+char    *put_map_in_tab(t_data *data)
 {
     char    *tab;
     int     i;
+    char    d;
 
-    tab = malloc(sizeof(int) * (height_size_map(file) * width_size_map(file)) + 1);
+    tab = malloc(sizeof(int) * (data->len_map * data->hei_map) + 1);
     if (!tab)
         return (NULL);
     i = 0;
-    while (i != height_size_map(file) * width_size_map(file))
+    while (i != data->len_map * data->hei_map)
     {
-        tab[i] = value(file);
+        d = value(data->map_file);
+        tab[i] = d;
         i++;
     }
     tab[i] = '\0';
