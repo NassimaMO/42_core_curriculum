@@ -1,17 +1,12 @@
 #include "so_long.h"
 
-int	escape(int keysym, t_data *data)
+void	escape(t_data *data)
 {
-	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
-	}
-	return (0);
+	mlx_loop_end(data->mlx_ptr);
 }
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_loop_end(data->mlx_ptr);
 	return (0);
 }

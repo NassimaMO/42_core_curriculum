@@ -1,4 +1,4 @@
-SRCS		=  so_long.c get_next_line/*.c so_long_*.c
+SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c
 
 OBJS		= *.o
 
@@ -15,11 +15,14 @@ RM		= rm -f
 
 all:			${OBJS}
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender
+			mkdir OBJS
+			mv *.o OBJS
 
 ${NAME}:		all
 
 clean:
-			${RM} *.o
+			${RM} OBJS/*.o
+			${RM} -r OBJS
 
 fclean:		clean
 			${RM} ${NAME}

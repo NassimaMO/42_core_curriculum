@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-char	*ft_line(char *l)
+static char	*ft_line(char *l)
 {
 	int		i;
 	char	*new;
@@ -39,7 +39,7 @@ char	*ft_line(char *l)
 	return (new);
 }
 
-void	ft_rm_bn(char *buf)
+static void	ft_rm_bn(char *buf)
 {
 	int	i;
 	int	j;
@@ -60,7 +60,7 @@ void	ft_rm_bn(char *buf)
 	buf[j] = '\0';
 }
 
-char	*ft_norminetteuh(char *buf, int fd, int *c)
+static char	*ft_norminetteuh(char *buf, int fd, int *c)
 {
 	char	*nl;
 

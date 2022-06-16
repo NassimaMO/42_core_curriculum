@@ -1,29 +1,37 @@
 #include "so_long.h"
 
-void    img_init(t_data *data)
+void    img_init(t_data *data, t_lil_imgs *img, char *path)
 {
-    data->img_wall.path = "IMAGES/tree.xpm";
-    data->img_wall.len = data->img_wall.hei = 64;
-    data->img_wall.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_wall.path, &data->img_wall.len, &data->img_wall.hei);
-
-    data->img_item.path = "IMAGES/champi.xpm";
-    data->img_item.len = data->img_item.hei = 64;
-    data->img_item.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_item.path, &data->img_item.len, &data->img_item.hei);
-
-    data->img_user.path = "IMAGES/Mario.xpm";
-    data->img_user.len = data->img_user.hei = 64;
-    data->img_user.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_user.path, &data->img_user.len, &data->img_user.hei);
-
-    data->img_background.path = "IMAGES/leaaff.xpm";
-    data->img_background.len = data->img_background.hei = 64;
-    data->img_background.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_background.path, &data->img_background.len, &data->img_background.hei);
-    
-    data->img_exit.path = "IMAGES/nice.xpm";
-    data->img_exit.len = data->img_exit.hei = 64;
-    data->img_exit.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_exit.path, &data->img_exit.len, &data->img_exit.hei);
-
-    data->img_enemy.path = "IMAGES/enemyn1.xpm";
-    data->img_enemy.len = data->img_enemy.hei = 64;
-    data->img_enemy.addr = mlx_xpm_file_to_image(data->mlx_ptr, data->img_enemy.path, &data->img_enemy.len, &data->img_enemy.hei);
+    img->path = path;
+    img->len = img->hei = 64;
+    img->mlx_lil_img = mlx_xpm_file_to_image(data->mlx_ptr, img->path, &img->len, &img->hei);
+    img->addr = mlx_get_data_addr(img->mlx_lil_img, &img->bpp, &img->line_len, &img->endian);
 }
 
+void    img_num_init(t_data *data, t_lil_imgs *img, char *path)
+{
+    img->path = path;
+    img->len = img->hei = 24;
+    img->mlx_lil_img = mlx_xpm_file_to_image(data->mlx_ptr, img->path, &img->len, &img->hei);
+    img->addr = mlx_get_data_addr(img->mlx_lil_img, &img->bpp, &img->line_len, &img->endian);
+}
+
+void    init_call(t_data *data)
+{
+    img_num_init(data, &data->stct.img_0, "IMAGES/0.xpm");
+    img_num_init(data, &data->stct.img_1, "IMAGES/1.xpm");
+    img_num_init(data, &data->stct.img_2, "IMAGES/2.xpm");
+    img_num_init(data, &data->stct.img_3, "IMAGES/3.xpm");
+    img_num_init(data, &data->stct.img_4, "IMAGES/4.xpm");
+    img_num_init(data, &data->stct.img_5, "IMAGES/5.xpm");
+    img_num_init(data, &data->stct.img_6, "IMAGES/6.xpm");
+    img_num_init(data, &data->stct.img_7, "IMAGES/7.xpm");
+    img_num_init(data, &data->stct.img_8, "IMAGES/8.xpm");
+    img_num_init(data, &data->stct.img_9, "IMAGES/9.xpm");
+    img_init(data, &data->stct.img_wall, "IMAGES/tree.xpm");
+    img_init(data, &data->stct.img_item, "IMAGES/champi.xpm");
+    img_init(data, &data->stct.img_user, "IMAGES/Mario.xpm");
+    img_init(data, &data->stct.img_background, "IMAGES/leaaff.xpm");
+    img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
+    img_init(data, &data->stct.img_enemy, "IMAGES/enemyn1.xpm");
+}

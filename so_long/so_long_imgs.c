@@ -20,22 +20,6 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
 	}
 }
 
-/*int render_rect(t_imgs *img, t_rect rect)
-{
-	int	i;
-	int j;
-
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			img_pix_put(img, j++, i, rect.color);
-		++i;
-	}
-	return (0);
-}*/
-
 void	render_background(t_data *data, int color)
 {
 	int	i;
@@ -62,16 +46,13 @@ void	print_img(t_lil_imgs *img, t_data *data, int x, int y)
 
 	if (!img)
 		return ;
-	printf("line_len = %d\n", data->img.line_len);
-	printf("len = %d\n", img->len);
-	printf("hei = %d\n\n", img->hei);
 	dst = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
 	src = img->addr;
 	i = 0;
-	while (i < SIZE_IMG)
+	while (i < img->hei)
 	{
 		j = 0;
-		while (j < SIZE_IMG)
+		while (j < img->len)
 		{
 			if (*((int *)src) >= 0)
 				*((int *)dst) = *((int *)src);
@@ -80,23 +61,40 @@ void	print_img(t_lil_imgs *img, t_data *data, int x, int y)
 			j++;
 		}
 		i++;
-		dst += data->img.line_len - SIZE_IMG;
+		dst += data->img.line_len - img->line_len;
 	}
 }
 
 t_lil_imgs	*get_img_ntr(char c, t_data *data)
 {
 	if (c == '0')
-		return (&(data->img_background));
+		return (&(data->stct.img_background));
 	else if (c == '1')
-		return (&(data->img_wall));
+		return (&(data->stct.img_wall));
 	else if (c == 'C')
-		return (&(data->img_item));
+		return (&(data->stct.img_item));
 	else if (c == 'E')
-		return (&(data->img_exit));
+		return (&(data->stct.img_exit));
 	else if (c == 'P')
-		return (&(data->img_user));
+		return (&(data->stct.img_user));
 	return (NULL);
+}
+
+void	render_steps(t_data *data)
+{
+	int	x;
+	int	i;
+	int	l;
+
+	l = nbr_case(data->nbr_step);
+	x = 0;
+	i = 0;
+	while (i < l)
+	{
+		print_img(&(data->stct.img_0), data, x, SIZE_IMG * data->hei_map);
+		x += data->stct.img_0.len;
+		i++;
+	}
 }
 
 int	render(t_data *data)
@@ -114,20 +112,21 @@ int	render(t_data *data)
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(data, BROWN_PIXEL);
-	/*while (j < data->hei_map)
+	while (j < data->hei_map)
 	{
 		i = 0;
 		x = 0;
-		while (i <= data->len_map)
-		{*/
+		while (i < data->len_map)
+		{
 			print_img(get_img_ntr(data->map[l], data), data, x, y);
-			/*x += SIZE_IMG;
+			x += SIZE_IMG;
 			l++;
 			i++;
 		}
 		y += SIZE_IMG;
 		j++;
-	}*/
+	}
+	render_steps(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }

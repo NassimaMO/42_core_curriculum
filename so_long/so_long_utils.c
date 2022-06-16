@@ -17,22 +17,6 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-/*char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
-}*/
-
 int	ft_atoi(const char *nptr)
 {
 	long int	result;
@@ -58,4 +42,17 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * minus);
+}
+
+int	nbr_case(long int n)
+{
+	int	i;
+
+	i = 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
