@@ -60,6 +60,7 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_item;
 	t_lil_imgs	img_user;
 	t_lil_imgs	img_background;
+	t_lil_imgs	img_backgroundAfter;
 	t_lil_imgs	img_exit;
 	t_lil_imgs	img_enemy;
 	t_lil_imgs	img_0;
