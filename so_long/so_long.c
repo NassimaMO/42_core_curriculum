@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	mlx_loop_hook(win_param.mlx_ptr, &render, &win_param);
 	
 	mlx_hook(win_param.win_ptr, KeyPress, KeyPressMask, &input, &win_param);
-	mlx_hook(win_param.win_ptr, DestroyNotify, StructureNotifyMask, &close_window, &win_param); //Seg fault
+	mlx_hook(win_param.win_ptr, DestroyNotify, StructureNotifyMask, &close_window, &win_param);
 	
 	mlx_loop(win_param.mlx_ptr);
 	

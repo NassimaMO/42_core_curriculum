@@ -26,7 +26,7 @@ void	render_background(t_data *data, int color)
 	int	j;
 
 	i = 0;
-	while (i < 64 * data->hei_map)
+	while (i < 64 * data->hei_map + 24)
 	{
 		j = 0;
 		while (j < 64 * data->len_map)
@@ -80,6 +80,51 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	return (NULL);
 }
 
+t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n)
+{
+	if (n == 0)
+		return (&img->img_0);
+	else if (n == 1)
+		return (&img->img_1);
+	else if (n == 2)
+		return (&img->img_2);
+	else if (n == 3)
+		return (&img->img_3);
+	else if (n == 4)
+		return (&img->img_4);
+	else if (n == 5)
+		return (&img->img_5);
+	else if (n == 6)
+		return (&img->img_6);
+	else if (n == 7)
+		return (&img->img_7);
+	else if (n == 8)
+		return (&img->img_8);
+	else if (n == 9)
+		return (&img->img_9);
+	return (NULL);
+}
+
+t_lil_imgs *get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
+{
+	int t[10];
+	t_lil_imgs *num;
+	static int	i = -1;
+
+	while (steps)
+	{
+		t[l] = steps % 10;
+		steps = steps / 10;
+		l--;
+	}
+	num = return_ntr(img, t[i]);
+	if (x == 1)
+		i++;
+	else
+		i = 0;
+	return (num);
+}
+
 void	render_steps(t_data *data)
 {
 	int	x;
@@ -91,7 +136,10 @@ void	render_steps(t_data *data)
 	i = 0;
 	while (i < l)
 	{
-		print_img(&(data->stct.img_0), data, x, SIZE_IMG * data->hei_map);
+		if (i + 1 == l)
+			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 0), data, x, SIZE_IMG * data->hei_map);
+		else
+			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 1), data, x, SIZE_IMG * data->hei_map);
 		x += data->stct.img_0.len;
 		i++;
 	}
