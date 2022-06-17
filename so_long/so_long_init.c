@@ -29,9 +29,10 @@ void    init_call(t_data *data)
     img_num_init(data, &data->stct.img_8, "IMAGES/8.xpm");
     img_num_init(data, &data->stct.img_9, "IMAGES/9.xpm");
     img_init(data, &data->stct.img_wall, "IMAGES/tree.xpm");
+    img_init(data, &data->stct.img_wall2, "IMAGES/tree2.xpm");
     img_init(data, &data->stct.img_item, "IMAGES/champi.xpm");
     img_init(data, &data->stct.img_user, "IMAGES/Mario.xpm");
-    img_init(data, &data->stct.img_background, "IMAGES/leaaff.xpm");
+    img_init(data, &data->stct.img_background, "IMAGES/leafy.xpm");
     img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
     img_init(data, &data->stct.img_enemy, "IMAGES/enemyn1.xpm");
 }

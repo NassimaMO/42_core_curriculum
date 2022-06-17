@@ -101,5 +101,9 @@ char    *put_map_in_tab(t_data *data)
         i++;
     }
     tab[i] = '\0';
+   /* while (tab[i] != '0')
+        i--;
+    if (tab[i] == '0')
+        tab[i] = 'N';*/
     return (tab);
 }

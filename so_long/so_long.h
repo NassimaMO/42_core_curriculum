@@ -15,6 +15,7 @@
 # define WHITE_PIXEL 0xFFFFFF
 # define BLACK_PIXEL 0x000000
 # define BROWN_PIXEL 0xA0522D
+# define BROWNER_PIXEL 0x5C3333
 
 # define MLX_ERROR 1
 # define MAP_ERROR 2
@@ -55,6 +56,7 @@ typedef struct s_lil_imgs
 typedef struct s_stct_lil_imgs
 {
 	t_lil_imgs	img_wall;
+	t_lil_imgs	img_wall2;
 	t_lil_imgs	img_item;
 	t_lil_imgs	img_user;
 	t_lil_imgs	img_background;
@@ -108,6 +110,13 @@ void	img_pix_put(t_imgs *img, int x, int y, int color);
 t_lil_imgs	*get_img_ntr(char c, t_data *data);
 t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs *get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
+
+//so_long_img/so_long_enemy_imgs.c
+void enemy_mvments(t_data *data);
+int    n_mv_up(t_data *data);
+int    n_mv_left(t_data *data);
+int    n_mv_down(t_data *data);
+int    n_mv_right(t_data *data);
 
 //so_long_utils.c
 int	ft_strlen(const char *s);

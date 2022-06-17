@@ -34,7 +34,8 @@ int	render(t_data *data)
 	x = 0;
 	if (data->win_ptr == NULL)
 		return (1);
-	render_background(data, BROWN_PIXEL);
+	render_background(data, BROWNER_PIXEL);
+//	enemy_mvments(data);
 	while (j < data->hei_map)
 	{
 		i = 0;

@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 		return (FILE_ERROR);
 	if (!file_verif(argv[1]))
 		return (MAP_ERROR);
-	win_param.hei_map = height_size_map(argv[1]);
+	win_param.hei_map = height_size_map(argv[1]); //Seg fault if file empty
 	win_param.len_map = width_size_map(argv[1]);
 	win_param.map_file = argv[1];
 	if (!(win_param.map = put_map_in_tab(&win_param)))
