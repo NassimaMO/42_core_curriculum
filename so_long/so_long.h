@@ -90,40 +90,36 @@ void    img_init(t_data *data, t_lil_imgs *img, char *path);
 void    img_num_init(t_data *data, t_lil_imgs *img, char *path);
 void    init_call(t_data *data);
 
-//so_long_win_param.c
-void		escape(t_data *data);
+//so_long_end.c
+void	escape(t_data *data);
 int		close_window(t_data *data);
+void	free_data_imgs(void *img);
 
-//so_long_imgs.c
-void	img_pix_put(t_imgs *img, int x, int y, int color);
-int		render_rect(t_imgs *img, t_rect rect);
-void	render_background(t_data *data, int color);
+//so_long_img/so_long_imgs.c
+void	render_steps(t_data *data);
 int		render(t_data *data);
-void	free_data_imgs(void	*img);
 
-//gnl
-char	*get_next_line(int fd);
+//so_long_img/so_long_imgs_print.c
+void	render_background(t_data *data, int color);
+void	print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
-//ft_printf
-int	ft_printf(const char *str, ...);
+//so_long_img/so_long_imgs_utils.c
+void	img_pix_put(t_imgs *img, int x, int y, int color);
+t_lil_imgs	*get_img_ntr(char c, t_data *data);
+t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n);
+t_lil_imgs *get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_utils.c
 int	ft_strlen(const char *s);
-int	ft_isdigit(int c);
-char	*ft_strchr(const char *s, int c);
-int	ft_atoi(const char *nptr);
-int	nbr_case(long int n);
+int	nbr_case(int n);
 
 //so_long_parse.c
-int map_verif(t_data *data);
-char    *put_map_in_tab(t_data *data);
-int height_size_map(char *file);
 int width_size_map(char *file);
+int height_size_map(char *file);
 char value(char *file);
-int file_verif(char *file);
+char    *put_map_in_tab(t_data *data);
 
 //so_long_move.c
-void direct_mv(int keysym, t_data *data);
 void    mv_up(t_data *data);
 void    mv_left(t_data *data);
 void    mv_down(t_data *data);
@@ -131,4 +127,16 @@ void    mv_right(t_data *data);
 
 //so_long_input.c
 int input(int keysym, t_data *data);
+void direct_mv(int keysym, t_data *data);
+
+//so_long_verif.c
+int file_verif(char *file);
+int map_verif(t_data *data);
+
+//gnl
+char	*get_next_line(int fd);
+
+//ft_printf
+int	ft_printf(const char *str, ...);
+
 #endif

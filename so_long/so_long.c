@@ -1,11 +1,5 @@
 #include "so_long.h"
 
-int	no_event(t_data *data)
-{
-	(void) data;
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
 	t_data win_param;

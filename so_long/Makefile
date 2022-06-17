@@ -1,4 +1,4 @@
-SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c
+SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_imgs/*.c
 
 OBJS		= *.o
 
@@ -21,6 +21,7 @@ all:			${OBJS}
 ${NAME}:		all
 
 clean:
+			${RM} *.o
 			${RM} OBJS/*.o
 			${RM} -r OBJS
 
