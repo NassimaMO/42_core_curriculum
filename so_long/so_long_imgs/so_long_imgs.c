@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_imgs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 13:49:41 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/06/18 13:49:42 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void	render_steps(t_data *data)
@@ -24,7 +36,7 @@ int	render(t_data *data)
 {
 	int	x;
 	int	y;
-	int i;
+	int	i;
 	int	j;
 	int	l;
 
@@ -35,7 +47,7 @@ int	render(t_data *data)
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(data, BROWNER_PIXEL);
-//	enemy_mvments(data);
+	enemy_mvments(data);
 	while (j < data->hei_map)
 	{
 		i = 0;

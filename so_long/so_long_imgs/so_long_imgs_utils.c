@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_imgs_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 13:49:21 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/06/18 13:49:23 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 void	img_pix_put(t_imgs *img, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 	int		i;
 
 	i = img->bpp - 8;
@@ -21,7 +33,7 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
 
 t_lil_imgs	*get_img_ntr(char c, t_data *data)
 {
-	//static int i = 0;
+	static int	i = 0;
 
 	if (c == '0')
 		return (&(data->stct.img_background));
@@ -29,15 +41,15 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 		return (&(data->stct.img_backgroundAfter));
 	else if (c == '1')
 	{
-		//i++;
-		//if (i < 20)
+		i++;
+		if (i < 500)
 			return (&(data->stct.img_wall));
-		/*else
+		else
 		{
-			if (i == 40)
+			if (i == 1000)
 				i = 0;
 			return (&(data->stct.img_wall2));
-		}*/
+		}
 	}
 	else if (c == 'C')
 		return (&(data->stct.img_item));
@@ -45,12 +57,18 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 		return (&(data->stct.img_exit));
 	else if (c == 'P')
 		return (&(data->stct.img_user));
-	/*else if (c == 'N')
-		return (&(data->stct.img_enemy));*/
+	else if (c == 'U')
+		return (&(data->stct.img_user_up));
+	else if (c == 'D')
+		return (&(data->stct.img_user_down));
+	else if (c == 'L')
+		return (&(data->stct.img_user_left));
+	else if (c == 'N')
+		return (&(data->stct.img_enemy));
 	return (NULL);
 }
 
-t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n)
+t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n)
 {
 	if (n == 0)
 		return (&img->img_0);
@@ -75,9 +93,9 @@ t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n)
 	return (NULL);
 }
 
-t_lil_imgs *get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
+t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
 {
-	int t[10];
+	int	t[10];
 	t_lil_imgs *num;
 	static int	i = -1;
 

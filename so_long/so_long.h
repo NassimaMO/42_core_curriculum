@@ -1,5 +1,17 @@
-#ifndef FDF_H
-#define FDF_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 13:43:26 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/06/18 13:43:29 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
+#define SO_LONG_H
 
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
@@ -59,6 +71,9 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_wall2;
 	t_lil_imgs	img_item;
 	t_lil_imgs	img_user;
+	t_lil_imgs	img_user_up;
+	t_lil_imgs	img_user_down;
+	t_lil_imgs	img_user_left;
 	t_lil_imgs	img_background;
 	t_lil_imgs	img_backgroundAfter;
 	t_lil_imgs	img_exit;
@@ -83,70 +98,71 @@ typedef struct s_data
 	int		hei_map;
 	int		len_map;
 	int		nbr_step;
+	char	user;
 	char	*map;
 	t_imgs	img;
 	t_stct_lil_imgs	stct;
 }	t_data;
 
 //so_long_init.c
-void    img_init(t_data *data, t_lil_imgs *img, char *path);
-void    img_num_init(t_data *data, t_lil_imgs *img, char *path);
-void    init_call(t_data *data);
+void		img_init(t_data *data, t_lil_imgs *img, char *path);
+void		img_num_init(t_data *data, t_lil_imgs *img, char *path);
+void		init_call(t_data *data);
 
 //so_long_end.c
-void	escape(t_data *data);
-int		close_window(t_data *data);
-void	free_data_imgs(void *img);
+void		escape(t_data *data);
+int			close_window(t_data *data);
+void		free_data_imgs(void *img);
 
 //so_long_img/so_long_imgs.c
-void	render_steps(t_data *data);
-int		render(t_data *data);
+void		render_steps(t_data *data);
+int			render(t_data *data);
 
 //so_long_img/so_long_imgs_print.c
-void	render_background(t_data *data, int color);
-void	print_img(t_lil_imgs *img, t_data *data, int x, int y);
+void		render_background(t_data *data, int color);
+void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
 //so_long_img/so_long_imgs_utils.c
-void	img_pix_put(t_imgs *img, int x, int y, int color);
-t_lil_imgs	*get_img_ntr(char c, t_data *data);
-t_lil_imgs *return_ntr(t_stct_lil_imgs *img, int n);
-t_lil_imgs *get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
+void			img_pix_put(t_imgs *img, int x, int y, int color);
+t_lil_imgs		*get_img_ntr(char c, t_data *data);
+t_lil_imgs		*return_ntr(t_stct_lil_imgs *img, int n);
+t_lil_imgs		*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_img/so_long_enemy_imgs.c
-void enemy_mvments(t_data *data);
-int    n_mv_up(t_data *data);
-int    n_mv_left(t_data *data);
-int    n_mv_down(t_data *data);
-int    n_mv_right(t_data *data);
+void		enemy_mvments(t_data *data);
+int			n_mv_up(t_data *data);
+int			n_mv_left(t_data *data);
+int			n_mv_down(t_data *data);
+int			n_mv_right(t_data *data);
 
 //so_long_utils.c
-int	ft_strlen(const char *s);
-int	nbr_case(int n);
+int			ft_strlen(const char *s);
+int			nbr_case(int n);
 
 //so_long_parse.c
-int width_size_map(char *file);
-int height_size_map(char *file);
-char value(char *file);
-char    *put_map_in_tab(t_data *data);
+int			width_size_map(char *file);
+int			height_size_map(char *file);
+char		value(char *file);
+char		*put_map_in_tab(t_data *data);
 
 //so_long_move.c
-void    mv_up(t_data *data);
-void    mv_left(t_data *data);
-void    mv_down(t_data *data);
-void    mv_right(t_data *data);
+void		mv_up(t_data *data);
+void		mv_left(t_data *data);
+void		mv_down(t_data *data);
+void		mv_right(t_data *data);
 
 //so_long_input.c
-int input(int keysym, t_data *data);
-void direct_mv(int keysym, t_data *data);
+int			input(int keysym, t_data *data);
+void		direct_mv(int keysym, t_data *data);
 
 //so_long_verif.c
-int file_verif(char *file);
-int map_verif(t_data *data);
+int			file_verif(char *file);
+int			map_verif(t_data *data);
 
 //gnl
-char	*get_next_line(int fd);
+char		*get_next_line(int fd);
 
 //ft_printf
-int	ft_printf(const char *str, ...);
+int			ft_printf(const char *str, ...);
 
 #endif
