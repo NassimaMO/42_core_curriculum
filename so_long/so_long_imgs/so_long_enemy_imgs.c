@@ -15,64 +15,64 @@
 void	enemy_mvments(t_data *data)
 {
 	static int	i = 0;
-	static int	mvUp = 1;
-	static int	mvDown = 0;
-	static int	mvLeft = 0;
-	static int	mvRight = 0;
+	static int	mv_up = 1;
+	static int	mv_down = 0;
+	static int	mv_left = 0;
+	static int	mv_right = 0;
 
 	if (i >= 100)
 	{
 		i = 0;
-		if (mvUp)
+		if (mv_up)
 		{
 			if (n_mv_up(data))
 			{
-				mvUp++;
+				mv_up++;
 				return ;
 			}
 			else
 			{
-				mvLeft++;
-				mvUp = 0;
+				mv_left++;
+				mv_up = 0;
 			}
 		}
-		if (mvLeft)
+		if (mv_left)
 		{
 			if (n_mv_left(data))
 			{
-				mvLeft++;
+				mv_left++;
 				return ;
 			}
 			else
 			{
-				mvDown++;
-				mvLeft = 0;
+				mv_down++;
+				mv_left = 0;
 			}
 		}
-		if (mvDown)
+		if (mv_down)
 		{
 			if (n_mv_down(data))
 			{
-				mvDown++;
+				mv_down++;
 				return ;
 			}
 			else
 			{
-				mvRight++;
-				mvDown = 0;
+				mv_right++;
+				mv_down = 0;
 			}
 		}
-		if (mvRight)
+		if (mv_right)
 		{
 			if (n_mv_right(data))
 			{
-				mvRight++;
+				mv_right++;
 				return ;
 			}
 			else
 			{
-				mvUp++;
-				mvRight = 0;
+				mv_up++;
+				mv_right = 0;
 			}
 		}
 	}
@@ -105,10 +105,10 @@ int	n_mv_up(t_data *data)
 	return (0);
 }
 
-int n_mv_left(t_data *data)
+int	n_mv_left(t_data *data)
 {
 	int		l;
-	int	tmp;
+	int		tmp;
 
 	l = 0;
 	while (data->map[l] && data->map[l] != 'N')

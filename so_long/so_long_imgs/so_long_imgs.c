@@ -24,9 +24,11 @@ void	render_steps(t_data *data)
 	while (i < l)
 	{
 		if (i + 1 == l)
-			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 0), data, x, SIZE_IMG * data->hei_map);
+			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 0), \
+				data, x, SIZE_IMG * data->hei_map);
 		else
-			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 1), data, x, SIZE_IMG * data->hei_map);
+			print_img(get_img_num_ntr(&data->stct, data->nbr_step, l - 1, 1), \
+				data, x, SIZE_IMG * data->hei_map);
 		x += data->stct.img_0.len;
 		i++;
 	}
@@ -63,6 +65,7 @@ int	render(t_data *data)
 		j++;
 	}
 	render_steps(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, \
+		0, 0);
 	return (0);
 }

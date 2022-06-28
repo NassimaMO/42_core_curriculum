@@ -18,13 +18,11 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
 	int		i;
 
 	i = img->bpp - 8;
-    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
-		 //big endian, MSB is the leftmost bit 
 		if (img->endian != 0)
 			*pixel++ = (color >> i) & 0xFF;
-		 //little endian, LSB is the leftmost bit 
 		else
 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
@@ -95,10 +93,11 @@ t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n)
 
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
 {
-	int	t[10];
-	t_lil_imgs *num;
-	static int	i = -1;
+	int			t[10];
+	t_lil_imgs	*num;
+	static int	i;
 
+	i = 0;
 	while (steps)
 	{
 		t[l] = steps % 10;

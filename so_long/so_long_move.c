@@ -25,7 +25,8 @@ void	mv_up(t_data *data)
 		tmp = l;
 		l = strlen((const char *)data->map) / data->hei_map;
 		l = tmp - l;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' || data->map[l] == '2'))
+		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
+			|| data->map[l] == '2'))
 		{
 			data->user = 'U';
 			data->map[l] = data->user;
@@ -49,7 +50,8 @@ void	mv_left(t_data *data)
 	{
 		tmp = l;
 		l--;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' || data->map[l] == '2'))
+		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
+			|| data->map[l] == '2'))
 		{
 			data->user = 'L';
 			data->map[l] = data->user;
@@ -74,7 +76,8 @@ void	mv_down(t_data *data)
 		tmp = l;
 		l = strlen((const char *)data->map) / data->hei_map;
 		l = tmp + l;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' || data->map[l] == '2'))
+		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
+			|| data->map[l] == '2'))
 		{
 			data->user = 'D';
 			data->map[l] = data->user;
@@ -98,7 +101,8 @@ void	mv_right(t_data *data)
 	{
 		tmp = l;
 		l++;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' || data->map[l] == '2'))
+		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
+			|| data->map[l] == '2'))
 		{
 			data->user = 'P';
 			data->map[l] = data->user;

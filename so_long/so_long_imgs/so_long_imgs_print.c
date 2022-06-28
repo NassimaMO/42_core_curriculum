@@ -56,4 +56,3 @@ void	print_img(t_lil_imgs *img, t_data *data, int x, int y)
 		dst += data->img.line_len - img->line_len;
 	}
 }
-

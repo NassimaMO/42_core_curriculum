@@ -113,6 +113,7 @@ void		init_call(t_data *data);
 void		escape(t_data *data);
 int			close_window(t_data *data);
 void		free_data_imgs(void *img);
+void		free_lil_imgs(t_stct_lil_imgs *imgs);
 
 //so_long_img/so_long_imgs.c
 void		render_steps(t_data *data);

@@ -23,7 +23,7 @@ int	width_size_map(char *file)
 	line = get_next_line(fd);
 	x = 0;
 	i = 0;
-	while(line && line[i])
+	while (line && line[i])
 	{
 		if (line[i] != '\n')
 			x++;
@@ -68,12 +68,14 @@ char	value(char *file)
 	line = get_next_line(fd);
 	while (line && i < l)
 	{
+		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	if (line && !line[d + 1])
 	{
 		d = 0;
+		free(line);
 		line = get_next_line(fd);
 		l++;
 	}
@@ -84,7 +86,6 @@ char	value(char *file)
 		close(fd);
 		fd = open(file, O_RDONLY);
 		line = get_next_line(fd);
-
 	}
 	if (line && line[d])
 	{
