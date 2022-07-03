@@ -3,6 +3,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_printf/ft_printf.h"
+
+int number_checker(char **argv, int argc);
+
+void algo_op(int *a, int *b, int *len_a, int *len_b);
+int nums_in_order(int *a, int len_b);
+int *put_int_tab(char **argv, int argc);
 
 void pab(int *ab, int *ba);
 void rab(int *ab);

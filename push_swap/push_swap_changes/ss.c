@@ -7,7 +7,7 @@ void ss(int *a, int *b)
     sab(b);
 }
 
-int main(void)
+/*int main(void)
 {
     static int *a;
     static int *b;
@@ -36,4 +36,4 @@ int main(void)
     printf("%d\n", b[3]);
     free(a);
     free(b);
-}
+}*/
