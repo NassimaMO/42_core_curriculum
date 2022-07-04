@@ -1,9 +1,9 @@
 /*pa (push a): Take the first element at the top of b and put it at the top of a.Do nothing if b is empty.*/
 #include "../push_swap.h"
 
-void pab(int *ab, int *ba)
+void	pab(int *ab, int *ba)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ab && ab[i])

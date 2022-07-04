@@ -2,13 +2,12 @@
 /*rrb (reverse rotate b): Shift down all elements of stack b by 1. The last element becomes the first one.*/
 #include "../push_swap.h"
 
-void rrab(int *ab)
+void	rrab(int *ab)
 {
-	int tmp;
-	int i;
+	int	tmp;
+	int	i;
 
 	i = 0;
-
 	while (ab && ab[i])
 		i++;
 	tmp = ab[--i];

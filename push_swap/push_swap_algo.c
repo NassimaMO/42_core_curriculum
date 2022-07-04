@@ -1,91 +1,205 @@
 #include "push_swap.h"
 
-void algo_op(int *a, int *b, int *len_a, int *len_b)
+void	algo_op(int *a, int *b, int ac)
 {
-	if (a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1)
-	{
-		ss(a, b);
-		ft_printf("ss\n");
-	}
-	else if (*len_a > 1 && a[0] > a[1])
-	{
-		sab(a);
-		ft_printf("sa\n");
-	}
-	else if (*len_b > 1 && b[0] < b[1])
-	{
-		sab(b);
-		ft_printf("sb\n");
-	}
-	else if (*len_a >= 1 && a[0] < a[1])
-	{
-		pab(b, a);
-		(*len_b)++;
-		(*len_a)--;
-		ft_printf("pb\n");
-	}
-	else if (*len_b >= 1 && b[0] > b[1])
-	{
-		pab(a, b);
-		(*len_a)++;
-		(*len_b)--;
-		ft_printf("pa\n");
-	}
-	printf("len_a = %d\n", *len_a);
-	printf("len_b = %d\n", *len_b);
-	ft_printf("\n%d", a[0]);
-	ft_printf("\n%d", a[1]);
-	ft_printf("\n%d", a[2]);
-	/*	else if (a)
-			rab(a);
-		else if (b)
-			rab(b);
-		else if (a && b)
-			rr(a, b);
+	int	len_a;
+	int	len_b;
 
-		else if (a)
+	len_a = ac - 1;
+	len_b = 0;
+	while (1)
+	{
+		if (nums_in_order(a, len_b, 1, 1))
+			break ;
+		if (a[0] > a[1] && b[0] < b[1] && len_b > 1 && len_a > 1)
+		{
+			ss(a, b);
+			ft_printf("ss\n");
+		}
+		else if (len_a > 1 && a[0] > a[1])
+		{
+			sab(a);
+			ft_printf("sa\n");
+		}
+		else if (len_b > 1 && b[0] < b[1])
+		{
+			sab(b);
+			ft_printf("sb\n");
+		}
+		else if (len_b >= 1 && b[0] < b[1] && (nums_in_order(a, len_b, 0, 1) && nums_in_order(b, len_b, 0, 0)) || (nums_in_order(a, len_b, 0, 1) && num_max(b[0], b)))
+		{
+			pab(a, b);
+			len_a++;
+			len_b--;
+			ft_printf("pa\n");
+		}
+		else if (len_a >= 1 && a[0] < a[1] && !nums_in_order(a, len_b, 0, 1))
+		{
+			pab(b, a);
+			len_b++;
+			len_a--;
+			ft_printf("pb\n");
+		}
+		/*else if (len_a > 2 && num_max(a[0], a) && len_b > 2 && num_min(b[0], b) && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
+		{
+			rr(a, b);
+			ft_printf("rr\n");
+		}
+		else if (len_a > 2 && num_max(a[0], a) && !nums_in_order(a, len_b, 0, 1))
+		{
+			rab(a);
+			ft_printf("ra\n");
+		}
+		else if (len_b > 2 && num_min(b[0], b) && !nums_in_order(b , len_b, 0, 0))
+		{
+			rab(b);
+			ft_printf("rb\n");
+		}
+		else if (len_a > 2 && num_min_r(a[len_a], a) && len_b > 2 && num_max_r(b[len_b], b)  && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
+		{
+			rrr(a, b);
+			ft_printf("rrr\n");
+		}
+		else if (len_a > 2 && num_min_r(a[len_a], a) && !nums_in_order(a, len_b, 0, 1))
+		{
 			rrab(a);
-		else if (b)
+			ft_printf("rra\n");
+		}
+		else if (len_b > 2 && num_max_r(b[len_b], b) && !nums_in_order(b , len_b, 0, 0))
+		{
 			rrab(b);
-		else if (a && b)
-			rrr(a, b);*/
+			ft_printf("rrb\n");
+		}*/
+		else if (len_a > 2 && a[0] < a[len_a] && len_b > 2 && b[0] > b[len_b])
+		{
+			rr(a, b);
+			ft_printf("rr\n");
+		}
+		else if (len_a > 2 && a[0] < a[len_a])
+		{
+			rab(a);
+			ft_printf("ra\n");
+		}
+		else if (len_b > 2 && b[0] > b[len_b])
+		{
+			rab(b);
+			ft_printf("rb\n");
+		}
+		else if (len_a > 2 && a[0] > a[len_a] && len_b > 2 && b[0] < b[len_b])
+		{
+			rrr(a, b);
+			ft_printf("rrr\n");
+		}
+		else if (len_a > 2 && a[0] > a[len_a])
+		{
+			rrab(a);
+			ft_printf("rra\n");
+		}
+		else if (len_b > 2 && b[0] < b[len_b])
+		{
+			rrab(b);
+			ft_printf("rrb\n");
+		}
+		/*printf("\n\nlen_a = %d\n", len_a);
+		printf("len_b = %d\n\n", len_b);
+		printf("1 = %d\n", nums_in_order(a, len_b, 0, 1));
+		printf("1 = %d\n\n", nums_in_order(b, len_b, 0, 0));*/
+		/*ft_printf("\n%d  %d\n", a[0], b[0]);
+		ft_printf("%d  %d\n", a[1], b[1]);
+		ft_printf("%d  %d\n", a[2], b[2]);
+		ft_printf("%d  %d\n", a[3], b[3]);
+		ft_printf("%d  %d\n", a[4], b[4]);
+		ft_printf("%d  %d\n", a[5], b[5]);
+		ft_printf("%d  %d\n", a[6], b[6]);
+		ft_printf("%d  %d\n", a[7], b[7]);
+		ft_printf("%d  %d\n", a[8], b[8]);
+		ft_printf("%d  %d\n", a[9], b[9]);*/
+	}
 }
 
-/*
-	while (index < size - 1)
-	{
-		if (tab[index + 1] < tab[index])
-		{
-			copie = tab[index];
-			tab[index] = tab[index + 1];
-			tab[index + 1] = copie;
-			index = -1;
-		}
-		index++;
-	}
-*/
-
-int nums_in_order(int *a, int len_b)
+int	num_max(int x, int *ab)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (len_b != 0)
-		return (0);
-	while (a[i])
+	while (ab[i])
 	{
-		if (a[i] < a[i - 1])
+		if (ab[i] > x)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int *put_int_tab(char **argv, int argc)
+int	num_min(int x, int *ab)
 {
-	int *a;
-	int i;
-	int j;
+	int	i;
+
+	i = 1;
+	while (ab[i])
+	{
+		if (ab[i] < x)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	num_max_r(int x, int *ab)
+{
+	int	i;
+
+	i = 0;
+	while (ab[i] && ab[i + 1])
+	{
+		if (ab[i] > x)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	num_min_r(int x, int *ab)
+{
+	int	i;
+
+	i = 0;
+	while (ab[i] && ab[i + 1])
+	{
+		if (ab[i] < x)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	nums_in_order(int *a, int len_b, int x, int y)
+{
+	int	i;
+
+	i = 1;
+	if (len_b != 0 && x)
+		return (0);
+	while (a[i] && y)
+	{
+		if (a[i] < a[i - 1])
+			return (0);
+		i++;
+	}
+	while (a[i] && !x && !y)
+	{
+		if (a[i] > a[i - 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	*put_int_tab(char **argv, int argc)
+{
+	int	*a;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;
