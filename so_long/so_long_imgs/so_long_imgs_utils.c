@@ -36,7 +36,7 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	if (c == '0')
 		return (&(data->stct.img_background));
 	else if (c == '2')
-		return (&(data->stct.img_backgroundAfter));
+		return (&(data->stct.img_background_after));
 	else if (c == '1')
 	{
 		i++;

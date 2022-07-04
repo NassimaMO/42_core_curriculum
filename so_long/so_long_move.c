@@ -33,7 +33,7 @@ void	mv_up(t_data *data)
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
 		}
-		if (data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -58,7 +58,7 @@ void	mv_left(t_data *data)
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
 		}
-		if (data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -84,7 +84,7 @@ void	mv_down(t_data *data)
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
 		}
-		if (data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -109,7 +109,7 @@ void	mv_right(t_data *data)
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
 		}
-		if (data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
 			close_window(data);
 	}
 }

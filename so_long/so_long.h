@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
@@ -47,9 +47,9 @@ typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
-	int color;
+	int	width;
+	int	height;
+	int	color;
 }	t_rect;
 
 typedef struct s_lil_imgs
@@ -75,7 +75,7 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_user_down;
 	t_lil_imgs	img_user_left;
 	t_lil_imgs	img_background;
-	t_lil_imgs	img_backgroundAfter;
+	t_lil_imgs	img_background_after;
 	t_lil_imgs	img_exit;
 	t_lil_imgs	img_enemy;
 	t_lil_imgs	img_0;
@@ -92,15 +92,15 @@ typedef struct s_stct_lil_imgs
 
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	char	*map_file;
-	int		hei_map;
-	int		len_map;
-	int		nbr_step;
-	char	user;
-	char	*map;
-	t_imgs	img;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	char			*map_file;
+	int				hei_map;
+	int				len_map;
+	int				nbr_step;
+	char			user;
+	char			*map;
+	t_imgs			img;
 	t_stct_lil_imgs	stct;
 }	t_data;
 
@@ -124,10 +124,10 @@ void		render_background(t_data *data, int color);
 void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
 //so_long_img/so_long_imgs_utils.c
-void			img_pix_put(t_imgs *img, int x, int y, int color);
-t_lil_imgs		*get_img_ntr(char c, t_data *data);
-t_lil_imgs		*return_ntr(t_stct_lil_imgs *img, int n);
-t_lil_imgs		*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
+void		img_pix_put(t_imgs *img, int x, int y, int color);
+t_lil_imgs	*get_img_ntr(char c, t_data *data);
+t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
+t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_img/so_long_enemy_imgs.c
 void		enemy_mvments(t_data *data);

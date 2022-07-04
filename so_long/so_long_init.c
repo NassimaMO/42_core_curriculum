@@ -55,7 +55,7 @@ void	init_call(t_data *data)
 	img_init(data, &data->stct.img_user_down, "IMAGES/pacmanDown.xpm");
 	img_init(data, &data->stct.img_user_left, "IMAGES/pacmanLeft.xpm");
 	img_init(data, &data->stct.img_background, "IMAGES/leafy2.xpm");
-	img_init(data, &data->stct.img_backgroundAfter, "IMAGES/leafy.xpm");
+	img_init(data, &data->stct.img_background_after, "IMAGES/leafy.xpm");
 	img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
 	img_init(data, &data->stct.img_enemy, "IMAGES/pacman_phantom.xpm");
 }
