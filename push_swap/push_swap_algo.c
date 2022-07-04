@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_algo.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/04 19:05:53 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/07/04 19:05:55 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	algo_op(int *a, int *b, int ac)
@@ -26,7 +38,9 @@ void	algo_op(int *a, int *b, int ac)
 			sab(b);
 			ft_printf("sb\n");
 		}
-		else if (len_b >= 1 && b[0] < b[1] && (nums_in_order(a, len_b, 0, 1) && nums_in_order(b, len_b, 0, 0)) || (nums_in_order(a, len_b, 0, 1) && num_max(b[0], b)))
+		else if (len_b >= 1 && b[0] < b[1] && (nums_in_order(a, len_b, 0, 1) && \
+			nums_in_order(b, len_b, 0, 0)) || (nums_in_order(a, len_b, 0, 1) && \
+			num_max(b[0], b)))
 		{
 			pab(a, b);
 			len_a++;
@@ -40,7 +54,8 @@ void	algo_op(int *a, int *b, int ac)
 			len_a--;
 			ft_printf("pb\n");
 		}
-		/*else if (len_a > 2 && num_max(a[0], a) && len_b > 2 && num_min(b[0], b) && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
+		/*else if (len_a > 2 && num_max(a[0], a) && len_b > 2 && num_min(b[0], b)\
+			 && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
 		{
 			rr(a, b);
 			ft_printf("rr\n");
@@ -55,17 +70,21 @@ void	algo_op(int *a, int *b, int ac)
 			rab(b);
 			ft_printf("rb\n");
 		}
-		else if (len_a > 2 && num_min_r(a[len_a], a) && len_b > 2 && num_max_r(b[len_b], b)  && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
+		else if (len_a > 2 && num_min_r(a[len_a], a) && len_b > 2 && \
+			num_max_r(b[len_b], b)  && !nums_in_order(a, len_b, 0, 1) && \
+			!nums_in_order(b , len_b, 0, 0))
 		{
 			rrr(a, b);
 			ft_printf("rrr\n");
 		}
-		else if (len_a > 2 && num_min_r(a[len_a], a) && !nums_in_order(a, len_b, 0, 1))
+		else if (len_a > 2 && num_min_r(a[len_a], a) && !nums_in_order(a, len_b, 0, \
+			1))
 		{
 			rrab(a);
 			ft_printf("rra\n");
 		}
-		else if (len_b > 2 && num_max_r(b[len_b], b) && !nums_in_order(b , len_b, 0, 0))
+		else if (len_b > 2 && num_max_r(b[len_b], b) && !nums_in_order(b , len_b, 0, \
+			0))
 		{
 			rrab(b);
 			ft_printf("rrb\n");
@@ -115,84 +134,6 @@ void	algo_op(int *a, int *b, int ac)
 		ft_printf("%d  %d\n", a[8], b[8]);
 		ft_printf("%d  %d\n", a[9], b[9]);*/
 	}
-}
-
-int	num_max(int x, int *ab)
-{
-	int	i;
-
-	i = 1;
-	while (ab[i])
-	{
-		if (ab[i] > x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	num_min(int x, int *ab)
-{
-	int	i;
-
-	i = 1;
-	while (ab[i])
-	{
-		if (ab[i] < x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	num_max_r(int x, int *ab)
-{
-	int	i;
-
-	i = 0;
-	while (ab[i] && ab[i + 1])
-	{
-		if (ab[i] > x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	num_min_r(int x, int *ab)
-{
-	int	i;
-
-	i = 0;
-	while (ab[i] && ab[i + 1])
-	{
-		if (ab[i] < x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	nums_in_order(int *a, int len_b, int x, int y)
-{
-	int	i;
-
-	i = 1;
-	if (len_b != 0 && x)
-		return (0);
-	while (a[i] && y)
-	{
-		if (a[i] < a[i - 1])
-			return (0);
-		i++;
-	}
-	while (a[i] && !x && !y)
-	{
-		if (a[i] > a[i - 1])
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int	*put_int_tab(char **argv, int argc)

@@ -1,5 +1,19 @@
-/*ra (rotate a): Shift up all elements of stack a by 1. The first element becomes the last one.*/
-/*rb (rotate b): Shift up all elements of stack b by 1.The first element becomes the last one.*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rab.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/04 19:04:46 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/07/04 19:04:48 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*ra (rotate a): Shift up all elements of stack a by 1. The first element
+	becomes the last one.*/
+/*rb (rotate b): Shift up all elements of stack b by 1.The first element
+	becomes the last one.*/
 #include "../push_swap.h"
 
 void	rab(int *ab)

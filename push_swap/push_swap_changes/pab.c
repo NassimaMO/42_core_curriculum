@@ -1,4 +1,19 @@
-/*pa (push a): Take the first element at the top of b and put it at the top of a.Do nothing if b is empty.*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pab.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/07/04 19:04:27 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*pa (push a): Take the first element at the top of b and put it at the top of a
+	Do nothing if b is empty.*/
+/*pb (push b): Take the first element at the top of a and put it at the top of b
+	Do nothing if a is empty.*/
 #include "../push_swap.h"
 
 void	pab(int *ab, int *ba)
