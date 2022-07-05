@@ -45,7 +45,7 @@ void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
 		ft_printf("rrr\n");
 		return ;
 	}
-	else if (a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1 \
+	else if ((a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1) \
 		|| (*len_b > 1 && *len_a > 1 && (num_max(a[1], a) && *len_a != 2) \
 		&& (num_min(b[1], b) && *len_b != 2)))
 	{
