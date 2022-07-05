@@ -25,7 +25,7 @@ void	pab(int *ab, int *ba)
 		i++;
 	ab[i + 1] = '\0';
 	i--;
-	while (ab && ab[i])
+	while (ab && i >= 0)
 	{
 		ab[i + 1] = ab[i];
 		i--;

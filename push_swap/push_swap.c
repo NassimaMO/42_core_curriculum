@@ -28,8 +28,11 @@ int	main(int argc, char **argv)
 		return (1);
 	b = malloc(sizeof(int) * argc);
 	if (!b)
+	{
+		free(a);
 		return (1);
-	while (i <= argc)
+	}
+	while (i < argc)
 		b[i++] = '\0';
 	algo_op(a, b, argc);
 	free(a);

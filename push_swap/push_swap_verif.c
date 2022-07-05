@@ -71,3 +71,24 @@ long long int	nbr_to_str(char *a)
 	}
 	return (nbr * minus);
 }
+
+int	*put_int_tab(char **argv, int argc)
+{
+	int	*a;
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	a = malloc(sizeof(int) * argc);
+	if (!a)
+		return (0);
+	while (i < argc)
+	{
+		a[j] = ft_atoi(argv[i]);
+		i++;
+		j++;
+	}
+	a[j] = '\0';
+	return (a);
+}
