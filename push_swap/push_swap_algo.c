@@ -16,123 +16,79 @@ void	algo_op(int *a, int *b, int ac)
 {
 	int	len_a;
 	int	len_b;
+	int	w;
 
 	len_a = ac - 1;
 	len_b = 0;
+	w = 0;
 	while (1)
 	{
 		if (nums_in_order(a, len_b, 1, 1))
 			break ;
-		if (a[0] > a[1] && b[0] < b[1] && len_b > 1 && len_a > 1)
+		if (len_a > 2 && a[0] > a[len_a - 1] && len_b > 2 \
+			&& b[0] < b[len_b - 1] && (!num_max(b[len_b - 1], b) \
+			&& !num_min(a[len_a - 1], a)))
+		{
+			rr(a, b);
+			ft_printf("rr\n");
+		}
+		else if (len_a > 2 && a[0] > a[len_a - 1] \
+			&& len_b > 2 && b[0] < b[len_b - 1])
+		{
+			rrr(a, b);
+			ft_printf("rrr\n");
+		}
+		else if (a[0] > a[1] && b[0] < b[1] && len_b > 1 && len_a > 1 \
+			|| (len_b > 1 && len_a > 1 && (num_max(a[1], a) && len_a != 2) \
+			&& (num_min(b[1], b) && len_b != 2)))
 		{
 			ss(a, b);
 			ft_printf("ss\n");
 		}
-		else if (len_a > 1 && a[0] > a[1])
+		else if (len_a > 2 && a[0] > a[len_a - 1] && !num_min(a[len_a - 1], a))
+		{
+			rab(a);
+			ft_printf("ra\n");
+		}
+		else if (len_a > 2 && a[0] > a[len_a - 1])
+		{
+			rrab(a);
+			ft_printf("rra\n");
+		}
+		else if (len_a > 1 && (a[0] > a[1] || (num_max(a[1], a) && len_a != 2)))
 		{
 			sab(a);
 			ft_printf("sa\n");
 		}
-		else if (len_b > 1 && b[0] < b[1])
+		else if (len_b > 2 && b[0] < b[len_b - 1] && !num_max(b[len_b - 1], b))
+		{
+			rab(b);
+			ft_printf("rb\n");
+		}
+		else if (len_b > 2 && b[0] < b[len_b - 1])
+		{
+			rrab(b);
+			ft_printf("rrb\n");
+		}
+		else if (len_b > 1 && (b[0] < b[1] || (num_min(b[1], b) && len_b != 2)))
 		{
 			sab(b);
 			ft_printf("sb\n");
 		}
-		else if (len_b >= 1 && b[0] < b[1] && (nums_in_order(a, len_b, 0, 1) && \
-			nums_in_order(b, len_b, 0, 0)) || (nums_in_order(a, len_b, 0, 1) && \
-			num_max(b[0], b)))
+		else if (len_b >= 1 && nums_in_order(a, len_b, 0, 1))
 		{
 			pab(a, b);
 			len_a++;
 			len_b--;
 			ft_printf("pa\n");
 		}
-		else if (len_a >= 1 && a[0] < a[1] && !nums_in_order(a, len_b, 0, 1))
+		else if (len_a >= 1 && !nums_in_order(a, len_b, 0, 1))
 		{
 			pab(b, a);
 			len_b++;
 			len_a--;
 			ft_printf("pb\n");
 		}
-		/*else if (len_a > 2 && num_max(a[0], a) && len_b > 2 && num_min(b[0], b)\
-			 && !nums_in_order(a, len_b, 0, 1) && !nums_in_order(b , len_b, 0, 0))
-		{
-			rr(a, b);
-			ft_printf("rr\n");
-		}
-		else if (len_a > 2 && num_max(a[0], a) && !nums_in_order(a, len_b, 0, 1))
-		{
-			rab(a);
-			ft_printf("ra\n");
-		}
-		else if (len_b > 2 && num_min(b[0], b) && !nums_in_order(b , len_b, 0, 0))
-		{
-			rab(b);
-			ft_printf("rb\n");
-		}
-		else if (len_a > 2 && num_min_r(a[len_a], a) && len_b > 2 && \
-			num_max_r(b[len_b], b)  && !nums_in_order(a, len_b, 0, 1) && \
-			!nums_in_order(b , len_b, 0, 0))
-		{
-			rrr(a, b);
-			ft_printf("rrr\n");
-		}
-		else if (len_a > 2 && num_min_r(a[len_a], a) && !nums_in_order(a, len_b, 0, \
-			1))
-		{
-			rrab(a);
-			ft_printf("rra\n");
-		}
-		else if (len_b > 2 && num_max_r(b[len_b], b) && !nums_in_order(b , len_b, 0, \
-			0))
-		{
-			rrab(b);
-			ft_printf("rrb\n");
-		}*/
-		else if (len_a > 2 && a[0] < a[len_a] && len_b > 2 && b[0] > b[len_b])
-		{
-			rr(a, b);
-			ft_printf("rr\n");
-		}
-		else if (len_a > 2 && a[0] < a[len_a])
-		{
-			rab(a);
-			ft_printf("ra\n");
-		}
-		else if (len_b > 2 && b[0] > b[len_b])
-		{
-			rab(b);
-			ft_printf("rb\n");
-		}
-		else if (len_a > 2 && a[0] > a[len_a] && len_b > 2 && b[0] < b[len_b])
-		{
-			rrr(a, b);
-			ft_printf("rrr\n");
-		}
-		else if (len_a > 2 && a[0] > a[len_a])
-		{
-			rrab(a);
-			ft_printf("rra\n");
-		}
-		else if (len_b > 2 && b[0] < b[len_b])
-		{
-			rrab(b);
-			ft_printf("rrb\n");
-		}
-		/*printf("\n\nlen_a = %d\n", len_a);
-		printf("len_b = %d\n\n", len_b);
-		printf("1 = %d\n", nums_in_order(a, len_b, 0, 1));
-		printf("1 = %d\n\n", nums_in_order(b, len_b, 0, 0));*/
-		/*ft_printf("\n%d  %d\n", a[0], b[0]);
-		ft_printf("%d  %d\n", a[1], b[1]);
-		ft_printf("%d  %d\n", a[2], b[2]);
-		ft_printf("%d  %d\n", a[3], b[3]);
-		ft_printf("%d  %d\n", a[4], b[4]);
-		ft_printf("%d  %d\n", a[5], b[5]);
-		ft_printf("%d  %d\n", a[6], b[6]);
-		ft_printf("%d  %d\n", a[7], b[7]);
-		ft_printf("%d  %d\n", a[8], b[8]);
-		ft_printf("%d  %d\n", a[9], b[9]);*/
 	}
 }
 

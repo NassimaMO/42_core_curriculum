@@ -14,9 +14,9 @@
 
 int	number_checker(char **argv, int argc)
 {
-	int	i;
-	int	j;
-	long long int nbr;
+	int				i;
+	int				j;
+	long long int	nbr;
 
 	i = 1;
 	while (argc != 1)
@@ -39,7 +39,7 @@ int	number_checker(char **argv, int argc)
 
 int	verif_double(char *a, char **argv, int x)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (argv[i])
@@ -67,7 +67,7 @@ long long int	nbr_to_str(char *a)
 		nbr += a[i] - 48;
 		if (a[i + 1])
 			nbr *= 10;
-		i++; 
+		i++;
 	}
 	return (nbr * minus);
 }
