@@ -12,57 +12,33 @@
 
 #include "push_swap.h"
 
-void	algo_op(int *a, int *b, int ac)
+static void	commands_the_third(int *a, int *b, int *len_a, int *len_b)
 {
-	int	len_a;
-	int	len_b;
-
-	len_a = ac - 1;
-	len_b = 0;
-	while (1)
+	if (*len_b > 1 && (b[0] < b[1] || (num_min(b[1], b) && *len_b != 2)))
 	{
-		if (nums_in_order(a, len_b, 1, 1))
-			break ;
-		if (len_a > 2 && a[0] > a[len_a - 1] && len_b > 2 \
-			&& b[0] < b[len_b - 1] && (!num_max(b[len_b - 1], b) \
-			&& !num_min(a[len_a - 1], a)))
-		{
-			rr(a, b);
-			ft_printf("rr\n");
-			return ;
-		}
-		else
-			commands_the_first(a, b, &len_a, &len_b);
+		sab(b);
+		ft_printf("sb\n");
+		return ;
+	}
+	else if (*len_b >= 1 && nums_in_order(a, *len_b, 0, 1))
+	{
+		pab(a, b);
+		(*len_a)++;
+		(*len_b)--;
+		ft_printf("pa\n");
+		return ;
+	}
+	else if (*len_a >= 1 && !nums_in_order(a, *len_b, 0, 1))
+	{
+		pab(b, a);
+		(*len_b)++;
+		(*len_a)--;
+		ft_printf("pb\n");
+		return ;
 	}
 }
 
-void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
-{
-	if (*len_a > 2 && a[0] > a[*len_a - 1] \
-		&& *len_b > 2 && b[0] < b[*len_b - 1])
-	{
-		rrr(a, b);
-		ft_printf("rrr\n");
-		return ;
-	}
-	else if ((a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1) \
-		|| (*len_b > 1 && *len_a > 1 && (num_max(a[1], a) && *len_a != 2) \
-		&& (num_min(b[1], b) && *len_b != 2)))
-	{
-		ss(a, b);
-		ft_printf("ss\n");
-		return ;
-	}
-	else if (*len_a > 2 && a[0] > a[*len_a - 1] && !num_min(a[*len_a - 1], a))
-	{
-		rab(a);
-		ft_printf("ra\n");
-		return ;
-	}
-	commands_the_second(a, b, len_a, len_b);
-}
-
-void	commands_the_second(int *a, int *b, int *len_a, int *len_b)
+static void	commands_the_second(int *a, int *b, int *len_a, int *len_b)
 {
 	if (*len_a > 2 && a[0] > a[*len_a - 1])
 	{
@@ -91,28 +67,56 @@ void	commands_the_second(int *a, int *b, int *len_a, int *len_b)
 	commands_the_third(a, b, len_a, len_b);
 }
 
-void	commands_the_third(int *a, int *b, int *len_a, int *len_b)
+static void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
 {
-	if (*len_b > 1 && (b[0] < b[1] || (num_min(b[1], b) && *len_b != 2)))
+	if (*len_a > 2 && a[0] > a[*len_a - 1] \
+		&& *len_b > 2 && b[0] < b[*len_b - 1])
 	{
-		sab(b);
-		ft_printf("sb\n");
+		rrr(a, b);
+		ft_printf("rrr\n");
 		return ;
 	}
-	else if (*len_b >= 1 && nums_in_order(a, *len_b, 0, 1))
+	else if ((a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1) \
+		|| (*len_b > 1 && *len_a > 1 && (num_max(a[1], a) && *len_a != 2) \
+		&& (num_min(b[1], b) && *len_b != 2)))
 	{
-		pab(a, b);
-		(*len_a)++;
-		(*len_b)--;
-		ft_printf("pa\n");
+		ss(a, b);
+		ft_printf("ss\n");
 		return ;
 	}
-	else if (*len_a >= 1 && !nums_in_order(a, *len_b, 0, 1))
+	else if (*len_a > 2 && a[0] > a[*len_a - 1] && !num_min(a[*len_a - 1], a))
 	{
-		pab(b, a);
-		(*len_b)++;
-		(*len_a)--;
-		ft_printf("pb\n");
+		rab(a);
+		ft_printf("ra\n");
 		return ;
+	}
+	commands_the_second(a, b, len_a, len_b);
+}
+
+
+
+
+
+void	algo_op(int *a, int *b, int ac)
+{
+	int	len_a;
+	int	len_b;
+
+	len_a = ac - 1;
+	len_b = 0;
+	while (1)
+	{
+		if (nums_in_order(a, len_b, 1, 1))
+			break ;
+		if (len_a > 2 && a[0] > a[len_a - 1] && len_b > 2 \
+			&& b[0] < b[len_b - 1] && (!num_max(b[len_b - 1], b) \
+			&& !num_min(a[len_a - 1], a)))
+		{
+			rr(a, b);
+			ft_printf("rr\n");
+			return ;
+		}
+		else
+			commands_the_first(a, b, &len_a, &len_b);
 	}
 }

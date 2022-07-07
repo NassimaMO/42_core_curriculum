@@ -25,9 +25,8 @@ long long int	nbr_to_str(char *a);
 int				*put_int_tab(char **argv, int argc);
 
 void			algo_op(int *a, int *b, int ac);
-void	commands_the_first(int *a, int *b, int *len_a, int *len_b);
-void	commands_the_second(int *a, int *b, int *len_a, int *len_b);
-void	commands_the_third(int *a, int *b, int *len_a, int *len_b);
+
+void			super_algo_op(int *a, int *b, int ac);
 
 int				num_max(int x, int *ab);
 int				num_min(int x, int *ab);

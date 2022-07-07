@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <unistd.h>
+
+void	ft_putstrtest_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -20,7 +33,10 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	if (!number_checker(argv, argc))
-		return (ft_printf("Error\n"), 0);
+	{
+		ft_putstrtest_fd("Error\n", 2);
+		exit(1);
+	}
 	if (argc <= 2)
 		return (0);
 	a = put_int_tab(argv, argc);
