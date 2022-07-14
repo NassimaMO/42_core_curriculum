@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 		free(win_param.map);
 		return (MAP_ERROR);
 	}
+	put_enemy_in_map(&win_param);
 	win_param.nbr_step = 0;
 	win_param.mlx_ptr = mlx_init();
 	if (!win_param.mlx_ptr)

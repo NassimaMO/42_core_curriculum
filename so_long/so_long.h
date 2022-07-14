@@ -129,7 +129,10 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data);
 t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
-//so_long_img/so_long_enemy_imgs.c
+//so_long_enemy/so_long_place_enemy.c
+void    put_enemy_in_map(t_data *data);
+
+//so_long_enemy/so_long_enemy_imgs.c
 void		enemy_mvments(t_data *data);
 int			n_mv_up(t_data *data);
 int			n_mv_left(t_data *data);

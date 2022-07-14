@@ -47,8 +47,7 @@ int	map_verif(t_data *data)
 				|| (x == data->len_map && d != '1') \
 				|| (x == 0 && d != '1') \
 				|| (y == data->hei_map && d != '1') \
-				|| (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P' \
-					&& d != 'N'))
+				|| (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P'))
 				return (ft_printf("Error\nMap not respecting the rules.\n"), 0);
 			x++;
 			l++;

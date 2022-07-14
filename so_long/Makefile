@@ -1,4 +1,4 @@
-SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_imgs/*.c
+SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_imgs/*.c so_long_enemy/*.c
 
 OBJS		= *.o
 
