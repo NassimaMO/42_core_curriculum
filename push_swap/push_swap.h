@@ -42,4 +42,13 @@ void			rrr(int *a, int *b);
 void			sab(int *ab);
 void			ss(int *a, int *b);
 
+typedef struct  s_stacks
+{
+    int *a;
+    int *b;
+    int len_a;
+    int len_b;
+}               t_stacks;
+
+
 #endif
