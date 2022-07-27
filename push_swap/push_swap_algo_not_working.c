@@ -1,4 +1,4 @@
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static void	exec(void (funct)(int *), int *a, int i, int x)
 {
@@ -113,7 +113,7 @@ static void order(t_stacks *stacks_data, int from, int till)
 	}
 }
 
-void	super_algo_op(int *a, int *b, int ac)
+void	super_algo_op3(int *a, int *b, int ac)
 {
 	t_stacks	stacks_data;
 	int	max;

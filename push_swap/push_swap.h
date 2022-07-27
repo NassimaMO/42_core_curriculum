@@ -27,6 +27,8 @@ int				*put_int_tab(char **argv, int argc);
 void			algo_op(int *a, int *b, int ac);
 
 void			super_algo_op(int *a, int *b, int ac);
+void			super_algo_op2(int *a, int *b, int ac);
+void			super_algo_op3(int *a, int *b, int ac);
 
 int				num_max(int x, int *ab);
 int				num_min(int x, int *ab);

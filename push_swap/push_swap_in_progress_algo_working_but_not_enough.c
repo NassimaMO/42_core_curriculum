@@ -1,4 +1,4 @@
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
 {
@@ -42,17 +42,27 @@ static void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
 	}
 }
 
-void	super_algo_op(int *a, int *b, int ac)
+void	super_algo_op2(int *a, int *b, int ac)
 {
 	int	len_a;
 	int	len_b;
+	int	tmp;
 
 	len_a = ac - 1;
 	len_b = 0;
 	while (1)
 	{
 		if (nums_in_order(a, len_b, 1, 1))
+		{
+			/*tmp = 0;
+			while (tmp < len_a)
+				ft_printf("%d\n", a[tmp++]);
+			ft_printf("\n");
+			tmp = 0;
+			while (tmp < len_b)
+				ft_printf("%d\n", b[tmp++]);*/
 			break ;
+		}
 		if ((len_b >= 2 && !num_max(b[0], b)) && (len_a >= 2 && (a[0] > a[len_a - 1] || a[0] > a[1]) && !num_min(a[0], a)))
 		{
 			rr(a, b);

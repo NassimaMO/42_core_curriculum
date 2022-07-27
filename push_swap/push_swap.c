@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	}
 	while (i < argc)
 		b[i++] = '\0';
-	super_algo_op(a, b, argc);
+	super_algo_op3(a, b, argc);
 	free(a);
 	free(b);
 	return (0);

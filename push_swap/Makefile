@@ -15,7 +15,7 @@ RM		= rm -f
 
 all:			${OBJS}
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -g
-			mkdir OBJS
+			mkdir -p OBJS
 			mv *.o OBJS
 
 ${NAME}:		all
