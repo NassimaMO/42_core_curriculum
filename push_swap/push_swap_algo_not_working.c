@@ -63,7 +63,7 @@ static void	order_b(t_stacks *stacks_data)
 	int	i;
 
 	i = 0;
-	while (stacks_data->b && stacks_data->b[i] && !nums_in_order(stacks_data->b, stacks_data->len_b, 0, 0))
+	while (stacks_data->b && stacks_data->b[i] && stacks_data->len_b)
 	{
 		while (stacks_data->b && stacks_data->b[i] && !num_max(stacks_data->b[i], stacks_data->b))
 			i++;
@@ -75,14 +75,9 @@ static void	order_b(t_stacks *stacks_data)
 		(stacks_data->len_a)++;
 		(stacks_data->len_b)--;
 		ft_printf("pa\n");
+		rab(stacks_data->a);
+		ft_printf("ra\n");
 		i = 0;
-	}
-	while (stacks_data->len_b)
-	{
-		pab(stacks_data->a, stacks_data->b);
-		(stacks_data->len_a)++;
-		(stacks_data->len_b)--;
-		ft_printf("pa\n");
 	}
 }
 
@@ -135,16 +130,10 @@ void	super_algo_op3(int *a, int *b, int ac)
 	{
 		order(&stacks_data, i, i + fifth_max);
 		order_b(&stacks_data);
-
 		i += fifth_max;
 	}
-	while (stacks_data.len_b)
-	{
-		pab(stacks_data.a, stacks_data.b);
-		(stacks_data.len_a)++;
-		(stacks_data.len_b)--;
-		ft_printf("pa\n");
-	}
+	rrab(stacks_data.a);
+	ft_printf("rra\n");
 	i = 0;
 	while (stacks_data.a && stacks_data.a[i])
 	{
@@ -159,5 +148,4 @@ void	super_algo_op3(int *a, int *b, int ac)
 		i++;
 	}
 	printf("\n");
-	i = 0;
 }
