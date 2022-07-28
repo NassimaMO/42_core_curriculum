@@ -40,20 +40,6 @@ int	num_min(int x, int *ab)
 	return (1);
 }
 
-int	num_max_r(int x, int *ab)
-{
-	int	i;
-
-	i = 0;
-	while (ab[i] && ab[i + 1])
-	{
-		if (ab[i] > x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	num_min_r(int x, int *ab)
 {
 	int	i;

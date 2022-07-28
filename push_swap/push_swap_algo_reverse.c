@@ -44,20 +44,6 @@ static void	exec_b(void (funct)(int *), t_stacks *stacks_data, int i)
 	}
 }
 
-static int	find_max(int max, int *b)
-{
-	int	i;
-
-	i = 0;
-	while (b[i])
-	{
-		if (b[i] == max)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 static void	order_b(t_stacks *stacks_data)
 {
 	int	i;

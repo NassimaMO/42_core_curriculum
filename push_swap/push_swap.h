@@ -18,6 +18,7 @@
 # include "ft_printf/ft_printf.h"
 
 # define INT_MAX 2147483647
+//need to add int min
 
 int				number_checker(char **argv, int argc);
 int				verif_double(char *a, char **argv, int x);
@@ -26,13 +27,10 @@ int				*put_int_tab(char **argv, int argc);
 
 void			algo_op(int *a, int *b, int ac);
 
-void			super_algo_op(int *a, int *b, int ac);
-void			super_algo_op2(int *a, int *b, int ac);
 void			super_algo_op3(int *a, int *b, int ac);
 
 int				num_max(int x, int *ab);
 int				num_min(int x, int *ab);
-int				num_max_r(int x, int *ab);
 int				num_min_r(int x, int *ab);
 int				nums_in_order(int *a, int len_b, int x, int y);
 

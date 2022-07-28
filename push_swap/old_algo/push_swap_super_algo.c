@@ -95,8 +95,7 @@ void	super_algo_op(int *a, int *b, int ac)
 
 	len_a = ac - 1;
 	len_b = 0;
-	//put the pivot at the top
-	place_pivot(a, len_a);
+	place_pivot(a, len_a); //put the pivot at the top
 	pivot = 0;
 	i = 1;
 	while (1)
