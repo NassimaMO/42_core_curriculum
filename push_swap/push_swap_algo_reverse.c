@@ -94,6 +94,22 @@ static void order(t_stacks *stacks_data, int from, int till)
 	}
 }
 
+int	ft_is_prime(int nb)
+{
+	int	i;
+
+	i = 2;
+	if (nb <= 1)
+		return (0);
+	while ((i * i) <= nb && i <= 46340)
+	{
+		if (nb % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	super_algo_op3(int *a, int *b, int ac)
 {
 	t_stacks	stacks_data;
@@ -110,6 +126,7 @@ void	super_algo_op3(int *a, int *b, int ac)
 	while (a && a[i] && !num_max(a[i], a))
 		i++;
 	max = a[i];
+	ft_printf("len_a = %d\n", stacks_data.len_a);
 	fifth_max = max / 5;
 	i = -1;
 	while (!nums_in_order(stacks_data.a, stacks_data.len_b, 1, 1) && i <= max)

@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	}
 	while (i < argc)
 		b[i++] = '\0';
-	if (argc - 1 <= 20)
+	if (argc - 1 <= 25)
 		algo_op(a, b, argc);
 	else
 		super_algo_op3(a, b, argc);
