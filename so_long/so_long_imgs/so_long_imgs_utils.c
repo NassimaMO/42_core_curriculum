@@ -95,9 +95,8 @@ t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
 {
 	int			t[10];
 	t_lil_imgs	*num;
-	static int	i;
+	static int	i = 0;
 
-	i = 0;
 	while (steps)
 	{
 		t[l] = steps % 10;

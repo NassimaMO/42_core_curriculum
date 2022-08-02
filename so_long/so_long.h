@@ -104,6 +104,10 @@ typedef struct s_data
 	t_stct_lil_imgs	stct;
 }	t_data;
 
+//so_long_init_and_free.c
+void		init_map(t_data *win_param, int argc, char **argv);
+void		free_all(t_data *win_param);
+
 //so_long_init.c
 void		img_init(t_data *data, t_lil_imgs *img, char *path);
 void		img_num_init(t_data *data, t_lil_imgs *img, char *path);
