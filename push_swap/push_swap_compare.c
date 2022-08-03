@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-int	num_max(int x, int *ab)
+int num_max(int x, int *ab)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	while (ab[i])
@@ -26,9 +26,9 @@ int	num_max(int x, int *ab)
 	return (1);
 }
 
-int	num_min(int x, int *ab)
+int num_min(int x, int *ab)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	while (ab[i])
@@ -40,23 +40,23 @@ int	num_min(int x, int *ab)
 	return (1);
 }
 
-int	num_min_r(int x, int *ab)
+int num_min_r(int x, int y, int *ab)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (ab[i] && ab[i + 1])
+	while (ab[i])
 	{
-		if (ab[i] < x)
+		if (ab[i] < x && i != y)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	nums_in_order(int *a, int len_b, int x, int y)
+int nums_in_order(int *a, int len_b, int x, int y)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	if (len_b != 0 && x)

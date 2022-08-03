@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-static void	exec(void (funct)(int *), int *a, int i, int x)
+static void exec(void(funct)(int *), int *a, int i, int x)
 {
 	if (!x)
 	{
-		while (a && a[i - 1])
+		while (a && a[i])
 		{
 			funct(a);
 			ft_printf("ra\n");
@@ -16,13 +16,15 @@ static void	exec(void (funct)(int *), int *a, int i, int x)
 		while (a && a[i])
 		{
 			funct(a);
-			i++;
 			ft_printf("rra\n");
+			i++;
 		}
+		funct(a);
+		ft_printf("rra\n");
 	}
 }
 
-static void	exec_b(void (funct)(int *), t_stacks *stacks_data, int i)
+static void exec_b(void(funct)(int *), t_stacks *stacks_data, int i)
 {
 	if (stacks_data->b && stacks_data->b[i] && i <= stacks_data->len_b / 2 && i != 0)
 	{
@@ -32,7 +34,7 @@ static void	exec_b(void (funct)(int *), t_stacks *stacks_data, int i)
 			ft_printf("rb\n");
 			i--;
 		}
-	}	
+	}
 	else if (stacks_data->b && stacks_data->b[i] && i > stacks_data->len_b / 2 && i != 0)
 	{
 		while (stacks_data->b && stacks_data->b[i])
@@ -44,15 +46,38 @@ static void	exec_b(void (funct)(int *), t_stacks *stacks_data, int i)
 	}
 }
 
-static void	order_b(t_stacks *stacks_data)
+int num_max_r(int x, int y, int *ab)
 {
-	int	i;
+	int i;
 
 	i = 0;
+	while (ab[i])
+	{
+		if (ab[i] > x && i != y)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void order_b(t_stacks *stacks_data)
+{
+	int i;
+	int tmp;
+
+	i = 0;
+	tmp = 0;
+	while (stacks_data->b && stacks_data->b[tmp])
+	{
+		printf("\nb = %d\n", stacks_data->b[tmp]);
+		tmp++;
+	}
+
 	while (stacks_data->b && stacks_data->b[i] && stacks_data->len_b)
 	{
-		while (stacks_data->b && stacks_data->b[i] && !num_max(stacks_data->b[i], stacks_data->b))
+		while (stacks_data->b && stacks_data->b[i] && !num_max_r(stacks_data->b[i], i, stacks_data->b))
 			i++;
+		ft_printf("|| i = %d ||\n", i);
 		if (stacks_data->b && stacks_data->b[i] && i <= stacks_data->len_b / 2 && i != 0)
 			exec_b(&rab, stacks_data, i);
 		else if (stacks_data->b && stacks_data->b[i] && i > stacks_data->len_b / 2 && i != 0)
@@ -61,22 +86,27 @@ static void	order_b(t_stacks *stacks_data)
 		(stacks_data->len_a)++;
 		(stacks_data->len_b)--;
 		ft_printf("pa\n");
-		rab(stacks_data->a);
-		ft_printf("ra\n");
+		ft_printf("\naaa = %d", stacks_data->a[0]);
+		if (!num_max(stacks_data->a[0], stacks_data->a))
+		{
+			rab(stacks_data->a);
+			ft_printf("ra\n");
+		}
 		i = 0;
 	}
 }
 
 static void order(t_stacks *stacks_data, int from, int till)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (stacks_data->a && stacks_data->a[++i])
 	{
 		if (stacks_data->a[i] > from && stacks_data->a[i] <= till)
 		{
-			if (!(num_min(stacks_data->a[i], stacks_data->a) && i == 0))
+			ft_printf("order_i = %d\n", i);
+			if (!(num_min_r(stacks_data->a[i], i, stacks_data->a) && i == 0))
 			{
 				if (i <= stacks_data->len_a / 2)
 					exec(&rab, stacks_data->a, i, 0);
@@ -94,9 +124,9 @@ static void order(t_stacks *stacks_data, int from, int till)
 	}
 }
 
-int	ft_is_prime(int nb)
+int ft_is_prime(int nb)
 {
-	int	i;
+	int i;
 
 	i = 2;
 	if (nb <= 1)
@@ -110,13 +140,13 @@ int	ft_is_prime(int nb)
 	return (1);
 }
 
-void	super_algo_op3(int *a, int *b, int ac)
+void super_algo_op3(int *a, int *b, int ac)
 {
-	t_stacks	stacks_data;
-	int	max;
-	int	i;
-	int	j;
-	int	fifth_max;
+	t_stacks stacks_data;
+	int max;
+	int i;
+	int j;
+	int fifth_max;
 
 	stacks_data.len_a = ac - 1;
 	stacks_data.len_b = 0;
@@ -135,8 +165,6 @@ void	super_algo_op3(int *a, int *b, int ac)
 		order_b(&stacks_data);
 		i += fifth_max;
 	}
-	rrab(stacks_data.a);
-	ft_printf("rra\n");
 	i = 0;
 	while (stacks_data.a && stacks_data.a[i])
 	{
