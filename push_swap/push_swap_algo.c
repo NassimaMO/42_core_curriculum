@@ -12,111 +12,103 @@
 
 #include "push_swap.h"
 
-static void	commands_the_third(int *a, int *b, int *len_a, int *len_b)
+static void commands_the_third(t_stacks *stacks)
 {
-	if (*len_b > 1 && (b[0] < b[1] || (num_min(b[1], b) && *len_b != 2)))
+	if (stacks->len_b > 1 && (stacks->b[0] < stacks->b[1] || (num_min(stacks->b[1], stacks->b) && stacks->len_b != 2)))
 	{
-		sab(b);
+		sab(stacks->b);
 		ft_printf("sb\n");
-		return ;
+		return;
 	}
-	else if (*len_b >= 1 && nums_in_order(a, *len_b, 0, 1))
+	else if (stacks->len_b >= 1 && nums_in_order(stacks, 0, 1))
 	{
-		pab(a, b);
-		(*len_a)++;
-		(*len_b)--;
+		pab(stacks->a, stacks->b);
+		stacks->len_a++;
+		stacks->len_b--;
 		ft_printf("pa\n");
-		return ;
+		return;
 	}
-	else if (*len_a >= 1 && !nums_in_order(a, *len_b, 0, 1))
+	else if (stacks->len_a >= 1 && !nums_in_order(stacks, 0, 1))
 	{
-		pab(b, a);
-		(*len_b)++;
-		(*len_a)--;
+		pab(stacks->b, stacks->a);
+		stacks->len_b++;
+		stacks->len_a--;
 		ft_printf("pb\n");
-		return ;
+		return;
 	}
 }
 
-static void	commands_the_second(int *a, int *b, int *len_a, int *len_b)
+static void commands_the_second(t_stacks *stacks)
 {
-	if (*len_a > 2 && a[0] > a[*len_a - 1])
+	if (stacks->len_a > 2 && stacks->a[0] > stacks->a[stacks->len_a - 1])
 	{
-		rrab(a);
+		rrab(stacks->a);
 		ft_printf("rra\n");
-		return ;
+		return;
 	}
-	else if (*len_a > 1 && (a[0] > a[1] || (num_max(a[1], a) && *len_a != 2)))
+	else if (stacks->len_a > 1 && (stacks->a[0] > stacks->a[1] || (num_max(stacks->a[1], stacks->a) && stacks->len_a != 2)))
 	{
-		sab(a);
+		sab(stacks->a);
 		ft_printf("sa\n");
-		return ;
+		return;
 	}
-	else if (*len_b > 2 && b[0] < b[*len_b - 1] && !num_max(b[*len_b - 1], b))
+	else if (stacks->len_b > 2 && stacks->b[0] < stacks->b[stacks->len_b - 1] && !num_max(stacks->b[stacks->len_b - 1], stacks->b))
 	{
-		rab(b);
+		rab(stacks->b);
 		ft_printf("rb\n");
-		return ;
+		return;
 	}
-	else if (*len_b > 2 && b[0] < b[*len_b - 1])
+	else if (stacks->len_b > 2 && stacks->b[0] < stacks->b[stacks->len_b - 1])
 	{
-		rrab(b);
+		rrab(stacks->b);
 		ft_printf("rrb\n");
-		return ;
+		return;
 	}
-	commands_the_third(a, b, len_a, len_b);
+	commands_the_third(stacks);
 }
 
-static void	commands_the_first(int *a, int *b, int *len_a, int *len_b)
+static void commands_the_first(t_stacks *stacks)
 {
-	if (*len_a > 2 && a[0] > a[*len_a - 1] \
-		&& *len_b > 2 && b[0] < b[*len_b - 1])
+	if (stacks->len_a > 2 && stacks->a[0] > stacks->a[stacks->len_a - 1] && stacks->len_b > 2 && stacks->b[0] < stacks->b[stacks->len_b - 1])
 	{
-		rrr(a, b);
+		rrr(stacks->a, stacks->b);
 		ft_printf("rrr\n");
-		return ;
+		return;
 	}
-	else if ((a[0] > a[1] && b[0] < b[1] && *len_b > 1 && *len_a > 1) \
-		|| (*len_b > 1 && *len_a > 1 && (num_max(a[1], a) && *len_a != 2) \
-		&& (num_min(b[1], b) && *len_b != 2)))
+	else if ((stacks->a[0] > stacks->a[1] && stacks->b[0] < stacks->b[1] && stacks->len_b > 1 && stacks->len_a > 1) || (stacks->len_b > 1 && stacks->len_a > 1 && (num_max(stacks->a[1], stacks->a) && stacks->len_a != 2) && (num_min(stacks->b[1], stacks->b) && stacks->len_b != 2)))
 	{
-		ss(a, b);
+		ss(stacks->a, stacks->b);
 		ft_printf("ss\n");
-		return ;
+		return;
 	}
-	else if (*len_a > 2 && a[0] > a[*len_a - 1] && !num_min(a[*len_a - 1], a))
+	else if (stacks->len_a > 2 && stacks->a[0] > stacks->a[stacks->len_a - 1] && !num_min(stacks->a[stacks->len_a - 1], stacks->a))
 	{
-		rab(a);
+		rab(stacks->a);
 		ft_printf("ra\n");
-		return ;
+		return;
 	}
-	commands_the_second(a, b, len_a, len_b);
+	commands_the_second(stacks);
 }
 
-
-
-
-
-void	algo_op(int *a, int *b, int ac)
+void algo_op(int *a, int *b, int ac)
 {
-	int	len_a;
-	int	len_b;
+	t_stacks stacks;
 
-	len_a = ac - 1;
-	len_b = 0;
+	stacks.a = a;
+	stacks.b = b;
+	stacks.len_a = ac - 1;
+	stacks.len_b = 0;
 	while (1)
 	{
-		if (nums_in_order(a, len_b, 1, 1))
-			break ;
-		if (len_a > 2 && a[0] > a[len_a - 1] && len_b > 2 \
-			&& b[0] < b[len_b - 1] && (!num_max(b[len_b - 1], b) \
-			&& !num_min(a[len_a - 1], a)))
+		if (nums_in_order(&stacks, 1, 1))
+			break;
+		if (stacks.len_a > 2 && stacks.a[0] > stacks.a[stacks.len_a - 1] && stacks.len_b > 2 && stacks.b[0] < stacks.b[stacks.len_b - 1] && (!num_max(stacks.b[stacks.len_b - 1], stacks.b) && !num_min(stacks.a[stacks.len_a - 1], stacks.a)))
 		{
-			rr(a, b);
+			rr(stacks.a, stacks.b);
 			ft_printf("rr\n");
-			return ;
+			return;
 		}
 		else
-			commands_the_first(a, b, &len_a, &len_b);
+			commands_the_first(&stacks);
 	}
 }

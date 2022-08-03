@@ -44,32 +44,33 @@ int num_min_r(int x, int y, int *ab)
 {
 	int i;
 
+	(void)y;
 	i = 0;
 	while (ab[i])
 	{
-		if (ab[i] < x && i != y)
+		if (ab[i] < x)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int nums_in_order(int *a, int len_b, int x, int y)
+int nums_in_order(t_stacks *stacks, int x, int y)
 {
 	int i;
 
 	i = 1;
-	if (len_b != 0 && x)
+	if (stacks->len_b != 0 && x)
 		return (0);
-	while (a[i] && y)
+	while (i != stacks->len_a && y)
 	{
-		if (a[i] < a[i - 1])
+		if (stacks->a[i] < stacks->a[i - 1])
 			return (0);
 		i++;
 	}
-	while (a[i] && !x && !y)
+	while (i != stacks->len_a && !x && !y)
 	{
-		if (a[i] > a[i - 1])
+		if (stacks->a[i] > stacks->a[i - 1])
 			return (0);
 		i++;
 	}

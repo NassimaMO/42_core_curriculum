@@ -20,6 +20,14 @@
 #define INT_MAX 2147483647
 // need to add int min
 
+typedef struct s_stacks
+{
+    int *a;
+    int *b;
+    int len_a;
+    int len_b;
+} t_stacks;
+
 int number_checker(char **argv, int argc);
 int verif_double(char *a, char **argv, int x);
 long long int nbr_to_str(char *a);
@@ -32,7 +40,7 @@ void super_algo_op3(int *a, int *b, int ac);
 int num_max(int x, int *ab);
 int num_min(int x, int *ab);
 int num_min_r(int x, int y, int *ab);
-int nums_in_order(int *a, int len_b, int x, int y);
+int nums_in_order(t_stacks *stacks, int x, int y);
 
 void pab(int *ab, int *ba);
 void rab(int *ab);
@@ -41,13 +49,5 @@ void rrab(int *ab);
 void rrr(int *a, int *b);
 void sab(int *ab);
 void ss(int *a, int *b);
-
-typedef struct s_stacks
-{
-    int *a;
-    int *b;
-    int len_a;
-    int len_b;
-} t_stacks;
 
 #endif
