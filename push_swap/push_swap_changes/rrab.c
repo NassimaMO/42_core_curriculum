@@ -16,16 +16,14 @@
 	element becomes the first one.*/
 #include "../push_swap.h"
 
-void	rrab(int *ab)
+void rrab(int *ab, int len_ab)
 {
-	int	tmp;
-	int	i;
+	int tmp;
+	int i;
 
-	i = 0;
-	while (ab && ab[i])
-		i++;
+	i = len_ab;
 	tmp = ab[--i];
-	while (ab && ab[i])
+	while (ab && i != 0)
 	{
 		ab[i] = ab[i - 1];
 		i--;
@@ -43,7 +41,7 @@ void	rrab(int *ab)
 	ab[2] = 9;
 	ab[3] = 4;
 	ab[4] = '\0';
-	rrab(ab);
+	rrab(ab, 4);
 	printf("%d\n", ab[0]);
 	printf("%d\n", ab[1]);
 	printf("%d\n", ab[2]);

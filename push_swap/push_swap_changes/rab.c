@@ -16,14 +16,14 @@
 	becomes the last one.*/
 #include "../push_swap.h"
 
-void	rab(int *ab)
+void rab(int *ab, int len_ba)
 {
-	int	tmp;
-	int	i;
+	int tmp;
+	int i;
 
 	i = 0;
 	tmp = ab[0];
-	while (ab && ab[i])
+	while (ab && i != len_ba)
 	{
 		ab[i] = ab[i + 1];
 		i++;
@@ -41,7 +41,7 @@ void	rab(int *ab)
 	ab[2] = 9;
 	ab[3] = 4;
 	ab[4] = '\0';
-	rab(ab);
+	rab(ab, 4);
 	printf("%d\n", ab[0]);
 	printf("%d\n", ab[1]);
 	printf("%d\n", ab[2]);

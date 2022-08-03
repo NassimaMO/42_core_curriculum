@@ -13,10 +13,10 @@
 /*rr : ra and rb at the same time.*/
 #include "../push_swap.h"
 
-void	rr(int *a, int *b)
+void rr(int *a, int *b, int len_a, int len_b)
 {
-	rab(a);
-	rab(b);
+	rab(a, len_a);
+	rab(b, len_b);
 }
 
 /*int main(void)

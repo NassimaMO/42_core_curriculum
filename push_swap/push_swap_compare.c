@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-int num_max(int x, int *ab)
+int num_max(int x, int *ab, int len)
 {
 	int i;
 
-	i = 1;
-	while (ab[i])
+	i = 0;
+	while (i != len)
 	{
 		if (ab[i] > x)
 			return (0);
@@ -26,27 +26,12 @@ int num_max(int x, int *ab)
 	return (1);
 }
 
-int num_min(int x, int *ab)
+int num_min(int x, int *ab, int len)
 {
 	int i;
 
-	i = 1;
-	while (ab[i])
-	{
-		if (ab[i] < x)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int num_min_r(int x, int y, int *ab)
-{
-	int i;
-
-	(void)y;
 	i = 0;
-	while (ab[i])
+	while (i != len)
 	{
 		if (ab[i] < x)
 			return (0);

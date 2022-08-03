@@ -37,16 +37,15 @@ void algo_op(int *a, int *b, int ac);
 
 void super_algo_op3(int *a, int *b, int ac);
 
-int num_max(int x, int *ab);
-int num_min(int x, int *ab);
-int num_min_r(int x, int y, int *ab);
+int num_max(int x, int *ab, int len);
+int num_min(int x, int *ab, int len);
 int nums_in_order(t_stacks *stacks, int x, int y);
 
-void pab(int *ab, int *ba);
-void rab(int *ab);
-void rr(int *a, int *b);
-void rrab(int *ab);
-void rrr(int *a, int *b);
+void pab(int *ab, int *ba, int len_ab, int len_ba);
+void rab(int *ab, int len_ba);
+void rr(int *a, int *b, int len_a, int len_b);
+void rrab(int *ab, int len_ab);
+void rrr(int *a, int *b, int len_a, int len_b);
 void sab(int *ab);
 void ss(int *a, int *b);
 
