@@ -40,6 +40,40 @@ int num_min(int x, int *ab, int len)
 	return (1);
 }
 
+int find_num_min(int *ab, int len)
+{
+	int	i;
+
+	i = 0;
+	while (ab && i != len && !num_min(ab[i], ab, len))
+		i++;
+	return (ab[i]);
+}
+
+int find_num_max(int *ab, int len)
+{
+	int	i;
+
+	i = 0;
+	while (ab && i != len && !num_max(ab[i], ab, len))
+		i++;
+	return (ab[i]);
+}
+
+int	find_num(int *ab, int x, int len)
+{
+	int i;
+
+	i = 0;
+	while (ab && i != len)
+	{
+		if (ab[i] == x)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int nums_in_order(t_stacks *stacks, int x, int y)
 {
 	int i;

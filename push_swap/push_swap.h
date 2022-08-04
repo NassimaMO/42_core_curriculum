@@ -39,6 +39,9 @@ void super_algo_op3(int *a, int *b, int ac);
 
 int num_max(int x, int *ab, int len);
 int num_min(int x, int *ab, int len);
+int find_num_min(int *ab, int len);
+int find_num_max(int *ab, int len);
+int	find_num(int *ab, int x, int len);
 int nums_in_order(t_stacks *stacks, int x, int y);
 
 void pab(int *ab, int *ba, int len_ab, int len_ba);
