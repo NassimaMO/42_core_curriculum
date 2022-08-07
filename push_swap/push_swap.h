@@ -43,6 +43,8 @@ int find_num_min(int *ab, int len);
 int find_num_max(int *ab, int len);
 int	find_num(int *ab, int x, int len);
 int nums_in_order(t_stacks *stacks, int x, int y);
+int *next_max_stack(t_stacks *stacks);
+void	ft_bzero(void *s, size_t n);
 
 void pab(int *ab, int *ba, int len_ab, int len_ba);
 void rab(int *ab, int len_ba);

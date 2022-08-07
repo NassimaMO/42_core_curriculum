@@ -72,7 +72,7 @@ static void order(t_stacks *stacks_data, int from, int till)
 	i = -1;
 	while (stacks_data->a && ++i != stacks_data->len_a)
 	{
-		if (stacks_data->a[i] <= from && stacks_data->a[i] > till)
+		if (stacks_data->a[i] <= from && stacks_data->a[i] >= till)
 		{
 			if (i <= stacks_data->len_a / 2)
 				exec(&rab, stacks_data, i, 0);
@@ -95,38 +95,41 @@ void super_algo_op3(int *a, int *b, int ac)
 	int i;
 	int	to_fifth;
 	int	tmp;
-	int	min;
+	int	index;
 	int fifth_len;
+	int	*x;
 
 	stacks_data.len_a = ac - 1;
 	stacks_data.len_b = 0;
 	stacks_data.a = a;
 	stacks_data.b = b;
-	i = find_num_max(stacks_data.a, stacks_data.len_a); // si nombre trop grand -> time out
+	x = next_max_stack(&stacks_data);
+	i = x[0];
+	index = 1;
 	fifth_len = stacks_data.len_a / 5;
-	min = find_num_min(stacks_data.a, stacks_data.len_a);
-	while (!nums_in_order(&stacks_data, 1, 1) && i >= min)
+	while (!nums_in_order(&stacks_data, 1, 1) && index < stacks_data.len_a)
 	{
 		to_fifth = 0;
 		tmp = i;
-		while (stacks_data.a && to_fifth <= fifth_len && i >= min)
+		while (stacks_data.a && to_fifth <= fifth_len && index <= stacks_data.len_a)
 		{
-			if (find_num(stacks_data.a, i, stacks_data.len_a))
-				to_fifth++;
-			i--;
+			to_fifth++;
+			i = x[index];
+			index++;
 		}
 		order(&stacks_data, tmp, i);
 		order_b(&stacks_data);
 	}
-	/*i = 0;
-	while (stacks_data.a && stacks_data.a[i])
+	free(x);
+	/* = 0;
+	while (stacks_data.a && i != stacks_data.len_a)
 	{
 		printf("\na = %d", stacks_data.a[i]);
 		i++;
 	}
 	printf("\n");
 	i = 0;
-	while (stacks_data.b && stacks_data.b[i])
+	while (stacks_data.b && i != stacks_data.len_b)
 	{
 		printf("\nb = %d", stacks_data.b[i]);
 		i++;
