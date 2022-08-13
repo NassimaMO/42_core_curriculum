@@ -25,11 +25,17 @@ int	number_checker(char **argv, int argc)
 		while (argv[i][j])
 		{
 			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-				return (0);
-			j++;
+			{
+				if (argv[i][j] == '-' && j == 0)
+					j++;
+				else
+					return (0);
+			}
+			else
+				j++;
 		}
 		nbr = nbr_to_str(argv[i]);
-		if (nbr > INT_MAX || verif_double(argv[i], argv, i))
+		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, i))
 			return (0);
 		i++;
 		argc--;
@@ -60,10 +66,13 @@ long long int	nbr_to_str(char *a)
 	i = 0;
 	nbr = 0;
 	minus = 1;
+	if (a[i] == '-')
+	{
+		minus = -1;
+		i++;
+	}
 	while (a[i])
 	{
-		if (a[i] == '-')
-			minus = -1;
 		nbr += a[i] - 48;
 		if (a[i + 1])
 			nbr *= 10;

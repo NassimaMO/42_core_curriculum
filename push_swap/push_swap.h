@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include "ft_printf/ft_printf.h"
 
-#define INT_MAX 2147483647
-// need to add int min
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_stacks
 {
