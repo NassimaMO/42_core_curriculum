@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	img_pix_put(t_imgs *img, int x, int y, int color)
 {
@@ -31,24 +31,24 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
 
 t_lil_imgs	*get_img_ntr(char c, t_data *data)
 {
-	//static int	i = 0;
+	static int	i = 0;
 
 	if (c == '0')
 		return (&(data->stct.img_background));
 	else if (c == '2')
 		return (&(data->stct.img_background_after));
 	else if (c == '1')
-	/*{
+	{
 		i++;
-		if (i < 500)*/
+		if (i < 500)
 			return (&(data->stct.img_wall));
-		/*else
+		else
 		{
 			if (i == 1000)
 				i = 0;
 			return (&(data->stct.img_wall2));
 		}
-	}*/
+	}
 	else if (c == 'C')
 		return (&(data->stct.img_item));
 	else if (c == 'E')
@@ -61,12 +61,12 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 		return (&(data->stct.img_user_down));
 	else if (c == 'L')
 		return (&(data->stct.img_user_left));
-	/*else if (c == 'N')
-		return (&(data->stct.img_enemy));*/
+	else if (c == 'N')
+		return (&(data->stct.img_enemy));
 	return (NULL);
 }
 
-/*t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n)
+t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n)
 {
 	if (n == 0)
 		return (&img->img_0);
@@ -89,9 +89,9 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	else if (n == 9)
 		return (&img->img_9);
 	return (NULL);
-}*/
+}
 
-/*t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
+t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x)
 {
 	int			t[10];
 	t_lil_imgs	*num;
@@ -109,4 +109,4 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	else
 		i = 0;
 	return (num);
-}*/
+}

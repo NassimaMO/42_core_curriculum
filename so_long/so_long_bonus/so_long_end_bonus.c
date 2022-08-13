@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	escape(t_data *data)
 {
@@ -31,7 +31,7 @@ void	free_data_imgs(void *img)
 
 void	free_lil_imgs(t_stct_lil_imgs *imgs)
 {
-	/*free_data_imgs(imgs->img_0.mlx_lil_img);
+	free_data_imgs(imgs->img_0.mlx_lil_img);
 	free_data_imgs(imgs->img_1.mlx_lil_img);
 	free_data_imgs(imgs->img_2.mlx_lil_img);
 	free_data_imgs(imgs->img_3.mlx_lil_img);
@@ -40,9 +40,9 @@ void	free_lil_imgs(t_stct_lil_imgs *imgs)
 	free_data_imgs(imgs->img_6.mlx_lil_img);
 	free_data_imgs(imgs->img_7.mlx_lil_img);
 	free_data_imgs(imgs->img_8.mlx_lil_img);
-	free_data_imgs(imgs->img_9.mlx_lil_img);*/
+	free_data_imgs(imgs->img_9.mlx_lil_img);
 	free_data_imgs(imgs->img_wall.mlx_lil_img);
-	//free_data_imgs(imgs->img_wall2.mlx_lil_img);
+	free_data_imgs(imgs->img_wall2.mlx_lil_img);
 	free_data_imgs(imgs->img_item.mlx_lil_img);
 	free_data_imgs(imgs->img_user.mlx_lil_img);
 	free_data_imgs(imgs->img_user_up.mlx_lil_img);
@@ -51,5 +51,5 @@ void	free_lil_imgs(t_stct_lil_imgs *imgs)
 	free_data_imgs(imgs->img_background.mlx_lil_img);
 	free_data_imgs(imgs->img_background_after.mlx_lil_img);
 	free_data_imgs(imgs->img_exit.mlx_lil_img);
-	//free_data_imgs(imgs->img_enemy.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy.mlx_lil_img);
 }

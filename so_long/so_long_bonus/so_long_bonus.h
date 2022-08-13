@@ -13,8 +13,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include <stdlib.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
@@ -68,7 +68,7 @@ typedef struct s_lil_imgs
 typedef struct s_stct_lil_imgs
 {
 	t_lil_imgs	img_wall;
-	//t_lil_imgs	img_wall2;
+	t_lil_imgs	img_wall2;
 	t_lil_imgs	img_item;
 	t_lil_imgs	img_user;
 	t_lil_imgs	img_user_up;
@@ -77,7 +77,7 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_background;
 	t_lil_imgs	img_background_after;
 	t_lil_imgs	img_exit;
-	/*t_lil_imgs	img_enemy;
+	t_lil_imgs	img_enemy;
 	t_lil_imgs	img_0;
 	t_lil_imgs	img_1;
 	t_lil_imgs	img_2;
@@ -87,7 +87,7 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_6;
 	t_lil_imgs	img_7;
 	t_lil_imgs	img_8;
-	t_lil_imgs	img_9;*/
+	t_lil_imgs	img_9;
 }	t_stct_lil_imgs;
 
 typedef struct s_data
@@ -120,7 +120,7 @@ void		free_data_imgs(void *img);
 void		free_lil_imgs(t_stct_lil_imgs *imgs);
 
 //so_long_img/so_long_imgs.c
-//void		render_steps(t_data *data);
+void		render_steps(t_data *data);
 int			render(t_data *data);
 
 //so_long_img/so_long_imgs_print.c
@@ -130,7 +130,7 @@ void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 //so_long_img/so_long_imgs_utils.c
 void		img_pix_put(t_imgs *img, int x, int y, int color);
 t_lil_imgs	*get_img_ntr(char c, t_data *data);
-//t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
+t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_enemy/so_long_place_enemy.c

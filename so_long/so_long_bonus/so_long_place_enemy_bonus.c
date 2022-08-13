@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long_bonus.h"
 
 void	put_enemy_in_map(t_data *data)
 {

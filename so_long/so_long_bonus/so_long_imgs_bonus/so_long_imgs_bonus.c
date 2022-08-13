@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
-/*void	render_steps(t_data *data)
+void	render_steps(t_data *data)
 {
 	int	x;
 	int	i;
@@ -32,7 +32,7 @@
 		x += data->stct.img_0.len;
 		i++;
 	}
-}*/
+}
 
 int	render(t_data *data)
 {
@@ -49,7 +49,7 @@ int	render(t_data *data)
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(data, BROWNER_PIXEL);
-	//enemy_mvments(data);
+	enemy_mvments(data);
 	while (j < data->hei_map)
 	{
 		i = 0;
@@ -64,8 +64,7 @@ int	render(t_data *data)
 		y += SIZE_IMG;
 		j++;
 	}
-	//render_steps(data);
-	ft_printf("\\\\number of steps = %d//\n\n", data->nbr_step);
+	render_steps(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, \
 		0, 0);
 	return (0);

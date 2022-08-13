@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	init_map(t_data *win_param, int argc, char **argv)
 {
@@ -19,7 +19,7 @@ void	init_map(t_data *win_param, int argc, char **argv)
 		free(win_param->map);
 		exit(MAP_ERROR);
 	}
-	//put_enemy_in_map(win_param);
+	put_enemy_in_map(win_param);
 	win_param->nbr_step = 0;
 	win_param->mlx_ptr = mlx_init();
 	if (!win_param->mlx_ptr)
