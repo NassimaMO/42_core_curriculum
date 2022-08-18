@@ -23,7 +23,7 @@ void	mv_up(t_data *data)
 	if (data->map[l] == data->user)
 	{
 		tmp = l;
-		l = strlen((const char *)data->map) / data->hei_map;
+		l = ft_strlen((const char *)data->map) / data->hei_map;
 		l = tmp - l;
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
 			|| data->map[l] == '2'))
@@ -74,7 +74,7 @@ void	mv_down(t_data *data)
 	if (data->map[l] == data->user)
 	{
 		tmp = l;
-		l = strlen((const char *)data->map) / data->hei_map;
+		l = ft_strlen((const char *)data->map) / data->hei_map;
 		l = tmp + l;
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
 			|| data->map[l] == '2'))

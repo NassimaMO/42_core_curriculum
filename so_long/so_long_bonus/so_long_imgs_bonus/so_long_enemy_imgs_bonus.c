@@ -90,7 +90,7 @@ int	n_mv_up(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l = strlen((const char *)data->map) / data->hei_map;
+		l = ft_strlen((const char *)data->map) / data->hei_map;
 		l = tmp - l;
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
@@ -145,7 +145,7 @@ int	n_mv_down(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l = strlen((const char *)data->map) / data->hei_map;
+		l = ft_strlen((const char *)data->map) / data->hei_map;
 		l = tmp + l;
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
