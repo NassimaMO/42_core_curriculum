@@ -18,7 +18,7 @@ void	render_background(t_data *data, int color)
 	int	j;
 
 	i = 0;
-	while (i < 64 * data->hei_map + 24)
+	while (i < 64 * data->hei_map)
 	{
 		j = 0;
 		while (j < 64 * data->len_map)

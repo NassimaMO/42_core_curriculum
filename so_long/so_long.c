@@ -12,13 +12,20 @@
 
 #include "so_long.h"
 
+int	no_input(t_data *data)
+{
+	(void) data;
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	win_param;
 
 	init_map(&win_param, argc, argv);
 	init_call(&win_param);
-	mlx_loop_hook(win_param.mlx_ptr, &render, &win_param);
+	render(&win_param);
+	mlx_loop_hook(win_param.mlx_ptr, &no_input, &win_param);
 	mlx_hook(win_param.win_ptr, KeyPress, KeyPressMask, &input, &win_param);
 	mlx_hook(win_param.win_ptr, DestroyNotify, StructureNotifyMask, \
 		&close_window, &win_param);

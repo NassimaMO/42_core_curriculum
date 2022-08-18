@@ -12,6 +12,12 @@
 
 #include "so_long_bonus.h"
 
+int	no_input(t_data *data)
+{
+	enemy_mvments(data);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	win_param;

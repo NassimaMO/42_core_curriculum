@@ -99,6 +99,8 @@ int	n_mv_up(t_data *data)
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
+			moved(data, l % data->len_map, l / data->len_map);
+			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
@@ -126,6 +128,8 @@ int	n_mv_left(t_data *data)
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
+			moved(data, l % data->len_map, l / data->len_map);
+			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
@@ -154,6 +158,8 @@ int	n_mv_down(t_data *data)
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
+			moved(data, l % data->len_map, l / data->len_map);
+			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
@@ -181,6 +187,8 @@ int	n_mv_right(t_data *data)
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
+			moved(data, l % data->len_map, l / data->len_map);
+			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')

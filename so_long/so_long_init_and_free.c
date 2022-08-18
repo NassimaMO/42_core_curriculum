@@ -25,7 +25,7 @@ void	init_map(t_data *win_param, int argc, char **argv)
 	if (!win_param->mlx_ptr)
 		exit(MLX_ERROR);
 	win_param->win_ptr = mlx_new_window(win_param->mlx_ptr, SIZE_IMG * \
-		win_param->len_map, SIZE_IMG * win_param->hei_map + 24, "Very Short");
+		win_param->len_map, SIZE_IMG * win_param->hei_map, "Very Short");
 	if (!win_param->win_ptr)
 	{
 		free(win_param->win_ptr);

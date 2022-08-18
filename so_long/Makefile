@@ -1,6 +1,6 @@
 SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_imgs/*.c
 
-SRCS_BONUS	=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long_verif.c so_long_utils.c so_long_parse.c so_long_move.c so_long_input.c so_long_bonus/*.c so_long_bonus/so_long_imgs_bonus/*.c
+SRCS_BONUS	=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long_verif.c so_long_utils.c so_long_parse.c so_long_input.c so_long_bonus/*.c so_long_bonus/so_long_imgs_bonus/*.c
 
 OBJS		= *.o
 

@@ -69,3 +69,49 @@ int	render(t_data *data)
 		0, 0);
 	return (0);
 }
+
+int	moved(t_data *data, int img_x, int img_y)
+{
+	int	x;
+	int	y;
+	int	i;
+	int	j;
+	int	l;
+
+	
+	y = 0;
+	l = 0;
+	x = 0;
+	if (data->win_ptr == NULL)
+		return (1);
+	i = img_y * 64;
+	while (i < 64 * (img_y + 1))
+	{
+		j = img_x * 64;
+		while (j < 64 * (img_x + 1))
+			img_pix_put(&data->img, j++, i, BROWNER_PIXEL);
+		i++;
+	}
+	j = 0;
+	while (j < data->hei_map)
+	{
+		i = 0;
+		x = 0;
+		while (i < data->len_map)
+		{
+			if (img_y == j && img_x == i)
+			{
+				print_img(get_img_ntr(data->map[l], data), data, x, y);
+				break ;
+			}
+			x += SIZE_IMG;
+			l++;
+			i++;
+		}
+		y += SIZE_IMG;
+		j++;
+	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, \
+		0, 0);
+	return (1);
+}

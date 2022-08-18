@@ -122,6 +122,7 @@ void		free_lil_imgs(t_stct_lil_imgs *imgs);
 //so_long_img/so_long_imgs.c
 void		render_steps(t_data *data);
 int			render(t_data *data);
+int			moved(t_data *data, int img_x, int img_y);
 
 //so_long_img/so_long_imgs_print.c
 void		render_background(t_data *data, int color);
