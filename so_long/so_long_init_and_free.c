@@ -32,7 +32,7 @@ void	init_map(t_data *win_param, int argc, char **argv)
 		exit(MLX_ERROR);
 	}
 	win_param->img.mlx_img = mlx_new_image(win_param->mlx_ptr, SIZE_IMG * \
-		win_param->len_map, SIZE_IMG * win_param->hei_map + 24);
+		win_param->len_map, SIZE_IMG * win_param->hei_map);
 	win_param->img.addr = mlx_get_data_addr(win_param->img.mlx_img, \
 		&win_param->img.bpp, &win_param->img.line_len, &win_param->img.endian);
 }

@@ -14,7 +14,11 @@
 
 int	no_input(t_data *data)
 {
-	enemy_mvments(data);
+	if (ft_strnstr(data->map, "N", data->len_map * data->hei_map))
+	{
+		printf("noooooo\n");
+		enemy_mvments(data);
+	}
 	return (0);
 }
 
