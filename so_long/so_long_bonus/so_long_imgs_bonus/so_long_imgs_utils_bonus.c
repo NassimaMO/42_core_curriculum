@@ -40,11 +40,11 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	else if (c == '1')
 	{
 		i++;
-		if (i < 500)
+		if (i <= 1)
 			return (&(data->stct.img_wall));
 		else
 		{
-			if (i == 1000)
+			if (i == 2)
 				i = 0;
 			return (&(data->stct.img_wall2));
 		}

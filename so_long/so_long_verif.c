@@ -35,24 +35,21 @@ int	map_verif(t_data *data)
 	char	d;
 	int		l;
 
-	y = 0;
+	y = -1;
 	l = 0;
-	while (y != data->hei_map)
+	while (++y != data->hei_map)
 	{
 		x = 0;
 		while (x < data->len_map)
 		{
 			d = data->map[l];
-			if ((y == 0 && d != '1') \
-				|| (x == data->len_map && d != '1') \
-				|| (x == 0 && d != '1') \
-				|| (y == data->hei_map && d != '1') \
+			if ((y == 0 && d != '1') || (x == data->len_map && d != '1') \
+				|| (x == 0 && d != '1') || (y == data->hei_map && d != '1') \
 				|| (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P'))
 				return (ft_printf("Error\nMap not respecting the rules.\n"), 0);
 			x++;
 			l++;
 		}
-		y++;
 	}
 	if (x == y || !strchr(data->map, 'E') || !strchr(data->map, 'C') \
 		|| !strchr(data->map, 'P'))

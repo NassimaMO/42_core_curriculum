@@ -17,8 +17,22 @@ void	render_steps(t_data *data)
 	int	x;
 	int	i;
 	int	l;
+	int	tmp;
 
 	l = nbr_case(data->nbr_step);
+	tmp = 0;
+	while (tmp < l)
+	{
+		i = data->hei_map * 64;
+		while (i < 24 + (64 *data->hei_map))
+		{
+			x = tmp * 24;
+			while (x < (tmp + 1) * 24)
+				img_pix_put(&data->img, x++, i, BROWNER_PIXEL);
+			i++;
+		}
+		tmp++;
+	}
 	x = 0;
 	i = 0;
 	while (i < l)
@@ -69,18 +83,40 @@ int	render(t_data *data)
 	return (0);
 }
 
-int	moved(t_data *data, int img_x, int img_y)
+void	moved_img(t_data *data, int img_x, int img_y)
 {
+	int	j;
+	int	i;
 	int	x;
 	int	y;
-	int	i;
-	int	j;
 	int	l;
 
-	
 	y = 0;
 	l = 0;
-	x = 0;
+	j = -1;
+	while (++j < data->hei_map)
+	{
+		i = -1;
+		x = 0;
+		while (++i < data->len_map)
+		{
+			if (img_y == j && img_x == i)
+			{
+				print_img(get_img_ntr(data->map[l], data), data, x, y);
+				break ;
+			}
+			x += SIZE_IMG;
+			l++;
+		}
+		y += SIZE_IMG;
+	}
+}
+
+int	moved(t_data *data, int img_x, int img_y)
+{
+	int	i;
+	int	j;
+
 	if (data->win_ptr == NULL)
 		return (1);
 	i = img_y * 64;
@@ -91,26 +127,7 @@ int	moved(t_data *data, int img_x, int img_y)
 			img_pix_put(&data->img, j++, i, BROWNER_PIXEL);
 		i++;
 	}
-	j = 0;
-	while (j < data->hei_map)
-	{
-		i = 0;
-		x = 0;
-		while (i < data->len_map)
-		{
-			if (img_y == j && img_x == i)
-			{
-				print_img(get_img_ntr(data->map[l], data), data, x, y);
-				break ;
-			}
-			x += SIZE_IMG;
-			l++;
-			i++;
-		}
-		y += SIZE_IMG;
-		j++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, \
-		0, 0);
-	return (1);
+	moved_img(data, img_x, img_y);
+	return (mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
+			data->img.mlx_img, 0, 0), 1);
 }

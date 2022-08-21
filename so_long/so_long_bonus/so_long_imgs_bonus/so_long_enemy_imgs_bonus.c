@@ -14,182 +14,178 @@
 
 void	enemy_mvments(t_data *data)
 {
-	static int move[4];
-	static int	x;
+	static int	move[4];
 	static int	mv_up = 1;
 	static int	mv_down;
 	static int	mv_left;
 	static int	mv_right;
-	int i;
+	int			i;
 
 	i = 4;
-	if (x == 50)
+	if (move[0] == move[2] && move[1] == move[3] && move[0] != move[3])
 	{
-		x = 0;
-		if (move[0] == move[2] && move[1] == move[3] && move[0] != move[3])
+		if ((move[0] == 1 && move[1] == 3) || (move[0] == 3 && \
+			move[1] == 1))
 		{
-			if ((move[0] == 1 && move[1] == 3) || (move[0] == 3 && move[1] == 1))
+			if (n_mv_left(data))
 			{
-				if (n_mv_left(data))
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 2;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else if (n_mv_right(data))
+				move[0] = 2;
+			}
+			else if (n_mv_right(data))
+			{
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 4;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else if (move[0] == 1 && n_mv_down(data))
+				move[0] = 4;
+			}
+			else if (move[0] == 1 && n_mv_down(data))
+			{
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 3;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else if (move[0] == 3 && n_mv_up(data))
+				move[0] = 3;
+			}
+			else if (move[0] == 3 && n_mv_up(data))
+			{
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 1;
+					move[i] = move[i - 1];
+					i--;
 				}
+				move[0] = 1;
+			}
+			return ;
+		}
+		else if ((move[0] == 2 && move[1] == 4) || \
+				(move[0] == 4 && move[1] == 2))
+		{
+			if (n_mv_up(data))
+			{
+				while (i > 0)
+				{
+					move[i] = move[i - 1];
+					i--;
+				}
+				move[0] = 1;
+			}
+			else if (n_mv_down(data))
+			{
+				while (i > 0)
+				{
+					move[i] = move[i - 1];
+					i--;
+				}
+				move[0] = 3;
+			}
+			else if (move[0] == 2 && n_mv_right(data))
+			{
+				while (i > 0)
+				{
+					move[i] = move[i - 1];
+					i--;
+				}
+				move[0] = 4;
+			}
+			else if (move[0] == 4 && n_mv_left(data))
+			{
+				while (i > 0)
+				{
+					move[i] = move[i - 1];
+					i--;
+				}
+				move[0] = 2;
+			}
+			return ;
+		}
+	}
+	while (1)
+	{
+		if (mv_up)
+		{
+			if (n_mv_up(data))
+			{
+				while (i > 0)
+				{
+					move[i] = move[i - 1];
+					i--;
+				}
+				move[0] = 1;
+				mv_up++;
 				return ;
 			}
-			else if ((move[0] == 2 && move[1] == 4) || (move[0] == 4 && move[1] == 2))
+			else
 			{
-				if (n_mv_up(data))
-				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 1;
-				}
-				else if (n_mv_down(data))
-				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 3;
-				}
-				else if (move[0] == 2 && n_mv_right(data))
-				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 4;
-				}
-				else if (move[0] == 4 && n_mv_left(data))
-				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 2;
-				}
-				return ;
+				mv_up = 0;
+				mv_left++;
 			}
 		}
-		while (1)
+		else if (mv_left)
 		{
-			if (mv_up)
+			if (n_mv_left(data))
 			{
-				if (n_mv_up(data))
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 1;
-					mv_up++;
-					return ;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else
-				{
-					mv_up = 0;
-					mv_left++;
-				}
+				move[0] = 2;
+				mv_left++;
+				return ;
 			}
-			else if (mv_left)
+			else
 			{
-				if (n_mv_left(data))
-				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 2;
-					mv_left++;
-					return ;
-				}
-				else
-				{
-					mv_left = 0;
-					mv_down++;
-				}
+				mv_left = 0;
+				mv_down++;
 			}
-			else if (mv_down)
+		}
+		else if (mv_down)
+		{
+			if (n_mv_down(data))
 			{
-				if (n_mv_down(data))
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 3;
-					mv_down++;
-					return ;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else
-				{
-					mv_down = 0;
-					mv_right++;
-				}
+				move[0] = 3;
+				mv_down++;
+				return ;
 			}
-			else if (mv_right)
+			else
 			{
-				if (n_mv_right(data))
+				mv_down = 0;
+				mv_right++;
+			}
+		}
+		else if (mv_right)
+		{
+			if (n_mv_right(data))
+			{
+				while (i > 0)
 				{
-					while (i > 0)
-					{
-						move[i] = move[i - 1];
-						i--;
-					}
-					move[0] = 4;
-					mv_right++;
-					return ;
+					move[i] = move[i - 1];
+					i--;
 				}
-				else
-				{
-					mv_right = 0;
-					mv_up++;
-				}
+				move[0] = 4;
+				mv_right++;
+				return ;
+			}
+			else
+			{
+				mv_right = 0;
+				mv_up++;
 			}
 		}
 	}
-	x++;
 }
 
 int	n_mv_up(t_data *data)
@@ -216,7 +212,8 @@ int	n_mv_up(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
-		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
+		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
+			|| data->map[l] == 'D' || data->map[l] == 'R')
 			close_window(data);
 	}
 	return (0);
@@ -245,7 +242,8 @@ int	n_mv_left(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
-		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
+		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
+			|| data->map[l] == 'D' || data->map[l] == 'R')
 			close_window(data);
 	}
 	return (0);
@@ -275,7 +273,8 @@ int	n_mv_down(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
-		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
+		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
+			|| data->map[l] == 'D' || data->map[l] == 'R')
 			close_window(data);
 	}
 	return (0);
@@ -304,7 +303,8 @@ int	n_mv_right(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			return (1);
 		}
-		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' || data->map[l] == 'D' || data->map[l] == 'R')
+		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
+			|| data->map[l] == 'D' || data->map[l] == 'R')
 			close_window(data);
 	}
 	return (0);

@@ -23,8 +23,7 @@ void	mv_up(t_data *data)
 	if (data->map[l] == data->user)
 	{
 		tmp = l;
-		l = ft_strlen((const char *)data->map) / data->hei_map;
-		l = tmp - l;
+		l = tmp - (ft_strlen((const char *)data->map) / data->hei_map);
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
 			|| data->map[l] == '2'))
 		{
@@ -36,7 +35,8 @@ void	mv_up(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("nbr of steps: %d\n", data->nbr_step);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+			|| data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -64,7 +64,8 @@ void	mv_left(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("nbr of steps: %d\n", data->nbr_step);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+			|| data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -80,8 +81,7 @@ void	mv_down(t_data *data)
 	if (data->map[l] == data->user)
 	{
 		tmp = l;
-		l = ft_strlen((const char *)data->map) / data->hei_map;
-		l = tmp + l;
+		l = tmp + (ft_strlen((const char *)data->map) / data->hei_map);
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
 			|| data->map[l] == '2'))
 		{
@@ -93,7 +93,8 @@ void	mv_down(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("nbr of steps: %d\n", data->nbr_step);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+			|| data->map[l] == 'N'))
 			close_window(data);
 	}
 }
@@ -121,7 +122,8 @@ void	mv_right(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("nbr of steps: %d\n", data->nbr_step);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) || data->map[l] == 'N'))
+		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+			|| data->map[l] == 'N'))
 			close_window(data);
 	}
 }

@@ -12,6 +12,22 @@
 
 #include "so_long_bonus.h"
 
+int	no_walls_around(t_data *data, int i)
+{
+	if (data->map[i] == '0')
+	{
+		if (data->map[i + data->len_map] != '1' || \
+			data->map[i - data->len_map] != '1' || \
+			data->map[i - 1] != '1' || \
+			data->map[i + 1] != '1')
+		{
+			data->map[i] = 'N';
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	put_enemy_in_map(t_data *data)
 {
 	int	i;
@@ -26,33 +42,15 @@ void	put_enemy_in_map(t_data *data)
 		i = tmp;
 		while (data->map[i])
 		{
-			if (data->map[i] == '0')
-			{
-				if (data->map[i + data->len_map] != '1' || \
-					data->map[i - data->len_map] != '1' || \
-					data->map[i - 1] != '1' || \
-					data->map[i + 1] != '1')
-				{
-					data->map[i] = 'N';
-					return ;
-				}
-			}
+			if (no_walls_around(data, i))
+				return ;
 			i--;
 		}
 		i = tmp;
 		while (data->map[i])
 		{
-			if (data->map[i] == '0')
-			{
-				if (data->map[i + data->len_map] != '1' || \
-					data->map[i - data->len_map] != '1' || \
-					data->map[i - 1] != '1' || \
-					data->map[i + 1] != '1')
-				{
-					data->map[i] = 'N';
-					return ;
-				}
-			}
+			if (no_walls_around(data, i))
+				return ;
 			i++;
 		}
 	}

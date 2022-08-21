@@ -54,9 +54,37 @@ int	height_size_map(char *file)
 	return (y);
 }
 
+char	con_value(char *file, int fd, int *l, char *line)
+{
+	static int	d;
+	char		c;
+
+	if (line && !line[d + 1])
+	{
+		d = 0;
+		free(line);
+		line = get_next_line(fd);
+		(*l)++;
+	}
+	if (!line)
+	{
+		d = 0;
+		l = 0;
+		close(fd);
+		fd = open(file, O_RDONLY);
+		line = get_next_line(fd);
+	}
+	if (line && line[d])
+	{
+		c = line[d];
+		d++;
+	}
+	free(line);
+	return (c);
+}
+
 char	value(char *file)
 {
-	static int	d = 0;
 	static int	l = 0;
 	int			fd;
 	char		*line;
@@ -72,28 +100,8 @@ char	value(char *file)
 		line = get_next_line(fd);
 		i++;
 	}
-	if (line && !line[d + 1])
-	{
-		d = 0;
-		free(line);
-		line = get_next_line(fd);
-		l++;
-	}
-	if (!line)
-	{
-		d = 0;
-		l = 0;
-		close(fd);
-		fd = open(file, O_RDONLY);
-		line = get_next_line(fd);
-	}
-	if (line && line[d])
-	{
-		c = line[d];
-		d++;
-	}
+	c = con_value(file, fd, &l, line);
 	close(fd);
-	free(line);
 	return (c);
 }
 

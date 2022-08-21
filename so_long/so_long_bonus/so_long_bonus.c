@@ -14,11 +14,14 @@
 
 int	no_input(t_data *data)
 {
-	if (ft_strnstr(data->map, "N", data->len_map * data->hei_map))
+	static int	i;
+
+	if (ft_strchr(data->map, 'N') && i == 50000)
 	{
-		printf("noooooo\n");
+		i = 0;
 		enemy_mvments(data);
 	}
+	i++;
 	return (0);
 }
 
@@ -28,7 +31,8 @@ int	main(int argc, char **argv)
 
 	init_map(&win_param, argc, argv);
 	init_call(&win_param);
-	mlx_loop_hook(win_param.mlx_ptr, &render, &win_param);
+	render(&win_param);
+	mlx_loop_hook(win_param.mlx_ptr, &no_input, &win_param);
 	mlx_hook(win_param.win_ptr, KeyPress, KeyPressMask, &input, &win_param);
 	mlx_hook(win_param.win_ptr, DestroyNotify, StructureNotifyMask, \
 		&close_window, &win_param);

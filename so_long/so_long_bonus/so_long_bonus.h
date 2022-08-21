@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
@@ -136,7 +136,7 @@ t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_enemy/so_long_place_enemy.c
-void    put_enemy_in_map(t_data *data);
+void	put_enemy_in_map(t_data *data);
 
 //so_long_enemy/so_long_enemy_imgs.c
 void		enemy_mvments(t_data *data);
