@@ -12,27 +12,11 @@
 
 #include "../so_long_bonus.h"
 
-void	render_steps(t_data *data)
+static void	render_imgs_steps(int l, t_data *data)
 {
 	int	x;
 	int	i;
-	int	l;
-	int	tmp;
 
-	l = nbr_case(data->nbr_step);
-	tmp = 0;
-	while (tmp < l)
-	{
-		i = data->hei_map * 64;
-		while (i < 24 + (64 *data->hei_map))
-		{
-			x = tmp * 24;
-			while (x < (tmp + 1) * 24)
-				img_pix_put(&data->img, x++, i, BROWNER_PIXEL);
-			i++;
-		}
-		tmp++;
-	}
 	x = 0;
 	i = 0;
 	while (i < l)
@@ -48,6 +32,30 @@ void	render_steps(t_data *data)
 	}
 }
 
+void	render_steps(t_data *data)
+{
+	int	x;
+	int	i;
+	int	l;
+	int	tmp;
+
+	l = nbr_case(data->nbr_step);
+	tmp = 0;
+	while (tmp < l)
+	{
+		i = data->hei_map * 64;
+		while (i < 24 + (64 * data->hei_map))
+		{
+			x = tmp * 24;
+			while (x < (tmp + 1) * 24)
+				img_pix_put(&data->img, x++, i, BROWNER_PIXEL);
+			i++;
+		}
+		tmp++;
+	}
+	render_imgs_steps(l, data);
+}
+
 int	render(t_data *data)
 {
 	int	x;
@@ -56,31 +64,25 @@ int	render(t_data *data)
 	int	j;
 	int	l;
 
-	j = 0;
+	j = -1;
 	y = 0;
-	l = 0;
-	x = 0;
+	l = -1;
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(data, BROWNER_PIXEL);
-	while (j < data->hei_map)
+	while (++j < data->hei_map)
 	{
-		i = 0;
+		i = -1;
 		x = 0;
-		while (i < data->len_map)
+		while (++i < data->len_map)
 		{
-			print_img(get_img_ntr(data->map[l], data), data, x, y);
+			print_img(get_img_ntr(data->map[++l], data), data, x, y);
 			x += SIZE_IMG;
-			l++;
-			i++;
 		}
 		y += SIZE_IMG;
-		j++;
 	}
-	render_steps(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, \
-		0, 0);
-	return (0);
+	return (render_steps(data), mlx_put_image_to_window(data->mlx_ptr, \
+			data->win_ptr, data->img.mlx_img, 0, 0), 0);
 }
 
 void	moved_img(t_data *data, int img_x, int img_y)

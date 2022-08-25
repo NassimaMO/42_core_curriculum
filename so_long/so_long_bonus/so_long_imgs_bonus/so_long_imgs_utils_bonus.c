@@ -29,6 +29,23 @@ void	img_pix_put(t_imgs *img, int x, int y, int color)
 	}
 }
 
+static t_lil_imgs	*get_img_ntr_two(char c, t_data *data)
+{
+	if (c == 'E')
+		return (&(data->stct.img_exit));
+	else if (c == 'P')
+		return (&(data->stct.img_user));
+	else if (c == 'U')
+		return (&(data->stct.img_user_up));
+	else if (c == 'D')
+		return (&(data->stct.img_user_down));
+	else if (c == 'L')
+		return (&(data->stct.img_user_left));
+	else if (c == 'N')
+		return (&(data->stct.img_enemy));
+	return (NULL);
+}
+
 t_lil_imgs	*get_img_ntr(char c, t_data *data)
 {
 	static int	i = 0;
@@ -51,19 +68,7 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data)
 	}
 	else if (c == 'C')
 		return (&(data->stct.img_item));
-	else if (c == 'E')
-		return (&(data->stct.img_exit));
-	else if (c == 'P')
-		return (&(data->stct.img_user));
-	else if (c == 'U')
-		return (&(data->stct.img_user_up));
-	else if (c == 'D')
-		return (&(data->stct.img_user_down));
-	else if (c == 'L')
-		return (&(data->stct.img_user_left));
-	else if (c == 'N')
-		return (&(data->stct.img_enemy));
-	return (NULL);
+	return (get_img_ntr_two(c, data));
 }
 
 t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n)

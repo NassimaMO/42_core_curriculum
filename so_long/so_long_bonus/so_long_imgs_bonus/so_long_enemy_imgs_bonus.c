@@ -199,8 +199,7 @@ int	n_mv_up(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l = ft_strlen((const char *)data->map) / data->hei_map;
-		l = tmp - l;
+		l = tmp - (ft_strlen((const char *)data->map) / data->hei_map);
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
 			if (data->map[l] == '0')
@@ -209,8 +208,7 @@ int	n_mv_up(t_data *data)
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
 			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
-			return (1);
+			return (moved(data, tmp % data->len_map, tmp / data->len_map), 1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
@@ -230,8 +228,7 @@ int	n_mv_left(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l--;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
+		if (data->map[--l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
 			if (data->map[l] == '0')
 				data->map[tmp] = '0';
@@ -260,8 +257,7 @@ int	n_mv_down(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l = ft_strlen((const char *)data->map) / data->hei_map;
-		l = tmp + l;
+		l = tmp + (ft_strlen((const char *)data->map) / data->hei_map);
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
 			if (data->map[l] == '0')
@@ -270,8 +266,7 @@ int	n_mv_down(t_data *data)
 				data->map[tmp] = '2';
 			data->map[l] = 'N';
 			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
-			return (1);
+			return (moved(data, tmp % data->len_map, tmp / data->len_map), 1);
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
@@ -291,8 +286,7 @@ int	n_mv_right(t_data *data)
 	if (data->map[l] == 'N')
 	{
 		tmp = l;
-		l++;
-		if (data->map[l] && (data->map[l] == '0' || data->map[l] == '2'))
+		if (data->map[++l] && (data->map[l] == '0' || data->map[l] == '2'))
 		{
 			if (data->map[l] == '0')
 				data->map[tmp] = '0';

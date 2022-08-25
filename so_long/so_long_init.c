@@ -39,10 +39,10 @@ void	init_call(t_data *data)
 	data->user = 'P';
 	img_init(data, &data->stct.img_wall, "IMAGES/tree.xpm");
 	img_init(data, &data->stct.img_item, "IMAGES/item.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/pacman.xpm");
-	img_init(data, &data->stct.img_user_up, "IMAGES/pacmanUp.xpm");
-	img_init(data, &data->stct.img_user_down, "IMAGES/pacmanDown.xpm");
-	img_init(data, &data->stct.img_user_left, "IMAGES/pacmanLeft.xpm");
+	img_init(data, &data->stct.img_user, "IMAGES/right/pacman.xpm");
+	img_init(data, &data->stct.img_user_up, "IMAGES/up/pacmanUp.xpm");
+	img_init(data, &data->stct.img_user_down, "IMAGES/down/pacmanDown.xpm");
+	img_init(data, &data->stct.img_user_left, "IMAGES/left/pacmanLeft.xpm");
 	img_init(data, &data->stct.img_background, "IMAGES/leafy2.xpm");
 	img_init(data, &data->stct.img_background_after, "IMAGES/leafy.xpm");
 	img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
