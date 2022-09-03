@@ -51,8 +51,8 @@ int	map_verif(t_data *data)
 			l++;
 		}
 	}
-	if (x == y || !strchr(data->map, 'E') || !strchr(data->map, 'C') \
-		|| !strchr(data->map, 'P'))
+	if (x == y || !ft_strchr(data->map, 'E') || !ft_strchr(data->map, 'C') \
+		|| !ft_strchr(data->map, 'P'))
 		return (ft_printf("Error\nMap might not be a rectangle or is \
 				missing a character.\n"), 0);
 	return (1);

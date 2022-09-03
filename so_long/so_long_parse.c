@@ -54,7 +54,7 @@ int	height_size_map(char *file)
 	return (y);
 }
 
-char	con_value(char *file, int fd, int *l, char *line)
+static char	con_value(char *file, int fd, int *l, char *line)
 {
 	static int	d;
 	char		c;
@@ -83,7 +83,7 @@ char	con_value(char *file, int fd, int *l, char *line)
 	return (c);
 }
 
-char	value(char *file)
+static char	value(char *file)
 {
 	static int	l = 0;
 	int			fd;

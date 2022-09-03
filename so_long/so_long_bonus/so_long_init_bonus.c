@@ -12,7 +12,7 @@
 
 #include "so_long_bonus.h"
 
-void	img_init(t_data *data, t_lil_imgs *img, char *path)
+static void	img_init(t_data *data, t_lil_imgs *img, char *path)
 {
 	img->path = path;
 	img->len = 64;
@@ -23,7 +23,7 @@ void	img_init(t_data *data, t_lil_imgs *img, char *path)
 		&img->endian);
 }
 
-void	img_num_init(t_data *data, t_lil_imgs *img, char *path)
+static void	img_num_init(t_data *data, t_lil_imgs *img, char *path)
 {
 	img->path = path;
 	img->len = 24;
@@ -32,6 +32,33 @@ void	img_num_init(t_data *data, t_lil_imgs *img, char *path)
 		&img->len, &img->hei);
 	img->addr = mlx_get_data_addr(img->mlx_lil_img, &img->bpp, &img->line_len, \
 		&img->endian);
+}
+
+static void	init_call_two(t_data *data)
+{
+	img_init(data, &data->stct.img_user_mouth_closed, \
+			"IMAGES/right/pacman_mouth_closed.xpm");
+	img_init(data, &data->stct.img_user_mouth_half_open, \
+			"IMAGES/right/pacman_mouth_half_open.xpm");
+	img_init(data, &data->stct.img_user_up, "IMAGES/up/pacmanUp.xpm");
+	img_init(data, &data->stct.img_user_up_mouth_closed, \
+			"IMAGES/up/pacman_up_mouth_closed.xpm");
+	img_init(data, &data->stct.img_user_up_mouth_half_open, \
+			"IMAGES/up/pacman_up_mouth_half_open.xpm");
+	img_init(data, &data->stct.img_user_down, "IMAGES/down/pacmanDown.xpm");
+	img_init(data, &data->stct.img_user_down_mouth_closed, \
+			"IMAGES/down/pacman_down_mouth_closed.xpm");
+	img_init(data, &data->stct.img_user_down_mouth_half_open, \
+			"IMAGES/down/pacman_down_mouth_half_open.xpm");
+	img_init(data, &data->stct.img_user_left, "IMAGES/left/pacmanLeft.xpm");
+	img_init(data, &data->stct.img_user_left_mouth_closed, \
+			"IMAGES/left/pacman_left_mouth_closed.xpm");
+	img_init(data, &data->stct.img_user_left_mouth_half_open, \
+			"IMAGES/left/pacman_left_mouth_half_open.xpm");
+	img_init(data, &data->stct.img_background, "IMAGES/leafy2.xpm");
+	img_init(data, &data->stct.img_background_after, "IMAGES/leafy.xpm");
+	img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
+	img_init(data, &data->stct.img_enemy, "IMAGES/pacman_phantom.xpm");
 }
 
 void	init_call(t_data *data)
@@ -51,19 +78,5 @@ void	init_call(t_data *data)
 	img_init(data, &data->stct.img_wall2, "IMAGES/tree2.xpm");
 	img_init(data, &data->stct.img_item, "IMAGES/item.xpm");
 	img_init(data, &data->stct.img_user, "IMAGES/right/pacman.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/right/pacman_mouth_closed.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/right/pacman_mouth_half_open.xpm");
-	img_init(data, &data->stct.img_user_up, "IMAGES/up/pacmanUp.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/up/pacman_up_mouth_closed.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/up/pacman_up_mouth_half_open.xpm");
-	img_init(data, &data->stct.img_user_down, "IMAGES/down/pacmanDown.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/down/pacman_down_mouth_closed.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/down/pacman_down_mouth_half_open.xpm");
-	img_init(data, &data->stct.img_user_left, "IMAGES/left/pacmanLeft.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/left/pacman_left_mouth_closed.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/left/pacman_left_mouth_half_open.xpm");
-	img_init(data, &data->stct.img_background, "IMAGES/leafy2.xpm");
-	img_init(data, &data->stct.img_background_after, "IMAGES/leafy.xpm");
-	img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
-	img_init(data, &data->stct.img_enemy, "IMAGES/pacman_phantom.xpm");
+	init_call_two(data);
 }

@@ -31,11 +31,10 @@ void	mv_up(t_data *data)
 			data->map[l] = data->user;
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
-			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
+			moved(data, l % data->len_map, l / data->len_map, 1);
 			render_steps(data);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+		if (((data->map[l] && data->map[l] == 'E' && !ft_strchr(data->map, 'C')) \
 			|| data->map[l] == 'N'))
 			close_window(data);
 	}
@@ -60,11 +59,10 @@ void	mv_left(t_data *data)
 			data->map[l] = data->user;
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
-			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
+			moved(data, l % data->len_map, l / data->len_map, 1);
 			render_steps(data);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+		if (((data->map[l] && data->map[l] == 'E' && !ft_strchr(data->map, 'C')) \
 			|| data->map[l] == 'N'))
 			close_window(data);
 	}
@@ -89,11 +87,10 @@ void	mv_down(t_data *data)
 			data->map[l] = data->user;
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
-			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
+			moved(data, l % data->len_map, l / data->len_map, 1);
 			render_steps(data);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+		if (((data->map[l] && data->map[l] == 'E' && !ft_strchr(data->map, 'C')) \
 			|| data->map[l] == 'N'))
 			close_window(data);
 	}
@@ -114,15 +111,14 @@ void	mv_right(t_data *data)
 		if (data->map[l] && (data->map[l] == '0' || data->map[l] == 'C' \
 			|| data->map[l] == '2'))
 		{
-			data->user = 'P';
+			data->user = 'R';
 			data->map[l] = data->user;
 			data->map[tmp] = '2';
 			(data->nbr_step)++;
-			moved(data, l % data->len_map, l / data->len_map);
-			moved(data, tmp % data->len_map, tmp / data->len_map);
+			moved(data, l % data->len_map, l / data->len_map, 1);
 			render_steps(data);
 		}
-		if (((data->map[l] && data->map[l] == 'E' && !strchr(data->map, 'C')) \
+		if (((data->map[l] && data->map[l] == 'E' && !ft_strchr(data->map, 'C')) \
 			|| data->map[l] == 'N'))
 			close_window(data);
 	}

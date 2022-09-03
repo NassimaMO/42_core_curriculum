@@ -35,12 +35,14 @@ static t_lil_imgs	*get_img_ntr_two(char c, t_data *data)
 		return (&(data->stct.img_exit));
 	else if (c == 'P')
 		return (&(data->stct.img_user));
+	else if (c == 'R')
+		return (&(data->stct.img_user_mouth_closed));
 	else if (c == 'U')
-		return (&(data->stct.img_user_up));
+		return (&(data->stct.img_user_up_mouth_closed));
 	else if (c == 'D')
-		return (&(data->stct.img_user_down));
+		return (&(data->stct.img_user_down_mouth_closed));
 	else if (c == 'L')
-		return (&(data->stct.img_user_left));
+		return (&(data->stct.img_user_left_mouth_closed));
 	else if (c == 'N')
 		return (&(data->stct.img_enemy));
 	return (NULL);

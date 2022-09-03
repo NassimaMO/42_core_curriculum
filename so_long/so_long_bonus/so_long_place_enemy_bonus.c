@@ -12,7 +12,7 @@
 
 #include "so_long_bonus.h"
 
-int	no_walls_around(t_data *data, int i)
+static int	no_walls_around(t_data *data, int i)
 {
 	if (data->map[i] == '0')
 	{
@@ -34,7 +34,7 @@ void	put_enemy_in_map(t_data *data)
 	int	tmp;
 
 	tmp = 0;
-	if (strchr(data->map, '0'))
+	if (ft_strchr(data->map, '0'))
 	{
 		while (data->map[tmp])
 			tmp++;

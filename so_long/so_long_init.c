@@ -12,22 +12,11 @@
 
 #include "so_long.h"
 
-void	img_init(t_data *data, t_lil_imgs *img, char *path)
+static void	img_init(t_data *data, t_lil_imgs *img, char *path)
 {
 	img->path = path;
 	img->len = 64;
 	img->hei = 64;
-	img->mlx_lil_img = mlx_xpm_file_to_image(data->mlx_ptr, img->path, \
-		&img->len, &img->hei);
-	img->addr = mlx_get_data_addr(img->mlx_lil_img, &img->bpp, &img->line_len, \
-		&img->endian);
-}
-
-void	img_num_init(t_data *data, t_lil_imgs *img, char *path)
-{
-	img->path = path;
-	img->len = 24;
-	img->hei = 24;
 	img->mlx_lil_img = mlx_xpm_file_to_image(data->mlx_ptr, img->path, \
 		&img->len, &img->hei);
 	img->addr = mlx_get_data_addr(img->mlx_lil_img, &img->bpp, &img->line_len, \

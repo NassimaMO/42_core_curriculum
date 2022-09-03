@@ -12,16 +12,7 @@
 
 #include "so_long.h"
 
-int	input(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-		escape(data);
-	else
-		direct_mv(keysym, data);
-	return (0);
-}
-
-void	direct_mv(int keysym, t_data *data)
+static void	direct_mv(int keysym, t_data *data)
 {
 	if (keysym == XK_W || keysym == XK_w)
 		mv_up(data);
@@ -32,3 +23,14 @@ void	direct_mv(int keysym, t_data *data)
 	else if (keysym == XK_D || keysym == XK_d)
 		mv_right(data);
 }
+
+int	input(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+		escape(data);
+	else
+		direct_mv(keysym, data);
+	return (0);
+}
+
+

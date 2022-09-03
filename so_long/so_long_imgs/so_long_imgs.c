@@ -41,7 +41,7 @@ int	render(t_data *data)
 			data->img.mlx_img, 0, 0), 0);
 }
 
-void	moved_img(t_data *data, int img_x, int img_y)
+static void	moved_img(t_data *data, int img_x, int img_y)
 {
 	int	j;
 	int	i;

@@ -12,6 +12,21 @@
 
 #include "../so_long_bonus.h"
 
+void	background_reset(t_data *data, int img_x, int img_y)
+{
+	int	i;
+	int	j;
+
+	i = img_y * 64;
+	while (i < 64 * (img_y + 1))
+	{
+		j = img_x * 64;
+		while (j < 64 * (img_x + 1))
+			img_pix_put(&data->img, j++, i, BROWNER_PIXEL);
+		i++;
+	}
+}
+
 void	render_background(t_data *data, int color)
 {
 	int	i;

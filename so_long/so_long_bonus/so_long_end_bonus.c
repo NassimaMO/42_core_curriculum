@@ -29,6 +29,22 @@ void	free_data_imgs(void *img)
 	free(img);
 }
 
+static void	free_lil_imgs_two(t_stct_lil_imgs *imgs)
+{
+	free_data_imgs(imgs->img_user_up_mouth_closed.mlx_lil_img);
+	free_data_imgs(imgs->img_user_up_mouth_half_open.mlx_lil_img);
+	free_data_imgs(imgs->img_user_down.mlx_lil_img);
+	free_data_imgs(imgs->img_user_down_mouth_closed.mlx_lil_img);
+	free_data_imgs(imgs->img_user_down_mouth_half_open.mlx_lil_img);
+	free_data_imgs(imgs->img_user_left.mlx_lil_img);
+	free_data_imgs(imgs->img_user_left_mouth_closed.mlx_lil_img);
+	free_data_imgs(imgs->img_user_left_mouth_half_open.mlx_lil_img);
+	free_data_imgs(imgs->img_background.mlx_lil_img);
+	free_data_imgs(imgs->img_background_after.mlx_lil_img);
+	free_data_imgs(imgs->img_exit.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy.mlx_lil_img);
+}
+
 void	free_lil_imgs(t_stct_lil_imgs *imgs)
 {
 	free_data_imgs(imgs->img_0.mlx_lil_img);
@@ -45,11 +61,8 @@ void	free_lil_imgs(t_stct_lil_imgs *imgs)
 	free_data_imgs(imgs->img_wall2.mlx_lil_img);
 	free_data_imgs(imgs->img_item.mlx_lil_img);
 	free_data_imgs(imgs->img_user.mlx_lil_img);
+	free_data_imgs(imgs->img_user_mouth_closed.mlx_lil_img);
+	free_data_imgs(imgs->img_user_mouth_half_open.mlx_lil_img);
 	free_data_imgs(imgs->img_user_up.mlx_lil_img);
-	free_data_imgs(imgs->img_user_down.mlx_lil_img);
-	free_data_imgs(imgs->img_user_left.mlx_lil_img);
-	free_data_imgs(imgs->img_background.mlx_lil_img);
-	free_data_imgs(imgs->img_background_after.mlx_lil_img);
-	free_data_imgs(imgs->img_exit.mlx_lil_img);
-	free_data_imgs(imgs->img_enemy.mlx_lil_img);
+	free_lil_imgs_two(imgs);
 }

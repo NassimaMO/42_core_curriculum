@@ -72,9 +72,17 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_wall2;
 	t_lil_imgs	img_item;
 	t_lil_imgs	img_user;
+	t_lil_imgs	img_user_mouth_half_open;
+	t_lil_imgs	img_user_mouth_closed;
 	t_lil_imgs	img_user_up;
+	t_lil_imgs	img_user_up_mouth_half_open;
+	t_lil_imgs	img_user_up_mouth_closed;
 	t_lil_imgs	img_user_down;
+	t_lil_imgs	img_user_down_mouth_half_open;
+	t_lil_imgs	img_user_down_mouth_closed;
 	t_lil_imgs	img_user_left;
+	t_lil_imgs	img_user_left_mouth_half_open;
+	t_lil_imgs	img_user_left_mouth_closed;
 	t_lil_imgs	img_background;
 	t_lil_imgs	img_background_after;
 	t_lil_imgs	img_exit;
@@ -110,8 +118,6 @@ void		init_map(t_data *win_param, int argc, char **argv);
 void		free_all(t_data *win_param);
 
 //so_long_init.c
-void		img_init(t_data *data, t_lil_imgs *img, char *path);
-void		img_num_init(t_data *data, t_lil_imgs *img, char *path);
 void		init_call(t_data *data);
 
 //so_long_end.c
@@ -123,9 +129,10 @@ void		free_lil_imgs(t_stct_lil_imgs *imgs);
 //so_long_img/so_long_imgs.c
 void		render_steps(t_data *data);
 int			render(t_data *data);
-int			moved(t_data *data, int img_x, int img_y);
+int			moved(t_data *data, int img_x, int img_y, int x);
 
 //so_long_img/so_long_imgs_print.c
+void		background_reset(t_data *data, int img_x, int img_y);
 void		render_background(t_data *data, int color);
 void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
@@ -135,8 +142,11 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data);
 t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
+//so_long_img/so_long_sprite_anim_imgs.c
+void		sprite_animations(t_data *data, int l, int img_x, int img_y);
+
 //so_long_enemy/so_long_place_enemy.c
-void	put_enemy_in_map(t_data *data);
+void		put_enemy_in_map(t_data *data);
 
 //so_long_enemy/so_long_enemy_imgs.c
 void		enemy_mvments(t_data *data);
