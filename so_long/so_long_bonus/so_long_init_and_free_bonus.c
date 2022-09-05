@@ -29,6 +29,7 @@ static void	init_map_tab(t_data *win_param, int argc, char **argv)
 		free(win_param->map);
 		exit(MAP_ERROR);
 	}
+	map_path(win_param);
 }
 
 void	init_map(t_data *win_param, int argc, char **argv)

@@ -25,6 +25,7 @@ void	enemy_mvments(t_data *data)
 		return ;
 	if (i == 3 && n_mv_right(data))
 		return ;
+	enemy_mvments(data);
 }
 
 int	n_mv_up(t_data *data)

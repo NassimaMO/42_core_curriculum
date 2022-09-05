@@ -178,6 +178,7 @@ void		direct_mv(int keysym, t_data *data);
 //so_long_verif.c
 int			file_verif(char *file);
 int			map_verif(t_data *data);
+void		map_path(t_data *data);
 
 //gnl
 char		*get_next_line(int fd);

@@ -57,3 +57,59 @@ int	map_verif(t_data *data)
 				missing a character.\n"), 0);
 	return (1);
 }
+
+static int	search(char *map, char c)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] != c)
+		i++;
+	return(i);
+
+}
+
+static void	map_backtrack(t_data *data, char *map, int i)
+{
+	if (data->map[i + 1] != '1' && map[i + 1] != 'V')
+	{
+		map[i] = 'V';
+		map_backtrack(data, map, i + 1);
+	}
+	if (data->map[i - 1] != '1' && map[i - 1] != 'V')
+	{
+		map[i] = 'V';
+		map_backtrack(data, map, i - 1);
+	}
+	if (data->map[i + (ft_strlen((const char *)data->map) / data->hei_map)] != '1' && map[i + (ft_strlen((const char *)data->map) / data->hei_map)] != 'V')
+	{
+		map[i] = 'V';
+		map_backtrack(data, map, i + (ft_strlen((const char *)data->map) / data->hei_map));
+	}
+	if (data->map[i - (ft_strlen((const char *)data->map) / data->hei_map)] != '1' && map[i - (ft_strlen((const char *)data->map) / data->hei_map)] != 'V')
+	{
+		map[i] = 'V';
+		map_backtrack(data, map, i - (ft_strlen((const char *)data->map) / data->hei_map));
+	}
+	if (data->map[i] == 'E')
+		map[i] = 'V';
+}
+
+void	map_path(t_data *data)
+{
+	int	i;
+	char *map;
+
+	i = search(data->map, 'E');
+	map = malloc(sizeof(char) * data->hei_map * data->len_map + 1);
+	ft_bzero(map, data->hei_map * data->len_map * sizeof(char) + 1);
+	map_backtrack(data, map, search(data->map, 'P'));
+	if (map[i] != 'V')
+	{
+		free(data->map);
+		free(map);
+		ft_printf("Error\nMap does not have a valid path.");
+		exit(MAP_ERROR);
+	}
+	free(map);
+}

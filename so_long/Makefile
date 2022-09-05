@@ -2,36 +2,35 @@ SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_
 
 SRCS_BONUS	=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long_verif.c so_long_utils.c so_long_parse.c so_long_input.c so_long_bonus/*.c so_long_bonus/so_long_imgs_bonus/*.c
 
-OBJS		= *.o
+OBJ_DIR		= objs
+
+OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+
+OBJ_BONUS	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 
 NAME		= so_long
 
-CC		= gcc
+CC			= gcc
 
-CFLAGS	= -Wall -Wextra -g
+CFLAGS		= -Wall -Wextra -Werror -g
 
-RM		= rm -f
+RM			= rm -f
 
-.c.o:
-			${CC} ${CFLAGS} -c ${SRCS}
+all:		${NAME}
 
-all:			${OBJS}
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender
-			mkdir -p OBJS
-			mv *.o OBJS
+$(OBJ_DIR)/%.o: %.c
+			mkdir -p $(OBJ_DIR)
+			cd minilibx-linux && make && cd ..
+			$(CC) $(CFLAGS) -c $< -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender
 
-bonus:		
-			${CC} ${CFLAGS} -c ${SRCS_BONUS}
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender
-			mkdir -p OBJS
-			mv *.o OBJS
+${NAME}:	${OBJ}
 
-${NAME}:		all
+bonus:		${OBJ_BONUS}
 
 clean:
 			${RM} *.o
-			${RM} OBJS/*.o
-			${RM} -r OBJS
+			${RM} ${OBJ_DIR}/*.o
+			${RM} -r ${OBJ_DIR}
 
 fclean:		clean
 			${RM} ${NAME}

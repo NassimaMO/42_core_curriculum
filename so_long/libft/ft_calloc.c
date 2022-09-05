@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 14:07:13 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/07 14:12:31 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/03 16:35:08 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/03 16:44:34 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdint.h>
 
-int	ft_putstr_fd(char *s, int fd, int *count)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	i;
+	char				*temp;
+	long unsigned int	i;
 
 	i = 0;
-	if (!s)
+	if (!nmemb || !size)
+		return (malloc(0));
+	if ((nmemb * size / size) != nmemb)
+		return (NULL);
+	temp = malloc(nmemb * size);
+	if (!temp)
+		return (NULL);
+	while (i != nmemb * size)
 	{
-		ft_putstr_fd("(null)", 1, count);
-		return (i);
-	}
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		(*count)++;
+		temp[i] = '\0';
 		i++;
 	}
-	return (i);
+	return ((void *)temp);
 }

@@ -11,15 +11,13 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "libft.h"
 
-void	ft_putchar(char c, int fd, int *i)
+static void	ft_putchar(char c, int fd)
 {
 	write(fd, &c, 1);
-	(*i)++;
 }
 
-void	ft_putnbr_fd(long long int n, int fd, int *i)
+void	ft_putnbr_fd(int n, int fd)
 {
 	long long int	nbr;
 
@@ -29,14 +27,14 @@ void	ft_putnbr_fd(long long int n, int fd, int *i)
 	if (nbr < 0)
 	{
 		nbr = -nbr;
-		ft_putchar('-', fd, i);
+		ft_putchar('-', fd);
 	}
 	if (nbr >= 0 && nbr <= 9)
-		ft_putchar(nbr + 48, fd, i);
+		ft_putchar(nbr + 48, fd);
 	if (nbr > 9)
 	{
-		ft_putnbr_fd(nbr / 10, fd, i);
+		ft_putnbr_fd(nbr / 10, fd);
 		nbr = nbr % 10;
-		ft_putchar(nbr + 48, fd, i);
+		ft_putchar(nbr + 48, fd);
 	}
 }

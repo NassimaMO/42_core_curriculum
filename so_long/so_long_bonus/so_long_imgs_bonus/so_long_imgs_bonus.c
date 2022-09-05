@@ -54,6 +54,8 @@ void	render_steps(t_data *data)
 		tmp++;
 	}
 	render_imgs_steps(l, data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
+							data->img.mlx_img, 0, 0);
 }
 
 int	render(t_data *data)

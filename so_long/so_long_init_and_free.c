@@ -24,6 +24,7 @@ static void	init_map_tab(t_data *win_param, int argc, char **argv)
 	win_param->map = put_map_in_tab(win_param);
 	if (!win_param->map)
 		exit(MALLOC_ERROR);
+	map_path(win_param);
 }
 
 void	init_map(t_data *win_param, int argc, char **argv)

@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_input.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 13:47:25 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/06/18 13:47:27 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/03 15:31:07 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/04 15:13:28 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <stddef.h>
 
-static void	direct_mv(int keysym, t_data *data)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (keysym == XK_W || keysym == XK_w)
-		mv_up(data);
-	else if (keysym == XK_A || keysym == XK_a)
-		mv_left(data);
-	else if (keysym == XK_S || keysym == XK_s)
-		mv_down(data);
-	else if (keysym == XK_D || keysym == XK_d)
-		mv_right(data);
-}
+	size_t	i;
 
-int	input(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-		escape(data);
-	else
-		direct_mv(keysym, data);
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if ((unsigned char)s1[i] < (unsigned char)s2[i])
+			return (-1);
+		if ((unsigned char)s1[i] > (unsigned char)s2[i])
+			return (1);
+		i++;
+	}
 	return (0);
 }
