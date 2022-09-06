@@ -113,75 +113,69 @@ typedef struct s_data
 	t_stct_lil_imgs	stct;
 }	t_data;
 
-//so_long_init_and_free.c
+//so_long_init_and_free_bonus.c
 void		init_map(t_data *win_param, int argc, char **argv);
 void		free_all(t_data *win_param);
 
-//so_long_init.c
+//so_long_init_bonus.c
 void		init_call(t_data *data);
 
-//so_long_end.c
+//so_long_end_bonus.c
 void		escape(t_data *data);
 int			close_window(t_data *data);
 void		free_data_imgs(void *img);
 void		free_lil_imgs(t_stct_lil_imgs *imgs);
 
-//so_long_img/so_long_imgs.c
+//so_long_imgs_bonus.c
 void		render_steps(t_data *data);
 int			render(t_data *data);
 int			moved(t_data *data, int img_x, int img_y, int x);
 
-//so_long_img/so_long_imgs_print.c
+//so_long_imgs_print_bonus.c
 void		background_reset(t_data *data, int img_x, int img_y);
 void		render_background(t_data *data, int color);
 void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
-//so_long_img/so_long_imgs_utils.c
+//so_long_imgs_utils_bonus.c
 void		img_pix_put(t_imgs *img, int x, int y, int color);
 t_lil_imgs	*get_img_ntr(char c, t_data *data);
 t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
-//so_long_img/so_long_sprite_anim_imgs.c
+//so_long_sprite_anim_imgs_bonus.c
 void		sprite_animations(t_data *data, int l, int img_x, int img_y);
 
-//so_long_enemy/so_long_place_enemy.c
+//so_long_place_enemy_bonus.c
 void		put_enemy_in_map(t_data *data);
 
-//so_long_enemy/so_long_enemy_imgs.c
+//so_long_enemy_imgs_bonus.c
 void		enemy_mvments(t_data *data);
 int			n_mv_up(t_data *data);
 int			n_mv_left(t_data *data);
 int			n_mv_down(t_data *data);
 int			n_mv_right(t_data *data);
 
-//so_long_utils.c
+//so_long_utils_bonus.c
 int			ft_strlen(const char *s);
 int			nbr_case(int n);
 
-//so_long_parse.c
+//so_long_parse_bonus.c
 int			width_size_map(char *file);
 int			height_size_map(char *file);
 char		*put_map_in_tab(t_data *data);
 
-//so_long_move.c
+//so_long_move_bonus.c
 void		mv_up(t_data *data);
 void		mv_left(t_data *data);
 void		mv_down(t_data *data);
 void		mv_right(t_data *data);
 
-//so_long_input.c
+//so_long_input_bonus.c
 int			input(int keysym, t_data *data);
 
-//so_long_verif.c
+//so_long_verif_bonus.c
 int			file_verif(char *file);
 int			map_verif(t_data *data);
 void		map_path(t_data *data);
-
-//gnl
-char		*get_next_line(int fd);
-
-//ft_printf
-int			ft_printf(const char *str, ...);
 
 #endif

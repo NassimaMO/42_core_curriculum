@@ -106,15 +106,15 @@ int			close_window(t_data *data);
 void		free_data_imgs(void *img);
 void		free_lil_imgs(t_stct_lil_imgs *imgs);
 
-//so_long_img/so_long_imgs.c
+//so_long_imgs.c
 int			render(t_data *data);
 int			moved(t_data *data, int img_x, int img_y);
 
-//so_long_img/so_long_imgs_print.c
+//so_long_imgs_print.c
 void		render_background(t_data *data, int color);
 void		print_img(t_lil_imgs *img, t_data *data, int x, int y);
 
-//so_long_img/so_long_imgs_utils.c
+//so_long_imgs_utils.c
 void		img_pix_put(t_imgs *img, int x, int y, int color);
 t_lil_imgs	*get_img_ntr(char c, t_data *data);
 
@@ -139,11 +139,5 @@ int			input(int keysym, t_data *data);
 int			file_verif(char *file);
 int			map_verif(t_data *data);
 void		map_path(t_data *data);
-
-//gnl
-char		*get_next_line(int fd);
-
-//ft_printf
-int			ft_printf(const char *str, ...);
 
 #endif
