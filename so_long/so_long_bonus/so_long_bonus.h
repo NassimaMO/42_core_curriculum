@@ -162,7 +162,6 @@ int			nbr_case(int n);
 //so_long_parse.c
 int			width_size_map(char *file);
 int			height_size_map(char *file);
-char		value(char *file);
 char		*put_map_in_tab(t_data *data);
 
 //so_long_move.c
@@ -173,7 +172,6 @@ void		mv_right(t_data *data);
 
 //so_long_input.c
 int			input(int keysym, t_data *data);
-void		direct_mv(int keysym, t_data *data);
 
 //so_long_verif.c
 int			file_verif(char *file);
