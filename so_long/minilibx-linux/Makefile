@@ -13,6 +13,9 @@
 
 all	: do_configure
 
+laptop : 
+	./configure_laptop
+
 do_configure	:
 	./configure
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long_bonus.h"
+#include "so_long_bonus.h"
 
 static void	user_display(t_lil_imgs *img, t_data *data, int x, int y)
 {

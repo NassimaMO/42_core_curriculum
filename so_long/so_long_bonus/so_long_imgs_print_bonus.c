@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long_bonus.h"
+#include "so_long_bonus.h"
 
 void	background_reset(t_data *data, int img_x, int img_y)
 {

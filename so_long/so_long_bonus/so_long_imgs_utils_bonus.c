@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long_bonus.h"
+#include "so_long_bonus.h"
 
 void	img_pix_put(t_imgs *img, int x, int y, int color)
 {

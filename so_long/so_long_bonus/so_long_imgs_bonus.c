@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long_bonus.h"
+#include "so_long_bonus.h"
 
 static void	render_imgs_steps(int l, t_data *data)
 {

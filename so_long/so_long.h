@@ -15,7 +15,7 @@
 
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
-# include "ft_printf/libft/libft.h"
+# include "libft/libft.h"
 # include <stdlib.h>
 # include <X11/keysym.h>
 # include <X11/X.h>

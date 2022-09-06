@@ -119,7 +119,7 @@ main(){
 		cat test/Makefile.mk | grep -v %%%% >> test/Makefile.gen 
 
 	log_info 'Execute "make all" from file "makefile.gen"'
-		${MAKE} -f Makefile.gen all
+		${MAKE} -f Makefile.gen laptop
 
 }
 

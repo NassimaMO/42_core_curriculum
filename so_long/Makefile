@@ -1,40 +1,52 @@
-SRCS		=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long*.c so_long_imgs/*.c
+NAME		=	so_long
 
-SRCS_BONUS	=  get_next_line/*.c ft_printf/*.c ft_printf/libft/*.c so_long_verif.c so_long_utils.c so_long_parse.c so_long_input.c so_long_bonus/*.c so_long_bonus/so_long_imgs_bonus/*.c
+NAME_BONUS	=	so_long_b
 
-OBJ_DIR		= objs
+LIB			=	libft.a
 
-OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+CC			=	gcc
 
-OBJ_BONUS	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+CFLAGS		=	-Wall -Wextra -Werror -g
 
-NAME		= so_long
+SRCS		=	so_long.c so_long_verif.c so_long_utils.c so_long_parse.c so_long_move.c \
+				so_long_input.c so_long_init.c so_long_init_and_free.c so_long_imgs.c \
+				so_long_imgs_utils.c so_long_imgs_print.c so_long_end.c
 
-CC			= gcc
+SRCS_BONUS	=	so_long_verif.c so_long_utils.c so_long_parse.c so_long_input.c \
+				so_long_bonus/so_long_bonus.c so_long_bonus/so_long_end_bonus.c so_long_bonus/so_long_enemy_imgs_bonus.c \
+				so_long_bonus/so_long_imgs_bonus.c so_long_bonus/so_long_imgs_print_bonus.c so_long_bonus/so_long_imgs_utils_bonus.c \
+				so_long_bonus/so_long_init_and_free_bonus.c so_long_bonus/so_long_init_bonus.c so_long_bonus/so_long_move_bonus.c \
+				so_long_bonus/so_long_place_enemy_bonus.c so_long_bonus/so_long_sprite_anim_imgs_bonus.c
 
-CFLAGS		= -Wall -Wextra -Werror -g
+OBJ			=	$(SRCS:.c=.o)
 
-RM			= rm -f
+OBJ_BONUS	=	$(SRCS_BONUS:.c=.o)
 
-all:		${NAME}
+RM			=	rm -f
 
-$(OBJ_DIR)/%.o: %.c
-			mkdir -p $(OBJ_DIR)
-			cd minilibx-linux && make && cd ..
-			$(CC) $(CFLAGS) -c $< -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender
+all:			${NAME}
 
-${NAME}:	${OBJ}
+bonus:			${NAME_BONUS}
 
-bonus:		${OBJ_BONUS}
+${NAME}:		${OBJ} ${LIB}
+				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
 
+${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
+				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
+
+${LIB}:
+				cd libft && make && mv $@ .. && cd ..
+				cd minilibx-linux && make laptop && cd ..
 clean:
-			${RM} *.o
-			${RM} ${OBJ_DIR}/*.o
-			${RM} -r ${OBJ_DIR}
+				cd libft && make fclean && cd ..
+				cd minilibx-linux && make clean && cd ..
+				${RM} ${LIB}
+				${RM} so_long_bonus/*.o
+				${RM} *.o
 
-fclean:		clean
-			${RM} ${NAME}
+fclean:			clean
+				${RM} ${NAME} ${NAME_BONUS}
 
-re:			fclean all
+re:				fclean all
 
-.PHONY: 	all clean fclean re
+.PHONY: 		all clean fclean re

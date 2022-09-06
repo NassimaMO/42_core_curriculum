@@ -13,9 +13,12 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft.h"
 
-int	ft_putnbr_base(long int nbr, char *base, int n, int *i);
-int	ft_printf(const char *str, ...);
+int		ft_printf_putstr_fd(char *s, int fd, int *count);
+void	ft_printf_putnbr_fd(long long int n, int fd, int *i);
+
+int		ft_printf_putnbr_base(long int nbr, char *base, int n, int *i);
+int		ft_printf(const char *str, ...);
 
 #endif
