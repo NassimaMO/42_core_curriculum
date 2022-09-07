@@ -65,12 +65,14 @@ static int	search(char *map, char c)
 	i = 0;
 	while (map[i] != c)
 		i++;
-	return(i);
-
+	return (i);
 }
 
 static void	map_backtrack(t_data *data, char *map, int i)
 {
+	int	x;
+
+	x = (ft_strlen((const char *)data->map) / data->hei_map);
 	if (data->map[i + 1] != '1' && map[i + 1] != 'V')
 	{
 		map[i] = 'V';
@@ -81,15 +83,15 @@ static void	map_backtrack(t_data *data, char *map, int i)
 		map[i] = 'V';
 		map_backtrack(data, map, i - 1);
 	}
-	if (data->map[i + (ft_strlen((const char *)data->map) / data->hei_map)] != '1' && map[i + (ft_strlen((const char *)data->map) / data->hei_map)] != 'V')
+	if (data->map[i + x] != '1' && map[i + x] != 'V')
 	{
 		map[i] = 'V';
-		map_backtrack(data, map, i + (ft_strlen((const char *)data->map) / data->hei_map));
+		map_backtrack(data, map, i + x);
 	}
-	if (data->map[i - (ft_strlen((const char *)data->map) / data->hei_map)] != '1' && map[i - (ft_strlen((const char *)data->map) / data->hei_map)] != 'V')
+	if (data->map[i - x] != '1' && map[i - x] != 'V')
 	{
 		map[i] = 'V';
-		map_backtrack(data, map, i - (ft_strlen((const char *)data->map) / data->hei_map));
+		map_backtrack(data, map, i - x);
 	}
 	if (data->map[i] == 'E')
 		map[i] = 'V';
@@ -97,8 +99,8 @@ static void	map_backtrack(t_data *data, char *map, int i)
 
 void	map_path(t_data *data)
 {
-	int	i;
-	char *map;
+	int		i;
+	char	*map;
 
 	i = search(data->map, 'E');
 	map = malloc(sizeof(char) * data->hei_map * data->len_map + 1);
