@@ -84,11 +84,29 @@ int *next_max_stack(t_stacks *stacks)
     return (i);
 }
 
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	copie;
+	int	index;
+
+	index = 0;
+	while (index < size - 1)
+	{
+		if (tab[index + 1] > tab[index])
+		{
+			copie = tab[index];
+			tab[index] = tab[index + 1];
+			tab[index + 1] = copie;
+			index = -1;
+		}
+		index++;
+	}
+}
+
 /*int main()
 {
     t_stacks stacks;
     int *a;
-    int *i;
     int index;
 
     index = 0;
@@ -103,15 +121,11 @@ int *next_max_stack(t_stacks *stacks)
     a[7] = 0;
     a[8] = 0;
     stacks.len_a = 8;
-    stacks.a = a;
-    i = malloc(sizeof(int) * stacks.len_a);
-    ft_bzero(i, stacks.len_a);
-
+    ft_sort_int_tab(a, 8);
     while  (index != stacks.len_a)
     {
-        printf("next_max = %d\n", next_max_stack(i, &stacks));
+        printf("next_max = %d\n", a[index]);
         index++;
     }
     free(a);
-    free(i);
 }*/

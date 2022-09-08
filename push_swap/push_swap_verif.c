@@ -34,23 +34,26 @@ int	number_checker(char **argv, int argc)
 			else
 				j++;
 		}
-		nbr = nbr_to_str(argv[i]);
-		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, i))
+		nbr = ft_atoi(argv[i]);
+		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, argc, i))
+		{
+			ft_printf("ya\n");
 			return (0);
+		}
 		i++;
 		argc--;
 	}
 	return (1);
 }
 
-int	verif_double(char *a, char **argv, int x)
+int	verif_double(char *a, char **argv, int argc, int x)
 {
 	int	i;
 
-	i = 0;
-	while (argv[i])
+	i = 1;
+	while (i < argc)
 	{
-		if (i != x && ft_strnstr(argv[i], a, ft_strlen(a)))
+		if (i != x && ft_atoi(argv[i]) == ft_atoi(a))
 			return (1);
 		i++;
 	}

@@ -103,7 +103,8 @@ void super_algo_op3(int *a, int *b, int ac)
 	stacks_data.len_b = 0;
 	stacks_data.a = a;
 	stacks_data.b = b;
-	x = next_max_stack(&stacks_data);
+	x = a;
+	ft_sort_int_tab(x, stacks_data.len_a);
 	i = x[0];
 	index = 1;
 	fifth_len = stacks_data.len_a / 5;
@@ -120,8 +121,7 @@ void super_algo_op3(int *a, int *b, int ac)
 		order(&stacks_data, tmp, i);
 		order_b(&stacks_data);
 	}
-	free(x);
-	/* = 0;
+	/*i = 0;
 	while (stacks_data.a && i != stacks_data.len_a)
 	{
 		printf("\na = %d", stacks_data.a[i]);
