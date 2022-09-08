@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 14:42:03 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/30 14:42:06 by nmouslim         ###   ########.fr       */
+/*   Created: 2022/05/03 16:35:08 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/05/03 16:44:34 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdint.h>
 
-# include "libft/libft.h"
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char				*temp;
+	long unsigned int	i;
 
-int	ft_putnbr_base(long int nbr, char *base, int n, int *i);
-int	ft_printf(const char *str, ...);
-
-#endif
+	i = 0;
+	if (!nmemb || !size)
+		return (malloc(0));
+	if ((nmemb * size / size) != nmemb)
+		return (NULL);
+	temp = malloc(nmemb * size);
+	if (!temp)
+		return (NULL);
+	while (i != nmemb * size)
+	{
+		temp[i] = '\0';
+		i++;
+	}
+	return ((void *)temp);
+}

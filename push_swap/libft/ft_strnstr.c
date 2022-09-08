@@ -48,7 +48,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		{
 			temp = i;
 			if (ft_ftt(big, little, len, &i) == \
-				ft_strlen(little) && ft_strlen(big) == ft_strlen(little))
+				ft_strlen(little))
 				return (((char *)big) + temp);
 		}
 		i++;

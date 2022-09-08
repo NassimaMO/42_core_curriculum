@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 #include <limits.h>
-#include "libft/libft.h"
+#include "../libft.h"
 
 static void	ft_nb_neg(long long *nb, int n, int *i)
 {
@@ -25,7 +25,7 @@ static void	ft_nb_neg(long long *nb, int n, int *i)
 			(*i)++;
 		}
 		else
-			ft_putstr_fd("ffffffff", 1, i);
+			ft_printf_putstr_fd("ffffffff", 1, i);
 	}
 }
 
@@ -50,19 +50,19 @@ static void	ft_recursive(long int nbr, char *base, int *i, int n)
 	}
 }
 
-int	ft_putnbr_base(long int nbr, char *base, int n, int *i)
+int	ft_printf_putnbr_base(long int nbr, char *base, int n, int *i)
 {
 	if (nbr && n)
-		ft_putstr_fd("0x", 1, i);
+		ft_printf_putstr_fd("0x", 1, i);
 	else if (n && !nbr)
 	{
-		ft_putstr_fd("(nil)", 1, i);
+		ft_printf_putstr_fd("(nil)", 1, i);
 		return (1);
 	}
 	if (nbr == LONG_MIN)
-		ft_putstr_fd("8000000000000000", 1, i);
+		ft_printf_putstr_fd("8000000000000000", 1, i);
 	else if ((long unsigned int)nbr == ULONG_MAX && n)
-		ft_putstr_fd("ffffffffffffffff", 1, i);
+		ft_printf_putstr_fd("ffffffffffffffff", 1, i);
 	else
 		ft_recursive(nbr, base, i, n);
 	return (0);

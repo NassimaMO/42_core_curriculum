@@ -42,20 +42,20 @@ static void	ft_conditions(char c, int *count, va_list args)
 		(*count)++;
 	}
 	else if (c == 's')
-		ft_putstr_fd(va_arg(args, char *), 1, count);
+		ft_printf_putstr_fd(va_arg(args, char *), 1, count);
 	else if (c == 'p')
-		ft_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, count);
+		ft_printf_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, count);
 	else if (c == 'd')
-		ft_putnbr_fd(va_arg(args, int), 1, count);
+		ft_printf_putnbr_fd(va_arg(args, int), 1, count);
 	else if (c == 'i')
-		ft_putnbr_fd(va_arg(args, int), 1, count);
+		ft_printf_putnbr_fd(va_arg(args, int), 1, count);
 	else if (c == 'u')
-		ft_putnbr_fd(va_arg(args, unsigned int), 1, count);
+		ft_printf_putnbr_fd(va_arg(args, unsigned int), 1, count);
 	else if (c == 'x')
-		ft_putnbr_base(va_arg(args, unsigned int), \
+		ft_printf_putnbr_base(va_arg(args, unsigned int), \
 		"0123456789abcdefg", 0, count);
 	else if (c == 'X')
-		ft_putnbr_base(va_arg(args, unsigned int), \
+		ft_printf_putnbr_base(va_arg(args, unsigned int), \
 		"0123456789ABCDEFG", 0, count);
 }
 

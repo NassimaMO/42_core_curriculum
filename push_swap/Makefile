@@ -1,33 +1,70 @@
-SRCS		= push_swap*.c push_swap_changes/*.c ft_printf/*.c ft_printf/libft/*.c 
+NAME		=	push_swap
 
-OBJS		= *.o
+NAME_BONUS	=	push_swap_b
 
-NAME		= push_swap
+LIB			=	libft.a
 
-CC		= gcc
+CC			=	gcc
 
-CFLAGS	= -Wall -Wextra -g
+CFLAGS		=	-Wall -Wextra -Werror -g
 
-RM		= rm -f
+SRCS_CHANGES=	push_swap_changes/pab.c push_swap_changes/rab.c \
+				push_swap_changes/rr.c push_swap_changes/rrab.c \
+				push_swap_changes/rrr.c push_swap_changes/sab.c \
+				push_swap_changes/ss.c
 
-.c.o:
-			${CC} ${CFLAGS} -c ${SRCS}
+SRCS		=	push_swap_algo_reverse.c push_swap_algo.c \
+				push_swap_compare.c push_swap_max_stack.c \
+				push_swap_verif.c push_swap.c
 
-all:			${OBJS}
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -g
-			mkdir -p OBJS
-			mv *.o OBJS
+SRCS_BONUS	=	
 
-${NAME}:		all
+OBJ_DIR		=	obj
 
+OBJ_DIR_B	=	obj
+
+OBJ			=	$(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))
+
+OBJ_CHANGES	=	$(addprefix $(OBJ_DIR)/,$(SRCS_CHANGES:push_swap_changes/%.c=%.o))
+
+OBJ_BONUS	=	$(addprefix $(OBJ_DIR_B)/,$(SRCS_BONUS:push_swap_bonus/%.c=%.o))
+
+RM			=	rm -f
+
+all:			${NAME}
+
+bonus:			${NAME_BONUS}
+
+$(OBJ_DIR)/%.o: %.c
+				@mkdir -p $(OBJ_DIR)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: push_swap_changes/%.c
+				@mkdir -p $(OBJ_DIR)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR_B)/%.o: push_swap_bonus/%.c
+				@mkdir -p $(OBJ_DIR_B)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+${NAME}:		${OBJ} ${OBJ_CHANGES} ${LIB}
+				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
+
+${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
+				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
+
+${LIB}:
+				cd libft && make && mv $@ .. && cd ..
 clean:
-			${RM} *.o
-			${RM} OBJS/*.o
-			${RM} -r OBJS
+				cd libft && make fclean && cd ..
+				${RM} ${LIB}
+				${RM} -r ${OBJ_DIR}
+				${RM} push_swap_bonus/*.o
+				${RM} *.o
 
-fclean:		clean
-			${RM} ${NAME}
+fclean:			clean
+				${RM} ${NAME} ${NAME_BONUS}
 
-re:			fclean all
+re:				fclean all
 
-.PHONY: 	all clean fclean re
+.PHONY: 		all clean fclean re
