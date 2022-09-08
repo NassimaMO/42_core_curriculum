@@ -51,7 +51,7 @@ ${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
 
 ${LIB}:
 				cd libft && make && mv $@ .. && cd ..
-				cd minilibx-linux && make laptop && cd ..
+				cd minilibx-linux && make && cd ..
 clean:
 				cd libft && make fclean && cd ..
 				cd minilibx-linux && make clean && cd ..
