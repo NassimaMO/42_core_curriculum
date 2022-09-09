@@ -40,38 +40,43 @@ int num_min(int x, int *ab, int len)
 	return (1);
 }
 
-int find_num_min(int *ab, int len)
+void	ft_sort_int_tab(int *tab, int size)
 {
-	int	i;
+	int	copie;
+	int	index;
 
-	i = 0;
-	while (ab && i != len && !num_min(ab[i], ab, len))
-		i++;
-	return (ab[i]);
-}
-
-int find_num_max(int *ab, int len)
-{
-	int	i;
-
-	i = 0;
-	while (ab && i != len && !num_max(ab[i], ab, len))
-		i++;
-	return (ab[i]);
-}
-
-int	find_num(int *ab, int x, int len)
-{
-	int i;
-
-	i = 0;
-	while (ab && i != len)
+	index = 0;
+	while (index < size - 1)
 	{
-		if (ab[i] == x)
-			return (1);
+		if (tab[index + 1] < tab[index])
+		{
+			copie = tab[index];
+			tab[index] = tab[index + 1];
+			tab[index + 1] = copie;
+			index = -1;
+		}
+		index++;
+	}
+}
+
+int	*ft_dup(const int *a, int len)
+{
+	int	*d;
+	int	i;
+
+	i = 0;
+	while (i < len)
+		i++;
+	d = malloc(i * sizeof(int));
+	if (!d)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		d[i] = ((int *)a)[i];
 		i++;
 	}
-	return (0);
+	return (d);
 }
 
 int nums_in_order(t_stacks *stacks, int x, int y)

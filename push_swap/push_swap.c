@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 	if (argc - 1 <= 25)
 		algo_op(a, b, argc);
 	else
-		super_algo_op3(a, b, argc);
+		twilio_algo(a, b, argc);
 	free(a);
 	free(b);
 	return (0);
