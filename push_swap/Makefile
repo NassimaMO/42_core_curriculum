@@ -13,7 +13,7 @@ SRCS_CHANGES=	push_swap_changes/pab.c push_swap_changes/rab.c \
 				push_swap_changes/rrr.c push_swap_changes/sab.c \
 				push_swap_changes/ss.c
 
-SRCS		=	push_swap_algo.c \
+SRCS		=	push_swap_algo_reverse.c push_swap_algo.c \
 				push_swap_utils.c \
 				push_swap_verif.c twilio_algo.c push_swap.c
 

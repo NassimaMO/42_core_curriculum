@@ -68,14 +68,16 @@ static void	push_smaller_than_mpn(t_stacks *stacks, int mpn)
 	}
 }
 
-static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic)
+static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic) //, int mpn
 {
 	int	i;
+	//int	tmp;
 
 	i = 0;
+	//tmp = nic;
 	while (i < stacks->len_b && nic >= 0)
 	{
-		if (stacks->b[i] == x[nic])
+		if (stacks->b[i] == x[nic]) //&& x[nic] >= mpn
 		{
 			exec_b(stacks, i);
 			i = -1;
@@ -83,6 +85,16 @@ static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic)
 		}
 		i++;
 	}
+	/*if (nic > 0)
+	{
+		ft_printf("a[0] = %d, x[0] = %d, mpn = %d, |tmp/nic = %d/%d|, fthkktjg = %d\n", stacks->a[0], x[0], mpn, tmp, nic, x[(tmp - nic) - nic / 2]);
+		push_bigger_than_mpn(stacks, x, nic, x[(tmp - nic) - nic / 2]);
+	}
+	else if (nic == 0)
+	{
+		ft_printf("a[0] = %d, x[0] = %d, mpn = %d, |tmp/nic = %d/%d|, fthkktjg = %d\n", stacks->a[0], x[0], mpn, tmp, nic, x[nic]);
+		push_bigger_than_mpn(stacks, x, nic, x[nic]);
+	}*/
 }
 
 static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int min)
@@ -114,7 +126,7 @@ static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int 
 	}
 	ft_sort_int_tab(x, num_in_chunk);
 	if (num_in_chunk)
-		push_bigger_than_mpn(stacks, x, num_in_chunk - 1);
+		push_bigger_than_mpn(stacks, x, num_in_chunk - 1); //, x[num_in_chunk / 2]
 	if (chunks_index > 0)
 		push_by_chunks(stacks, chunks, chunks_index - 1, min);
 	else if (chunks_index == 0 && stacks->len_b)

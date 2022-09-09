@@ -36,10 +36,7 @@ int	number_checker(char **argv, int argc)
 		}
 		nbr = ft_atoi(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, argc, i))
-		{
-			ft_printf("ya\n");
 			return (0);
-		}
 		i++;
 		argc--;
 	}
