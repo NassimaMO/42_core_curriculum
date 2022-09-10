@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 	if (stacks.len_a <= 25)
 		algo_op(&stacks);
 	else if (stacks.len_a <= 200)
-		super_algo_op3(&stacks);
+		twilio_algo(&stacks);
 	else
 		super_algo_op3(&stacks);
 	free(a);
