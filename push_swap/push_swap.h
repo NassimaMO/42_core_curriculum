@@ -33,14 +33,17 @@ int				verif_double(char *a, char **argv, int argc, int x);
 long long int	nbr_to_str(char *a);
 int				*put_int_tab(char **argv, int argc);
 
-void			algo_op(int *a, int *b, int ac);
-void			super_algo_op3(int *a, int *b, int ac);
-void			twilio_algo(int *a, int *b, int ac);
+void			algo_op(t_stacks *stacks);
+void			super_algo_op3(t_stacks *stacks);
+void			twilio_algo(t_stacks *stacks);
+
+void			rev_scase(t_stacks *stacks);
 
 int				num_max(int x, int *ab, int len);
 int				num_min(int x, int *ab, int len);
 void			ft_sort_int_tab(int *tab, int size);
 int				*ft_dup(const int *a, int len);
+int				nums_in_order_rev(int *ab, int len);
 int				nums_in_order(t_stacks *stacks, int x, int y);
 
 void			pab(int *ab, int *ba, int len_ab, int len_ba);

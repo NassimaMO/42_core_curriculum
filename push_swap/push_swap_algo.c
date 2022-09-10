@@ -90,28 +90,19 @@ static void commands_the_first(t_stacks *stacks)
 	commands_the_second(stacks);
 }
 
-void algo_op(int *a, int *b, int ac)
+void algo_op(t_stacks *stacks)
 {
-	t_stacks stacks;
-
-	stacks.a = a;
-	stacks.b = b;
-	stacks.len_a = ac - 1;
-	stacks.len_b = 0;
 	while (1)
 	{
-		if (nums_in_order(&stacks, 1, 1))
+		if (nums_in_order(stacks, 1, 1))
 			break;
-		/*ft_printf("\n%d", stacks.a[0]);
-		ft_printf("\n%d", stacks.a[1]);
-		ft_printf("\n%d\n\n", stacks.a[2]);*/
-		if (stacks.len_a > 2 && stacks.a[0] > stacks.a[stacks.len_a - 1] && stacks.len_b > 2 && stacks.b[0] < stacks.b[stacks.len_b - 1] && (!num_max(stacks.b[stacks.len_b - 1], stacks.b, stacks.len_b) && !num_min(stacks.a[stacks.len_a - 1], stacks.a, stacks.len_a)))
+		if (stacks->len_a > 2 && stacks->a[0] > stacks->a[stacks->len_a - 1] && stacks->len_b > 2 && stacks->b[0] < stacks->b[stacks->len_b - 1] && (!num_max(stacks->b[stacks->len_b - 1], stacks->b, stacks->len_b) && !num_min(stacks->a[stacks->len_a - 1], stacks->a, stacks->len_a)))
 		{
-			rr(stacks.a, stacks.b, stacks.len_a, stacks.len_b);
+			rr(stacks->a, stacks->b, stacks->len_a, stacks->len_b);
 			ft_printf("rr\n");
 			return;
 		}
 		else
-			commands_the_first(&stacks);
+			commands_the_first(stacks);
 	}
 }

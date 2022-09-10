@@ -79,6 +79,20 @@ int	*ft_dup(const int *a, int len)
 	return (d);
 }
 
+int	nums_in_order_rev(int *ab, int len)
+{
+	int	i;
+
+	i = 1;
+	while (i < len)
+	{
+		if (ab[i] > ab[i - 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int nums_in_order(t_stacks *stacks, int x, int y)
 {
 	int i;

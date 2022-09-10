@@ -27,6 +27,7 @@ void	ft_putstrtest_fd(char *s, int fd)
 
 int	main(int argc, char **argv)
 {
+	t_stacks	stacks;
 	int			i;
 	static int	*a;
 	static int	*b;
@@ -50,12 +51,21 @@ int	main(int argc, char **argv)
 	}
 	while (i < argc)
 		b[i++] = '\0';
-	if (argc - 1 <= 25)
-		algo_op(a, b, argc);
-	else if (argc - 1 <= 200)
-		twilio_algo(a, b, argc);
+	stacks.len_a = argc - 1;
+	stacks.len_b = 0;
+	stacks.a = a;
+	stacks.b = b;
+	if (nums_in_order_rev(stacks.a, stacks.len_a))
+	{
+		rev_scase(&stacks);
+		return (0);
+	}
+	if (stacks.len_a <= 25)
+		algo_op(&stacks);
+	else if (stacks.len_a <= 200)
+		super_algo_op3(&stacks);
 	else
-		super_algo_op3(a, b, argc);
+		super_algo_op3(&stacks);
 	free(a);
 	free(b);
 	return (0);
