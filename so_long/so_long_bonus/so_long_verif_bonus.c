@@ -51,10 +51,9 @@ int	map_verif(t_data *data)
 			l++;
 		}
 	}
-	if (x == y || !ft_strchr(data->map, 'E') || !ft_strchr(data->map, 'C') \
-		|| !ft_strchr(data->map, 'P'))
-		return (ft_printf("Error\nMap might not be a rectangle or is \
-				missing a character.\n"), 0);
+	if (x == y || !ft_strchr(data->map, 'E') || !ft_strchr(data->map, 'C') || \
+	!ft_strchr(data->map, 'P') || ft_strchr(ft_strchr(data->map, 'P') + 1, 'P'))
+		return (ft_printf("Error\nMap format or constituants not valid.\n"), 0);
 	return (1);
 }
 

@@ -12,7 +12,8 @@ SRCS			= ft_atoi.c ft_itoa.c ft_putendl_fd.c ft_strlcpy.c ft_tolower.c \
                 ft_strrchr.c ft_isdigit.c ft_memset.c ft_strjoin.c ft_strtrim.c \
                 ft_isprint.c ft_putchar_fd.c ft_strlcat.c ft_substr.c ft_striteri.c \
 				ft_printf/ft_printf.c ft_printf/ft_printf_putnbr_base.c \
-				ft_printf/ft_printf_utils.c get_next_line/get_next_line_bonus.c
+				ft_printf/ft_printf_utils.c get_next_line/get_next_line_bonus.c \
+				get_next_line/get_next_line_utils_bonus.c
 
 BONUS			= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \

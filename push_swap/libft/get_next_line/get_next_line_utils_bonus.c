@@ -12,44 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*d;
-	int		i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	d = malloc((i + 1) * sizeof(char));
-	if (!d)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		d[i] = ((char *)s)[i];
-		i++;
-	}
-	d[i] = '\0';
-	return (d);
-}
-
-void	ft_fill(char const *s1, char const *s2, char *temp)
+static void	ft_fill(char const *s1, char const *s2, char *temp)
 {
 	int	i;
 	int	j;
@@ -70,7 +33,7 @@ void	ft_fill(char const *s1, char const *s2, char *temp)
 	temp[i] = '\0';
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin_free(char *s1, char const *s2)
 {
 	char	*temp;
 	int		i;

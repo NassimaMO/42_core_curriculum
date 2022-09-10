@@ -65,13 +65,13 @@ static char	*ft_norminetteuh(char *buf, int fd, int *c)
 	char	*nl;
 
 	nl = ft_strdup("");
-	nl = ft_strjoin(nl, buf);
+	nl = ft_strjoin_free(nl, buf);
 	*c = 1;
 	while (nl && ft_strchr(nl, '\n') == 0 && *c)
 	{
 		*c = read(fd, buf, BUFFER_SIZE);
 		buf[*c] = '\0';
-		nl = ft_strjoin(nl, buf);
+		nl = ft_strjoin_free(nl, buf);
 	}
 	return (nl);
 }
