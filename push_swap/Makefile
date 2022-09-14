@@ -15,7 +15,7 @@ SRCS_CHANGES=	push_swap_changes/pab.c push_swap_changes/rab.c \
 
 SRCS		=	push_swap_algo_reverse.c push_swap_algo.c \
 				push_swap_utils.c push_swap_verif.c push_swap_quick_algo.c \
-				push_swap_scases.c push_swap.c
+				push_swap_scases.c push_swap.c push_swap_test_algo_op.c
 
 SRCS_BONUS	=	
 

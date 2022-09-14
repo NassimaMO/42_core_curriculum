@@ -35,7 +35,7 @@ void	mv_up(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("steps: %d\n", data->nbr_step);
 		}
-		if ((data->map[l] && (data->map[l] == 'E' || data->map[l] == 'N')))
+		if (data->map[l] && (data->map[l] == 'E' && !ft_strchr(data->map, 'C')))
 			close_window(data);
 	}
 }
@@ -63,7 +63,7 @@ void	mv_left(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("steps: %d\n", data->nbr_step);
 		}
-		if ((data->map[l] && (data->map[l] == 'E' || data->map[l] == 'N')))
+		if (data->map[l] && (data->map[l] == 'E' && !ft_strchr(data->map, 'C')))
 			close_window(data);
 	}
 }
@@ -91,7 +91,7 @@ void	mv_down(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("steps: %d\n", data->nbr_step);
 		}
-		if ((data->map[l] && (data->map[l] == 'E' || data->map[l] == 'N')))
+		if (data->map[l] && (data->map[l] == 'E' && !ft_strchr(data->map, 'C')))
 			close_window(data);
 	}
 }
@@ -119,7 +119,7 @@ void	mv_right(t_data *data)
 			moved(data, tmp % data->len_map, tmp / data->len_map);
 			ft_printf("steps: %d\n", data->nbr_step);
 		}
-		if ((data->map[l] && (data->map[l] == 'E' || data->map[l] == 'N')))
+		if (data->map[l] && (data->map[l] == 'E' && !ft_strchr(data->map, 'C')))
 			close_window(data);
 	}
 }

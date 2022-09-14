@@ -33,6 +33,8 @@ int				verif_double(char *a, char **argv, int argc, int x);
 long long int	nbr_to_str(char *a);
 int				*put_int_tab(char **argv, int argc);
 
+void test_algo_op(t_stacks *stacks);
+
 void			algo_op(t_stacks *stacks);
 void			super_algo_op3(t_stacks *stacks);
 void			twilio_algo(t_stacks *stacks);
