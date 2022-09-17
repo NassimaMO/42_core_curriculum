@@ -96,7 +96,7 @@ void super_algo_op3(t_stacks *stacks)
 	ft_sort_int_tab(x, stacks->len_a);
 	i = x[stacks->len_a - 1];
 	index = stacks->len_a - 2;
-	fifth_len = (stacks->len_a - 1) / 7;
+	fifth_len = (stacks->len_a - 1) / 4;
 	while (!nums_in_order(stacks, 1, 1) && index >= 0)
 	{
 		to_fifth = 0;

@@ -68,16 +68,14 @@ static void	push_smaller_than_mpn(t_stacks *stacks, int mpn)
 	}
 }
 
-static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic) //, int mpn
+static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic)
 {
 	int	i;
-	//int	tmp;
 
 	i = 0;
-	//tmp = nic;
 	while (i < stacks->len_b && nic >= 0)
 	{
-		if (stacks->b[i] == x[nic]) //&& x[nic] >= mpn
+		if (stacks->b[i] == x[nic])
 		{
 			exec_b(stacks, i);
 			i = -1;
@@ -85,16 +83,6 @@ static void	push_bigger_than_mpn(t_stacks *stacks, int *x, int nic) //, int mpn
 		}
 		i++;
 	}
-	/*if (nic > 0)
-	{
-		ft_printf("a[0] = %d, x[0] = %d, mpn = %d, |tmp/nic = %d/%d|, fthkktjg = %d\n", stacks->a[0], x[0], mpn, tmp, nic, x[(tmp - nic) - nic / 2]);
-		push_bigger_than_mpn(stacks, x, nic, x[(tmp - nic) - nic / 2]);
-	}
-	else if (nic == 0)
-	{
-		ft_printf("a[0] = %d, x[0] = %d, mpn = %d, |tmp/nic = %d/%d|, fthkktjg = %d\n", stacks->a[0], x[0], mpn, tmp, nic, x[nic]);
-		push_bigger_than_mpn(stacks, x, nic, x[nic]);
-	}*/
 }
 
 static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int min)
@@ -124,13 +112,9 @@ static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int 
 		}
 		i++;
 	}
-	/*i = -1;
-	while (++i < stacks->len_b)
-		ft_printf("b = %d\n", stacks->b[i]);
-	ft_printf("\n");*/
 	ft_sort_int_tab(x, num_in_chunk);
 	if (num_in_chunk)
-		push_bigger_than_mpn(stacks, x, num_in_chunk - 1); //, x[num_in_chunk / 2]
+		push_bigger_than_mpn(stacks, x, num_in_chunk - 1);
 	if (chunks_index > 0)
 		push_by_chunks(stacks, chunks, chunks_index - 1, min);
 	else if (chunks_index == 0 && stacks->len_b)
@@ -141,12 +125,11 @@ static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int 
 	free(x);
 }
 
-void    twilio_algo(t_stacks *stacks)
+void    ayo_algo(t_stacks *stacks)
 {
 	int *x;
 	int	i;
-	//int	t;
-	int	chunks[5];
+	int	chunks[11];
 	int	tmp;
 
 	i  = 0;
@@ -156,16 +139,8 @@ void    twilio_algo(t_stacks *stacks)
 		ft_sort_int_tab(x, stacks->len_a);
 		if (i == 0)
 			tmp = x[0];
-		if (stacks->len_a - 1 > 7)
-			chunks[i] = x[(stacks->len_a - 1) / 2];
-		else
-			chunks[i] = x[(stacks->len_a) / 2];
+		chunks[i] = x[(stacks->len_a - 1) / (11 - i)];
 		push_smaller_than_mpn(stacks, chunks[i]);
-		/*ft_printf("|||||||||||||||||||%d, chunks = %d\n", i, chunks[i]);
-		t = -1;
-		while (++t < stacks->len_a)
-			ft_printf("x = %d\n", x[t]);
-		ft_printf("\n");*/
 		free(x);
 		i++;
 	}

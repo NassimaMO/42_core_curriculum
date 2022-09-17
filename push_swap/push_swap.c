@@ -61,11 +61,11 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	if (stacks.len_a <= 25)
-		test_algo_op(&stacks);
+		algo_op(&stacks);
 	else if (stacks.len_a <= 200)
-		test_algo_op(&stacks);
+		twilio_algo(&stacks);
 	else
-		test_algo_op(&stacks);
+		ayo_algo(&stacks);
 	free(a);
 	free(b);
 	return (0);

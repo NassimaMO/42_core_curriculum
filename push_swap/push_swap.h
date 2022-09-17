@@ -39,6 +39,8 @@ void			algo_op(t_stacks *stacks);
 void			super_algo_op3(t_stacks *stacks);
 void			twilio_algo(t_stacks *stacks);
 
+void    ayo_algo(t_stacks *stacks);
+
 void			rev_scase(t_stacks *stacks);
 
 int				num_max(int x, int *ab, int len);
