@@ -100,7 +100,6 @@ void algo_op(t_stacks *stacks)
 		{
 			rr(stacks->a, stacks->b, stacks->len_a, stacks->len_b);
 			ft_printf("rr\n");
-			return;
 		}
 		else
 			commands_the_first(stacks);

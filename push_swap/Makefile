@@ -8,6 +8,18 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
+TEST		=	echo $$ARG; ./push_swap $$ARG | ./checker_linux $$ARG; ./push_swap \
+				$$ARG | wc -l
+
+TEST_25		=	ARG=$$(shuf -i 0-9999 -n 25) ;
+
+TEST_100	=	ARG=$$(shuf -i 0-9999 -n 100) ;
+
+TEST_500	=	ARG=$$(shuf -i 0-9999 -n 500) ;
+
+TEST_VAL	=	echo $$ARG; ./push_swap $$ARG | ./checker_linux $$ARG; valgrind \
+				--leak-check=full ./push_swap $$ARG | wc -l
+
 SRCS_CHANGES=	push_swap_changes/pab.c push_swap_changes/rab.c \
 				push_swap_changes/rr.c push_swap_changes/rrab.c \
 				push_swap_changes/rrr.c push_swap_changes/sab.c \
@@ -34,6 +46,24 @@ RM			=	rm -f
 all:			${NAME}
 
 bonus:			${NAME_BONUS}
+
+test_25:		${NAME}
+				$(TEST_25) $(TEST)
+
+test_100:		${NAME}
+				$(TEST_100) $(TEST)
+
+test_500:		${NAME}
+				$(TEST_500) $(TEST)
+
+test_25_val:	${NAME}
+				$(TEST_25) $(TEST_VAL)
+
+test_100_val:	${NAME}
+				$(TEST_100) $(TEST_VAL)
+
+test_500_val:	${NAME}
+				$(TEST_500) $(TEST_VAL)
 
 $(OBJ_DIR)/%.o: %.c
 				@mkdir -p $(OBJ_DIR)

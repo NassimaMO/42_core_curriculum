@@ -48,12 +48,20 @@ int	main(int argc, char **argv)
 		rev_scase(&stacks);
 		return (0);
 	}
-	if (stacks.len_a <= 25)
+	if (stacks.len_a <= 10)
 		algo_op(&stacks);
 	else if (stacks.len_a <= 200)
 		twilio_algo(&stacks);
 	else
 		ayo_algo(&stacks);
+	/*i = -1;
+	while (++i < stacks.len_a)
+		ft_printf("a = %d\n", stacks.a[i]);
+	ft_printf("\n");
+	i = -1;
+	while (++i < stacks.len_b)
+		ft_printf("b = %d\n", stacks.b[i]);
+	ft_printf("\n");*/
 	free(a);
 	free(b);
 	return (0);
