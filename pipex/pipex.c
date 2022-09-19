@@ -1,46 +1,64 @@
 #include "pipex.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-	int fd[2];
-	int	*pid;
-	int	len;
-	int	i;
+	int 	fd[2];
+	int		infile;
+	int		outfile;
+	int		pid;
+	char	**tmp;
+	int		i;
 
 	if (argc < 5)
 		return (1);
+	i = 0;
 	if (argv[1] = WRONTOP)
 	{
-		len = argc - 3;
-		fd[0] = open(argv[2], O_APPEND | O_WRONLY);
-		fd[1] = open(argv[argc], O_APPEND | O_WRONLY);
+		i = 1;
+		infile = open(argv[2], O_RDONLY);
+		outfile = open(argv[argc], O_APPEND | O_CREAT | O_RDWR | O_TRUNC);
 	}
 	else
 	{
-		len = argc - 2;
-		fd[0] = open(argv[1], O_WRONLY);
-		fd[1] = open(argv[argc], O_WRONLY);
+		i = 0;
+		infile = open(argv[1], O_RDONLY);
+		outfile = open(argv[argc], O_CREAT | O_RDWR | O_TRUNC);
 	}
-	pid = calloc(len, sizeof(int));
 	if (pipe(fd) < 0)
 		return (2);
-	i = -1;
-	while (++i < len)
+	while (++i < argc)
 	{
-		pid[i] = fork();
-		if (pid[i] == 0)
+		pid = fork();
+		if (pid == 0)
 		{
-			dup2(fd[0], STDOUT_FILENO);
+			if (dup2(infile, STDIN_FILENO) < 0)
+				return (perror("DUDE SERIOUSLY WTF"));
+			if (dup2(fd[1], STDOUT_FILENO) < 0)
+				return (perror("OK U KNOW WHAT ? WHATEVER"));
 			close(fd[0]);
-			close(fd[1]);
-			execve();
+			close(infile);
+			tmp = ft_split(argv[i], ' ');
+			access(tmp[0], F_OK);
+			execve(..., tmp, smt(envp));
+			free(tmp);
 		}
+		else if (pid > 0)
+		{
+			waitpid(-1, NULL, 0);
+			if (dup2(outfile, STDOUT_FILENO) < 0)
+				return (perror("AINT NO WAY ITS HAPPENING AT THIS MOMENT RIGHT NOW"));
+			if (dup2(fd[0], STDIN_FILENO) < 0)
+				return (perror("HUUUUUUUUUUUHHHHHH !?!??"));
+			close(fd[1]);
+			close(outfile);
+			tmp = ft_split(argv[i], ' ');
+			access(tmp[0], F_OK);
+			execve(..., tmp, smt(envp));
+			free(tmp);
+		}
+		else
+			return (perror("THERES A PROBLEM RIGHT HERE DUDE"));
 	}
 	close(fd[0]);
 	close(fd[1]);
-	i = -1;
-	while (++i < len)
-	{
-		waitpid(pid[i], NULL, 0);
-	}
 }
