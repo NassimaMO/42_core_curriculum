@@ -16,9 +16,11 @@ int	number_checker(char **argv, int argc)
 {
 	int				i;
 	int				j;
+	int				tmp;
 	long long int	nbr;
 
 	i = 1;
+	tmp = argc;
 	while (argc != 1)
 	{
 		j = 0;
@@ -35,7 +37,7 @@ int	number_checker(char **argv, int argc)
 				j++;
 		}
 		nbr = ft_atoi(argv[i]);
-		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, argc, i))
+		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, tmp, i))
 			return (0);
 		i++;
 		argc--;
