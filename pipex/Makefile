@@ -8,7 +8,7 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
-SRCS		=	pipex.c
+SRCS		=	pipex.c pipex_envp.c
 
 SRCS_BONUS	=	
 
