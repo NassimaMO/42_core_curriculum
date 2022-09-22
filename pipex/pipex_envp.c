@@ -1,5 +1,21 @@
 #include "pipex.h"
 
+char    *get_cmd_path(char *cmd, char **paths)
+{
+	int		i;
+	char	*cmd_path;
+
+	i = -1;
+	while (paths[++i])
+	{
+		cmd_path = ft_strjoin(paths[i], cmd);
+		if (access(cmd_path, F_OK) == 0)
+			return(cmd_path);
+		free(cmd_path);
+	}
+	return (NULL);
+}
+
 void	free_envp(char **envp)
 {
 	int	i;
