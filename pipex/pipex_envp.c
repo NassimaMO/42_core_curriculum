@@ -18,7 +18,7 @@ char	**get_paths(char **envp)
 	i = -1;
 	while (envp[++i])
 	{
-		if (ft_strnstr(envp[i], "PATH", ft_strlen(envp[i])))
+		if (ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
 			break ;
 	}
 	//printf("%s\n\n", envp[i]);
@@ -34,3 +34,11 @@ char	**get_paths(char **envp)
 		printf("%s\n\n", tmp[i]);*/
 	return (tmp);
 }
+
+/*int	main(int argc, char **argv, char **envp)
+{
+	(void) argc;
+	(void) argv;
+	get_paths(envp);
+	return (0);
+}*/

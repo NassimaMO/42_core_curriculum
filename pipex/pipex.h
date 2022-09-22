@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 
 # define WRONTOP "here_doc"

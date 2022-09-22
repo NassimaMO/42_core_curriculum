@@ -34,32 +34,32 @@ int main(int argc, char **argv, char **envp)
 		if (pid == 0)
 		{
 			if (dup2(infile, STDIN_FILENO) < 0)
-				return (free_envp(paths), perror("NAH"));
+				return (free_envp(paths), perror("NAH"), 1);
 			if (dup2(fd[1], STDOUT_FILENO) < 0)
-				return (free_envp(paths), perror("NO"));
+				return (free_envp(paths), perror("NO"), 2);
 			close(fd[0]);
 			close(infile);
 			tmp = ft_split(argv[i], ' ');
-			access(tmp[0], F_OK);
-			execve(..., tmp, paths);
+			access(argv[i], F_OK);
+			execve(tmp[0], tmp, paths); // 2e argument = tmp + 1 ?
 			free(tmp);
 		}
 		else if (pid > 0)
 		{
 			waitpid(-1, NULL, 0);
 			if (dup2(outfile, STDOUT_FILENO) < 0)
-				return (free_envp(paths), perror("NOPE"));
+				return (free_envp(paths), perror("NOPE"), 3);
 			if (dup2(fd[0], STDIN_FILENO) < 0)
-				return (free_envp(paths), perror("NAY"));
+				return (free_envp(paths), perror("NAY"), 4);
 			close(fd[1]);
 			close(outfile);
 			tmp = ft_split(argv[i], ' ');
-			access(tmp[0], F_OK);
-			execve(..., tmp, paths);
+			access(argv[i], F_OK);
+			execve(tmp[0], tmp, paths);  // 2e argument = tmp + 1 ?
 			free(tmp);
 		}
 		else
-			return (free_envp(paths), perror("NOWR"));
+			return (free_envp(paths), perror("NOWR"), 4);
 	}
 	close(fd[0]);
 	close(fd[1]);
