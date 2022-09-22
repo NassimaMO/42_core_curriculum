@@ -14,7 +14,7 @@
 typedef struct s_pipex
 {
     char    **argv;
-    int     argc;
+    int     nbr_cmds;
     int     *fd;
     char    **paths;
     int     infile;

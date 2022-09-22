@@ -21,21 +21,20 @@ void    child_process(t_pipex *pipex, int i)
 	{
 		if (i == 0)
 		{
-			dup_fds(pipex->infile, pipex->fd[1], pipex->paths);
-			close_fds(pipex->fd, pipex->argc - 3, -1, 1);
+			dup_fds(pipex->infile, pipex->fd[2 * i + 1], pipex->paths);
+			close_fds(pipex->fd, pipex->nbr_cmds, -1, 2 * i + 1);
 			close(pipex->outfile);
 		}
-		else if (i == pipex->argc - 2)
+		else if (i == pipex->nbr_cmds - 1)
 		{
-			dup_fds(pipex->fd[2 * i - 2], pipex->outfile, pipex->paths);
-			close_fds(pipex->fd, pipex->argc - 3, -1, 2 * i - 2);
+			dup_fds(pipex->fd[(i - 1) * 2], pipex->outfile, pipex->paths);
+			close_fds(pipex->fd, pipex->nbr_cmds, -1, (i - 1) * 2);
 			close(pipex->infile);
-			close(pipex->outfile);
 		}
 		else
 		{
-			dup_fds(pipex->fd[2 * i - 2], pipex->fd[2 * i + 1], pipex->paths);
-			close_fds(pipex->fd, pipex->argc - 3, 2 * i - 2, 2 * i  + 1);
+			dup_fds(pipex->fd[(i - 1) * 2], pipex->fd[2 * i + 1], pipex->paths);
+			close_fds(pipex->fd, pipex->nbr_cmds, (i - 1) * 2, 2 * i + 1);
 			close(pipex->infile);
 			close(pipex->outfile);
 		}
