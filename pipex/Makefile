@@ -8,9 +8,10 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
-SRCS		=	pipex.c pipex_envp.c
+SRCS		=	pipex.c pipex_envp.c pipex_process.c
 
-SRCS_BONUS	=	
+SRCS_BONUS	=	pipex_bonus/pipex_bonus.c pipex_bonus/pipex_bonus_process.c \
+				pipex_bonus/pipex_bonus_envp.c
 
 OBJ_DIR		=	obj
 
@@ -48,6 +49,7 @@ clean:
 				${RM} -r ${OBJ_DIR}
 				${RM} pipex_bonus/*.o
 				${RM} *.o
+				${RM} file2
 
 fclean:			clean
 				${RM} ${NAME} ${NAME_BONUS}

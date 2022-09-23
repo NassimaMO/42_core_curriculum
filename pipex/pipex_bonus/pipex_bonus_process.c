@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void    dup_fds(int in, int out, char **paths)
 {
@@ -20,24 +20,12 @@ void    child_process(t_pipex *pipex, int i)
 	if (pid == 0)
 	{
 		if (i == 0)
-		{
 			dup_fds(pipex->infile, pipex->fd[2 * i + 1], pipex->paths);
-			close_fds(pipex->fd, pipex->nbr_cmds, -1, 2 * i + 1);
-			close(pipex->outfile);
-		}
 		else if (i == pipex->nbr_cmds - 1)
-		{
 			dup_fds(pipex->fd[(i - 1) * 2], pipex->outfile, pipex->paths);
-			close_fds(pipex->fd, pipex->nbr_cmds, -1, (i - 1) * 2);
-			close(pipex->infile);
-		}
 		else
-		{
 			dup_fds(pipex->fd[(i - 1) * 2], pipex->fd[2 * i + 1], pipex->paths);
-			close_fds(pipex->fd, pipex->nbr_cmds, (i - 1) * 2, 2 * i + 1);
-			close(pipex->infile);
-			close(pipex->outfile);
-		}
+		close_fds(pipex->fd, pipex->nbr_cmds * 2);
 		tmp = ft_split(pipex->argv[i + 2], ' ');
 		cmd = get_cmd_path(tmp[0], pipex->paths);
 		if (!cmd)
