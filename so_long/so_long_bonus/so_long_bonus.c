@@ -16,7 +16,7 @@ int	no_input(t_data *data)
 {
 	static int	i;
 
-	if (ft_strchr(data->map, 'N') && i == 50000)
+	if (ft_strchr(data->map, 'N') && i == 200000)
 	{
 		i = 0;
 		enemy_mvments(data);

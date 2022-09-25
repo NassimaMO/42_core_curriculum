@@ -18,8 +18,7 @@ static void	init_map_tab(t_data *win_param, int argc, char **argv)
 		exit(FILE_ERROR);
 	if (!file_verif(argv[1]))
 		exit(MAP_ERROR);
-	win_param->hei_map = height_size_map(argv[1]);
-	win_param->len_map = width_size_map(argv[1]);
+	size_map(argv[1], &win_param->hei_map, &win_param->len_map);
 	win_param->map_file = argv[1];
 	win_param->map = put_map_in_tab(win_param);
 	if (!win_param->map)

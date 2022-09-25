@@ -12,35 +12,29 @@
 
 #include "so_long.h"
 
-int	width_size_map(char *file)
+static int	cmp_len(int *x, int len)
 {
-	int		fd;
-	char	*line;
-	int		x;
-	int		i;
+	int	i;
 
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	x = 0;
-	i = 0;
-	while (line && line[i])
+	i = -1;
+	while (++i < len - 1)
 	{
-		if (line[i] != '\n')
-			x++;
-		i++;
+		if (x[i] != x[i + 1])
+			return (0);
 	}
-	close(fd);
-	free(line);
-	return (x);
+	return (1);
 }
 
-int	height_size_map(char *file)
+void	size_map(char *file, int *height, int *width)
 {
 	int		fd;
 	char	*line;
 	int		y;
+	int		*x;
+	int		i;
 
 	y = 0;
+	i = 0;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
@@ -50,8 +44,31 @@ int	height_size_map(char *file)
 		y++;
 	}
 	close(fd);
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	x = malloc(sizeof(int) * y);
+	while (line)
+	{
+		i = 0;
+		while (line[i] && line[i] != '\n')
+			i++;
+		*x = i;
+		x++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	x -= y;
 	free(line);
-	return (y);
+	close(fd);
+	if (!cmp_len(x, y))
+	{
+		free(x);
+		perror("MAP NOT VALID.");
+		exit( -1);
+	}
+	free(x);
+	*height = y;
+	*width = i;
 }
 
 static char	con_value(char *file, int fd, int *l, char *line)
