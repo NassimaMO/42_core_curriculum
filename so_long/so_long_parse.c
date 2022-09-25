@@ -64,11 +64,11 @@ void	size_map(char *file, int *height, int *width)
 	{
 		free(x);
 		perror("MAP NOT VALID.");
-		exit( -1);
+		exit(-1);
 	}
 	free(x);
 	*height = y;
-	*width = i;
+	*width = i - 1;
 }
 
 static char	con_value(char *file, int fd, int *l, char *line)
