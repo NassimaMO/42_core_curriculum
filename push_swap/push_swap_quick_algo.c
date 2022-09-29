@@ -62,8 +62,14 @@ static void	push_smaller_than_mpn(t_stacks *stacks, int mpn)
 		if (stacks->a[i] < mpn)
 		{
 			exec_a(stacks, i);
+			if (stacks->b[1] && stacks->a[1] && stacks->b[0] < stacks->b[1] && stacks->a[0] > stacks->a[1])
+			{
+				ss(stacks->b, stacks->a);
+				ft_printf("ss\n");
+			}
 			i = -1;
 		}
+		
 		i++;
 	}
 }
@@ -127,7 +133,9 @@ static void	push_by_chunks(t_stacks *stacks, int *chunks, int chunks_index, int 
 	/*i = -1;
 	while (++i < stacks->len_b)
 		ft_printf("b = %d\n", stacks->b[i]);
-	ft_printf("\n");*/
+	ft_printf("\n");
+	ft_printf("------------%d, %d\n", chunks_index, chunks[chunks_index]);
+	ft_printf("-------------------------------------------\n");*/
 	ft_sort_int_tab(x, num_in_chunk);
 	if (num_in_chunk)
 		push_bigger_than_mpn(stacks, x, num_in_chunk - 1); //, x[num_in_chunk / 2]
@@ -145,23 +153,23 @@ void    twilio_algo(t_stacks *stacks)
 {
 	int *x;
 	int	i;
-	//int	t;
+	int	t;
 	int	chunks[5];
 	int	tmp;
 
 	i  = 0;
+	t = 7;
 	while (stacks->len_a > 2)
 	{
 		x =	ft_dup(stacks->a, stacks->len_a);
 		ft_sort_int_tab(x, stacks->len_a);
 		if (i == 0)
 			tmp = x[0];
-		if (stacks->len_a - 1 > 7)
-			chunks[i] = x[(stacks->len_a - 1) / 2];
-		else
-			chunks[i] = x[(stacks->len_a) / 2];
+		chunks[i] = x[(stacks->len_a - 1) / --t];
 		push_smaller_than_mpn(stacks, chunks[i]);
-		/*ft_printf("|||||||||||||||||||%d, chunks = %d\n", i, chunks[i]);
+		/*printf("%d, chunks = %d\n", i, chunks[i]);
+		printf("-----------------------------------------------\n");
+		ft_printf("|||||||||||||||||||%d, chunks = %d\n", i, chunks[i]);
 		t = -1;
 		while (++t < stacks->len_a)
 			ft_printf("x = %d\n", x[t]);
@@ -174,5 +182,9 @@ void    twilio_algo(t_stacks *stacks)
 		sab(stacks->a);
 		ft_printf("sa\n");
 	}
-	push_by_chunks(stacks, chunks, i - 1, tmp);
+	push_by_chunks(stacks, chunks, i - 2, tmp);
+	/*t = -1;
+	while (++t < stacks->len_a)
+		ft_printf("a = %d\n", stacks->a[t]);
+	ft_printf("\n");*/
 }
