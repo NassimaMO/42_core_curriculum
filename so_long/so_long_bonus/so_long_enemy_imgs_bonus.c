@@ -52,7 +52,7 @@ int	n_mv_up(t_data *data)
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	return (0);
 }
@@ -81,7 +81,7 @@ int	n_mv_left(t_data *data)
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	return (0);
 }
@@ -110,7 +110,7 @@ int	n_mv_down(t_data *data)
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	return (0);
 }
@@ -139,7 +139,7 @@ int	n_mv_right(t_data *data)
 		}
 		if (data->map[l] == 'P' || data->map[l] == 'U' || data->map[l] == 'L' \
 			|| data->map[l] == 'D' || data->map[l] == 'R')
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	return (0);
 }

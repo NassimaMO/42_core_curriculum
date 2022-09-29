@@ -160,8 +160,7 @@ int			ft_strlen(const char *s);
 int			nbr_case(int n);
 
 //so_long_parse_bonus.c
-int			width_size_map(char *file);
-int			height_size_map(char *file);
+void		size_map(char *file, int *height, int *width);
 char		*put_map_in_tab(t_data *data);
 
 //so_long_move_bonus.c

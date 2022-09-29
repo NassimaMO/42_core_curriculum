@@ -1,5 +1,5 @@
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -7,14 +7,15 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # define WRONTOP "here_doc"
 
 typedef struct s_pipex
 {
     char    **argv;
-    int     fd[2];
+    int     nbr_cmds;
+    int     *fd;
     char    **paths;
     int     infile;
     int     outfile;
@@ -25,7 +26,4 @@ void    free_envp(char **envp);
 char    *get_cmd_path(char *cmd, char **paths);
 void    child_process(t_pipex *pipex, int i);
 void    close_fds(int *fd, int len);
-void    first_cmds(t_pipex *pipex);
-void    second_cmds(t_pipex *pipex);
-
 #endif

@@ -122,8 +122,7 @@ t_lil_imgs	*get_img_ntr(char c, t_data *data);
 int			ft_strlen(const char *s);
 
 //so_long_parse.c
-int			width_size_map(char *file);
-int			height_size_map(char *file);
+void		size_map(char *file, int *height, int *width);
 char		*put_map_in_tab(t_data *data);
 
 //so_long_move.c
