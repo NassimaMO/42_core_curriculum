@@ -34,7 +34,7 @@ char	**get_paths(char **envp)
 	i = -1;
 	while (envp[++i])
 	{
-		if (ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
+		if (ft_strnstr(envp[i], "PATH", ft_strlen(envp[i])))
 			break ;
 	}
 	tmp = ft_split(envp[i] + 5, ':');

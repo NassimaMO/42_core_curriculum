@@ -19,6 +19,8 @@ typedef struct s_pipex
     char    **paths;
     int     infile;
     int     outfile;
+    int     heredoc;
+    char    *limiter;
 }              t_pipex;
 
 char    **get_paths(char **envp);
@@ -26,4 +28,5 @@ void    free_envp(char **envp);
 char    *get_cmd_path(char *cmd, char **paths);
 void    child_process(t_pipex *pipex, int i);
 void    close_fds(int *fd, int len);
+void    heredoc(t_pipex *pipex);
 #endif

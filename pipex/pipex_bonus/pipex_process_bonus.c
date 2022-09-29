@@ -26,7 +26,7 @@ void    child_process(t_pipex *pipex, int i)
 		else
 			dup_fds(pipex->fd[(i - 1) * 2], pipex->fd[2 * i + 1], pipex->paths);
 		close_fds(pipex->fd, pipex->nbr_cmds * 2);
-		tmp = ft_split(pipex->argv[i + 2], ' ');
+		tmp = ft_split(pipex->argv[i + 2 + pipex->heredoc], ' ');
 		cmd = get_cmd_path(tmp[0], pipex->paths);
 		if (!cmd)
 		{

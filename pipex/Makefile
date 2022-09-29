@@ -10,8 +10,8 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 
 SRCS		=	pipex.c pipex_envp.c pipex_process.c
 
-SRCS_BONUS	=	pipex_bonus/pipex_bonus.c pipex_bonus/pipex_bonus_process.c \
-				pipex_bonus/pipex_bonus_envp.c
+SRCS_BONUS	=	pipex_bonus/pipex_bonus.c pipex_bonus/pipex_process_bonus.c \
+				pipex_bonus/pipex_envp_bonus.c pipex_bonus/pipex_heredoc_bonus.c
 
 OBJ_DIR		=	obj
 
