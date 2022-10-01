@@ -23,17 +23,17 @@ static void	init_map_tab(t_data *win_param, int argc, char **argv)
 	win_param->map = put_map_in_tab(win_param);
 	if (!win_param->map)
 		exit(MALLOC_ERROR);
+	if (!map_verif(win_param))
+	{
+		free(win_param->map);
+		exit(MAP_ERROR);
+	}
 	map_path(win_param);
 }
 
 void	init_map(t_data *win_param, int argc, char **argv)
 {
 	init_map_tab(win_param, argc, argv);
-	if (!map_verif(win_param))
-	{
-		free(win_param->map);
-		exit(MAP_ERROR);
-	}
 	win_param->nbr_step = 0;
 	win_param->mlx_ptr = mlx_init();
 	if (!win_param->mlx_ptr)

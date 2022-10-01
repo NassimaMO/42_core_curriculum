@@ -12,65 +12,6 @@
 
 #include "so_long_bonus.h"
 
-static int	cmp_len(int *x, int len)
-{
-	int	i;
-
-	i = -1;
-	while (++i < len - 1)
-	{
-		if (x[i] != x[i + 1])
-			return (0);
-	}
-	return (1);
-}
-
-void	size_map(char *file, int *height, int *width)
-{
-	int		fd;
-	char	*line;
-	int		y;
-	int		*x;
-	int		i;
-
-	y = 0;
-	i = 0;
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		y++;
-	}
-	close(fd);
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	x = malloc(sizeof(int) * y);
-	while (line)
-	{
-		i = 0;
-		while (line[i] && line[i] != '\n')
-			i++;
-		*x = i;
-		x++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	x -= y;
-	free(line);
-	close(fd);
-	if (!cmp_len(x, y))
-	{
-		free(x);
-		perror("MAP NOT VALID.");
-		exit(-1);
-	}
-	free(x);
-	*height = y;
-	*width = i - 1;
-}
-
 static char	con_value(char *file, int fd, int *l, char *line)
 {
 	static int	d;
