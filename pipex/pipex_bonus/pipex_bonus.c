@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **envp)
 	pipex.nbr_cmds = argc - 3;
 	pipex.argv = argv;
 	pipex.heredoc = 0;
-	if (!ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc")))
+	if (!ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc"))) // to change bcs if its longer I will still go with it
 	{
 		pipex.nbr_cmds--;
 		pipex.heredoc = 1;
@@ -39,19 +39,26 @@ int main(int argc, char **argv, char **envp)
 			close(pipex.infile);
 			unlink("heredoc_file");
 		}
-		
 		close(pipex.outfile);
 		unlink(argv[argc - 1]);
 		return (perror("OH"), -1);
 	}
 	pipex.fd = malloc(sizeof(int) * pipex.nbr_cmds);
+	if (!pipex.fd)
+		return (-1);
 	i = -1;
 	while (++i < pipex.nbr_cmds)
 	{
 		if (pipe(pipex.fd + 2 * i) < 0)
+		{
+			free(pipex.fd);
+			perror("HUH ?!");
 			return (2);
+		}
 	}
 	pipex.paths = get_paths(envp);
+	if (!pipex.paths)
+		return (free(pipex.fd), -1);
 	i = -1;
 	while (++i < pipex.nbr_cmds)
 		child_process(&pipex, i);
@@ -61,6 +68,7 @@ int main(int argc, char **argv, char **envp)
 	close(pipex.outfile);
 	if (pipex.heredoc)
 		unlink("heredoc_file");
+	free(pipex.fd);
 	free_envp(pipex.paths);
 	return (0);
 }

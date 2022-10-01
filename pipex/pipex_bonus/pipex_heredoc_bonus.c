@@ -10,7 +10,7 @@ void    heredoc(t_pipex *pipex)
 	{
 		write(1, "heredoc> ", 9);
 		line = get_next_line(0);
-		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
+		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter))) // to change bcs if its longer I will still go with it
 			break;
 		write(tmp_fd, line, ft_strlen(line));
 		free(line);

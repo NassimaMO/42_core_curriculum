@@ -4,7 +4,7 @@ int main(int argc, char **argv, char **envp)
 {
 	t_pipex pipex;
 
-	if (argc < 5 || argc > 5)
+	if (argc != 5)
 		return (1);
 	pipex.argv = argv;
 	pipex.infile = open(argv[1], O_RDONLY);

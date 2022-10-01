@@ -34,15 +34,24 @@ char	**get_paths(char **envp)
 	i = -1;
 	while (envp[++i])
 	{
-		if (ft_strnstr(envp[i], "PATH", ft_strlen(envp[i])))
+		if (ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
 			break ;
 	}
 	tmp = ft_split(envp[i] + 5, ':');
+	if (!tmp)
+		return (NULL);
 	i = -1;
 	while (tmp && tmp[++i])
 	{
 		if (tmp[i][ft_strlen(tmp[i]) - 1] != '/')
+		{
 			tmp[i] = ft_strjoin_free(tmp[i], "/");
+			if (!tmp[i])
+			{
+				free_envp(tmp);
+				return (NULL);
+			}
+		}
 	}
 	return (tmp);
 }

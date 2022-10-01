@@ -38,11 +38,20 @@ char	**get_paths(char **envp)
 			break ;
 	}
 	tmp = ft_split(envp[i] + 5, ':');
+	if (!tmp)
+		exit(-1);
 	i = -1;
-	while (tmp && tmp[++i])
+	while (tmp[++i])
 	{
 		if (tmp[i][ft_strlen(tmp[i]) - 1] != '/')
+		{
 			tmp[i] = ft_strjoin_free(tmp[i], "/");
+			if (!tmp[i])
+			{
+				free_envp(tmp);
+				exit(-1);
+			}
+		}
 	}
 	return (tmp);
 }

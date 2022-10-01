@@ -24,6 +24,11 @@ void    first_cmds(t_pipex *pipex)
 		close(pipex->fd[0]);
 		close(pipex->infile);
 		tmp = ft_split(pipex->argv[2], ' ');
+		if (!tmp)
+		{
+			free_envp(pipex->paths);
+			exit(-1);
+		}
 		cmd = get_cmd_path(tmp[0], pipex->paths);
 		if (!cmd)
 		{
@@ -69,6 +74,11 @@ void    second_cmds(t_pipex *pipex)
 		close(pipex->fd[1]);
 		close(pipex->outfile);
 		tmp = ft_split(pipex->argv[3], ' ');
+		if (!tmp)
+		{
+			free_envp(pipex->paths);
+			exit(-1);
+		}
 		cmd = get_cmd_path(tmp[0], pipex->paths);
 		if (!cmd)
 		{
