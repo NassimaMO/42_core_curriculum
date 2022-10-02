@@ -43,11 +43,11 @@ int main(int argc, char **argv, char **envp)
 		unlink(argv[argc - 1]);
 		return (perror("OH"), -1);
 	}
-	pipex.fd = malloc(sizeof(int) * pipex.nbr_cmds);
+	pipex.fd = malloc(sizeof(int) * pipex.nbr_cmds); //maybe (int *) // maybe 2 * nbr_cmds - 1
 	if (!pipex.fd)
 		return (-1);
 	i = -1;
-	while (++i < pipex.nbr_cmds)
+	while (++i < pipex.nbr_cmds) //maybe nbr_cmds - 1 // maybe (2 * nbr_cmds - 1) - 1
 	{
 		if (pipe(pipex.fd + 2 * i) < 0)
 		{
