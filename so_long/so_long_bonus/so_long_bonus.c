@@ -21,6 +21,7 @@ int	no_input(t_data *data)
 		i = 0;
 		enemy_mvments(data);
 	}
+	n_sprite_animation(data);
 	i++;
 	return (0);
 }
