@@ -21,8 +21,8 @@
 
 # define BUFFER_SIZE 1
 
-char    *ft_strjoin_free(char *s1, char const *s2);
+char	*ft_strjoin_free(char *s1, char const *s2);
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

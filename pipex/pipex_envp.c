@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_envp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 15:08:22 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/04 15:08:24 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-char    *get_cmd_path(char *cmd, char **paths)
+char	*get_cmd_path(char *cmd, char **paths)
 {
 	int		i;
 	char	*cmd_path;
@@ -10,7 +22,7 @@ char    *get_cmd_path(char *cmd, char **paths)
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (access(cmd_path, F_OK) == 0)
-			return(cmd_path);
+			return (cmd_path);
 		free(cmd_path);
 	}
 	return (NULL);
@@ -31,12 +43,9 @@ char	**get_paths(char **envp)
 	int		i;
 	char	**tmp;
 
-	i = -1;
-	while (envp[++i])
-	{
-		if (ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
-			break ;
-	}
+	i = 0;
+	while (envp[i] && !ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
+		i++;
 	tmp = ft_split(envp[i] + 5, ':');
 	if (!tmp)
 		exit(-1);

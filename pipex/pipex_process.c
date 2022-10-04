@@ -1,25 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_process.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 15:08:31 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/04 15:08:39 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-void    first_cmds(t_pipex *pipex)
+void	exec_cmd(t_pipex *pipex, char **tmp)
+{
+	char	*cmd;
+
+	cmd = get_cmd_path(tmp[0], pipex->paths);
+	if (!cmd)
+	{
+		free_envp(pipex->paths);
+		free_envp(tmp);
+		free(cmd);
+		perror("COMMAND ERROR");
+		exit(4);
+	}
+	execve(cmd, tmp, pipex->paths);
+	free(tmp);
+	free(cmd);
+}
+
+void	neg_pid(t_pipex *pipex, int pid)
+{
+	if (pid < 0)
+	{
+		free_envp(pipex->paths);
+		perror("PROCESS ERROR");
+		exit(5);
+	}
+}
+
+void	first_cmds(t_pipex *pipex)
 {
 	int		pid1;
-	char    *cmd;
 	char	**tmp;
-    
-    pid1 = fork();
+
+	pid1 = fork();
 	if (pid1 == 0)
 	{
-		if (dup2(pipex->infile, STDIN_FILENO) < 0)
+		if (dup2(pipex->infile, STDIN_FILENO) < 0 || \
+			dup2(pipex->fd[1], STDOUT_FILENO) < 0)
 		{
 			free_envp(pipex->paths);
-			perror("NAH");
+			perror("DUP ERROR");
 			exit(3);
-		}
-		if (dup2(pipex->fd[1], STDOUT_FILENO) < 0)
-		{
-			free_envp(pipex->paths);
-			perror("NO");
-			exit(4);
 		}
 		close(pipex->fd[0]);
 		close(pipex->infile);
@@ -29,47 +63,25 @@ void    first_cmds(t_pipex *pipex)
 			free_envp(pipex->paths);
 			exit(-1);
 		}
-		cmd = get_cmd_path(tmp[0], pipex->paths);
-		if (!cmd)
-		{
-			free_envp(pipex->paths);
-			free_envp(tmp);
-			free(cmd);
-			perror("AYWHATSTHATCOMMANDMATE");
-			exit(5);
-		}
-		execve(cmd, tmp, pipex->paths);
-		free(tmp);
-		free(cmd);
+		exec_cmd(pipex, tmp);
 	}
-	else if (pid1 < 0)
-	{
-		free_envp(pipex->paths);
-		perror("NOWR");
-		exit(6);
-	}
+	neg_pid(pipex, pid1);
 }
 
-void    second_cmds(t_pipex *pipex)
+void	second_cmds(t_pipex *pipex)
 {
 	int		pid2;
-	char    *cmd;
 	char	**tmp;
 
-    pid2 = fork();
+	pid2 = fork();
 	if (pid2 == 0)
 	{
-		if (dup2(pipex->outfile, STDOUT_FILENO) < 0)
+		if (dup2(pipex->outfile, STDOUT_FILENO) < 0 || \
+			dup2(pipex->fd[0], STDIN_FILENO) < 0)
 		{
 			free_envp(pipex->paths);
-			perror("NOPE");
+			perror("DUP ERROR");
 			exit(7);
-		}
-		if (dup2(pipex->fd[0], STDIN_FILENO) < 0)
-		{
-			free_envp(pipex->paths);
-			perror("NAY");
-			exit(8);
 		}
 		close(pipex->fd[1]);
 		close(pipex->outfile);
@@ -79,23 +91,7 @@ void    second_cmds(t_pipex *pipex)
 			free_envp(pipex->paths);
 			exit(-1);
 		}
-		cmd = get_cmd_path(tmp[0], pipex->paths);
-		if (!cmd)
-		{
-			free_envp(pipex->paths);
-			free_envp(tmp);
-			free(cmd);
-			perror("AYWHATSTHATCOMMANDMATE");
-			exit(9);
-		}
-		execve(cmd, tmp, pipex->paths);
-		free(tmp);
-		free(cmd);
+		exec_cmd(pipex, tmp);
 	}
-	else if (pid2 < 0)
-	{
-		free_envp(pipex->paths);
-		perror("NOWR");
-		exit(10);
-	}
+	neg_pid(pipex, pid2);
 }

@@ -44,7 +44,8 @@ static void	ft_conditions(char c, int *count, va_list args)
 	else if (c == 's')
 		ft_printf_putstr_fd(va_arg(args, char *), 1, count);
 	else if (c == 'p')
-		ft_printf_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, count);
+		ft_printf_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, \
+		count);
 	else if (c == 'd')
 		ft_printf_putnbr_fd(va_arg(args, int), 1, count);
 	else if (c == 'i')

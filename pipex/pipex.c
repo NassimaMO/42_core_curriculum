@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 15:08:47 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/04 15:08:48 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_pipex pipex;
+	t_pipex	pipex;
 
 	if (argc != 5)
 		return (1);
@@ -13,10 +25,10 @@ int main(int argc, char **argv, char **envp)
 	{
 		close(pipex.outfile);
 		unlink(argv[argc - 1]);
-		return (perror("OH"), -1);
+		return (perror("FILE ERROR"), 1);
 	}
 	if (pipe(pipex.fd) < 0)
-		return (2);
+		return (perror("PIPE ERROR"), 2);
 	pipex.paths = get_paths(envp);
 	first_cmds(&pipex);
 	second_cmds(&pipex);

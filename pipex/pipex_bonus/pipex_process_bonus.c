@@ -1,21 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_process_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 15:09:36 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/04 15:09:38 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
-static void    dup_fds(int in, int out, t_pipex *pipex)
+static void	dup_fds(int in, int out, t_pipex *pipex)
 {
 	if (dup2(in, STDIN_FILENO) < 0 || dup2(out, STDOUT_FILENO) < 0)
 	{
 		free(pipex->fd);
 		free_envp(pipex->paths);
-		perror("NOPE OR NAY");
-		exit(42);
+		perror("DUP ERROR");
+		exit(3);
 	}
 }
 
-void    child_process(t_pipex *pipex, int i)
+static void	exec_cmd(t_pipex *pipex, char **tmp)
 {
-	int pid;
-	char **tmp;
-	char *cmd;
+	char	*cmd;
+
+	cmd = get_cmd_path(tmp[0], pipex->paths);
+	if (!cmd)
+	{
+		free(pipex->fd);
+		free_envp(pipex->paths);
+		free_envp(tmp);
+		free(cmd);
+		perror("COMMAND ERROR");
+		exit(4);
+	}
+	execve(cmd, tmp, pipex->paths);
+	free(tmp);
+	free(cmd);
+}
+
+static void	neg_pid(t_pipex *pipex, int pid)
+{
+	if (pid < 0)
+	{
+		free(pipex->fd);
+		free_envp(pipex->paths);
+		perror("PROCESS ERROR");
+		exit(5);
+	}
+}
+
+void	child_process(t_pipex *pipex, int i)
+{
+	int		pid;
+	char	**tmp;
 
 	pid = fork();
 	if (pid == 0)
@@ -34,25 +75,7 @@ void    child_process(t_pipex *pipex, int i)
 			free_envp(pipex->paths);
 			exit(-1);
 		}
-		cmd = get_cmd_path(tmp[0], pipex->paths);
-		if (!cmd)
-		{
-			free(pipex->fd);
-			free_envp(pipex->paths);
-			free_envp(tmp);
-			free(cmd);
-			perror("AYWHATSTHATCOMMANDMATE");
-			exit(-2);
-		}
-		execve(cmd, tmp, pipex->paths);
-		free(tmp);
-		free(cmd);
+		exec_cmd(pipex, tmp);
 	}
-	else if (pid < 0)
-	{
-		free(pipex->fd);
-		free_envp(pipex->paths);
-		perror("NOWR");
-		exit(-3);
-	}
+	neg_pid(pipex, pid);
 }
