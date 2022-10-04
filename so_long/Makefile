@@ -19,7 +19,8 @@ SRCS_BONUS	=	so_long_bonus/so_long_verif_bonus.c so_long_bonus/so_long_utils_bon
 				so_long_bonus/so_long_imgs_print_bonus.c so_long_bonus/so_long_imgs_utils_bonus.c \
 				so_long_bonus/so_long_init_and_free_bonus.c so_long_bonus/so_long_init_bonus.c \
 				so_long_bonus/so_long_move_bonus.c so_long_bonus/so_long_place_enemy_bonus.c \
-				so_long_bonus/so_long_sprite_anim_imgs_bonus.c so_long_bonus/so_long_mapsize_verif_bonus.c
+				so_long_bonus/so_long_sprite_anim_imgs_bonus.c so_long_bonus/so_long_mapsize_verif_bonus.c \
+				so_long_bonus/so_long_n_sprite_animation.c
 
 OBJ_DIR		=	obj
 

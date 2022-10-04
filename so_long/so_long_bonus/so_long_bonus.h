@@ -44,15 +44,6 @@ typedef struct s_imgs
 	int		endian;
 }	t_imgs;
 
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-	int	color;
-}	t_rect;
-
 typedef struct s_lil_imgs
 {
 	void	*mlx_lil_img;
@@ -87,6 +78,11 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_background_after;
 	t_lil_imgs	img_exit;
 	t_lil_imgs	img_enemy;
+	t_lil_imgs	img_enemy_LR;
+	t_lil_imgs	img_enemy_left;
+	t_lil_imgs	img_enemy_left_LR;
+	t_lil_imgs	img_enemy_right;
+	t_lil_imgs	img_enemy_right_LR;
 	t_lil_imgs	img_0;
 	t_lil_imgs	img_1;
 	t_lil_imgs	img_2;
@@ -143,6 +139,7 @@ t_lil_imgs	*return_ntr(t_stct_lil_imgs *img, int n);
 t_lil_imgs	*get_img_num_ntr(t_stct_lil_imgs *img, int steps, int l, int x);
 
 //so_long_sprite_anim_imgs_bonus.c
+void		display(t_lil_imgs *img, t_data *data, int x, int y);
 void		sprite_animations(t_data *data, int l, int img_x, int img_y);
 
 //so_long_place_enemy_bonus.c
@@ -176,5 +173,9 @@ int			input(int keysym, t_data *data);
 int			file_verif(char *file);
 int			map_verif(t_data *data);
 void		map_path(t_data *data);
+
+//so_long_n_sprite_animation
+void	n_sprite_animation(t_data *data);
+void	n_sprite_animation_right(t_data *data);
 
 #endif

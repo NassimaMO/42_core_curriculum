@@ -44,15 +44,6 @@ typedef struct s_imgs
 	int		endian;
 }	t_imgs;
 
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-	int	color;
-}	t_rect;
-
 typedef struct s_lil_imgs
 {
 	void	*mlx_lil_img;

@@ -16,12 +16,15 @@ int	no_input(t_data *data)
 {
 	static int	i;
 
-	if (ft_strchr(data->map, 'N') && i == 200000)
+	if ((ft_strchr(data->map, 'N') || ft_strchr(data->map, 'K')) && i == 200000)
 	{
 		i = 0;
 		enemy_mvments(data);
 	}
-	n_sprite_animation(data);
+	if (ft_strchr(data->map, 'N'))
+		n_sprite_animation(data);
+	if (ft_strchr(data->map, 'K'))
+		n_sprite_animation_right(data);
 	i++;
 	return (0);
 }

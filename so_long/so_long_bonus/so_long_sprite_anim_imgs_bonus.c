@@ -12,7 +12,7 @@
 
 #include "so_long_bonus.h"
 
-static void	user_display(t_lil_imgs *img, t_data *data, int x, int y)
+void	display(t_lil_imgs *img, t_data *data, int x, int y)
 {
 	background_reset(data, x, y);
 	print_img(img, data, x * SIZE_IMG, y * SIZE_IMG);
@@ -28,21 +28,21 @@ static void	sprite_animations_left(t_data *data, int l, int x, int y)
 	i = -1;
 	if (data->map[l] == 'L')
 	{
-		while (++i < 30000000)
+		while (++i < 60000000)
 		{
 			if (i == 0)
-				user_display(&data->stct.img_user_left_mouth_half_open, data, \
+				display(&data->stct.img_user_left_mouth_half_open, data, \
 								x + 1, y);
-			else if (i == 10000000)
+			else if (i == 20000000)
 			{
 				background_reset(data, x + 1, y);
 				print_img(&data->stct.img_background_after, data, \
 							(x + 1) * SIZE_IMG, y * SIZE_IMG);
-				user_display(&data->stct.img_user_left_mouth_closed, data, \
+				display(&data->stct.img_user_left_mouth_closed, data, \
 								x, y);
 			}
-			else if (i == 20000000)
-				user_display(&data->stct.img_user_left, data, x, y);
+			else if (i == 40000000)
+				display(&data->stct.img_user_left, data, x, y);
 		}
 		return ;
 	}
@@ -55,21 +55,21 @@ static void	sprite_animations_down(t_data *data, int l, int x, int y)
 	i = -1;
 	if (data->map[l] == 'D')
 	{
-		while (++i < 30000000)
+		while (++i < 60000000)
 		{
 			if (i == 0)
-				user_display(&data->stct.img_user_down_mouth_half_open, data, \
+				display(&data->stct.img_user_down_mouth_half_open, data, \
 								x, y - 1);
-			else if (i == 10000000)
+			else if (i == 20000000)
 			{
 				background_reset(data, x, y - 1);
 				print_img(&data->stct.img_background_after, data, \
 							x * SIZE_IMG, (y - 1) * SIZE_IMG);
-				user_display(&data->stct.img_user_down_mouth_closed, data, x, \
+				display(&data->stct.img_user_down_mouth_closed, data, x, \
 							y);
 			}
-			else if (i == 20000000)
-				user_display(&data->stct.img_user_down, data, x, y);
+			else if (i == 40000000)
+				display(&data->stct.img_user_down, data, x, y);
 		}
 		return ;
 	}
@@ -83,20 +83,20 @@ static void	sprite_animations_up(t_data *data, int l, int x, int y)
 	i = -1;
 	if (data->map[l] == 'U')
 	{
-		while (++i < 30000000)
+		while (++i < 60000000)
 		{
 			if (i == 0)
-				user_display(&data->stct.img_user_up_mouth_half_open, data, \
+				display(&data->stct.img_user_up_mouth_half_open, data, \
 								x, y + 1);
-			else if (i == 10000000)
+			else if (i == 20000000)
 			{
 				background_reset(data, x, y + 1);
 				print_img(&data->stct.img_background_after, data, \
 							x * SIZE_IMG, (y + 1) * SIZE_IMG);
-				user_display(&data->stct.img_user_up_mouth_closed, data, x, y);
+				display(&data->stct.img_user_up_mouth_closed, data, x, y);
 			}
-			else if (i == 20000000)
-				user_display(&data->stct.img_user_up, data, x, y);
+			else if (i == 40000000)
+				display(&data->stct.img_user_up, data, x, y);
 		}
 		return ;
 	}
@@ -110,21 +110,21 @@ void	sprite_animations(t_data *data, int l, int img_x, int img_y)
 	i = -1;
 	if (data->map[l] == 'R')
 	{
-		while (++i < 30000000)
+		while (++i < 60000000)
 		{
 			if (i == 0)
-				user_display(&data->stct.img_user_mouth_half_open, data, \
+				display(&data->stct.img_user_mouth_half_open, data, \
 								img_x - 1, img_y);
-			else if (i == 10000000)
+			else if (i == 20000000)
 			{
 				background_reset(data, img_x - 1, img_y);
 				print_img(&data->stct.img_background_after, data, \
 							(img_x - 1) * SIZE_IMG, img_y * SIZE_IMG);
-				user_display(&data->stct.img_user_mouth_closed, data, \
+				display(&data->stct.img_user_mouth_closed, data, \
 								img_x, img_y);
 			}
-			else if (i == 20000000)
-				user_display(&data->stct.img_user, data, img_x, img_y);
+			else if (i == 40000000)
+				display(&data->stct.img_user, data, img_x, img_y);
 		}
 		return ;
 	}

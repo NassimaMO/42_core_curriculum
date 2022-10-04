@@ -1,6 +1,6 @@
 #include "so_long_bonus.h"
 
-int	find_enemy(const char *s, int c)
+static int	find_enemy(const char *s, int c)
 {
 	int	i;
 
@@ -16,25 +16,42 @@ int	find_enemy(const char *s, int c)
 	return (-1);
 }
 
-static void	n_sprite_animation(t_data *data)
+void	n_sprite_animation(t_data *data)
 {
 	static int	i;
-	int	l;
+	int			l;
 
 	l = find_enemy(data->map, 'N');
-	if (l < 0)
-		return ;
 	if (i == 0)
-		user_display(&data->stct.img_enemy_left, data, \
+		display(&data->stct.img_enemy_left, data, \
 						l % data->len_map, l / data->len_map);
-	else if (i == 10000)
-		user_display(&data->stct.img_enemy_middle, data, \
+	else if (i == 15000 || i == 45000)
+		display(&data->stct.img_enemy, data, \
 						l % data->len_map, l / data->len_map);
-	else if (i == 20000)
-	{
-		user_display(&data->stct.img_enemy_right, data, l % \
+	else if (i == 30000)
+		display(&data->stct.img_enemy_right, data, l % \
 						data->len_map, l / data->len_map);
+	else if (i == 59999)
 		i = -1;
-	}
+	i++;
+}
+
+void	n_sprite_animation_right(t_data *data)
+{
+	static int	i;
+	int			l;
+
+	l = find_enemy(data->map, 'K');
+	if (i == 0)
+		display(&data->stct.img_enemy_left_LR, data, \
+						l % data->len_map, l / data->len_map);
+	else if (i == 15000 || i == 45000)
+		display(&data->stct.img_enemy_LR, data, \
+						l % data->len_map, l / data->len_map);
+	else if (i == 30000)
+		display(&data->stct.img_enemy_right_LR, data, l % \
+						data->len_map, l / data->len_map);
+	else if (i == 59999)
+		i = -1;
 	i++;
 }

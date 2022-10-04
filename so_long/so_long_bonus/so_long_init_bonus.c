@@ -36,6 +36,7 @@ static void	img_num_init(t_data *data, t_lil_imgs *img, char *path)
 
 static void	init_call_two(t_data *data)
 {
+	img_init(data, &data->stct.img_user, "IMAGES/right/pacman.xpm");
 	img_init(data, &data->stct.img_user_mouth_closed, \
 			"IMAGES/right/pacman_mouth_closed.xpm");
 	img_init(data, &data->stct.img_user_mouth_half_open, \
@@ -58,7 +59,6 @@ static void	init_call_two(t_data *data)
 	img_init(data, &data->stct.img_background, "IMAGES/leafy2.xpm");
 	img_init(data, &data->stct.img_background_after, "IMAGES/leafy.xpm");
 	img_init(data, &data->stct.img_exit, "IMAGES/nice.xpm");
-	img_init(data, &data->stct.img_enemy, "IMAGES/pacman_phantom.xpm");
 }
 
 void	init_call(t_data *data)
@@ -77,6 +77,13 @@ void	init_call(t_data *data)
 	img_init(data, &data->stct.img_wall, "IMAGES/tree.xpm");
 	img_init(data, &data->stct.img_wall2, "IMAGES/tree2.xpm");
 	img_init(data, &data->stct.img_item, "IMAGES/item.xpm");
-	img_init(data, &data->stct.img_user, "IMAGES/right/pacman.xpm");
+	img_init(data, &data->stct.img_enemy, "IMAGES/pacman_phantom.xpm");
+	img_init(data, &data->stct.img_enemy_left, \
+			"IMAGES/pacman_phantom_left.xpm");
+	img_init(data, &data->stct.img_enemy_right, \
+			"IMAGES/pacman_phantom_right.xpm");
+	img_init(data, &data->stct.img_enemy_LR, "IMAGES/pacman_phantom_LR.xpm");
+	img_init(data, &data->stct.img_enemy_left_LR, "IMAGES/pacman_phantom_left_LR.xpm");
+	img_init(data, &data->stct.img_enemy_right_LR, "IMAGES/pacman_phantom_right_LR.xpm");
 	init_call_two(data);
 }

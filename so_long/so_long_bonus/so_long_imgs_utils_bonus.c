@@ -36,6 +36,8 @@ static t_lil_imgs	*get_img_ntr_two(char c, t_data *data)
 		return (&(data->stct.img_user_left_mouth_closed));
 	else if (c == 'N')
 		return (&(data->stct.img_enemy));
+	else if (c == 'K')
+		return (&(data->stct.img_enemy_LR));
 	return (NULL);
 }
 

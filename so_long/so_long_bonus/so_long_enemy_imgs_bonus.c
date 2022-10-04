@@ -34,9 +34,9 @@ int	n_mv_up(t_data *data)
 	int	tmp;
 
 	l = 0;
-	while (data->map[l] && data->map[l] != 'N')
+	while (data->map[l] && data->map[l] != 'N' && data->map[l] != 'K')
 		l++;
-	if (data->map[l] == 'N')
+	if (data->map[l] == 'N' || data->map[l] == 'K')
 	{
 		tmp = l;
 		l = tmp - (ft_strlen((const char *)data->map) / data->hei_map);
@@ -46,7 +46,7 @@ int	n_mv_up(t_data *data)
 				data->map[tmp] = '0';
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
-			data->map[l] = 'N';
+			data->map[l] = 'K';
 			return (moved(data, l % data->len_map, l / data->len_map, 0), \
 				moved(data, tmp % data->len_map, tmp / data->len_map, 0), 1);
 		}
@@ -63,9 +63,9 @@ int	n_mv_left(t_data *data)
 	int		tmp;
 
 	l = 0;
-	while (data->map[l] && data->map[l] != 'N')
+	while (data->map[l] && data->map[l] != 'N' && data->map[l] != 'K')
 		l++;
-	if (data->map[l] == 'N')
+	if (data->map[l] == 'N' || data->map[l] == 'K')
 	{
 		tmp = l;
 		if (data->map[--l] && (data->map[l] == '0' || data->map[l] == '2'))
@@ -74,7 +74,7 @@ int	n_mv_left(t_data *data)
 				data->map[tmp] = '0';
 			if (data->map[l] == '2')
 				data->map[tmp] = '2';
-			data->map[l] = 'N';
+			data->map[l] = 'K';
 			moved(data, l % data->len_map, l / data->len_map, 0);
 			moved(data, tmp % data->len_map, tmp / data->len_map, 0);
 			return (1);
@@ -92,9 +92,9 @@ int	n_mv_down(t_data *data)
 	int	tmp;
 
 	l = 0;
-	while (data->map[l] && data->map[l] != 'N')
+	while (data->map[l] && data->map[l] != 'N' && data->map[l] != 'K')
 		l++;
-	if (data->map[l] == 'N')
+	if (data->map[l] == 'N' || data->map[l] == 'K')
 	{
 		tmp = l;
 		l = tmp + (ft_strlen((const char *)data->map) / data->hei_map);
@@ -121,9 +121,9 @@ int	n_mv_right(t_data *data)
 	int	tmp;
 
 	l = 0;
-	while (data->map[l] && data->map[l] != 'N')
+	while (data->map[l] && data->map[l] != 'N' && data->map[l] != 'K')
 		l++;
-	if (data->map[l] == 'N')
+	if (data->map[l] == 'N' || data->map[l] == 'K')
 	{
 		tmp = l;
 		if (data->map[++l] && (data->map[l] == '0' || data->map[l] == '2'))

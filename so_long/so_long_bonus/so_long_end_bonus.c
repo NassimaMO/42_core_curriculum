@@ -43,6 +43,11 @@ static void	free_lil_imgs_two(t_stct_lil_imgs *imgs)
 	free_data_imgs(imgs->img_background_after.mlx_lil_img);
 	free_data_imgs(imgs->img_exit.mlx_lil_img);
 	free_data_imgs(imgs->img_enemy.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_left.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_right.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_right_LR.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_LR.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_left_LR.mlx_lil_img);
 }
 
 void	free_lil_imgs(t_stct_lil_imgs *imgs)
