@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_n_sprite_animation.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/06 15:32:21 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/06 15:32:21 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 static int	find_enemy(const char *s, int c)
@@ -43,13 +55,13 @@ void	n_sprite_animation_right(t_data *data)
 
 	l = find_enemy(data->map, 'K');
 	if (i == 0)
-		display(&data->stct.img_enemy_left_LR, data, \
+		display(&data->stct.img_enemy_left_lr, data, \
 						l % data->len_map, l / data->len_map);
 	else if (i == 15000 || i == 45000)
-		display(&data->stct.img_enemy_LR, data, \
+		display(&data->stct.img_enemy_lr, data, \
 						l % data->len_map, l / data->len_map);
 	else if (i == 30000)
-		display(&data->stct.img_enemy_right_LR, data, l % \
+		display(&data->stct.img_enemy_right_lr, data, l % \
 						data->len_map, l / data->len_map);
 	else if (i == 59999)
 		i = -1;

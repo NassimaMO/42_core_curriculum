@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_end.c                                      :+:      :+:    :+:   */
+/*   so_long_end_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:48:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/06/18 13:48:04 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:30:26 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	free_lil_imgs_two(t_stct_lil_imgs *imgs)
 	free_data_imgs(imgs->img_enemy.mlx_lil_img);
 	free_data_imgs(imgs->img_enemy_left.mlx_lil_img);
 	free_data_imgs(imgs->img_enemy_right.mlx_lil_img);
-	free_data_imgs(imgs->img_enemy_right_LR.mlx_lil_img);
-	free_data_imgs(imgs->img_enemy_LR.mlx_lil_img);
-	free_data_imgs(imgs->img_enemy_left_LR.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_right_lr.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_lr.mlx_lil_img);
+	free_data_imgs(imgs->img_enemy_left_lr.mlx_lil_img);
 }
 
 void	free_lil_imgs(t_stct_lil_imgs *imgs)

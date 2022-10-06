@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_init.c                                     :+:      :+:    :+:   */
+/*   so_long_init_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:47:42 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/06/18 13:47:44 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:32:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ void	init_call(t_data *data)
 			"IMAGES/pacman_phantom_left.xpm");
 	img_init(data, &data->stct.img_enemy_right, \
 			"IMAGES/pacman_phantom_right.xpm");
-	img_init(data, &data->stct.img_enemy_LR, "IMAGES/pacman_phantom_LR.xpm");
-	img_init(data, &data->stct.img_enemy_left_LR, "IMAGES/pacman_phantom_left_LR.xpm");
-	img_init(data, &data->stct.img_enemy_right_LR, "IMAGES/pacman_phantom_right_LR.xpm");
+	img_init(data, &data->stct.img_enemy_lr, "IMAGES/pacman_phantom_LR.xpm");
+	img_init(data, &data->stct.img_enemy_left_lr, \
+			"IMAGES/pacman_phantom_left_LR.xpm");
+	img_init(data, &data->stct.img_enemy_right_lr, \
+			"IMAGES/pacman_phantom_right_LR.xpm");
 	init_call_two(data);
 }

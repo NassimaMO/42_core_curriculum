@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_imgs_utils.c                               :+:      :+:    :+:   */
+/*   so_long_imgs_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:49:21 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/06/18 13:49:23 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:30:39 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_lil_imgs	*get_img_ntr_two(char c, t_data *data)
 	else if (c == 'N')
 		return (&(data->stct.img_enemy));
 	else if (c == 'K')
-		return (&(data->stct.img_enemy_LR));
+		return (&(data->stct.img_enemy_lr));
 	return (NULL);
 }
 

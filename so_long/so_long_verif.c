@@ -28,9 +28,6 @@ int	file_verif(char *file)
 	return (1);
 }
 
-/*printf("hei = %d, len = %d, d = %c
------------------------------------------\n", y, x, d);
-when there is a 0 at the end of the map its still working when it shouldn't*/
 int	map_verif(t_data *data)
 {
 	int		x;
@@ -112,7 +109,7 @@ void	map_path(t_data *data)
 	{
 		free(data->map);
 		free(map);
-		ft_printf("Error\nMap does not have a valid path.");
+		ft_printf("Error\nMap does not have a valid path.\n");
 		exit(MAP_ERROR);
 	}
 	free(map);

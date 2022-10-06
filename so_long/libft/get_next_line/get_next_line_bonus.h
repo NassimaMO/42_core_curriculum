@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:13:52 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/27 10:13:54 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:27:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 # define BUFFER_SIZE 1
 
-char    *ft_strjoin_free(char *s1, char const *s2);
+char	*ft_strjoin_free(char *s1, char const *s2);
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

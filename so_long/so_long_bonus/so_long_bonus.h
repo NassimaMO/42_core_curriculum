@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:43:26 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/06/18 13:43:29 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:29:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ typedef struct s_stct_lil_imgs
 	t_lil_imgs	img_background_after;
 	t_lil_imgs	img_exit;
 	t_lil_imgs	img_enemy;
-	t_lil_imgs	img_enemy_LR;
+	t_lil_imgs	img_enemy_lr;
 	t_lil_imgs	img_enemy_left;
-	t_lil_imgs	img_enemy_left_LR;
+	t_lil_imgs	img_enemy_left_lr;
 	t_lil_imgs	img_enemy_right;
-	t_lil_imgs	img_enemy_right_LR;
+	t_lil_imgs	img_enemy_right_lr;
 	t_lil_imgs	img_0;
 	t_lil_imgs	img_1;
 	t_lil_imgs	img_2;
@@ -175,7 +175,7 @@ int			map_verif(t_data *data);
 void		map_path(t_data *data);
 
 //so_long_n_sprite_animation
-void	n_sprite_animation(t_data *data);
-void	n_sprite_animation_right(t_data *data);
+void		n_sprite_animation(t_data *data);
+void		n_sprite_animation_right(t_data *data);
 
 #endif

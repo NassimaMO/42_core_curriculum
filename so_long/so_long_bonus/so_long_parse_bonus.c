@@ -17,7 +17,12 @@ static char	con_value(char *file, int fd, int *l, char *line)
 	static int	d;
 	char		c;
 
-	if (line && !line[d + 1])
+	if (line && line[d] && line[d] != '\n')
+	{
+		c = line[d];
+		d++;
+	}
+	if (line && (line[d] == '\n' || !line[d]))
 	{
 		d = 0;
 		free(line);
@@ -31,11 +36,6 @@ static char	con_value(char *file, int fd, int *l, char *line)
 		close(fd);
 		fd = open(file, O_RDONLY);
 		line = get_next_line(fd);
-	}
-	if (line && line[d])
-	{
-		c = line[d];
-		d++;
 	}
 	free(line);
 	return (c);

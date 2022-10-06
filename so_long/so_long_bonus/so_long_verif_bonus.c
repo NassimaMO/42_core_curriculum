@@ -43,8 +43,8 @@ int	map_verif(t_data *data)
 		while (x < data->len_map)
 		{
 			d = data->map[l];
-			if ((y == 0 && d != '1') || (x == data->len_map && d != '1') \
-				|| (x == 0 && d != '1') || (y == data->hei_map && d != '1') \
+			if ((y == 0 && d != '1') || (x == data->len_map - 1 && d != '1') \
+				|| (x == 0 && d != '1') || (y == data->hei_map - 1 && d != '1') \
 				|| (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P'))
 				return (ft_printf("Error\nMap not respecting the rules.\n"), 0);
 			x++;
@@ -109,7 +109,7 @@ void	map_path(t_data *data)
 	{
 		free(data->map);
 		free(map);
-		ft_printf("Error\nMap does not have a valid path.");
+		ft_printf("Error\nMap does not have a valid path.\n");
 		exit(MAP_ERROR);
 	}
 	free(map);
