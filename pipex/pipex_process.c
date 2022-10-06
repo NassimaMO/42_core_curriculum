@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:08:31 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/04 15:08:39 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:11:17 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_cmd(t_pipex *pipex, char **tmp)
 		free_envp(pipex->paths);
 		free_envp(tmp);
 		free(cmd);
-		perror("COMMAND ERROR");
+		perror("COMMAND NOT FOUND.");
 		exit(4);
 	}
 	execve(cmd, tmp, pipex->paths);

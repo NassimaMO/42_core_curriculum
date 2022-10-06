@@ -49,7 +49,6 @@ clean:
 				${RM} -r ${OBJ_DIR}
 				${RM} pipex_bonus/*.o
 				${RM} *.o
-				${RM} file2
 
 fclean:			clean
 				${RM} ${NAME} ${NAME_BONUS}

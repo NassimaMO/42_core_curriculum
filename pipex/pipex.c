@@ -23,8 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	pipex.outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex.infile < 0 || pipex.outfile < 0)
 	{
-		close(pipex.outfile);
-		unlink(argv[argc - 1]);
+		write(pipex.outfile, "0\n", 2);
 		return (perror("FILE ERROR"), 1);
 	}
 	if (pipe(pipex.fd) < 0)

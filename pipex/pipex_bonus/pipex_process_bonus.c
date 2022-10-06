@@ -34,7 +34,7 @@ static void	exec_cmd(t_pipex *pipex, char **tmp)
 		free_envp(pipex->paths);
 		free_envp(tmp);
 		free(cmd);
-		perror("COMMAND ERROR");
+		ft_printf("COMMAND ERROR.");
 		exit(4);
 	}
 	execve(cmd, tmp, pipex->paths);

@@ -43,8 +43,7 @@ static void	create_files(t_pipex *pipex, char **argv, int argc)
 			close(pipex->infile);
 			unlink("heredoc_file");
 		}
-		close(pipex->outfile);
-		unlink(argv[argc - 1]);
+		write(pipex->outfile, "0\n", 2);
 		perror("FILE ERROR");
 		exit(1);
 	}
