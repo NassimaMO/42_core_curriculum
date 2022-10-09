@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_mapsize_verif.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 15:42:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/01 15:42:40 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:36:51 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	size_map(char *file, int *height, int *width)
 	if (!cmp_len(x, y))
 	{
 		free(x);
-		ft_printf("MAP NOT VALID.\n");
+		ft_printf("Error\nMap not valid.\n");
 		exit(1);
 	}
 	free(x);

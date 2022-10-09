@@ -39,20 +39,20 @@ int	map_verif(t_data *data)
 	l = 0;
 	while (++y != data->hei_map)
 	{
-		x = 0;
-		while (x < data->len_map)
+		x = -1;
+		while (++x < data->len_map)
 		{
 			d = data->map[l];
 			if ((y == 0 && d != '1') || (x == data->len_map - 1 && d != '1') \
 				|| (x == 0 && d != '1') || (y == data->hei_map - 1 && d != '1') \
 				|| (d != '0' && d != '1' && d != 'C' && d != 'E' && d != 'P'))
 				return (ft_printf("Error\nMap not respecting the rules.\n"), 0);
-			x++;
 			l++;
 		}
 	}
 	if (x == y || !ft_strchr(data->map, 'E') || !ft_strchr(data->map, 'C') || \
-	!ft_strchr(data->map, 'P') || ft_strchr(ft_strchr(data->map, 'P') + 1, 'P'))
+	!ft_strchr(data->map, 'P') || ft_strchr(ft_strchr(data->map, 'P') + 1, 'P') \
+	|| ft_strchr(ft_strchr(data->map, 'E') + 1, 'E'))
 		return (ft_printf("Error\nMap format or constituants not valid.\n"), 0);
 	return (1);
 }
