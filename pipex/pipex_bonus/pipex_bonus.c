@@ -26,8 +26,8 @@ static void	create_files(t_pipex *pipex, char **argv, int argc)
 	if (!ft_strncmp(argv[1], "here_doc", 8) && ft_strlen(argv[1]) == 8)
 	{
 		pipex->nbr_cmds--;
-		pipex->heredoc = heredoc(pipex);
 		pipex->limiter = argv[2];
+		pipex->heredoc = heredoc(pipex);
 		pipex->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_APPEND, \
 							0644);
 	}
@@ -36,17 +36,18 @@ static void	create_files(t_pipex *pipex, char **argv, int argc)
 		pipex->infile = open(argv[1], O_RDONLY);
 		pipex->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	}
-	if (pipex->infile < 0 || pipex->outfile < 0)
+	if (pipex->outfile < 0)
 	{
 		if (pipex->heredoc)
 		{
 			close(pipex->infile);
 			unlink("heredoc_file");
 		}
-		write(pipex->outfile, "0\n", 2);
-		perror("FILE ERROR");
+		perror("OUTFILE ERROR");
 		exit(1);
 	}
+	if (pipex->infile < 0)
+		perror("INFILE ERROR");
 }
 
 static void	create_pipes(t_pipex *pipex)

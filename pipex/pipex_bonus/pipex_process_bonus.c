@@ -18,23 +18,44 @@ static void	dup_fds(int in, int out, t_pipex *pipex)
 	{
 		free(pipex->fd);
 		free_envp(pipex->paths);
-		perror("DUP ERROR");
+		free(pipex->fd);
 		exit(3);
+	}
+}
+
+static void	get_the_previous_command(void)
+{
+	char	*line;
+
+	line = get_next_line(0);
+	while (line)
+	{
+		ft_printf("%s", line);
+		free(line);
+		line = get_next_line(0);
 	}
 }
 
 static void	exec_cmd(t_pipex *pipex, char **tmp)
 {
 	char	*cmd;
+	char	*error_cmd;
 
 	cmd = get_cmd_path(tmp[0], pipex->paths);
 	if (!cmd)
 	{
-		free(pipex->fd);
+		if (tmp[0])
+		{
+			error_cmd = ft_strjoin("command not found: ", tmp[0]);
+			error_cmd = ft_strjoin_free(error_cmd, "\n");
+			write(2, error_cmd, ft_strlen(error_cmd));
+			free(error_cmd);
+		}
+		else
+			get_the_previous_command();
 		free_envp(pipex->paths);
+		free(pipex->fd);
 		free_envp(tmp);
-		free(cmd);
-		ft_printf("COMMAND ERROR.");
 		exit(4);
 	}
 	execve(cmd, tmp, pipex->paths);

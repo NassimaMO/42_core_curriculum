@@ -1,7 +1,0 @@
-if arg == ""
- cmd shell --->>> writes the precedent or the next command
- my program --->>> doesnt do anything
-
-if arg == invalid command
- cmd shell --->>> command not found
- my program --->>> time out
