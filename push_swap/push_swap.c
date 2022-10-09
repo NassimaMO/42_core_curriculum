@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:06:13 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:15:42 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	main(int argc, char **argv)
 	static int	*b;
 
 	i = 0;
+	if (argc <= 2)
+		return (0);
 	if (!number_checker(argv, argc))
 	{
 		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
-	if (argc <= 2)
-		return (0);
 	a = put_int_tab(argv, argc);
 	if (!a)
 		return (1);
