@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/10 18:17:15 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:02:38 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,18 @@ typedef struct s_stacks
 	int len_b;
 } t_stacks;
 
-typedef struct s_stack
-{
-	int				value;
-	int				index;
-	int				pos;
-	int				target_pos;
-	int				cost_a;
-	int				cost_b;
-}	t_stack;
-
 int				number_checker(char **argv, int argc);
 int				verif_double(char *a, char **argv, int argc, int x);
 long long int	nbr_to_str(char *a);
 int				*put_int_tab(char **argv, int argc);
+
+void test_algo_op(t_stacks *stacks);
+
+void			algo_op(t_stacks *stacks);
+void			super_algo_op3(t_stacks *stacks);
+void			twilio_algo(t_stacks *stacks);
+
+void    ayo_algo(t_stacks *stacks);
 
 void			rev_scase(t_stacks *stacks);
 
@@ -51,5 +49,13 @@ void			ft_sort_int_tab(int *tab, int size);
 int				*ft_dup(const int *a, int len);
 int				nums_in_order_rev(int *ab, int len);
 int				nums_in_order(t_stacks *stacks, int x, int y);
+
+void			pab(int *ab, int *ba, int len_ab, int len_ba);
+void			rab(int *ab, int len_ba);
+void			rr(int *a, int *b, int len_a, int len_b);
+void			rrab(int *ab, int len_ab);
+void			rrr(int *a, int *b, int len_a, int len_b);
+void			sab(int *ab);
+void			ss(int *a, int *b);
 
 #endif

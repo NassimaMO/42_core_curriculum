@@ -6,58 +6,19 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/10 18:27:56 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:31:40 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <unistd.h>
 
-int	find_index_num(int value, int *a)
-{
-	int	i;
-
-	i = 0;
-	while (value != a[i])
-		i++;
-	return (i);
-}
-
-t_stack	*init_stack(char **argv, int *a, int i)
-{
-	t_stack	*stack;
-
-	stack->value = ft_atoi(argv[i]);
-	stack->index = find_index_num(stack->value, a);
-	stack->pos = i;
-	return (stack);
-}
-
-void	put_in_lst(t_list **lst, char **argv, int *a, int i)
-{
-	t_list	*tmp;
-
-	tmp->content = init_stack(argv, a, i);
-	ft_lstadd_back(lst, tmp);
-}
-
-void	init_lst(t_list **lst, char **argv, int len)
-{
-	int	*a;
-	int	i;
-
-	i = -1;
-	a = put_int_tab(argv, len);
-	ft_sort_int_tab(a, len);
-	while (++i < len)
-		put_in_lst(lst, argv, a, i);
-}
-
 int	main(int argc, char **argv)
 {
-	t_list		*list_a;
-	t_list		*list_b;
+	t_stacks	stacks;
 	int			i;
+	static int	*a;
+	static int	*b;
 
 	i = 0;
 	if (argc <= 2)
@@ -65,15 +26,43 @@ int	main(int argc, char **argv)
 	if (!number_checker(argv, argc))
 	{
 		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
+	a = put_int_tab(argv, argc);
+	if (!a)
+		return (1);
+	b = malloc(sizeof(int) * argc);
+	if (!b)
+	{
+		free(a);
 		return (1);
 	}
-	init_lst(&list_a, argv, argc - 1);
-	tri_positionel_algo(&list_a, &list_b, argc - 1);
+	while (i < argc)
+		b[i++] = '\0';
+	stacks.len_a = argc - 1;
+	stacks.len_b = 0;
+	stacks.a = a;
+	stacks.b = b;
+	if (nums_in_order_rev(stacks.a, stacks.len_a))
+	{
+		rev_scase(&stacks);
+		return (0);
+	}
+	if (stacks.len_a <= 10)
+		algo_op(&stacks);
+	else if (stacks.len_a <= 200)
+		twilio_algo(&stacks);
+	else
+		ayo_algo(&stacks);
+	/*i = -1;
+	while (++i < stacks.len_a)
+		ft_printf("a = %d\n", stacks.a[i]);
+	ft_printf("\n");
+	i = -1;
+	while (++i < stacks.len_b)
+		ft_printf("b = %d\n", stacks.b[i]);
+	ft_printf("\n");*/
+	free(a);
+	free(b);
 	return (0);
 }
-
-/*if (nums_in_order_rev(&list_a, argc - 1))
-{
-	rev_scase(&list_a, &list_b, argc - 1);
-	return (0);
-}*/
