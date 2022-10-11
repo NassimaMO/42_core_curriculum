@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:50:41 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/09 18:17:51 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:47:41 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
+typedef struct s_stack
+{
+	int				value;
+	int				index;
+	int				pos;
+	int				target_pos;
+	int				cost_a;
+	int				cost_b;
+}	t_stack;
+
 typedef struct s_list
 {
-	void			*content;
+	t_stack			*content;
 	struct s_list	*next;
 }					t_list;
 

@@ -6,29 +6,29 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/10 18:17:15 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:37:13 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include "libft/libft.h"
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
 typedef struct s_stacks
 {
-	int *a;
-	int *b;
-	int len_a;
-	int len_b;
-} t_stacks;
+	int	*a;
+	int	*b;
+	int	len_a;
+	int	len_b;
+}				t_stacks;
 
-typedef struct s_stack
+/*typedef struct s_stack
 {
 	int				value;
 	int				index;
@@ -36,7 +36,7 @@ typedef struct s_stack
 	int				target_pos;
 	int				cost_a;
 	int				cost_b;
-}	t_stack;
+}	t_stack;*/
 
 int				number_checker(char **argv, int argc);
 int				verif_double(char *a, char **argv, int argc, int x);

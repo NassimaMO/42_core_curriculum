@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:25 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:05:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:43:02 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,11 @@
 	there is only one or no elements.*/
 #include "../push_swap.h"
 
-void	sab(int *ab)
+void	sab(t_list *lst)
 {
-	int	tmp;
+	t_list 	*tmp;
 
-	tmp = ab[0];
-	ab[0] = ab[1];
-	ab[1] = tmp;
+	tmp = lst->next;
+	lst->next = tmp->next;
+	tmp->next = lst;
 }
-
-/*int main(void)
-{
-	static int *ab;
-
-	ab = malloc(sizeof(int) * 5);
-	ab[0] = 5;
-	ab[1] = 8;
-	ab[2] = 9;
-	ab[3] = 4;
-	ab[4] = '\0';
-	sab(ab);
-	printf("%d\n", ab[0]);
-	printf("%d\n", ab[1]);
-	printf("%d\n", ab[2]);
-	printf("%d\n", ab[3]);
-	printf("%d\n", ab[4]);
-	free(ab);
-}*/

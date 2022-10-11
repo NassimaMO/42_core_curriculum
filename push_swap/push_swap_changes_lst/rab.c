@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:46 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:04:48 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:34:49 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,12 @@
 	becomes the last one.*/
 #include "../push_swap.h"
 
-void rab(int *ab, int len_ba)
+void rab(t_list *lst)
 {
-	int tmp;
-	int i;
+	t_list	*tmp;
 
-	i = 0;
-	tmp = ab[0];
-	while (ab && i != len_ba)
-	{
-		ab[i] = ab[i + 1];
-		i++;
-	}
-	ab[i - 1] = tmp;
+	tmp = lst;
+	ft_lstadd_back(lst, lst);
+	lst = lst->next;
+	ft_lstdelone(tmp, free);
 }
-
-/*int main(void)
-{
-	static int *ab;
-
-	ab = malloc(sizeof(int) * 5);
-	ab[0] = 5;
-	ab[1] = 8;
-	ab[2] = 9;
-	ab[3] = 4;
-	ab[4] = '\0';
-	rab(ab, 4);
-	printf("%d\n", ab[0]);
-	printf("%d\n", ab[1]);
-	printf("%d\n", ab[2]);
-	printf("%d\n", ab[3]);
-	printf("%d\n", ab[4]);
-	free(ab);
-}*/

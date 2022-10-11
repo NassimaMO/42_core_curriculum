@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:04:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:39:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,117 @@
 	Do nothing if a is empty.*/
 #include "../push_swap.h"
 
-void pab(int *ab, int *ba, int len_ab, int len_ba)
+void	change_pos(t_list **lst, int x)
 {
-	int i;
-
-	i = len_ab;
-	ab[len_ab + 1] = '\0';
-	i--;
-	while (ab && i >= 0)
+	t_list	*tmp;
+	
+	tmp = *lst;
+	while (tmp)
 	{
-		ab[i + 1] = ab[i];
-		i--;
+		if (x < 0)
+			tmp->content->pos--;
+		else if (x > 0)
+			tmp->content->pos++;
+		tmp = tmp->next;
 	}
-	ab[0] = ba[0];
-	i = 1;
-	while (ba && i != len_ba)
-	{
-		ba[i - 1] = ba[i];
-		i++;
-	}
-	ba[i - 1] = '\0';
 }
 
-/*int main(void)
+void pab(t_list *list_one, t_list *list_two) //let's just write it everywhere
 {
-	static int *a;
-	static int *b;
+	t_list	*tmp_one;
 
-	a = malloc(sizeof(int) * 8);
-	b = malloc(sizeof(int) * 8);
-	a[0] = 5;
-	a[1] = 8;
-	a[2] = 9;
-	a[3] = 4;
-	a[4] = '\0';
-	b[0] = 6;
-	b[1] = 3;
-	b[2] = 2;
-	b[3] = '\0';
-	pab(a, b, 4, 3);
-	printf("%d\n", a[0]);
-	printf("%d\n", a[1]);
-	printf("%d\n", a[2]);
-	printf("%d\n", a[3]);
-	printf("%d\n", a[4]);
-	printf("%d\n", a[5]);
-	printf("\n");
-	printf("%d\n", b[0]);
-	printf("%d\n", b[1]);
-	printf("%d\n", b[2]);
+	*tmp_one = *list_one;
+	*list_one = *list_one->next;
+	change_pos(&list_one, -1);
+	change_pos(&list_two, 1);
+	tmp_one->next = NULL;
+	/*list_two = malloc(sizeof(t_list *));
+	list_two->content = malloc(sizeof(t_stack *));*/
+	ft_lstadd_front(&list_two, tmp_one);
+}
+
+int	find_index_num(int value, int *a)
+{
+	int	i;
+
+	i = 0;
+	while (a[i] && value != a[i])
+		i++;
+	return (i + 1);
+}
+
+t_stack	*init_stack(char **argv, int *a, int i) //also problem here
+{
+	t_stack	*stack;
+
+	stack = malloc(sizeof(t_stack *));
+	stack->value = ft_atoi(argv[i + 1]);
+	stack->index = find_index_num(stack->value, a);
+	stack->pos = i;
+	return (stack);
+}
+
+void	put_in_lst(t_list **lst, char **argv, int *a, int i) //problem here too
+{
+	t_list	*tmp;
+
+	tmp = malloc(sizeof(t_list *));
+	tmp->content = init_stack(argv, a, i);
+	ft_lstadd_back(lst, tmp);
+}
+
+void	init_lst(t_list **lst, char **argv, int len)
+{
+	int	*a;
+	int	i;
+
+	i = -1;
+	a = put_int_tab(argv, len);
+	ft_sort_int_tab(a, len - 1);
+	while (++i < len - 1)
+		put_in_lst(lst, argv, a, i);
 	free(a);
-	free(b);
-}*/
+}
+
+int	main(int argc, char **argv) //problem here
+{
+	t_list	*list_a;
+	t_list	*list_b;
+	t_list	*tmp;
+
+	init_lst(&list_a, argv, argc);
+	tmp = list_a;
+	ft_printf("before\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n");
+	while (tmp)
+	{
+		ft_printf("value = %d, ",tmp->content->value);
+		ft_printf("index = %d, ", tmp->content->index);
+		ft_printf("pos = %d\n\n", tmp->content->pos);
+		tmp = tmp->next;
+	}
+	ft_printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n\n");
+	pab(list_a, list_b);
+	//pab(list_a, list_b);
+	tmp = list_a;
+	ft_printf("after_a\n");
+	while (tmp)
+	{
+		ft_printf("value = %d, ",tmp->content->value);
+		ft_printf("index = %d, ", tmp->content->index);
+		ft_printf("pos = %d\n\n", tmp->content->pos);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+	tmp = list_b;
+	ft_printf("after_b\n");
+	while (tmp)
+	{
+		ft_printf("value = %d, ",tmp->content->value);
+		ft_printf("index = %d, ", tmp->content->index);
+		ft_printf("pos = %d\n\n", tmp->content->pos);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+	ft_lstclear(&list_a, free);
+	ft_lstclear(&list_b, free);
+}
