@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/11 17:39:53 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:31:58 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 	Do nothing if a is empty.*/
 #include "../push_swap.h"
 
-void	change_pos(t_list **lst, int x)
+static void	change_pos_p(t_list **lst, int x)
 {
 	t_list	*tmp;
-	
+
 	tmp = *lst;
 	while (tmp)
 	{
@@ -31,21 +31,19 @@ void	change_pos(t_list **lst, int x)
 	}
 }
 
-void pab(t_list *list_one, t_list *list_two) //let's just write it everywhere
+void	pab(t_list **list_one, t_list **list_two)
 {
 	t_list	*tmp_one;
 
-	*tmp_one = *list_one;
-	*list_one = *list_one->next;
-	change_pos(&list_one, -1);
-	change_pos(&list_two, 1);
+	tmp_one = *list_one;
+	*list_one = (*list_one)->next;
+	change_pos_p(list_one, -1);
+	change_pos_p(list_two, 1);
 	tmp_one->next = NULL;
-	/*list_two = malloc(sizeof(t_list *));
-	list_two->content = malloc(sizeof(t_stack *));*/
-	ft_lstadd_front(&list_two, tmp_one);
+	ft_lstadd_front(list_two, tmp_one);
 }
 
-int	find_index_num(int value, int *a)
+/*int	find_index_num(int value, int *a)
 {
 	int	i;
 
@@ -105,8 +103,7 @@ int	main(int argc, char **argv) //problem here
 		tmp = tmp->next;
 	}
 	ft_printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n\n");
-	pab(list_a, list_b);
-	//pab(list_a, list_b);
+	pab(&list_a, &list_b);
 	tmp = list_a;
 	ft_printf("after_a\n");
 	while (tmp)
@@ -129,4 +126,4 @@ int	main(int argc, char **argv) //problem here
 	ft_printf("\n");
 	ft_lstclear(&list_a, free);
 	ft_lstclear(&list_b, free);
-}
+}*/

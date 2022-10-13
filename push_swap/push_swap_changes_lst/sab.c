@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:25 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/11 13:43:02 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:06:27 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 	there is only one or no elements.*/
 #include "../push_swap.h"
 
-void	sab(t_list *lst)
+void	sab(t_list **lst)
 {
 	t_list 	*tmp;
 
-	tmp = lst->next;
-	lst->next = tmp->next;
-	tmp->next = lst;
+	(*lst)->content->pos = 1;
+	(*lst)->next->content->pos = 0;
+	tmp = (*lst)->next;
+	(*lst)->next = tmp->next;
+	tmp->next = *lst;
 }
