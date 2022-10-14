@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:05 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/13 13:46:46 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:57:00 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void	nullify_next_before_last(t_list **lst, t_list *t)
 	while (tmp)
 	{
 		if (tmp->next->content->value == t->content->value)
+		{
+			ft_printf("tmp_before_last = %d\n", tmp->next->content->value);
 			tmp->next = NULL;
+			return ;
+		}
 		tmp = tmp->next;
 	}
 }
@@ -34,6 +38,7 @@ void	rrab(t_list **lst)
 	t_list	*tmp;
 
 	tmp = ft_lstlast(*lst);
+	ft_printf("tmp_last = %d\n", tmp->content->value);
 	nullify_next_before_last(lst, tmp);
 	ft_lstadd_front(lst, tmp);
 	change_pos(lst);

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	algo_three(t_list **list_a)
+int	algo_three(t_list **list_a)
 {
 	int	three_index[3];
 	int	i;
@@ -9,29 +9,29 @@ void	algo_three(t_list **list_a)
 	while (*list_a && ++i < 3)
 	{
 		three_index[i] = (*list_a)->content->index;
-		list_a = (*list_a)->next;
+		*list_a = (*list_a)->next;
 	}
 	if (three_index[0] > three_index[1] && three_index[0] > three_index[2])
 	{
 		rab(list_a);
 		ft_printf("ra\n");
 		if (three_index[0] > three_index[1])
-			return (sab(list_a), ft_printf("sa\n"));
+			return (sab(list_a), ft_printf("sa\n"), 0);
 	}
 	else if (three_index[1] > three_index[0] && three_index[1] > three_index[2])
 	{
 		rrab(list_a);
 		ft_printf("rra\n");
 		if (three_index[0] > three_index[1])
-			return (sab(list_a), ft_printf("sa\n"));
+			return (sab(list_a), ft_printf("sa\n"), 0);
 	}
 	else if (three_index[0] > three_index[1])
-		return (sab(list_a), ft_printf("sa\n"));
-	return ;
+		return (sab(list_a), ft_printf("sa\n"), 0);
+	return (0);
 }
 
 // to test
-///||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\\
+/*//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\*/
 
 static void	put_target_pos(t_list *b, t_list *a) 
 {
@@ -54,7 +54,7 @@ static void	put_target_pos(t_list *b, t_list *a)
 			biggest_index_case = a->content->pos;
 			save_index_bic = a->content->index;
 		}
-		a->next;
+		a = a->next;
 	}
 	if (save_index == 2147483647)
 		pos = biggest_index_case;
@@ -76,7 +76,7 @@ static void	get_target_pos(t_list **list_a, t_list **list_b)
 	}
 }
 
-//||||||||||||||||||||||||||||||||||||\\
+/*/||||||||||||||||||||||||||||||||||||\*/
 
 static int	get_lst_len(t_list **lst)
 {
@@ -93,7 +93,7 @@ static int	get_lst_len(t_list **lst)
 	return (i);
 }
 
-static int calculate_cost(t_list **lst, int pos, int len)
+static int calculate_cost(int pos, int len)
 {
 	int	i;
 
@@ -124,13 +124,13 @@ void	calculate_movements_costs(t_list **list_a, t_list **list_b)
 	len_a = get_lst_len(list_a);
 	while (tmp)
 	{
-		tmp->content->cost_b = calculate_cost(list_b, tmp->content->pos, len_b);
-		tmp->content->cost_a = calculate_cost(list_a, tmp->content->target_pos, len_a);
+		tmp->content->cost_b = calculate_cost(tmp->content->pos, len_b);
+		tmp->content->cost_a = calculate_cost(tmp->content->target_pos, len_a);
 		tmp = tmp->next;
 	}
 }
 
-//||||||||||||||||||||||||||||||||||||\\
+/*/||||||||||||||||||||||||||||||||||||\*/
 
 int	get_total_cost(t_list *lst)
 {
@@ -146,7 +146,7 @@ int	get_total_cost(t_list *lst)
 	return (a + b);
 }
 
-void	perform_movement(t_list **list_a, t_list **list_b, int len)
+void	perform_movement(t_list **list_a, t_list **list_b)
 {
 	t_list	*tmp;
 	int		min_cost;
@@ -203,7 +203,7 @@ void	perform_movement(t_list **list_a, t_list **list_b, int len)
 	}
 }
 
-//||||||||||||||||||||||||||||||||||||\\
+/*/||||||||||||||||||||||||||||||||||||\*/
 
 int	find_min_pos(t_list **list_a)
 {
@@ -216,6 +216,7 @@ int	find_min_pos(t_list **list_a)
 			return (tmp->content->pos);
 		tmp = tmp->next;
 	}
+	return (tmp->content->pos);
 }
 
 void	put_list_in_order(t_list **list_a, int len)
@@ -223,7 +224,7 @@ void	put_list_in_order(t_list **list_a, int len)
 	int	pos;
 
 	pos = find_min_pos(list_a);
-	pos = calculate_cost(list_a, pos, len);
+	pos = calculate_cost(pos, len);
 	while (pos < 0)
 	{
 		rrab(list_a);
@@ -238,7 +239,7 @@ void	put_list_in_order(t_list **list_a, int len)
 	}
 }
 
-///||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\\
+/*//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\*/
 
 void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 {
@@ -269,7 +270,7 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 	{
 		get_target_pos(list_a, list_b);
 		calculate_movements_costs(list_a, list_b);
-		perform_movement(list_a, list_b, i);
+		perform_movement(list_a, list_b);
 		pab(list_b, list_a);
 		ft_printf("pa\n");
 		i--;

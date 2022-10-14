@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/13 16:15:34 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:07:43 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ typedef struct s_stacks
 	int				cost_b;
 }	t_stack;*/
 
-
-long long int	nbr_to_str(char *a);
-
 void			change_pos(t_list **lst);
 int				number_checker(char **argv, int argc);
 int				verif_double(char *a, char **argv, int argc, int x);
@@ -49,5 +46,15 @@ void			ft_sort_int_tab(int *tab, int size);
 
 void			rev_scase(int len_a);
 int				nums_in_order_rev(int *ab, int len);
+
+void	pab(t_list **list_one, t_list **list_two);
+void	rab(t_list **lst);
+void	rr(t_list **list_one, t_list **list_two);
+void	rrab(t_list **lst);
+void	rrr(t_list **list_one, t_list **list_two);
+void	sab(t_list **lst);
+void	ss(t_list **list_one, t_list **list_two);
+
+void			tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane);
 
 #endif

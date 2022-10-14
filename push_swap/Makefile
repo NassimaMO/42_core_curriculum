@@ -20,14 +20,13 @@ TEST_500	=	ARG=$$(shuf -i 0-9999 -n 500) ;
 TEST_VAL	=	echo $$ARG; ./push_swap $$ARG | ./checker_linux $$ARG; valgrind \
 				--leak-check=full ./push_swap $$ARG | wc -l
 
-SRCS_CHANGES=	push_swap_changes/pab.c push_swap_changes/rab.c \
-				push_swap_changes/rr.c push_swap_changes/rrab.c \
-				push_swap_changes/rrr.c push_swap_changes/sab.c \
-				push_swap_changes/ss.c
+SRCS_CHANGES=	push_swap_changes_lst/pab.c push_swap_changes_lst/rab.c \
+				push_swap_changes_lst/rr.c push_swap_changes_lst/rrab.c \
+				push_swap_changes_lst/rrr.c push_swap_changes_lst/sab.c \
+				push_swap_changes_lst/ss.c
 
-SRCS		=	push_swap_algo.c push_swap_utils.c \
-				push_swap_verif.c push_swap_quick_algo.c \
-				push_swap_scases.c push_swap.c push_swap_ayo_question_mark.c
+SRCS		=	push_swap.c push_swap_utils.c \
+				push_swap_scases.c push_swap_tri_positionel_algo.c
 
 SRCS_BONUS	=	
 
@@ -37,7 +36,7 @@ OBJ_DIR_B	=	obj
 
 OBJ			=	$(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))
 
-OBJ_CHANGES	=	$(addprefix $(OBJ_DIR)/,$(SRCS_CHANGES:push_swap_changes/%.c=%.o))
+OBJ_CHANGES	=	$(addprefix $(OBJ_DIR)/,$(SRCS_CHANGES:push_swap_changes_lst/%.c=%.o))
 
 OBJ_BONUS	=	$(addprefix $(OBJ_DIR_B)/,$(SRCS_BONUS:push_swap_bonus/%.c=%.o))
 
@@ -69,7 +68,7 @@ $(OBJ_DIR)/%.o: %.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: push_swap_changes/%.c
+$(OBJ_DIR)/%.o: push_swap_changes_lst/%.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
 
@@ -84,7 +83,7 @@ ${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
 ${LIB}:
-				cd libft && make && mv $@ .. && cd ..
+				cd libft && make bonus && mv $@ .. && cd ..
 clean:
 				cd libft && make fclean && cd ..
 				${RM} ${LIB}

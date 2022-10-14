@@ -69,7 +69,7 @@ int	*put_int_tab(char **argv, int argc)
 
 	i = 1;
 	j = 0;
-	a = malloc(sizeof(int) * argc);
+	a = malloc(sizeof(int) * (argc - 1));
 	if (!a)
 		return (0);
 	while (i < argc)
@@ -78,7 +78,7 @@ int	*put_int_tab(char **argv, int argc)
 		i++;
 		j++;
 	}
-	a[j] = '\0';
+	//a[j] = '\0';
 	return (a);
 }
 
