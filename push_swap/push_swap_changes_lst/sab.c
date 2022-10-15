@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:25 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/13 13:06:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:16:12 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@
 void	sab(t_list **lst)
 {
 	t_list 	*tmp;
+	t_list	*tmp_two;
 
 	(*lst)->content->pos = 1;
 	(*lst)->next->content->pos = 0;
-	tmp = (*lst)->next;
-	(*lst)->next = tmp->next;
-	tmp->next = *lst;
+	tmp = *lst;
+	tmp_two = tmp->next->next;
+	*lst = tmp->next;
+	(*lst)->next = tmp;
+	(*lst)->next->next = tmp_two;
 }

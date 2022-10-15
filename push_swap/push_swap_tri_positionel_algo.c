@@ -4,25 +4,30 @@ int	algo_three(t_list **list_a)
 {
 	int	three_index[3];
 	int	i;
+	t_list *tmp;
 
 	i = -1;
-	while (*list_a && ++i < 3)
+	tmp = *list_a;
+	while (++i < 3)
+		three_index[i] = 0;
+	i = -1;
+	while (tmp && ++i < 3)
 	{
-		three_index[i] = (*list_a)->content->index;
-		*list_a = (*list_a)->next;
+		three_index[i] = tmp->content->index;
+		tmp = tmp->next;
 	}
 	if (three_index[0] > three_index[1] && three_index[0] > three_index[2])
 	{
 		rab(list_a);
 		ft_printf("ra\n");
-		if (three_index[0] > three_index[1])
+		if (three_index[1] > three_index[2])
 			return (sab(list_a), ft_printf("sa\n"), 0);
 	}
 	else if (three_index[1] > three_index[0] && three_index[1] > three_index[2])
 	{
 		rrab(list_a);
 		ft_printf("rra\n");
-		if (three_index[0] > three_index[1])
+		if (three_index[2] > three_index[0])
 			return (sab(list_a), ft_printf("sa\n"), 0);
 	}
 	else if (three_index[0] > three_index[1])
@@ -155,6 +160,8 @@ void	perform_movement(t_list **list_a, t_list **list_b)
 	int		cost_b;
 
 	tmp = *list_b;
+	cost_a = 0;
+	cost_b = 0;
 	min_cost = 2147483647;
 	while (tmp)
 	{
@@ -216,7 +223,7 @@ int	find_min_pos(t_list **list_a)
 			return (tmp->content->pos);
 		tmp = tmp->next;
 	}
-	return (tmp->content->pos);
+	return (0);
 }
 
 void	put_list_in_order(t_list **list_a, int len)
@@ -255,6 +262,11 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 				rab(list_a);
 				ft_printf("ra\n");
 			}
+			if (i == 0)
+			{
+				*list_b = malloc(sizeof(t_list));
+				ft_bzero(list_b, sizeof(t_list));
+			}
 			pab(list_a, list_b);
 			ft_printf("pb\n");
 		}
@@ -265,7 +277,7 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 		}
 	}
 	algo_three(list_a);
-	i = len;
+	i = len - 3;
 	while (i)
 	{
 		get_target_pos(list_a, list_b);

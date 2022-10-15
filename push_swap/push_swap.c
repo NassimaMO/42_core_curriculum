@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/14 17:28:04 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:22:35 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,32 @@ int	main(int argc, char **argv)
 		return (free(a), rev_scase(argc - 1), 0);
 	i = a[(argc - 1) / 2];
 	init_lst(&list_a, argv, a, argc);
-	tri_positionel(&list_a, &list_b, argc - 1, i);
+	if (argc - 1 == 3)
+		algo_three(&list_a);
+	else
+		tri_positionel(&list_a, &list_b, argc - 1, i);
+
+	t_list *tmp = list_a;
+
+	while (tmp)
+	{
+		ft_printf("value = %d, ",tmp->content->value);
+		ft_printf("index = %d, ", tmp->content->index);
+		ft_printf("pos = %d\n\n", tmp->content->pos);
+		tmp = tmp->next;
+	}
+
+	tmp = list_b;
+
+	while (tmp)
+	{
+		ft_printf("value = %d, ",tmp->content->value);
+		ft_printf("index = %d, ", tmp->content->index);
+		ft_printf("pos = %d\n\n", tmp->content->pos);
+		tmp = tmp->next;
+	}
+	
+	ft_lstclear(&list_a, free);
 	return (0);
 }
+
