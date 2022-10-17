@@ -25,20 +25,27 @@ SRCS_CHANGES=	push_swap_changes_lst/pab.c push_swap_changes_lst/rab.c \
 				push_swap_changes_lst/rrr.c push_swap_changes_lst/sab.c \
 				push_swap_changes_lst/ss.c
 
+CHECKER_CHANGES=checker/checker_changes/pab.c checker/checker_changes/rab.c \
+				checker/checker_changes/rr.c checker/checker_changes/rrab.c \
+				checker/checker_changes/rrr.c checker/checker_changes/sab.c \
+				checker/checker_changes/ss.c
+
 SRCS		=	push_swap.c push_swap_utils.c \
 				push_swap_scases.c push_swap_tri_positionel_algo.c
 
-SRCS_BONUS	=	
+SRCS_BONUS	=	checker/checker.c checker/checker_verif.c checker/checker_check.c
 
 OBJ_DIR		=	obj
 
-OBJ_DIR_B	=	obj
+OBJ_DIR_B	=	obj_b
 
 OBJ			=	$(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))
 
 OBJ_CHANGES	=	$(addprefix $(OBJ_DIR)/,$(SRCS_CHANGES:push_swap_changes_lst/%.c=%.o))
 
-OBJ_BONUS	=	$(addprefix $(OBJ_DIR_B)/,$(SRCS_BONUS:push_swap_bonus/%.c=%.o))
+OBJ_CK_CHANGES=	$(addprefix $(OBJ_DIR_B)/,$(CHECKER_CHANGES:checker/checker_changes/%.c=%.o))
+
+OBJ_BONUS	=	$(addprefix $(OBJ_DIR_B)/,$(SRCS_BONUS:checker/%.c=%.o))
 
 RM			=	rm -f
 
@@ -72,14 +79,18 @@ $(OBJ_DIR)/%.o: push_swap_changes_lst/%.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_B)/%.o: push_swap_bonus/%.c
+$(OBJ_DIR_B)/%.o: checker/checker_changes/%.c
+				@mkdir -p $(OBJ_DIR_B)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR_B)/%.o: checker/%.c
 				@mkdir -p $(OBJ_DIR_B)
 				$(CC) $(CFLAGS) -c $< -o $@
 
 ${NAME}:		${OBJ} ${OBJ_CHANGES} ${LIB}
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
-${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
+${NAME_BONUS}:	${OBJ_BONUS} ${OBJ_CK_CHANGES} ${LIB}
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
 ${LIB}:
@@ -88,6 +99,7 @@ clean:
 				cd libft && make fclean && cd ..
 				${RM} ${LIB}
 				${RM} -r ${OBJ_DIR}
+				${RM} -r ${OBJ_DIR_B}
 				${RM} push_swap_bonus/*.o
 				${RM} *.o
 

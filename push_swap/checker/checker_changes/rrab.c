@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rrab.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:05 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:05:08 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:44:23 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 	element becomes the first one.*/
 #include "../checker.h"
 
-void	rrab(int *ab)
+void rrab(int *ab, int len_ab)
 {
-	int	tmp;
-	int	i;
+	int tmp;
+	int i;
 
-	i = 0;
-	while (ab && ab[i])
-		i++;
+	i = len_ab;
 	tmp = ab[--i];
-	while (ab && ab[i])
+	while (ab && i != 0)
 	{
 		ab[i] = ab[i - 1];
 		i--;

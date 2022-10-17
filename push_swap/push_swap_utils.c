@@ -78,7 +78,6 @@ int	*put_int_tab(char **argv, int argc)
 		i++;
 		j++;
 	}
-	//a[j] = '\0';
 	return (a);
 }
 

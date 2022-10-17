@@ -5,7 +5,7 @@ int nums_in_order(int *a, int *b)
 	int	i;
 
 	i = 1;
-	if (!b || !b[0])
+	if (b[0])
 		return (0);
 	while (a[i])
 	{
@@ -16,57 +16,53 @@ int nums_in_order(int *a, int *b)
 	return (1);
 }
 
-int execute_instruct(char **tab, int *a, int *b)
+int execute_instruct(char **tab, int len_tab, int *a, int len_a, int *b)
 {
 	int i;
+	int	len;
+	int	len_b;
 
+	len_b = 0;
 	i = 0;
-	while (tab[i])
+	while (i < len_tab && tab[i])
 	{
-		if (tab[i] == "rr\n")
-			rr(a, b);
-		else if (tab[i] == "rrr\n")
-			rrr(a, b);
-		else if (tab[i] == "ss\n")
+		len = ft_strlen(tab[i]);
+		ft_printf("len = %d, tab[i] = %s", len, tab[i]);
+		if (ft_strncmp(tab[i], "rr\n", len) && len == 3)
+			rr(a, b, len_a, len_b);
+		else if (ft_strncmp(tab[i], "rrr\n", len) && len == 4)
+			rrr(a, b, len_a, len_b);
+		else if (ft_strncmp(tab[i], "ss\n", len) && len == 3)
 			ss(a, b);
-		else if (tab[i] == "ra\n")
-			rab(a);
-		else if (tab[i] == "rra\n")
-			rrab(a);
-		else if (tab[i] == "sa\n")
+		else if (ft_strncmp(tab[i], "ra\n", len) && len == 3)
+			rab(a, len_a);
+		else if (ft_strncmp(tab[i], "rra\n", len) && len == 4)
+			rrab(a, len_a);
+		else if (ft_strncmp(tab[i], "sa\n", len) && len == 3)
 			sab(a);
-		else if (tab[i] == "rb\n")
-			rab(b);
-		else if (tab[i] == "rrb\n")
-			rrab(b);
-		else if (tab[i] == "sb\n")
+		else if (ft_strncmp(tab[i], "rb\n", len) && len == 3)
+			rab(b, len_b);
+		else if (ft_strncmp(tab[i], "rrb\n", len) && len == 4)
+			rrab(b, len_b);
+		else if (ft_strncmp(tab[i], "sb\n", len) && len == 3)
 			sab(b);
-		else if (tab[i] == "pa\n")
-			pab(a, b);
-		else if (tab[i] == "pb\n")
-			pab(b, a);
+		else if (ft_strncmp(tab[i], "pa\n", len) && len == 3)
+		{
+			pab(a, b, len_a, len_b);
+			len_a++;
+			len_b--;
+		}
+		else if (ft_strncmp(tab[i], "pb\n", len) && len == 3)
+		{
+			pab(b, a, len_b, len_a);
+			len_a--;
+			len_b++;
+		}
+		else
+			return(ft_printf("Error\n"), 0);
 		i++;
 	}
 	if (nums_in_order(a, b))
-			return (ft_printf("OK"), 1);
-	return(ft_printf("KO"), 0);
-}
-
-char	**str_to_tab()
-{
-	char 	**tab;
-	int		c;
-	int		i;
-	
-	open(1, O_RDONLY);
-	i = 0;
-	tab = malloc(sizeof(char *) * /*taille tableau*/);
-	while (tab[i] = get_next_line(1))
-	{
-		if (!tab[i])
-			free_tab(tab, i);
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
+			return (ft_printf("OK\n"), 1);
+	return(ft_printf("KO\n"), 0);
 }

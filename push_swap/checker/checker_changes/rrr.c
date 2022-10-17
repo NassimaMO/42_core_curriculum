@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   rrr.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:16 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:05:19 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:44:52 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*rrr : rra and rrb at the same time.*/
 #include "../checker.h"
 
-void	rrr(int *a, int *b)
+void rrr(int *a, int *b, int len_a, int len_b)
 {
-	rrab(a);
-	rrab(b);
+	rrab(a, len_a);
+	rrab(b, len_b);
 }
 
 /*int main(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:04:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:40:57 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 	Do nothing if a is empty.*/
 #include "../checker.h"
 
-void	pab(int *ab, int *ba)
+void pab(int *ab, int *ba, int len_ab, int len_ba)
 {
-	int	i;
+	int i;
 
-	i = 0;
-	while (ab && ab[i])
-		i++;
-	ab[i + 1] = '\0';
+	i = len_ab;
+	ab[len_ab + 1] = '\0';
 	i--;
 	while (ab && i >= 0)
 	{
@@ -32,7 +30,7 @@ void	pab(int *ab, int *ba)
 	}
 	ab[0] = ba[0];
 	i = 1;
-	while (ba && ba[i])
+	while (ba && i != len_ba)
 	{
 		ba[i - 1] = ba[i];
 		i++;

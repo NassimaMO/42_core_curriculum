@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:46 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/07/04 19:04:48 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:39:38 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 	becomes the last one.*/
 #include "../checker.h"
 
-void	rab(int *ab)
+void rab(int *ab, int len_ba)
 {
-	int	tmp;
-	int	i;
+	int tmp;
+	int i;
 
 	i = 0;
 	tmp = ab[0];
-	while (ab && ab[i])
+	while (ab && i != len_ba)
 	{
 		ab[i] = ab[i + 1];
 		i++;

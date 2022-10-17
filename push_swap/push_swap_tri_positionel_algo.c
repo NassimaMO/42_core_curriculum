@@ -219,7 +219,7 @@ int	find_min_pos(t_list **list_a)
 	tmp = *list_a;
 	while (tmp)
 	{
-		if (tmp->content->index == 0)
+		if (tmp->content->index == 1)
 			return (tmp->content->pos);
 		tmp = tmp->next;
 	}
