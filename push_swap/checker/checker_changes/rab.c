@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:46 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:39:38 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:52:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 	becomes the last one.*/
 #include "../checker.h"
 
-void rab(int *ab, int len_ba)
+void	rab(int *ab, int len_ba)
 {
-	int tmp;
-	int i;
+	int	tmp;
+	int	i;
 
 	i = 0;
 	tmp = ab[0];
-	while (ab && i != len_ba)
+	while (ab && i < len_ba)
 	{
-		ab[i] = ab[i + 1];
+		if (i < len_ba - 1)
+			ab[i] = ab[i + 1];
 		i++;
 	}
 	ab[i - 1] = tmp;

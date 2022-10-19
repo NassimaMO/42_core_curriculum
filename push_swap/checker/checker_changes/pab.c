@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:40:57 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:52:21 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 	Do nothing if a is empty.*/
 #include "../checker.h"
 
-void pab(int *ab, int *ba, int len_ab, int len_ba)
+void	pab(int *ab, int *ba, int len_ab, int len_ba)
 {
-	int i;
+	int	i;
 
 	i = len_ab;
-	ab[len_ab + 1] = '\0';
+	ab[len_ab] = '\0';
 	i--;
 	while (ab && i >= 0)
 	{

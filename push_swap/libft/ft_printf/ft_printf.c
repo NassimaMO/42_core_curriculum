@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:53:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/05/17 14:53:46 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:43:32 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	ft_conditions(char c, int *count, va_list args)
 	else if (c == 's')
 		ft_printf_putstr_fd(va_arg(args, char *), 1, count);
 	else if (c == 'p')
-		ft_printf_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, count);
+		ft_printf_putnbr_base(va_arg(args, long int), "0123456789abcdefg", 1, \
+		count);
 	else if (c == 'd')
 		ft_printf_putnbr_fd(va_arg(args, int), 1, count);
 	else if (c == 'i')

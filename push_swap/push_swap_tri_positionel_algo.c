@@ -1,15 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_tri_positionel_algo.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/19 14:10:11 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/19 14:10:13 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	algo_three(t_list **list_a)
 {
-	int	three_index[3];
-	int	i;
-	t_list *tmp;
+	int		three_index[3];
+	int		i;
+	t_list	*tmp;
 
-	i = -1;
 	tmp = *list_a;
-	while (++i < 3)
-		three_index[i] = 0;
+	ft_bzero(three_index, sizeof(int));
 	i = -1;
 	while (tmp && ++i < 3)
 	{
@@ -35,10 +45,7 @@ int	algo_three(t_list **list_a)
 	return (0);
 }
 
-// to test
-/*//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\*/
-
-static void	put_target_pos(t_list *b, t_list *a) 
+static void	put_target_pos(t_list *b, t_list *a)
 {
 	int	pos;
 	int	biggest_index_case;
@@ -49,12 +56,14 @@ static void	put_target_pos(t_list *b, t_list *a)
 	save_index_bic = 2147483647;
 	while (a)
 	{
-		if (a->content->index > b->content->index && a->content->index < save_index)
+		if (a->content->index > b->content->index && \
+			a->content->index < save_index)
 		{
 			pos = a->content->pos;
 			save_index = a->content->index;
 		}
-		if (a->content->index < b->content->index && a->content->index < save_index_bic)
+		if (a->content->index < b->content->index && \
+			a->content->index < save_index_bic)
 		{
 			biggest_index_case = a->content->pos;
 			save_index_bic = a->content->index;
@@ -68,8 +77,8 @@ static void	put_target_pos(t_list *b, t_list *a)
 
 static void	get_target_pos(t_list **list_a, t_list **list_b)
 {
-	t_list *tmp_a;
-	t_list *tmp_b;
+	t_list	*tmp_a;
+	t_list	*tmp_b;
 
 	tmp_a = *list_a;
 	tmp_b = *list_b;
@@ -81,12 +90,10 @@ static void	get_target_pos(t_list **list_a, t_list **list_b)
 	}
 }
 
-/*/||||||||||||||||||||||||||||||||||||\*/
-
 static int	get_lst_len(t_list **lst)
 {
-	int	i;
-	t_list *tmp;
+	int		i;
+	t_list	*tmp;
 
 	i = 0;
 	tmp = *lst;
@@ -98,7 +105,7 @@ static int	get_lst_len(t_list **lst)
 	return (i);
 }
 
-static int calculate_cost(int pos, int len)
+static int	calculate_cost(int pos, int len)
 {
 	int	i;
 
@@ -121,8 +128,8 @@ static int calculate_cost(int pos, int len)
 void	calculate_movements_costs(t_list **list_a, t_list **list_b)
 {
 	t_list	*tmp;
-	int	len_a;
-	int	len_b;
+	int		len_a;
+	int		len_b;
 
 	tmp = *list_b;
 	len_b = get_lst_len(list_b);
@@ -134,8 +141,6 @@ void	calculate_movements_costs(t_list **list_a, t_list **list_b)
 		tmp = tmp->next;
 	}
 }
-
-/*/||||||||||||||||||||||||||||||||||||\*/
 
 int	get_total_cost(t_list *lst)
 {
@@ -178,11 +183,15 @@ void	perform_movement(t_list **list_a, t_list **list_b)
 	{
 		rrr(list_a, list_b);
 		ft_printf("rrr\n");
+		cost_a++;
+		cost_b++;
 	}
 	while (cost_b > 0 && cost_a > 0)
 	{
 		rr(list_a, list_b);
 		ft_printf("rr\n");
+		cost_a--;
+		cost_b--;
 	}
 	while (cost_b < 0)
 	{
@@ -209,8 +218,6 @@ void	perform_movement(t_list **list_a, t_list **list_b)
 		cost_a--;
 	}
 }
-
-/*/||||||||||||||||||||||||||||||||||||\*/
 
 int	find_min_pos(t_list **list_a)
 {
@@ -246,14 +253,12 @@ void	put_list_in_order(t_list **list_a, int len)
 	}
 }
 
-/*//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\*/
-
 void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 {
 	int	i;
 
 	i = -1;
-	while(++i < len - 3)
+	while (++i < len - 3)
 	{
 		if (i < len / 2)
 		{
@@ -277,15 +282,14 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 		}
 	}
 	algo_three(list_a);
-	i = len - 3;
-	while (i)
+	i = len - 2;
+	while (--i)
 	{
 		get_target_pos(list_a, list_b);
 		calculate_movements_costs(list_a, list_b);
 		perform_movement(list_a, list_b);
 		pab(list_b, list_a);
 		ft_printf("pa\n");
-		i--;
 	}
 	put_list_in_order(list_a, len);
 }

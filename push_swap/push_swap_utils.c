@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/19 13:33:29 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/19 13:56:23 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	change_pos(t_list **lst)
@@ -18,31 +30,22 @@ int	number_checker(char **argv, int argc)
 {
 	int				i;
 	int				j;
-	int				tmp;
 	long long int	nbr;
 
-	i = 1;
-	tmp = argc;
-	while (argc != 1)
+	i = 0;
+	while (++i < argc)
 	{
-		j = 0;
-		while (argv[i][j])
+		j = -1;
+		while (argv[i][++j])
 		{
-			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-			{
-				if (argv[i][j] == '-' && j == 0)
-					j++;
-				else
-					return (0);
-			}
-			else
-				j++;
+			if (!(argv[i][j] >= '0' && argv[i][j] <= '9') && \
+				!(argv[i][j] == '-' && j == 0))
+				return (0);
 		}
 		nbr = ft_atoi(argv[i]);
-		if (nbr > INT_MAX || nbr < INT_MIN || verif_double(argv[i], argv, tmp, i))
+		if (nbr > INT_MAX || nbr < INT_MIN || \
+			verif_double(argv[i], argv, argc, i))
 			return (0);
-		i++;
-		argc--;
 	}
 	return (1);
 }

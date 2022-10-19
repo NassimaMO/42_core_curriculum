@@ -6,14 +6,14 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:54 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:44:25 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:51:43 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*rr : ra and rb at the same time.*/
 #include "../checker.h"
 
-void rr(int *a, int *b, int len_a, int len_b)
+void	rr(int *a, int *b, int len_a, int len_b)
 {
 	rab(a, len_a);
 	rab(b, len_b);

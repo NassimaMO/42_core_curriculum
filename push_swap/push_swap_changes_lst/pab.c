@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/15 14:13:51 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:37:41 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	change_pos_p(t_list **lst, int x)
 	{
 		if (x < 0)
 			tmp->content->pos--;
-		else if (x > 0)
+		else if (tmp->content && x > 0)
 			tmp->content->pos++;
 		tmp = tmp->next;
 	}

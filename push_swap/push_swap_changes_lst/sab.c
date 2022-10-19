@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:25 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/15 15:16:12 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:54:20 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	sab(t_list **lst)
 {
-	t_list 	*tmp;
+	t_list	*tmp;
 	t_list	*tmp_two;
 
 	(*lst)->content->pos = 1;

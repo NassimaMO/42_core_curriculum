@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:46 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/15 13:46:52 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:54:40 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	becomes the last one.*/
 #include "../push_swap.h"
 
-void rab(t_list **lst)
+void	rab(t_list **lst)
 {
 	t_list	*tmp;
 

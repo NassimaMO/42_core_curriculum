@@ -1,6 +1,6 @@
 NAME		=	push_swap
 
-NAME_BONUS	=	push_swap_b
+NAME_BONUS	=	checker_bonus
 
 LIB			=	libft.a
 

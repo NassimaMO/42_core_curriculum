@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:16:10 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:16:15 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	main(int argc, char **argv)
 		algo_three(&list_a);
 	else
 		tri_positionel(&list_a, &list_b, argc - 1, i);
+	ft_lstclear(&list_a, free);
+	return (0);
+}
 
 	/*t_list *tmp = list_a;
 
@@ -89,8 +92,3 @@ int	main(int argc, char **argv)
 		ft_printf("pos = %d\n\n", tmp->content->pos);
 		tmp = tmp->next;
 	}*/
-	
-	ft_lstclear(&list_a, free);
-	return (0);
-}
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/10/19 13:49:52 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int	get_len(int fd)
@@ -53,7 +65,7 @@ int	main(int argc, char **argv)
 	static int	*a;
 	static int	*b;
 	int			len;
-    char		**tab;
+	char		**tab;
 
 	if (argc <= 2)
 		return (0);
@@ -66,13 +78,10 @@ int	main(int argc, char **argv)
 	if (!b)
 		return (free(a), 1);
 	ft_bzero(b, sizeof(int));
-    tab = str_to_tab(&len);
+	tab = str_to_tab(&len);
 	if (!tab)
 		return (free(a), free(b), 1);
 	execute_instruct(tab, len, a, argc - 1, b);
-	int	i = -1;
-	while (tab[++i])
-		free(tab[i]);
 	free(tab);
 	free(a);
 	free(b);

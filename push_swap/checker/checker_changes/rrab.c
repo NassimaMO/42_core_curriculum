@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:05:05 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 14:44:23 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:52:36 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 	element becomes the first one.*/
 #include "../checker.h"
 
-void rrab(int *ab, int len_ab)
+void	rrab(int *ab, int len_ab)
 {
-	int tmp;
-	int i;
+	int	tmp;
+	int	i;
 
 	i = len_ab;
 	tmp = ab[--i];
