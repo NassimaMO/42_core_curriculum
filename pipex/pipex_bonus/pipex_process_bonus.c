@@ -18,22 +18,26 @@ static void	dup_fds(int in, int out, t_pipex *pipex)
 	{
 		free(pipex->fd);
 		free_envp(pipex->paths);
-		free(pipex->fd);
 		exit(3);
 	}
 }
 
-static void	get_the_previous_command(void)
+static void	get_the_previous_command(int nbr_cmds)
 {
 	char	*line;
 
-	line = get_next_line(0);
-	while (line)
+	if (nbr_cmds == 2)
 	{
-		ft_printf("%s", line);
-		free(line);
 		line = get_next_line(0);
+		while (line)
+		{
+			ft_printf("%s", line);
+			free(line);
+			line = get_next_line(0);
+		}
 	}
+	else
+		write(2, "permission denied.\n", 19);
 }
 
 static void	exec_cmd(t_pipex *pipex, char **tmp)
@@ -52,7 +56,7 @@ static void	exec_cmd(t_pipex *pipex, char **tmp)
 			free(error_cmd);
 		}
 		else
-			get_the_previous_command();
+			get_the_previous_command(pipex->nbr_cmds);
 		free_envp(pipex->paths);
 		free(pipex->fd);
 		free_envp(tmp);
