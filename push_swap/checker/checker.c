@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/19 13:49:52 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:03:30 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ int	get_len(int fd)
 char	**str_to_tab(int *l)
 {
 	char	**tab;
-	char	*str;
 	int		len;
 	int		i;
 	int		fd;
 
-	i = -1;
+	i = 0;
 	fd = open("./tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
 		return (ft_printf("WTF1\n"), NULL);
@@ -47,13 +46,9 @@ char	**str_to_tab(int *l)
 	fd = open("./tmp", O_RDWR, 0644);
 	if (fd < 0)
 		return (ft_printf("WTF2\n"), NULL);
-	str = get_next_line(fd);
-	while (str && ++i < len)
-	{
-		tab[i] = malloc(sizeof(char) * ft_strlen(str));
-		tab[i] = str;
-		str = get_next_line(fd);
-	}
+	tab[i] = get_next_line(fd);
+	while (tab[i] && ++i < len)
+		tab[i] = get_next_line(fd);
 	*l = len;
 	close(fd);
 	unlink("./tmp");
@@ -66,6 +61,7 @@ int	main(int argc, char **argv)
 	static int	*b;
 	int			len;
 	char		**tab;
+	int			i;
 
 	if (argc <= 2)
 		return (0);
@@ -82,6 +78,9 @@ int	main(int argc, char **argv)
 	if (!tab)
 		return (free(a), free(b), 1);
 	execute_instruct(tab, len, a, argc - 1, b);
+	i = -1;
+	while (++i < len)
+		free(tab[i]);
 	free(tab);
 	free(a);
 	free(b);

@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:04:24 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/17 15:37:41 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:49:45 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ static void	change_pos_p(t_list **lst, int x)
 	}
 }
 
-void	pab(t_list **list_one, t_list **list_two)
+void	pab(t_list **list_one, t_list **list_two, int b_lst_init)
 {
 	t_list	*tmp_one;
 
 	tmp_one = *list_one;
 	*list_one = (*list_one)->next;
 	change_pos_p(list_one, -1);
-	change_pos_p(list_two, 1);
+	if (b_lst_init)
+		change_pos_p(list_two, 1);
 	tmp_one->next = NULL;
-	ft_lstadd_front(list_two, tmp_one);
+	if (b_lst_init)
+		ft_lstadd_front(list_two, tmp_one);
+	else
+		*list_two = tmp_one;
 }
 
 /*int	find_index_num(int value, int *a)

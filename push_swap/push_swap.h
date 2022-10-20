@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/15 13:25:46 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:48:18 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_sort_int_tab(int *tab, int size);
 void	rev_scase(int len_a);
 int		nums_in_order_rev(int *ab, int len);
 
-void	pab(t_list **list_one, t_list **list_two);
+void	pab(t_list **list_one, t_list **list_two, int b_lst_init);
 void	rab(t_list **lst);
 void	rr(t_list **list_one, t_list **list_two);
 void	rrab(t_list **lst);

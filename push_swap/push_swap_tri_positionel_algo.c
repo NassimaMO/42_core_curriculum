@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_tri_positionel_algo.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:10:11 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/19 14:10:13 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:49:45 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,17 +267,12 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 				rab(list_a);
 				ft_printf("ra\n");
 			}
-			if (i == 0)
-			{
-				*list_b = malloc(sizeof(t_list));
-				ft_bzero(list_b, sizeof(t_list));
-			}
-			pab(list_a, list_b);
+			pab(list_a, list_b, i);
 			ft_printf("pb\n");
 		}
 		else
 		{
-			pab(list_a, list_b);
+			pab(list_a, list_b, i);
 			ft_printf("pb\n");
 		}
 	}
@@ -288,7 +283,7 @@ void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 		get_target_pos(list_a, list_b);
 		calculate_movements_costs(list_a, list_b);
 		perform_movement(list_a, list_b);
-		pab(list_b, list_a);
+		pab(list_b, list_a, 1);
 		ft_printf("pa\n");
 	}
 	put_list_in_order(list_a, len);
