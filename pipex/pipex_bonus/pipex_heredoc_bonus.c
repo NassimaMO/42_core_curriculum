@@ -34,6 +34,12 @@ int	heredoc(t_pipex *pipex)
 	{
 		write(1, "heredoc> ", 9);
 		line = get_next_line(0);
+		if (!line)
+		{
+			close(tmp_fd);
+			unlink("here_doc");
+			exit(-1);
+		}
 		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)) && \
 			ft_strlen(line) - 1 == ft_strlen(pipex->limiter))
 			break ;
@@ -43,8 +49,7 @@ int	heredoc(t_pipex *pipex)
 	free(line);
 	close(tmp_fd);
 	pipex->infile = open("heredoc_file", O_RDONLY);
-	check_file(pipex->infile);
-	return (1);
+	return (check_file(pipex->infile), 1);
 }
 
 /*int	main(int argc, char **argv)

@@ -38,17 +38,10 @@ void	free_envp(char **envp)
 	free(envp);
 }
 
-char	**get_paths(char **envp)
+void	add_backslash_to_path_end(char **tmp)
 {
-	int		i;
-	char	**tmp;
+	int	i;
 
-	i = 0;
-	while (envp[i] && !ft_strnstr(envp[i], "PATH=/mnt", ft_strlen(envp[i])))
-		i++;
-	tmp = ft_split(envp[i] + 5, ':');
-	if (!tmp)
-		exit(-1);
 	i = -1;
 	while (tmp[++i])
 	{
@@ -62,5 +55,20 @@ char	**get_paths(char **envp)
 			}
 		}
 	}
+}
+
+char	**get_paths(char **envp)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
+		i++;
+	if (envp[i])
+		tmp = ft_split(envp[i] + 5, ':');
+	if (!tmp)
+		exit(-1);
+	add_backslash_to_path_end(tmp);
 	return (tmp);
 }
