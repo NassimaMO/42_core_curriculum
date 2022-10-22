@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:50:16 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/19 13:50:18 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:20:48 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		number_checker(char **argv, int argc);
 int		verif_double(char *a, char **argv, int argc, int x);
 int		*put_int_tab(char **argv, int argc);
 
-int		execute_instruct(char **tab, int len_tab, int *a, int len_a, int *b);
+int		execute_instruct(char **tab, int len_tab, int *a, int len_a);
 
 void	pab(int *ab, int *ba, int len_ab, int len_ba);
 void	rab(int *ab, int len_ba);

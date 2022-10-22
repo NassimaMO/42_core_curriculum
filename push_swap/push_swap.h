@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/20 15:48:18 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:07:23 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,16 @@ void	rrr(t_list **list_one, t_list **list_two);
 void	sab(t_list **lst);
 void	ss(t_list **list_one, t_list **list_two);
 
-int		algo_three(t_list **list_a);
+void	algo_three(t_list **list_a);
+
 void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane);
+
+void	get_target_pos(t_list **list_a, t_list **list_b);
+
+int		calculate_cost(int pos, int len);
+void	calculate_movements_costs(t_list **list_a, t_list **list_b);
+int		get_total_cost(t_list *lst);
+
+void	perform_movement(t_list **list_a, t_list **list_b);
 
 #endif

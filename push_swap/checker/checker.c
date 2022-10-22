@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/20 16:03:30 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:21:20 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ char	**str_to_tab(int *l)
 	fd = open("./tmp", O_RDWR, 0644);
 	if (fd < 0)
 		return (ft_printf("WTF2\n"), NULL);
-	tab[i] = get_next_line(fd);
-	while (tab[i] && ++i < len)
+	if (len && tab)
+	{
 		tab[i] = get_next_line(fd);
+		while (tab[i] && ++i < len)
+			tab[i] = get_next_line(fd);
+	}
 	*l = len;
 	close(fd);
 	unlink("./tmp");
@@ -58,7 +61,6 @@ char	**str_to_tab(int *l)
 int	main(int argc, char **argv)
 {
 	static int	*a;
-	static int	*b;
 	int			len;
 	char		**tab;
 	int			i;
@@ -70,19 +72,12 @@ int	main(int argc, char **argv)
 	a = put_int_tab(argv, argc);
 	if (!a)
 		return (1);
-	b = malloc(sizeof(int) * argc);
-	if (!b)
-		return (free(a), 1);
-	ft_bzero(b, sizeof(int));
 	tab = str_to_tab(&len);
 	if (!tab)
-		return (free(a), free(b), 1);
-	execute_instruct(tab, len, a, argc - 1, b);
+		return (free(a), 1);
+	execute_instruct(tab, len, a, argc - 1);
 	i = -1;
 	while (++i < len)
 		free(tab[i]);
-	free(tab);
-	free(a);
-	free(b);
-	return (0);
+	return (free(tab), free(a), 0);
 }

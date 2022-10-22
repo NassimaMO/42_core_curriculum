@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/20 15:49:43 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/22 12:59:43 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	main(int argc, char **argv)
 	else
 		tri_positionel(&list_a, &list_b, argc - 1, i);
 	ft_lstclear(&list_a, free);
-	ft_lstclear(&list_b, free);
 	return (0);
 }
 

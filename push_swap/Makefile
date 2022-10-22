@@ -11,6 +11,10 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 TEST		=	echo $$ARG; ./push_swap $$ARG | ./checker_linux $$ARG; ./push_swap \
 				$$ARG | wc -l
 
+TEST_3		=	ARG=$$(shuf -i 0-9999 -n 3) ;
+
+TEST_5		=	ARG=$$(shuf -i 0-9999 -n 5) ;
+
 TEST_25		=	ARG=$$(shuf -i 0-9999 -n 25) ;
 
 TEST_100	=	ARG=$$(shuf -i 0-9999 -n 100) ;
@@ -30,7 +34,8 @@ CHECKER_CHANGES=checker/checker_changes/pab.c checker/checker_changes/rab.c \
 				checker/checker_changes/rrr.c checker/checker_changes/sab.c \
 				checker/checker_changes/ss.c
 
-SRCS		=	push_swap.c push_swap_utils.c \
+SRCS		=	push_swap.c push_swap_utils.c push_swap_target_pos.c \
+				push_swap_costs.c push_swap_algo_three.c push_swap_perf_move.c \
 				push_swap_scases.c push_swap_tri_positionel_algo.c
 
 SRCS_BONUS	=	checker/checker.c checker/checker_verif.c checker/checker_check.c
@@ -53,6 +58,12 @@ all:			${NAME}
 
 bonus:			${NAME_BONUS}
 
+test_3:			${NAME}
+				$(TEST_3) $(TEST)
+
+test_5:			${NAME}
+				$(TEST_5) $(TEST)
+
 test_25:		${NAME}
 				$(TEST_25) $(TEST)
 
@@ -61,6 +72,12 @@ test_100:		${NAME}
 
 test_500:		${NAME}
 				$(TEST_500) $(TEST)
+
+test_3_val:		${NAME}
+				$(TEST_3) $(TEST_VAL)
+
+test_5_val:		${NAME}
+				$(TEST_5) $(TEST_VAL)
 
 test_25_val:	${NAME}
 				$(TEST_25) $(TEST_VAL)
