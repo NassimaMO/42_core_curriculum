@@ -10,8 +10,10 @@
 typedef struct	s_philo
 {
 	pthread_t		*threads;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
 	int				number_of_philosophers;
+	int				*forks;
+	long int		*last_eaten;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
