@@ -76,7 +76,7 @@ void	*routine(void *philosopher)
 	static int	x;
 	struct timeval	time;
 
-	while(!dying(philosopher, i, time))
+	while(1)
 	{
 		pthread_mutex_lock(&(((t_philo *)philosopher)->mutex));
 		if (x == 0)
@@ -86,19 +86,20 @@ void	*routine(void *philosopher)
 			x = -1;
 			while (++x < ((t_philo *)philosopher)->number_of_philosophers)
 				((t_philo *)philosopher)->last_eaten[x] = time.tv_usec;
-			x = 0;
 		}
-		if (taking_a_fork(philosopher, i, time))
-			eating(philosopher, i, time);
 		thinking(philosopher, i, time);
+		while (!taking_a_fork(philosopher, i, time))
+			x++;
+		pthread_mutex_unlock(&(((t_philo *)philosopher)->mutex));
+		eating(philosopher, i, time);
 		sleeping(philosopher, i, time);
-		if (x == ((t_philo *)philosopher)->nbr_of_times_a_philo_must_eat - 1)
+		if (dying(philosopher, i, time))
 			exit(1);
+		if (((t_philo *)philosopher)->nbr_of_times_a_philo_has_eaten[i] == ((t_philo *)philosopher)->nbr_of_times_a_philo_must_eat - 1)
+			return NULL;
 		i++;
-		x++;
 		if (i == ((t_philo *)philosopher)->number_of_philosophers - 1)
 			i = 0;
-		pthread_mutex_unlock(&(((t_philo *)philosopher)->mutex));
 	}
 }
 
@@ -114,11 +115,13 @@ int	main(int argc, char **argv)
 	philosopher.number_of_philosophers = atoi(argv[1]);
 	philosopher.forks = malloc(philosopher.number_of_philosophers * sizeof(int));
 	philosopher.last_eaten = malloc(philosopher.number_of_philosophers * sizeof(long int));
+	philosopher.nbr_of_times_a_philo_has_eaten = malloc(philosopher.number_of_philosophers * sizeof(int));
 	i = -1;
 	while (++i < philosopher.number_of_philosophers)
 	{
 		philosopher.forks[i] = 0;
 		philosopher.last_eaten[i] = 0;
+		philosopher.nbr_of_times_a_philo_has_eaten[i] = 0;
 	}
 	philosopher.time_to_die = atoi(argv[2]);
 	philosopher.time_to_eat = atoi(argv[3]);
@@ -134,6 +137,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < philosopher.number_of_philosophers)
 		pthread_join(philosopher.threads[i], NULL);
+	free(philosopher.nbr_of_times_a_philo_has_eaten);
 	free(philosopher.forks);
 	free(philosopher.last_eaten);
 	free(philosopher.threads);
