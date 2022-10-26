@@ -62,35 +62,44 @@ void	sleeping(t_philo *philosopher, int i, struct timeval time)
 	usleep(philosopher->time_to_sleep);
 }
 
-void	dying(t_philo *philosopher, int i, struct timeval time)
+int	dying(t_philo *philosopher, int i, struct timeval time)
 {
 	gettimeofday(&time, NULL);
 	if ((time.tv_usec - philosopher->time) - philosopher->last_eaten[i] >= philosopher->time_to_die)
-		printf("%ld %d died\n", time.tv_usec - philosopher->time, i + 1);
+		return (printf("%ld %d died\n", time.tv_usec - philosopher->time, i + 1), 1);
+	return (0);
 }
 
 void	*routine(void *philosopher)
 {
 	static int	i;
-	int	x;
+	static int	x;
 	struct timeval	time;
 
-	pthread_mutex_lock(&(((t_philo *)philosopher)->mutex));
-	if (i == 0)
+	while(!dying(philosopher, i, time))
 	{
-		gettimeofday(&time, NULL);
-		((t_philo *)philosopher)->time = time.tv_usec;
-		x = -1;
-		while (++x < ((t_philo *)philosopher)->number_of_philosophers)
-			((t_philo *)philosopher)->last_eaten[x] = time.tv_usec;
+		pthread_mutex_lock(&(((t_philo *)philosopher)->mutex));
+		if (x == 0)
+		{
+			gettimeofday(&time, NULL);
+			((t_philo *)philosopher)->time = time.tv_usec;
+			x = -1;
+			while (++x < ((t_philo *)philosopher)->number_of_philosophers)
+				((t_philo *)philosopher)->last_eaten[x] = time.tv_usec;
+			x = 0;
+		}
+		if (taking_a_fork(philosopher, i, time))
+			eating(philosopher, i, time);
+		thinking(philosopher, i, time);
+		sleeping(philosopher, i, time);
+		if (x == ((t_philo *)philosopher)->nbr_of_times_a_philo_must_eat - 1)
+			exit(1);
+		i++;
+		x++;
+		if (i == ((t_philo *)philosopher)->number_of_philosophers - 1)
+			i = 0;
+		pthread_mutex_unlock(&(((t_philo *)philosopher)->mutex));
 	}
-	if (taking_a_fork(philosopher, i, time))
-		eating(philosopher, i, time);
-	thinking(philosopher, i, time);
-	sleeping(philosopher, i, time);
-	dying(philosopher, i, time);
-	i++;
-	pthread_mutex_unlock(&(((t_philo *)philosopher)->mutex));
 }
 
 int	main(int argc, char **argv)
@@ -114,9 +123,10 @@ int	main(int argc, char **argv)
 	philosopher.time_to_die = atoi(argv[2]);
 	philosopher.time_to_eat = atoi(argv[3]);
 	philosopher.time_to_sleep = atoi(argv[4]);
+	philosopher.nbr_of_times_a_philo_must_eat = -1;
 	if (argc == 6)
 		philosopher.nbr_of_times_a_philo_must_eat = atoi(argv[5]);
-	if (philosopher.time_to_die < 60 || philosopher.time_to_eat < 60)
+	if (philosopher.time_to_sleep < 60 || philosopher.time_to_eat < 60)
 		return (0);
 	i = -1;
 	while (++i < philosopher.number_of_philosophers)
