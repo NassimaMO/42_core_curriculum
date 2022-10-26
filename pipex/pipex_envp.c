@@ -63,6 +63,7 @@ char	**get_paths(char **envp)
 	char	**tmp;
 
 	i = 0;
+	tmp = NULL;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (envp[i])

@@ -21,10 +21,10 @@ int	main(int argc, char **argv, char **envp)
 	pipex.argv = argv;
 	pipex.infile = open(argv[1], O_RDONLY);
 	pipex.outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (pipex.outfile < 0)
-		return (perror("OUTFILE ERROR"), 1);
 	if (pipex.infile < 0)
 		perror("INFILE ERROR");
+	if (pipex.outfile < 0)
+		return (perror("OUTFILE ERROR"), 1);
 	if (pipe(pipex.fd) < 0)
 		return (perror("PIPE ERROR"), 2);
 	pipex.paths = get_paths(envp);
