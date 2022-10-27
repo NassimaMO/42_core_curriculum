@@ -61,7 +61,13 @@ void	eating(t_philosophers *philosopher)
 
 void	thinking(t_philosophers *philosopher) 
 {
-	gettimeofday(&philosopher->philo->curr_time, NULL);
+	printf("nbr_philo = %d\n", philosopher->philo->number_of_philosophers);
+	printf("time = %ld\n", philosopher->philo->time);
+	printf("time_to_die = %d\n", philosopher->philo->time_to_die);
+	printf("time_to_eat = %d\n", philosopher->philo->time_to_eat);
+	printf("time_to_sleep = %d\n", philosopher->philo->time_to_sleep);
+	printf("notapme = %d\n", philosopher->philo->nbr_of_times_a_philo_must_eat);
+	gettimeofday(&(philosopher->philo->curr_time), NULL);
 	printf("%ld %d is thinking\n", philosopher->philo->curr_time.tv_usec - philosopher->philo->time, philosopher->philo_nbr);
 }
 
@@ -82,14 +88,13 @@ int	dying(t_philosophers *philosopher)
 
 void	*routine(void *philosopher)
 {
-	struct timeval	time;
-
 	while(1)
 	{
+		//pthread_mutex_lock(&(((t_philosophers *)philosopher)->philo->mutex));
+		printf("%d\n", ((t_philosophers *)philosopher)->philo_nbr);
+		//pthread_mutex_unlock(&(((t_philosophers *)philosopher)->philo->mutex));
 		thinking(philosopher);
-		//pthread_mutex_lock(&(((t_philo *)philosopher)->mutex));
 		taking_a_fork(philosopher);
-		//pthread_mutex_unlock(&(((t_philo *)philosopher)->mutex));
 		eating(philosopher);
 		sleeping(philosopher);
 		if (dying(philosopher))
@@ -99,56 +104,78 @@ void	*routine(void *philosopher)
 	}
 }
 
-/*void	create_list(t_philosophers *philosophers, t_philo *philo)
+void	create_list(t_philosophers **philosophers, t_philo **philo)
 {
 	int			i;
+	t_philosophers	*tmp;
+	t_philosophers	*last_tmp;
 
-	i = -1;
-	while (++i < philo->number_of_philosophers)
+	tmp = malloc(sizeof(t_philosophers));
+	tmp->philo_nbr = 1;
+	tmp->forks = 0;
+	tmp->last_eaten = 0;
+	tmp->nbr_of_times_a_philo_has_eaten = 0;
+	tmp->philo = *philo;
+	*philosophers = tmp;
+	tmp->philosophers_again = philosophers;
+	last_tmp = tmp;
+	tmp = tmp->next;
+	i = 0;
+	while (++i < (*philo)->number_of_philosophers)
 	{
 		tmp = malloc(sizeof(t_philosophers));
 		tmp->philo_nbr = i + 1;
+		printf("n = %d\n", tmp->philo_nbr);
 		tmp->forks = 0;
 		tmp->last_eaten = 0;
 		tmp->nbr_of_times_a_philo_has_eaten = 0;
-		tmp->philo = philo;
-		*tmp->philosophers_again = philosophers;
+		tmp->philo = *philo;
+		tmp->philosophers_again = philosophers;
+		last_tmp->next = tmp;
+		last_tmp = tmp;
 		tmp = tmp->next;
 	}
-}*/
+}
 
 int	main(int argc, char **argv)
 {
-	t_philosophers	philosophers;
+	t_philosophers	*philosophers;
 	t_philo			*philo;
 	t_philosophers  *tmp;
 	struct timeval	time;
+	pthread_mutex_t	mutex;
+	int				i;
 
 	if (argc < 5 || argc > 6)
 		return (1);
-	//pthread_mutex_init(&philo->mutex, NULL);
+	pthread_mutex_init(&mutex, NULL);
 	philo = malloc(sizeof(t_philo));
+	philo->mutex = mutex;
+	pthread_mutex_lock(&(philo->mutex));
 	philo->number_of_philosophers = atoi(argv[1]);
 	philo->time_to_die = atoi(argv[2]);
 	philo->time_to_eat = atoi(argv[3]);
 	philo->time_to_sleep = atoi(argv[4]);
+		pthread_mutex_unlock(&(philo->mutex));
 	philo->nbr_of_times_a_philo_must_eat = -1;
 	if (argc == 6)
 		philo->nbr_of_times_a_philo_must_eat = atoi(argv[5]);
 	if (philo->time_to_sleep < 60 || philo->time_to_eat < 60)
 		return (0);
-	//create_list(&philosophers, philo);
-	*tmp = philosophers;
+	create_list(&philosophers, &philo);
+	tmp = philosophers;
 	gettimeofday(&time, NULL);
-	while (tmp)
+	i = -1;
+	while (++i < philosophers->philo->number_of_philosophers)
 	{
 		tmp->philo->time = time.tv_usec;
 		tmp->last_eaten = time.tv_usec;
 		pthread_create(&tmp->thread, NULL, routine, &tmp);
 		tmp = tmp->next;
 	}
-	*tmp = philosophers;
-	while (tmp)
+	tmp = philosophers;
+	i = -1;
+	while (++i < philosophers->philo->number_of_philosophers)
 	{
 		pthread_join(tmp->thread, NULL);
 		tmp = tmp->next;

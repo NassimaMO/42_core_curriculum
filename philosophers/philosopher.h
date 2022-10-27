@@ -26,10 +26,12 @@ typedef struct	s_philosophers
 	int						forks;
 	long int				last_eaten;
 	int						nbr_of_times_a_philo_has_eaten;
-	t_philo					*philo;
-	struct s_philosophers	*philosophers_again;
+	t_philo					philo;
+	struct s_philosophers	**philosophers_again;
 	struct s_philosophers	*next;
 }				t_philosophers;
 
+t_philosophers	*ft_lstlast(t_philosophers *lst);
+void			ft_lstadd_back(t_philosophers **lst, t_philosophers *new);
 
 #endif
