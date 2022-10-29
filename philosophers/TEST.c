@@ -7,7 +7,6 @@ void	taking_a_fork(t_philosophers **philosopher)
 
 	tmp = (*(*philosopher)->philosophers_again);
 	left_fork = 1;
-    //printf("philo = %d\n", (*philosopher)->philo_nbr);
 	while (1)
 	{
 		if (!(*philosopher)->forks)
@@ -25,16 +24,16 @@ void	taking_a_fork(t_philosophers **philosopher)
 		{
 			left_fork = 0;
 			tmp->forks = 1;
-			gettimeofday(&(tmp->philo.curr_time), NULL);
-			printf("%ld %d has taken a fork (2)\n", tmp->philo.curr_time.tv_usec - tmp->philo.time, (*philosopher)->philo_nbr);
+			gettimeofday(&((*philosopher)->philo.curr_time), NULL);
+			printf("%ld %d has taken a fork\n", (*philosopher)->philo.curr_time.tv_usec - (*philosopher)->philo.time, (*philosopher)->philo_nbr);
             break;
 		}
 		else if (tmp->philo_nbr == (*philosopher)->philo_nbr + 1 && !tmp->forks)
 		{
 			left_fork = 0;
 			tmp->forks = 1;
-			gettimeofday(&(tmp->philo.curr_time), NULL);
-			printf("%ld %d has taken a fork (2)\n", tmp->philo.curr_time.tv_usec - tmp->philo.time, (*philosopher)->philo_nbr);
+			gettimeofday(&((*philosopher)->philo.curr_time), NULL);
+			printf("%ld %d has taken a fork\n", (*philosopher)->philo.curr_time.tv_usec - (*philosopher)->philo.time, (*philosopher)->philo_nbr);
             break;
 		}
         if (tmp->philo_nbr == tmp->philo.number_of_philosophers)
@@ -58,9 +57,9 @@ void	eating(t_philosophers **philosopher)
 			tmp = tmp->next;
 		tmp->forks = 0;
 	}
-	gettimeofday(&(tmp->philo.curr_time), NULL);
-	printf("%ld %d is eating\n", tmp->philo.curr_time.tv_usec - (*philosopher)->philo.time, (*philosopher)->philo_nbr);
-	(*philosopher)->last_eaten = tmp->philo.curr_time.tv_usec - (*philosopher)->philo.time;
+	gettimeofday(&((*philosopher)->philo.curr_time), NULL);
+	printf("%ld %d is eating\n", (*philosopher)->philo.curr_time.tv_usec - (*philosopher)->philo.time, (*philosopher)->philo_nbr);
+	(*philosopher)->last_eaten = (*philosopher)->philo.curr_time.tv_usec - (*philosopher)->philo.time;
 	(*philosopher)->nbr_of_times_a_philo_has_eaten++;
 	usleep((*philosopher)->philo.time_to_eat);
 }
@@ -93,23 +92,34 @@ int	dying(t_philosophers **philosopher)
 	return (0);
 }
 
+/*void	ft_lstclear(t_philosophers **philosophers)
+{
+	t_philosophers	*tmp;
+
+	if ((*philosophers))
+	{
+		tmp = (*philosophers);
+		(*philosophers) = (*philosophers)->next;
+		free(tmp);
+		ft_lstclear(philosophers);
+	}
+}*/
+
 void	*routine(void *philosopher)
 {
-	while(1)
+	while(!dying(((t_philosophers **)philosopher)))
 	{
+		//pthread_mutex_lock(&(((t_philosophers *)philosopher)->philo.mutex));
+		//pthread_mutex_unlock(&(((t_philosophers *)philosopher)->philo.mutex));
 		thinking(((t_philosophers **)philosopher));
-		pthread_mutex_lock(&(((t_philosophers *)philosopher)->philo.mutex));
 		taking_a_fork(((t_philosophers **)philosopher));
-		pthread_mutex_unlock(&(((t_philosophers *)philosopher)->philo.mutex));
-		pthread_mutex_lock(&(((t_philosophers *)philosopher)->philo.mutex));
 		eating(((t_philosophers **)philosopher));
-		pthread_mutex_unlock(&(((t_philosophers *)philosopher)->philo.mutex));
 		sleeping(((t_philosophers **)philosopher));
-		if (dying(((t_philosophers **)philosopher)))
-			(ft_lstclear((*(t_philosophers **)philosopher)->philosophers_again),  exit(1));
+			//ft_lstclear(((t_philosophers *)philosopher)->philosophers_again)
 		if (((t_philosophers *)philosopher)->nbr_of_times_a_philo_has_eaten == ((t_philosophers *)philosopher)->philo.nbr_of_times_a_philo_must_eat - 1)
 			return NULL;
 	}
+	exit(1);
 }
 
 void	create_list(t_philosophers **philosophers, t_philo philo)
@@ -188,6 +198,6 @@ int	main(int argc, char **argv)
 		tmp = tmp->next;
 	}
     free(philo);
-    ft_lstclear(&philosophers);
+    //ft_lstclear(&philosophers);
 	pthread_mutex_destroy(&philo->mutex);
 }
