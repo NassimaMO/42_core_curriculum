@@ -23,7 +23,7 @@ OBJ_BONUS	=	$(addprefix $(OBJ_DIR_B)/,$(SRCS_BONUS:pipex_bonus/%.c=%.o))
 
 RM			=	rm -f
 
-all:			${NAME}
+all:			${NAME} 
 
 bonus:			${NAME_BONUS}
 
@@ -35,10 +35,10 @@ $(OBJ_DIR_B)/%.o: pipex_bonus/%.c
 				@mkdir -p $(OBJ_DIR_B)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}:		${OBJ} ${LIB}
+${NAME}:		${OBJ} ${LIB} pipex.h
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
-${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
+${NAME_BONUS}:	${OBJ_BONUS} ${LIB} pipex_bonus/pipex_bonus.h
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
 ${LIB}:

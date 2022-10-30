@@ -6,48 +6,20 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:08:31 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/11 17:02:26 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:42:17 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	get_the_previous_command(void)
-{
-	char	*line;
-
-	line = get_next_line(0);
-	while (line)
-	{
-		ft_printf("%s", line);
-		free(line);
-		line = get_next_line(0);
-	}
-}
-
 void	exec_cmd(t_pipex *pipex, char **tmp)
 {
 	char	*cmd;
-	char	*error_cmd;
 
 	cmd = get_cmd_path(tmp[0], pipex->paths);
-	if (!cmd)
-	{
-		if (tmp[0])
-		{
-			error_cmd = ft_strjoin("command not found: ", tmp[0]);
-			error_cmd = ft_strjoin_free(error_cmd, "\n");
-			write(2, error_cmd, ft_strlen(error_cmd));
-			free(error_cmd);
-		}
-		else
-			get_the_previous_command();
-		free_envp(pipex->paths);
-		free_envp(tmp);
-		exit(4);
-	}
-	execve(cmd, tmp, pipex->paths);
-	free(tmp);
+	if (cmd)
+		execve(cmd, tmp, pipex->paths);
+	free_envp(tmp);
 	free(cmd);
 }
 
@@ -76,7 +48,7 @@ void	first_cmds(t_pipex *pipex)
 			exit(3);
 		}
 		close(pipex->fd[0]);
-		close(pipex->infile);
+		close(pipex->outfile);
 		tmp = ft_split(pipex->argv[2], ' ');
 		if (!tmp)
 		{
@@ -103,7 +75,7 @@ void	second_cmds(t_pipex *pipex)
 			exit(7);
 		}
 		close(pipex->fd[1]);
-		close(pipex->outfile);
+		close(pipex->infile);
 		tmp = ft_split(pipex->argv[3], ' ');
 		if (!tmp)
 		{

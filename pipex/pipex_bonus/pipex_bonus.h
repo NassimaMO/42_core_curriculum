@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:50:39 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/06 15:58:29 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:13:29 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_pipex
 
 char	**get_paths(char **envp);
 void	free_envp(char **envp);
+char	*check_cmd(t_pipex *pipex, char **tmp);
 char	*get_cmd_path(char *cmd, char **paths);
 void	child_process(t_pipex *pipex, int i);
 void	close_fds(int *fd, int len);

@@ -18,6 +18,8 @@ char	*get_cmd_path(char *cmd, char **paths)
 	char	*cmd_path;
 
 	i = -1;
+	if (!cmd || access(cmd, F_OK) == 0)
+		return (cmd);
 	while (paths[++i])
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);

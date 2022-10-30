@@ -21,6 +21,42 @@ void	close_fds(int *fd, int len)
 		close(fd[i]);
 }
 
+static int	check_cmds(t_pipex *pipex)
+{
+	int		i;
+	int		nbr_error;
+	char	**tmp;
+	char	*error_cmd;
+	char	*cmd;
+
+	i = -1;
+	while (++i < pipex->nbr_cmds)
+	{
+		tmp = ft_split(pipex->argv[i + 2 + pipex->heredoc], ' ');
+		if (!tmp)
+		{
+			free_envp(pipex->paths);
+			exit(-1);
+		}
+		cmd = get_cmd_path(tmp[0], pipex->paths);
+		if (!cmd)
+		{
+			if (tmp[0])
+				error_cmd = ft_strjoin(tmp[0], " :command not found");
+			else
+				error_cmd = ft_strjoin("''", " :command not found");
+			error_cmd = ft_strjoin_free(error_cmd, "\n");
+			write(2, error_cmd, ft_strlen(error_cmd));
+			free(error_cmd);
+			nbr_error++;
+		}
+		if (cmd && ft_strncmp(cmd, tmp[0], sizeof(cmd)))
+			free(cmd);
+		free_envp(tmp);
+	}
+	return (nbr_error);
+}
+
 static void	create_files(t_pipex *pipex, char **argv, int argc)
 {
 	if (!ft_strncmp(argv[1], "here_doc", 8) && ft_strlen(argv[1]) == 8)
@@ -37,7 +73,7 @@ static void	create_files(t_pipex *pipex, char **argv, int argc)
 		pipex->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	}
 	if (pipex->infile < 0)
-		perror("INFILE ERROR");
+		perror(argv[1 + pipex->heredoc]);
 	if (pipex->outfile < 0)
 	{
 		if (pipex->heredoc)
@@ -45,7 +81,7 @@ static void	create_files(t_pipex *pipex, char **argv, int argc)
 			close(pipex->infile);
 			unlink("heredoc_file");
 		}
-		perror("OUTFILE ERROR");
+		perror(argv[argc - 1]);
 		exit(1);
 	}
 }
@@ -84,6 +120,8 @@ int	main(int argc, char **argv, char **envp)
 	pipex.paths = get_paths(envp);
 	if (!pipex.paths)
 		return (free(pipex.fd), -1);
+	if (check_cmds(&pipex)) /*Conditional jump or move depends on uninitialised value(s)*/
+		return (free_envp(pipex.paths), free(pipex.fd), 1);
 	i = -1;
 	while (++i < pipex.nbr_cmds)
 		child_process(&pipex, i);
