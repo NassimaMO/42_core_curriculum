@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:44:51 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/22 14:22:25 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:43:11 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	execute_instruct(char **tab, int len_tab, int *a, int len_a)
 			len_b++;
 		}
 		else
-			return (ft_printf("Error\n"), 0);
+			return (free(b), ft_printf("Error\n"), 0);
 		i++;
 	}
 	if (nums_in_order(a, len_a, len_b))
