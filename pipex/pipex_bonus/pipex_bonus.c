@@ -12,13 +12,16 @@
 
 #include "pipex_bonus.h"
 
-void	close_fds(int *fd, int len)
+void	close_fds(int *fd, int len, int in, int out)
 {
 	int	i;
 
 	i = -1;
 	while (++i < len)
-		close(fd[i]);
+	{
+		if (i != in && i != out)
+			close(fd[i]);
+	}
 }
 
 static int	check_cmds(t_pipex *pipex)
@@ -119,13 +122,13 @@ int	main(int argc, char **argv, char **envp)
 	create_pipes(&pipex);
 	pipex.paths = get_paths(envp);
 	if (!pipex.paths)
-		return (free(pipex.fd), -1);
+		return (ft_printf("Path not found.\n"), free(pipex.fd), -1);
 	if (check_cmds(&pipex)) /*Conditional jump or move depends on uninitialised value(s)*/
 		return (free_envp(pipex.paths), free(pipex.fd), 1);
 	i = -1;
 	while (++i < pipex.nbr_cmds)
 		child_process(&pipex, i);
-	close_fds(pipex.fd, pipex.nbr_cmds * 2);
+	close_fds(pipex.fd, pipex.nbr_cmds * 2, -1, -1);
 	waitpid(-1, NULL, 0);
 	close(pipex.infile);
 	close(pipex.outfile);

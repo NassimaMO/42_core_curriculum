@@ -68,10 +68,11 @@ char	**get_paths(char **envp)
 	tmp = NULL;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
-	if (envp[i])
-		tmp = ft_split(envp[i] + 5, ':');
+	if (!envp[i])
+		(ft_printf("Path not found.\n"), exit(-1));
+	tmp = ft_split(envp[i] + 5, ':');
 	if (!tmp)
-		exit(-1);
+		(ft_printf("Memory error.\n"), exit(-1));
 	add_backslash_to_path_end(tmp);
 	return (tmp);
 }

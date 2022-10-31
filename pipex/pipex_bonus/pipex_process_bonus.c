@@ -58,7 +58,7 @@ void	child_process(t_pipex *pipex, int i)
 			dup_fds(pipex->fd[(i - 1) * 2], pipex->outfile, pipex);
 		else
 			dup_fds(pipex->fd[(i - 1) * 2], pipex->fd[2 * i + 1], pipex);
-		close_fds(pipex->fd, pipex->nbr_cmds * 2);
+		close_fds(pipex->fd, pipex->nbr_cmds * 2, (i - 1) * 2, 2 * i + 1);
 		tmp = ft_split(pipex->argv[i + 2 + pipex->heredoc], ' ');
 		if (!tmp)
 		{
