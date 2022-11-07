@@ -104,10 +104,10 @@ $(OBJ_DIR_B)/%.o: checker/%.c
 				@mkdir -p $(OBJ_DIR_B)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}:		${OBJ} ${OBJ_CHANGES} ${LIB}
+${NAME}:		${OBJ} ${OBJ_CHANGES} ${LIB} push_swap.h
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
-${NAME_BONUS}:	${OBJ_BONUS} ${OBJ_CK_CHANGES} ${LIB}
+${NAME_BONUS}:	${OBJ_BONUS} ${OBJ_CK_CHANGES} ${LIB} checker/checker.h
 				$(CC) $(CFLAGS) $^ -o $@ -L. -lft
 
 ${LIB}:
