@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:32:10 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/22 13:49:22 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:16:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	put_target_pos(t_list *b, t_list *a)
 	int	pos;
 	int	biggest_index_case;
 	int	save_index;
-	int	save_index_bic;
+	int	sibic;
 
 	save_index = 2147483647;
-	save_index_bic = 2147483647;
+	sibic = 2147483647;
 	while (a)
 	{
 		if (a->content->index > b->content->index && \
@@ -29,11 +29,10 @@ static void	put_target_pos(t_list *b, t_list *a)
 			pos = a->content->pos;
 			save_index = a->content->index;
 		}
-		if (a->content->index < b->content->index && \
-			a->content->index < save_index_bic)
+		if (a->content->index < b->content->index && a->content->index < sibic)
 		{
 			biggest_index_case = a->content->pos;
-			save_index_bic = a->content->index;
+			sibic = a->content->index;
 		}
 		a = a->next;
 	}

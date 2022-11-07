@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/22 14:21:20 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:58:37 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	main(int argc, char **argv)
 	tab = str_to_tab(&len);
 	if (!tab)
 		return (free(a), 1);
+	if (!len)
+		return (free(a), free(tab), 1);
 	execute_instruct(tab, len, a, argc - 1);
 	i = -1;
 	while (++i < len)

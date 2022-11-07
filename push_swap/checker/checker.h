@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:50:16 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/22 14:20:48 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:41:44 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+
+typedef struct s_data_stacks
+{
+	int		*a;
+	int		*b;
+	int		len_a;
+	int		len_b;
+}				t_data_stacks;
 
 int		number_checker(char **argv, int argc);
 int		verif_double(char *a, char **argv, int argc, int x);
