@@ -6,7 +6,8 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
-SRCS		=	philosophers.c
+SRCS		=	philosophers.c philo_init.c philo_free.c \
+				printing_philos.c philo_doing_things.c
 
 SRCS_BONUS	=	philosophers_bonus.c
 
