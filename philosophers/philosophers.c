@@ -5,17 +5,19 @@ void	*routine(void *philosopher)
 	t_philosophers	**tmp;
 
 	tmp = (t_philosophers **)philosopher;
+	//pthread_mutex_lock(&(*tmp)->data->print);
+	if ((*tmp)->philo_nbr % 2 == 0)
+		usleep(10);
+	(*tmp)->last_eaten = current_time();
+	//pthread_mutex_unlock(&(*tmp)->data->print);
 	while (!dying(tmp))
 	{
-		printing_philo(philosopher);
-		thinking(tmp);
-		printing_philo(philosopher);
 		eating(tmp);
-		printing_philo(philosopher);
-		sleeping(tmp);
-		printing_philo(philosopher);
-		if (((t_philosophers *)philosopher)->nbr_of_times_a_philo_has_eaten == ((t_philosophers *)philosopher)->data->nbr_of_times_a_philo_must_eat - 1)
-			return (free_thread((t_philosophers *)philosopher), NULL);
+		print_lock(tmp, "is thinking", current_time());
+		print_lock(tmp, "is sleeping", current_time());
+		usleep((*tmp)->data->time_to_sleep);
+		if ((*tmp)->nbr_of_times_a_philo_has_eaten >= (*tmp)->data->nbr_of_times_a_philo_must_eat)
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -34,12 +36,11 @@ int	main(int argc, char **argv)
 		return (1);
 	creat_list(&philosophers, data);
 	tmp = philosophers;
-	gettimeofday(&philosophers->data->curr_time, NULL);
+	tmp->data->time = current_time();
 	i = -1;
 	while (++i < philosophers->data->number_of_philosophers)
 	{
-		tmp->data->time = philosophers->data->curr_time.tv_usec;
-		tmp->last_eaten = philosophers->data->curr_time.tv_usec;
+		tmp->last_eaten = tmp->data->time;
 		pthread_create(&tmp->thread, NULL, routine, &tmp);
 		tmp = tmp->next;
 	}

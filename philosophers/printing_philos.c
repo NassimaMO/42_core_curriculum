@@ -2,11 +2,10 @@
 
 void	printing_philo(t_philosophers **philosopher)
 {
-	printf("|||||||||||||||||||||||||||||P number = %d|||||||||||||||||||||||||||||||||\n", (*philosopher)->philo_nbr);
+	printf("\n\n\n\n\n\n\n|||||||||||||||||||||||||||||P number = %d|||||||||||||||||||||||||||||||||\n", (*philosopher)->philo_nbr);
 	printf("|||||||||||||                                                |||||||||||||\n");
 	printf("||||||||||||| data struct infos:                             |||||||||||||\n");
 	printf("|||||||||||||                                                |||||||||||||\n");
-	printf("||||||||||||| current time = %ld                          |||||||||||||\n", (*philosopher)->data->curr_time.tv_usec);
 	printf("||||||||||||| times P should eat = %d;                       |||||||||||||\n", (*philosopher)->data->nbr_of_times_a_philo_must_eat);
 	printf("||||||||||||| number of P = %d;                               |||||||||||||\n", (*philosopher)->data->number_of_philosophers);
 	printf("||||||||||||| time = %ld;                                 |||||||||||||\n", (*philosopher)->data->time);
