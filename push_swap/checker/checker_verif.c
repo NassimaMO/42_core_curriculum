@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:04 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/19 13:55:16 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:43:40 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,43 @@ int	*put_int_tab(char **argv, int argc)
 		j++;
 	}
 	return (a);
+}
+
+int	verif_instructs(char **instruct, int length)
+{
+	int	len;
+	int	i;
+
+	i = -1;
+	while (++i < length)
+	{
+		len = ft_strlen(instruct[i]);
+		if (ft_strncmp(instruct[i], "rrb\n", len) && \
+		ft_strncmp(instruct[i], "sb\n", len) && \
+		ft_strncmp(instruct[i], "pa\n", len) && \
+		ft_strncmp(instruct[i], "pb\n", len) && \
+		ft_strncmp(instruct[i], "rr\n", len) && \
+		ft_strncmp(instruct[i], "rrr\n", len) && \
+		ft_strncmp(instruct[i], "ss\n", len) && \
+		ft_strncmp(instruct[i], "ra\n", len) && \
+		ft_strncmp(instruct[i], "rra\n", len) && \
+		ft_strncmp(instruct[i], "sa\n", len) && \
+		ft_strncmp(instruct[i], "rb\n", len))
+			return (1);
+	}
+	return (0);
+}
+
+int	nums_in_order(int *a, int len)
+{
+	int	i;
+
+	i = 1;
+	while (i < len)
+	{
+		if (a[i - 1] > a[i])
+			return (ft_putstr_fd("KO\n", 1), 0);
+		i++;
+	}
+	return (ft_putstr_fd("OK\n", 1), 1);
 }

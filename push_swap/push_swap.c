@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/07 13:47:59 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:44:27 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ int	main(int argc, char **argv)
 	a = put_int_tab(argv, argc);
 	if (!a)
 		return (1);
-	ft_sort_int_tab(a, argc - 1);
-	if (nums_in_order_rev(a, argc - 1))
+	if (nums_in_order_rev(a, argc - 1) && argc - 1 > 3)
 		return (free(a), rev_scase(argc - 1), 0);
+	if (nums_in_order(a, argc - 1))
+		return (free(a), 0);
+	ft_sort_int_tab(a, argc - 1);
 	i = a[(argc - 1) / 2];
 	init_lst(&list_a, argv, a, argc);
 	if (argc - 1 == 3)

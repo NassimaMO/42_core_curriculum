@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:50:16 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/07 14:06:58 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:35:16 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_data_stacks
 int		number_checker(char **argv, int argc);
 int		verif_double(char *a, char **argv, int argc, int x);
 int		*put_int_tab(char **argv, int argc);
+int		verif_instructs(char **instruct, int length);
+int		nums_in_order(int *a, int len);
 
 int		execute_instruct(char **tab, int len_tab, int *a, int len_a);
 
