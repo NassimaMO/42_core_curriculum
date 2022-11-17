@@ -2,21 +2,21 @@
 
 void	*routine(void *philosopher)
 {
-	t_philosophers	**tmp;
+	t_philosophers	*tmp;
 
-	tmp = (t_philosophers **)philosopher;
-	//pthread_mutex_lock(&(*tmp)->data->print);
-	if ((*tmp)->philo_nbr % 2 == 0)
-		usleep(10);
-	(*tmp)->last_eaten = current_time();
-	//pthread_mutex_unlock(&(*tmp)->data->print);
-	while (!dying(tmp))
+	tmp = (t_philosophers *)philosopher;
+	pthread_mutex_lock(&tmp->data->print);
+	if (tmp->philo_nbr % 2 == 0)
+		usleep(100);
+	tmp->last_eaten = current_time();
+	pthread_mutex_unlock(&tmp->data->print);
+	while (!dying(&tmp))
 	{
-		eating(tmp);
-		print_lock(tmp, "is thinking", current_time());
-		print_lock(tmp, "is sleeping", current_time());
-		usleep((*tmp)->data->time_to_sleep);
-		if ((*tmp)->nbr_of_times_a_philo_has_eaten >= (*tmp)->data->nbr_of_times_a_philo_must_eat)
+		eating(&tmp);
+		print_lock(&tmp, "is thinking", current_time());
+		print_lock(&tmp, "is sleeping", current_time());
+		usleep(tmp->data->time_to_sleep);
+		if (tmp->nbr_of_times_a_philo_has_eaten >= tmp->data->nbr_of_times_a_philo_must_eat)
 			return (NULL);
 	}
 	return (NULL);
@@ -41,7 +41,8 @@ int	main(int argc, char **argv)
 	while (++i < philosophers->data->number_of_philosophers)
 	{
 		tmp->last_eaten = tmp->data->time;
-		pthread_create(&tmp->thread, NULL, routine, &tmp);
+		pthread_create(&tmp->thread, NULL, routine, tmp);
+		usleep(100);
 		tmp = tmp->next;
 	}
 	tmp = philosophers;

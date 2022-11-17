@@ -34,7 +34,7 @@ $(OBJ_DIR_B)/%.o: philosophers_bonus/%.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
 ${NAME}:		${OBJ} ${OBJ_CHANGES} philosophers.h
-				$(CC) $(CFLAGS) $^ -o $@
+				$(CC) $(CFLAGS) $^ -o $@ -lpthread
 
 ${NAME_BONUS}:	${OBJ_BONUS} ${OBJ_CK_CHANGES} philosophers_bonus/philosophers_bonus.h
 				$(CC) $(CFLAGS) $^ -o $@
