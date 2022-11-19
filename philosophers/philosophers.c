@@ -5,11 +5,6 @@ void	*routine(void *philosopher)
 	t_philosophers	**tmp;
 
 	tmp = (t_philosophers **)philosopher;
-	//pthread_mutex_lock(&(*tmp)->data->print);
-	if ((*tmp)->philo_nbr % 2 == 0)
-		usleep(10);
-	(*tmp)->last_eaten = current_time();
-	//pthread_mutex_unlock(&(*tmp)->data->print);
 	while (!dying(tmp))
 	{
 		eating(tmp);
