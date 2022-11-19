@@ -7,6 +7,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define INT_MAX 2147483647
+
 typedef struct	s_data
 {
 	pthread_mutex_t	print;
@@ -30,6 +32,7 @@ typedef struct	s_philosophers
 	struct s_philosophers	*next;
 }				t_philosophers;
 
+int		arg_verif(int argc, char **argv);
 
 void	printing_philo(t_philosophers **philosopher);
 void    printing_list(t_philosophers *philosophers);

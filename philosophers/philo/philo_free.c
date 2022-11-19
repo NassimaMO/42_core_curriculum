@@ -21,12 +21,12 @@ void	free_list(t_philosophers **philosophers)
 	num = (*philosophers)->data->number_of_philosophers;
 	free_data((*philosophers)->data);
 	tmp = *philosophers;
-	i = -1;
+	/*i = -1;
 	while (++i < num)
 	{
 		pthread_detach(tmp->thread);
 		tmp = tmp->next;
-	}
+	}*/
 	i = -1;
 	while (++i < num)
 	{
