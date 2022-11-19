@@ -13,7 +13,7 @@ void	print_lock(t_philosophers **philosopher, char *current_activity, long int t
 	pthread_mutex_lock(&(*philosopher)->data->print);
 	if (!(*philosopher)->data->philo_stop)
 		printf("%ld %d %s\n", time - (*philosopher)->data->time, (*philosopher)->philo_nbr, current_activity);
-	pthread_mutex_unlock(&(*philosopher)->data->print);6 3 is eating
+	pthread_mutex_unlock(&(*philosopher)->data->print);
 }
 
 int	dying(t_philosophers **philosopher)

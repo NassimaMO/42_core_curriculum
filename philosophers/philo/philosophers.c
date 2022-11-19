@@ -6,7 +6,7 @@ void	*routine(void *philosopher)
 
 	tmp = (t_philosophers *)philosopher;
 	if (tmp->philo_nbr % 2 == 0)
-		usleep(20);
+		usleep(10);
 	tmp->last_eaten = current_time();
 	while (!dying(&tmp))
 	{
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 		if (i == 0)
 			tmp->data->time = current_time();
 		pthread_create(&tmp->thread, NULL, routine, tmp);
+		//usleep(100);
 		tmp = tmp->next;
 	}
 	tmp = philosophers;
