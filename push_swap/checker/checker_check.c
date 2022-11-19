@@ -6,13 +6,13 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:44:51 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/16 16:28:02 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:15:46 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static int	nums_in_order(int *a, int len_a, int len_b)
+static int	list_in_order(int *a, int len_a, int len_b)
 {
 	int	i;
 
@@ -100,7 +100,7 @@ int	execute_instruct(char **tab, int len_tab, int *a, int len_a)
 			return (0);
 		i++;
 	}
-	if (nums_in_order(stacks.a, stacks.len_a, stacks.len_b))
+	if (list_in_order(stacks.a, stacks.len_a, stacks.len_b))
 		return (free(stacks.b), ft_printf("OK\n"), 1);
 	return (free(stacks.b), ft_printf("KO\n"), 0);
 }
