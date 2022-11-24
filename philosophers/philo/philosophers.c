@@ -11,8 +11,8 @@ void	*routine(void *philosopher)
 	while (!dying(&tmp))
 	{
 		eating(&tmp);
-		print_lock(&tmp, "is thinking", current_time());
 		print_lock(&tmp, "is sleeping", current_time());
+		print_lock(&tmp, "is thinking", current_time());
 		usleep(tmp->data->time_to_sleep);
 		if ((tmp->data->nbr_of_times_a_philo_must_eat >= 0 && tmp->nbr_of_times_a_philo_has_eaten >= tmp->data->nbr_of_times_a_philo_must_eat))
 			return (NULL);
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 		if (i == 0)
 			tmp->data->time = current_time();
 		pthread_create(&tmp->thread, NULL, routine, tmp);
-		//usleep(100);
 		tmp = tmp->next;
 	}
 	tmp = philosophers;

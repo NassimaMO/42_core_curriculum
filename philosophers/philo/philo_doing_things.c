@@ -22,14 +22,21 @@ int	dying(t_philosophers **philosopher)
 
 	if ((*philosopher)->data->philo_stop)
 		return (1);
+	if ((*philosopher)->data->number_of_philosophers == 1)
+	{
+		(*philosopher)->last_eaten = (*philosopher)->data->time;
+		usleep((*philosopher)->data->time_to_die);
+	}
 	curr_time = current_time();
 	if (curr_time - (*philosopher)->last_eaten >= (*philosopher)->data->time_to_die)
-		return (print_lock(philosopher, "died", curr_time), (*philosopher)->data->philo_stop++, 1);
+		return (print_lock(philosopher, "died", (*philosopher)->last_eaten + (*philosopher)->data->time_to_die), (*philosopher)->data->philo_stop++, 1);
 	return (0);
 }
 
 void	eating(t_philosophers **philosopher)
 {
+	long int	curr_time;
+
 	pthread_mutex_lock(&(*philosopher)->data->forks[(*philosopher)->philo_nbr - 1]);
 	print_lock(philosopher, "has taken a fork", current_time());
 	if ((*philosopher)->philo_nbr == (*philosopher)->data->number_of_philosophers)
@@ -37,8 +44,9 @@ void	eating(t_philosophers **philosopher)
 	else
 		pthread_mutex_lock(&(*philosopher)->data->forks[(*philosopher)->philo_nbr]);
 	print_lock(philosopher, "has taken a fork", current_time());
-	print_lock(philosopher, "is eating", current_time());
-	(*philosopher)->last_eaten = current_time();
+	curr_time = current_time();
+	print_lock(philosopher, "is eating", curr_time);
+	(*philosopher)->last_eaten = curr_time;
 	usleep((*philosopher)->data->time_to_eat);
 	(*philosopher)->nbr_of_times_a_philo_has_eaten++;
 	pthread_mutex_unlock(&(*philosopher)->data->forks[(*philosopher)->philo_nbr - 1]);
