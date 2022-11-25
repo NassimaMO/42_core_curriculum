@@ -20,6 +20,7 @@ void	creat_list(t_philosophers **philosophers, t_data *data)
 		tmp = malloc(sizeof(t_philosophers));
 		tmp->philo_nbr = i + 1;
 		tmp->last_eaten = 0;
+		tmp->wait = 0;
 		tmp->nbr_of_times_a_philo_has_eaten = 0;
 		tmp->data = data;
 		last_tmp->next = tmp;
