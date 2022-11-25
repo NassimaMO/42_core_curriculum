@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/16 16:35:04 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:10:50 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	main(int argc, char **argv)
 	char		**tab;
 	int			i;
 
-	if (argc <= 2)
-		return (0);
 	if (!number_checker(argv, argc))
 		return (ft_putstr_fd("Error\n", 2), 0);
 	a = put_int_tab(argv, argc);

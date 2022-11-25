@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/16 15:44:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:07:34 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	main(int argc, char **argv)
 	ft_sort_int_tab(a, argc - 1);
 	i = a[(argc - 1) / 2];
 	init_lst(&list_a, argv, a, argc);
-	if (argc - 1 == 3)
+	if (argc - 1 < 3)
+		ft_printf("sa\n");
+	else if (argc - 1 == 3)
 		algo_three(&list_a);
 	else
 		tri_positionel(&list_a, &list_b, argc - 1, i);

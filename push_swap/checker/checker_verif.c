@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:04 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/16 16:43:40 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:11:09 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	number_checker(char **argv, int argc)
 			verif_double(argv[i], argv, argc, i))
 			return (0);
 	}
+	if (argc <= 2)
+		exit(0);
 	return (1);
 }
 
