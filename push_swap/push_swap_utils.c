@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:33:29 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/25 18:07:53 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:51:52 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	*put_int_tab(char **argv, int argc)
 	j = 0;
 	a = malloc(sizeof(int) * (argc - 1));
 	if (!a)
-		return (0);
+		exit(1);
 	while (i < argc)
 	{
 		a[j] = ft_atoi(argv[i]);
