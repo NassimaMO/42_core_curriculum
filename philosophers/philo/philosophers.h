@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/11/26 14:13:36 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSPHERS_H
 
@@ -9,7 +21,7 @@
 
 # define INT_MAX 2147483647
 
-typedef struct	s_data
+typedef struct s_data
 {
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
@@ -22,12 +34,11 @@ typedef struct	s_data
 	int				nbr_of_times_a_philo_must_eat;
 }				t_data;
 
-typedef struct	s_philosophers
+typedef struct s_philosophers
 {
 	int						philo_nbr;
 	pthread_t				thread;
 	long int				last_eaten;
-	int						wait;
 	int						nbr_of_times_a_philo_has_eaten;
 	t_data					*data;
 	struct s_philosophers	*next;
@@ -44,7 +55,7 @@ int			stock_data(t_data *data, int argc, char **argv);
 
 long int	current_time(void);
 void		ft_usleep(t_philosophers **philosopher, long int time_to_do_smth);
-void		print_lock(t_philosophers **philosopher, char *current_activity, long int time);
+void		print_lock(t_philosophers **philosopher, char *current_activity);
 int			dying(t_philosophers **philosopher);
 void		eating(t_philosophers **philosopher);
 

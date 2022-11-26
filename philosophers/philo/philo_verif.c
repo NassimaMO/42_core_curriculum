@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_verif.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/26 14:12:55 by nmouslim          #+#    #+#             */
+/*   Updated: 2022/11/26 14:12:56 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 static int	invalid_arg(char *arg)
@@ -12,6 +24,7 @@ static int	invalid_arg(char *arg)
 	}
 	return (0);
 }
+
 int	arg_verif(int argc, char **argv)
 {
 	long int	number;
