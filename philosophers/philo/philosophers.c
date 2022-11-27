@@ -6,32 +6,32 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/27 14:17:14 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:39:32 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*routine_loop(t_philosophers *tmp)
+void	*routine_loop(t_philosophers *philo)
 {
-	while (!dying(&tmp))
+	while (!dying(philo))
 	{
-		eating(&tmp);
-		print_lock(&tmp, "is sleeping");
-		if (tmp->data->time_to_eat < tmp->data->time_to_die && \
-			(current_time() - tmp->last_eaten) + tmp->data->time_to_sleep <= \
-			tmp->data->time_to_die && !tmp->data->philo_stop)
-			usleep(tmp->data->time_to_sleep * 1000);
-		else if (tmp->data->time_to_eat < tmp->data->time_to_die && \
-				tmp->data->time_to_eat + tmp->data->time_to_sleep > \
-				tmp->data->time_to_die && !tmp->data->philo_stop)
-			usleep((tmp->data->time_to_die - (current_time() - \
-			tmp->data->time)) * 1000);
-		if (!dying(&tmp))
-			print_lock(&tmp, "is thinking");
-		if ((tmp->data->nbr_of_times_a_philo_must_eat >= 0 && \
-		tmp->nbr_of_times_a_philo_has_eaten >= \
-		tmp->data->nbr_of_times_a_philo_must_eat))
+		eating(philo);
+		print_lock(philo, "is sleeping");
+		if (philo->data->time_to_eat < philo->data->time_to_die && \
+			(current_time() - philo->last_eaten) + philo->data->time_to_sleep <= \
+			philo->data->time_to_die && !philo->data->philo_stop)
+			usleep(philo->data->time_to_sleep * 1000);
+		else if (philo->data->time_to_eat < philo->data->time_to_die && \
+				philo->data->time_to_eat + philo->data->time_to_sleep > \
+				philo->data->time_to_die && !philo->data->philo_stop)
+			usleep((philo->data->time_to_die - (current_time() - \
+			philo->data->time)) * 1000);
+		if (!dying(philo))
+			print_lock(philo, "is thinking");
+		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
+		philo->nbr_of_times_a_philo_has_eaten >= \
+		philo->data->nbr_of_times_a_philo_must_eat))
 			return (NULL);
 	}
 	return (NULL);
@@ -39,48 +39,48 @@ void	*routine_loop(t_philosophers *tmp)
 
 void	*routine(void *philosopher)
 {
-	t_philosophers	*tmp;
+	t_philosophers	*philo;
 
-	tmp = (t_philosophers *)philosopher;
-	tmp->last_eaten = tmp->data->time;
-	print_lock(&tmp, "is thinking");
-	if ((tmp->data->time_to_eat > tmp->data->time_to_die && \
-		tmp->philo_nbr % 2 == tmp->data->number_of_philosophers % 2) || \
-		tmp->data->number_of_philosophers == 1)
-		usleep(tmp->data->time_to_die * 1000);
-	else if (tmp->philo_nbr % 2 == tmp->data->number_of_philosophers % 2)
-		usleep(tmp->data->time_to_eat * 1000);
-	return (routine_loop(tmp));
+	philo = (t_philosophers *)philosopher;
+	philo->last_eaten = philo->data->time;
+	print_lock(philo, "is thinking");
+	if ((philo->data->time_to_eat > philo->data->time_to_die && \
+		philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2) || \
+		philo->data->number_of_philosophers == 1)
+		usleep(philo->data->time_to_die * 1000);
+	else if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
+		usleep(philo->data->time_to_eat * 1000);
+	return (routine_loop(philo));
 }
 
-int	creat_thread(t_philosophers *philosophers)
+int	creat_thread(t_philosophers *philos)
 {
-	t_philosophers	*tmp;
+	t_philosophers	*philo;
 	int				i;
 
-	tmp = philosophers;
+	philo = philos;
 	i = -1;
-	tmp->data->time = current_time();
-	while (++i < philosophers->data->number_of_philosophers)
+	philo->data->time = current_time();
+	while (++i < philos->data->number_of_philosophers)
 	{
-		if (pthread_create(&tmp->thread, NULL, routine, tmp))
+		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (1);
-		tmp = tmp->next;
+		philo = philo->next;
 	}
-	tmp = philosophers;
+	philo = philos;
 	i = -1;
-	while (++i < philosophers->data->number_of_philosophers)
+	while (++i < philos->data->number_of_philosophers)
 	{
-		if (pthread_join(tmp->thread, NULL))
+		if (pthread_join(philo->thread, NULL))
 			return (2);
-		tmp = tmp->next;
+		philo = philo->next;
 	}
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philosophers	*philosophers;
+	t_philosophers	*philos;
 	t_data			*data;
 
 	if (arg_verif(argc, argv))
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (stock_data(data, argc, argv))
 		return (1);
-	creat_list(&philosophers, data);
-	creat_thread(philosophers);
-	free_list(&philosophers);
+	creat_list(&philos, data);
+	creat_thread(philos);
+	free_list(philos);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/26 14:12:29 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:30:56 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,25 @@ void	free_data(t_data *data)
 	free(data);
 }
 
-void	free_list(t_philosophers **philosophers)
+void	free_list(t_philosophers *philos)
 {
 	t_philosophers	*tmp;
 	int				i;
 	int				num;
 
-	num = (*philosophers)->data->number_of_philosophers;
-	free_data((*philosophers)->data);
-	tmp = *philosophers;
+	num = philos->data->number_of_philosophers;
+	free_data(philos->data);
+	tmp = philos;
 	i = -1;
 	while (++i < num)
 	{
-		tmp = *philosophers;
-		*philosophers = (*philosophers)->next;
+		tmp = philos;
+		philos = philos->next;
 		free(tmp);
 	}
 }
 
-void	free_thread(t_philosophers *philosopher)
+void	free_thread(t_philosophers *philos)
 {
-	(void) philosopher;
+	(void) philos;
 }

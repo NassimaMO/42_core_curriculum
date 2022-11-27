@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/26 14:12:36 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:49:39 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	creat_list(t_philosophers **philosophers, t_data *data)
+void	creat_list(t_philosophers **philos, t_data *data)
 {
 	int				i;
 	t_philosophers	*tmp;
@@ -23,7 +23,7 @@ void	creat_list(t_philosophers **philosophers, t_data *data)
 	tmp->last_eaten = 0;
 	tmp->nbr_of_times_a_philo_has_eaten = 0;
 	tmp->data = data;
-	*philosophers = tmp;
+	*philos = tmp;
 	last_tmp = tmp;
 	tmp = tmp->next;
 	i = 0;
@@ -47,7 +47,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 	pthread_mutex_init(&data->print, NULL);
 	data->number_of_philosophers = atoi(argv[1]);
 	data->forks = malloc(data->number_of_philosophers * \
-							sizeof(pthread_mutex_t));
+		sizeof(pthread_mutex_t));
 	i = -1;
 	while (++i < data->number_of_philosophers)
 		pthread_mutex_init(&data->forks[i], NULL);

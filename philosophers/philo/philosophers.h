@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/26 14:13:36 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:49:57 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,18 @@ typedef struct s_philosophers
 }				t_philosophers;
 
 int			arg_verif(int argc, char **argv);
-int			ft_memcmp(const void *s1, const void *s2, size_t n);
 
-void		printing_philo(t_philosophers **philosopher);
-void		printing_list(t_philosophers *philosophers);
-
-void		creat_list(t_philosophers **philosophers, t_data *data);
+void		creat_list(t_philosophers **philos, t_data *data);
 int			stock_data(t_data *data, int argc, char **argv);
 
 long int	current_time(void);
-void		ft_usleep(t_philosophers **philosopher, long int time_to_do_smth);
-void		print_lock(t_philosophers **philosopher, char *current_activity);
-int			dying(t_philosophers **philosopher);
-void		eating(t_philosophers **philosopher);
+
+void		print_lock(t_philosophers *philo, char *current_activity);
+int			dying(t_philosophers *philo);
+void		eating(t_philosophers *philo);
 
 void		free_data(t_data *data);
-void		free_list(t_philosophers **philosophers);
-void		free_thread(t_philosophers *philosopher);
+void		free_list(t_philosophers *philos);
+void		free_thread(t_philosophers *philos);
 
 #endif
