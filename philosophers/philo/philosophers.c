@@ -6,11 +6,36 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/27 11:44:42 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:17:14 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	*routine_loop(t_philosophers *tmp)
+{
+	while (!dying(&tmp))
+	{
+		eating(&tmp);
+		print_lock(&tmp, "is sleeping");
+		if (tmp->data->time_to_eat < tmp->data->time_to_die && \
+			(current_time() - tmp->last_eaten) + tmp->data->time_to_sleep <= \
+			tmp->data->time_to_die && !tmp->data->philo_stop)
+			usleep(tmp->data->time_to_sleep * 1000);
+		else if (tmp->data->time_to_eat < tmp->data->time_to_die && \
+				tmp->data->time_to_eat + tmp->data->time_to_sleep > \
+				tmp->data->time_to_die && !tmp->data->philo_stop)
+			usleep((tmp->data->time_to_die - (current_time() - \
+			tmp->data->time)) * 1000);
+		if (!dying(&tmp))
+			print_lock(&tmp, "is thinking");
+		if ((tmp->data->nbr_of_times_a_philo_must_eat >= 0 && \
+		tmp->nbr_of_times_a_philo_has_eaten >= \
+		tmp->data->nbr_of_times_a_philo_must_eat))
+			return (NULL);
+	}
+	return (NULL);
+}
 
 void	*routine(void *philosopher)
 {
@@ -25,25 +50,7 @@ void	*routine(void *philosopher)
 		usleep(tmp->data->time_to_die * 1000);
 	else if (tmp->philo_nbr % 2 == tmp->data->number_of_philosophers % 2)
 		usleep(tmp->data->time_to_eat * 1000);
-	while (!dying(&tmp))
-	{
-		eating(&tmp);
-		print_lock(&tmp, "is sleeping");
-		/*pthread_mutex_lock(&tmp->data->print);
-		printf("|||||||||||||||philo=%d, time_eaten=%ld, curr=%ld, time=%ld, total=%ld.\n", tmp->philo_nbr, tmp->last_eaten, current_time(), tmp->data->time, (current_time() - tmp->last_eaten) + tmp->data->time_to_sleep);
-		pthread_mutex_unlock(&tmp->data->print);*/
-		if (tmp->data->time_to_eat < tmp->data->time_to_die && (current_time() - tmp->last_eaten) + tmp->data->time_to_sleep <= tmp->data->time_to_die && !tmp->data->philo_stop)
-			usleep(tmp->data->time_to_sleep * 1000);
-		else if (tmp->data->time_to_eat < tmp->data->time_to_die && tmp->data->time_to_eat + tmp->data->time_to_sleep > tmp->data->time_to_die)
-			usleep((tmp->data->time_to_die - tmp->data->time_to_sleep) * 1000);
-		if (!dying(&tmp))
-			print_lock(&tmp, "is thinking");
-		if ((tmp->data->nbr_of_times_a_philo_must_eat >= 0 && \
-		tmp->nbr_of_times_a_philo_has_eaten >= \
-		tmp->data->nbr_of_times_a_philo_must_eat))
-			return (NULL);
-	}
-	return (NULL);
+	return (routine_loop(tmp));
 }
 
 int	creat_thread(t_philosophers *philosophers)
