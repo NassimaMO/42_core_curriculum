@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/26 16:12:08 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:44:42 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	*routine(void *philosopher)
 	{
 		eating(&tmp);
 		print_lock(&tmp, "is sleeping");
-		if (tmp->data->time_to_eat < tmp->data->time_to_die && (current_time() - tmp->last_eaten) + tmp->data->time_to_sleep < tmp->data->time_to_die)
+		/*pthread_mutex_lock(&tmp->data->print);
+		printf("|||||||||||||||philo=%d, time_eaten=%ld, curr=%ld, time=%ld, total=%ld.\n", tmp->philo_nbr, tmp->last_eaten, current_time(), tmp->data->time, (current_time() - tmp->last_eaten) + tmp->data->time_to_sleep);
+		pthread_mutex_unlock(&tmp->data->print);*/
+		if (tmp->data->time_to_eat < tmp->data->time_to_die && (current_time() - tmp->last_eaten) + tmp->data->time_to_sleep <= tmp->data->time_to_die && !tmp->data->philo_stop)
 			usleep(tmp->data->time_to_sleep * 1000);
 		else if (tmp->data->time_to_eat < tmp->data->time_to_die && tmp->data->time_to_eat + tmp->data->time_to_sleep > tmp->data->time_to_die)
 			usleep((tmp->data->time_to_die - tmp->data->time_to_sleep) * 1000);
