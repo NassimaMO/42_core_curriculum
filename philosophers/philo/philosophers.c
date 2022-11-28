@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/27 15:03:56 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/28 11:54:50 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,7 @@ void	*routine_loop(t_philosophers *philo)
 	{
 		eating(philo);
 		print_lock(philo, "is sleeping");
-		if (philo->data->time_to_eat < philo->data->time_to_die && \
-			(current_time() - philo->last_eaten) + philo->data->time_to_sleep \
-			<= philo->data->time_to_die && !philo->data->philo_stop)
-			usleep(philo->data->time_to_sleep * 1000);
-		else if (philo->data->time_to_eat < philo->data->time_to_die && \
-				philo->data->time_to_eat + philo->data->time_to_sleep > \
-				philo->data->time_to_die && !philo->data->philo_stop)
-			usleep((philo->data->time_to_die - (current_time() - \
-			philo->data->time)) * 1000);
+		usleep(philo->data->time_to_sleep * 1000);
 		if (!dying(philo))
 			print_lock(philo, "is thinking");
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
