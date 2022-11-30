@@ -36,12 +36,13 @@ int	number_checker(char **argv, int argc)
 	while (++i < argc)
 	{
 		j = -1;
-		if (argv[i][j + 1] == '\0')
+		if (!argv[i][j + 1])
 			return (0);
 		while (argv[i][++j])
 		{
 			if (!(argv[i][j] >= '0' && argv[i][j] <= '9') && \
-				!(argv[i][j] == '-' && j == 0) && !(argv[i][j] == '+' && j == 0))
+				!(argv[i][j] == '-' && j == 0 && argv[i][j + 1]) && \
+				!(argv[i][j] == '+' && j == 0 && argv[i][j + 1]))
 				return (0);
 		}
 		nbr = ft_atoi(argv[i]);
