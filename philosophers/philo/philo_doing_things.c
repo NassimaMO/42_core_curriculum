@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/28 11:09:47 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:05:52 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	unlock_fork(t_philosophers *philo)
 
 void	eating(t_philosophers *philo)
 {
+	int	i;
+	
+	i = 0;
 	if (!dying(philo))
 	{
 		lock_fork(philo);
@@ -50,7 +53,13 @@ void	eating(t_philosophers *philo)
 		if (philo->data->time_to_eat > philo->data->time_to_die)
 			usleep((philo->data->time_to_die + 1) * 1000);
 		else
-			usleep(philo->data->time_to_eat * 1000);
+		{
+			while (i < philo->data->time_to_eat)
+			{
+				usleep(10 * 1000);
+				i += 10;
+			}
+		}
 		philo->last_eaten = current_time();
 		if (philo->data->nbr_of_times_a_philo_must_eat >= 0)
 			philo->nbr_of_times_a_philo_has_eaten++;
