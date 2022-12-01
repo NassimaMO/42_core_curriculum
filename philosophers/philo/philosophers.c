@@ -18,7 +18,7 @@ void	*routine_loop(t_philosophers *philo)
 	{
 		eating(philo);
 		print_lock(philo, "is sleeping");
-		usleep(philo->data->time_to_sleep * 1000);
+		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
 			print_lock(philo, "is thinking");
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
@@ -36,12 +36,8 @@ void	*routine(void *philosopher)
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
-	if ((philo->data->time_to_eat > philo->data->time_to_die && \
-		philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2) || \
-		philo->data->number_of_philosophers == 1)
-		usleep(philo->data->time_to_die * 1000);
-	else if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
-		usleep(philo->data->time_to_eat * 1000);
+	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
+		ft_usleep(philo, philo->data->time_to_eat);
 	return (routine_loop(philo));
 }
 

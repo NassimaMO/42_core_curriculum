@@ -20,6 +20,18 @@ long int	current_time(void)
 	return (time.tv_sec * 1000 + time. tv_usec / 1000);
 }
 
+void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
+{
+	long int	time;
+
+	time = current_time();
+	while (current_time() < time + time_to_do_smth)
+	{
+		if (philosopher->data->philo_stop || dying(philosopher))
+			return ;
+	}
+}
+
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
 	pthread_mutex_lock(&philo->data->print);

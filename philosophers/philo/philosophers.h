@@ -49,6 +49,7 @@ int			arg_verif(int argc, char **argv);
 void		creat_list(t_philosophers **philos, t_data *data);
 int			stock_data(t_data *data, int argc, char **argv);
 
+void		ft_usleep(t_philosophers *philosopher, long int time_to_do_smth);
 long int	current_time(void);
 
 void		print_lock(t_philosophers *philo, char *current_activity);

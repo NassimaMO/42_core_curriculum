@@ -16,6 +16,8 @@ int	dying(t_philosophers *philo)
 {
 	if (philo->data->philo_stop)
 		return (1);
+	if (philo->data->number_of_philosophers == 1)
+		usleep(philo->data->time_to_die * 1000);
 	if (current_time() - philo->last_eaten >= philo->data->time_to_die)
 		return (print_lock(philo, "died"), philo->data->philo_stop++, 1);
 	return (0);
@@ -43,23 +45,11 @@ void	unlock_fork(t_philosophers *philo)
 
 void	eating(t_philosophers *philo)
 {
-	int	i;
-	
-	i = 0;
 	if (!dying(philo))
 	{
 		lock_fork(philo);
 		print_lock(philo, "is eating");
-		if (philo->data->time_to_eat > philo->data->time_to_die)
-			usleep((philo->data->time_to_die + 1) * 1000);
-		else
-		{
-			while (i < philo->data->time_to_eat)
-			{
-				usleep(10 * 1000);
-				i += 10;
-			}
-		}
+		ft_usleep(philo, philo->data->time_to_eat);
 		philo->last_eaten = current_time();
 		if (philo->data->nbr_of_times_a_philo_must_eat >= 0)
 			philo->nbr_of_times_a_philo_has_eaten++;
