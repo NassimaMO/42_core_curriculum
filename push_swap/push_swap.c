@@ -53,8 +53,6 @@ int	main(int argc, char **argv)
 	int			*a;
 	int			i;
 
-	if (argc <= 2)
-		return (0);
 	if (!number_checker(argv, argc))
 		return (ft_putstr_fd("Error\n", 2), 1);
 	a = put_int_tab(argv, argc);

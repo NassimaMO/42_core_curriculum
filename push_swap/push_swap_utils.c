@@ -50,6 +50,8 @@ int	number_checker(char **argv, int argc)
 			verif_double(argv[i], argv, argc, i))
 			return (0);
 	}
+	if (argc <= 2)
+		return (0);
 	return (1);
 }
 

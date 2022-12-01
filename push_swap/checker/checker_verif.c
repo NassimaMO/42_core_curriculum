@@ -27,7 +27,8 @@ int	number_checker(char **argv, int argc)
 		while (argv[i][++j])
 		{
 			if (!(argv[i][j] >= '0' && argv[i][j] <= '9') && \
-				!(argv[i][j] == '-' && j == 0) && !(argv[i][j] == '+' && j == 0))
+				!(argv[i][j] == '-' && j == 0 && argv[i][j + 1]) && \
+				!(argv[i][j] == '+' && j == 0 && argv[i][j + 1]))
 				return (0);
 		}
 		nbr = ft_atoi(argv[i]);
