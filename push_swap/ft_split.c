@@ -57,13 +57,9 @@ char    **ft_split(char *str, char c)
         while (str[i] == c)
             i++;
         chr = 0;
-        tab[word] = malloc(sizeof(char) * ft_strc(str + i, c));
+        tab[word] = malloc(sizeof(char) * ft_strc(str + i, c) + 1);
         while (str[i] && str[i] != c)
-        {
-            tab[word][chr++] = str[i];
-
-            i++;
-        }
+            tab[word][chr++] = str[i++];
         tab[word][chr] = '\0';
         while (str[i] == c)
             i++;
@@ -72,7 +68,7 @@ char    **ft_split(char *str, char c)
     return (tab);
 }
 
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
     char    **tab;
     int     i;
@@ -82,4 +78,4 @@ int main(int argc, char **argv)
     while (tab[++i])
         printf("%s;\n", tab[i]);
     return (0);
-}
+}*/
