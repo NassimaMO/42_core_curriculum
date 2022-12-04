@@ -17,7 +17,7 @@ int	number_checker(char **argv, int argc)
 		while (tab_tmp[x] && tab_tmp[x][j])
 		{
 			if (!(tab_tmp[x][j] >= '0' && tab_tmp[x][j] <= '9') && \
-				!(tab_tmp[x][j] == '-' && j == 0 && tab_tmp[x][j + 1]) && \
+				!(tab_tmp[x][j] == '-' && j == 0 && tab_tmp[x][j + 1]) &&\
 				!(tab_tmp[x][j] == '+' && j == 0 && tab_tmp[x][j + 1]))
 				return (free_tab(tab_tmp), 0);
             j++;
