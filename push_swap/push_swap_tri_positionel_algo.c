@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:10:11 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/04 12:52:00 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:44:55 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ void	algo_exec(t_list **list_a, t_list **list_b, int len)
 	put_list_in_order(list_a, len);
 }
 
-void	tri_positionel(t_list **list_a, int len, int mediane)
+void	tri_positionel(t_list **list_a, t_list **list_b, int len, int mediane)
 {
-	int		i;
-	t_list	*list_b;
+	int	i;
 
 	i = -1;
 	while (++i < len - 3)
@@ -77,15 +76,15 @@ void	tri_positionel(t_list **list_a, int len, int mediane)
 				rab(list_a);
 				ft_printf("ra\n");
 			}
-			pab(list_a, &list_b, i);
+			pab(list_a, list_b, i);
 			ft_printf("pb\n");
 		}
 		else
 		{
-			pab(list_a, &list_b, i);
+			pab(list_a, list_b, i);
 			ft_printf("pb\n");
 		}
 	}
 	algo_three(list_a);
-	algo_exec(list_a, &list_b, len);
+	algo_exec(list_a, list_b, len);
 }

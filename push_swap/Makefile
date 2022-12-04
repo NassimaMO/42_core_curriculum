@@ -36,10 +36,9 @@ CHECKER_CHANGES=checker/checker_changes/pab.c checker/checker_changes/rab.c \
 
 SRCS		=	push_swap.c push_swap_utils.c push_swap_target_pos.c \
 				push_swap_costs.c push_swap_algo_three.c push_swap_perf_move.c \
-				push_swap_scases.c push_swap_tri_positionel_algo.c push_swap_tab.c
+				push_swap_scases.c push_swap_tri_positionel_algo.c
 
-SRCS_BONUS	=	checker/checker.c checker/checker_verif.c checker/checker_check.c \
-				checker/checker_tab.c
+SRCS_BONUS	=	checker/checker.c checker/checker_verif.c checker/checker_check.c
 
 OBJ_DIR		=	obj
 
