@@ -13,11 +13,11 @@ int	number_checker(char **argv, int argc)
 		j = 0;
 		if (!argv[i][j])
 			return (0);
-        tab_tmp = ft_split(argv, ' ');
+        tab_tmp = ft_split(argv[i], ' ');
 		while (tab_tmp[x] && tab_tmp[x][j])
 		{
 			if (!(tab_tmp[x][j] >= '0' && tab_tmp[x][j] <= '9') && \
-				!(tab_tmp[x][j] == '-' && j == 0 && tab_tmp[x][j + 1]) &&\
+				!(tab_tmp[x][j] == '-' && j == 0 && tab_tmp[x][j + 1]) && \
 				!(tab_tmp[x][j] == '+' && j == 0 && tab_tmp[x][j + 1]))
 				return (free_tab(tab_tmp), 0);
             j++;
@@ -25,7 +25,7 @@ int	number_checker(char **argv, int argc)
             {
 		        nbr = ft_atoi(tab_tmp[x]);
 		        if (nbr > INT_MAX || nbr < INT_MIN || \
-			        verif_double(tab_tmp[x], argv, argc, i))
+			        verif_double(argv, argc, x, i))
 			        return (free_tab(tab_tmp), 0);
                 x++;
                 j = 0;
@@ -40,16 +40,26 @@ int	number_checker(char **argv, int argc)
 
 
 // to verify for each tab of arg
-int	verif_double(char *a, char **argv, int argc, int x)
+int	verif_double(char **argv, int argc, int i, int x)
 {
-	int	i;
+	int	n;
+	int	**tab_tmp;
+	int	num;
+	int	w;
 
-	i = 1;
-	while (i < argc)
+	n = 0;
+	tab_tmp = ft_split(argv[i], ' ');
+	num = ft_atoi(tab_tmp[x]);
+	free_tab(tab_tmp);
+	while (++n < argc)
 	{
-		if (i != x && ft_atoi(argv[i]) == ft_atoi(a))
-			return (1);
-		i++;
+        tab_tmp = ft_split(argv[n], ' ');
+		w = -1;
+		while (tab_tmp[++w])
+		{
+			if (n != i && x != w && ft_atoi(tab_tmp[w]) == num)
+				return (1);
+		}
 	}
 	return (0);
 }
@@ -59,17 +69,20 @@ int	*put_int_tab(char **argv, int argc)
 	int	*a;
 	int	i;
 	int	j;
+	int	w;
+	int	**tab_tmp;
 
-	i = 1;
-	j = 0;
-	a = malloc(sizeof(int) * (argc - 1));
+	i = 0;
+	j = -1;
+	a = malloc(sizeof(int) * get_num_param(argv, argc));
 	if (!a)
 		exit(1);
-	while (i < argc)
+	while (++i < argc)
 	{
-		a[j] = ft_atoi(argv[i]);
-		i++;
-		j++;
+		tab_tmp = ft_split(argv[i], ' ');
+		w = -1;
+		while (tab_tmp[++w])
+			a[++j] = ft_atoi(tab_tmp[w]);
 	}
 	return (a);
 }

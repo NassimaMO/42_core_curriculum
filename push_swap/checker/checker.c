@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/25 18:10:50 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:37:38 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 		return (nums_in_order(a, argc - 1), free(a), free(tab), 1);
 	if (verif_instructs(tab, len))
 		return (ft_putstr_fd("Error\n", 2), free(a), free(tab), 1);
-	execute_instruct(tab, len, a, argc - 1);
+	execute_instruct(tab, len, a, get_num_param(argv, argc));
 	i = -1;
 	while (++i < len)
 		free(tab[i]);
