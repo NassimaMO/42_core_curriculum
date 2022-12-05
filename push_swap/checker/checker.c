@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:49:49 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/25 18:10:50 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:26:26 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,21 @@ char	**str_to_tab(int *l)
 	return (tab);
 }
 
+static void	free_tab(char **tab, int len)
+{
+	int	i;
+
+	i = -1;
+	while (++i < len)
+		free(tab[i]);
+	free(tab);
+}
+
 int	main(int argc, char **argv)
 {
 	static int	*a;
 	int			len;
 	char		**tab;
-	int			i;
 
 	if (!number_checker(argv, argc))
 		return (ft_putstr_fd("Error\n", 2), 0);
@@ -74,12 +83,9 @@ int	main(int argc, char **argv)
 	if (!tab)
 		return (free(a), 1);
 	if (!len)
-		return (nums_in_order(a, argc - 1), free(a), free(tab), 1);
+		return (nums_in_order(a, argc - 1), free(a), free_tab(tab, len), 1);
 	if (verif_instructs(tab, len))
-		return (ft_putstr_fd("Error\n", 2), free(a), free(tab), 1);
+		return (ft_putstr_fd("Error\n", 2), free(a), free_tab(tab, len), 1);
 	execute_instruct(tab, len, a, argc - 1);
-	i = -1;
-	while (++i < len)
-		free(tab[i]);
-	return (free(tab), free(a), 0);
+	return (free_tab(tab, len), free(a), 0);
 }

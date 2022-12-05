@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:06:12 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/25 18:51:52 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:53:13 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,3 @@ int	main(int argc, char **argv)
 	ft_lstclear(&list_a, free);
 	return (0);
 }
-
-	/*t_list *tmp = list_a;
-
-	while (tmp)
-	{
-		ft_printf("value = %d, ",tmp->content->value);
-		ft_printf("index = %d, ", tmp->content->index);
-		ft_printf("pos = %d\n\n", tmp->content->pos);
-		tmp = tmp->next;
-	}
-
-	tmp = list_b;
-
-	while (tmp)
-	{
-		ft_printf("value = %d, ",tmp->content->value);
-		ft_printf("index = %d, ", tmp->content->index);
-		ft_printf("pos = %d\n\n", tmp->content->pos);
-		tmp = tmp->next;
-	}*/
