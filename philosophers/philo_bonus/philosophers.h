@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/04 16:02:07 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:39 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <fcntl.h>
 # include <sys/time.h>
 
 # define INT_MAX 2147483647
@@ -48,7 +49,7 @@ typedef struct s_philosophers
 int			arg_verif(int argc, char **argv);
 
 void		creat_list(t_philosophers **philos, t_data *data);
-int			stock_data(t_data *data, int argc, char **argv);
+t_data		*stock_data(int argc, char **argv);
 
 void		ft_usleep(t_philosophers *philosopher, long int time_to_do_smth);
 long int	current_time(void);

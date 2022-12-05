@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/28 11:54:50 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:54:51 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*routine_loop(t_philosophers *philo)
 {
 	while (!dying(philo))
 	{
-		eating(philo);
+		//eating(philo);
 		print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
@@ -36,6 +36,7 @@ void	*routine(void *philosopher)
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
+	printf("heyy\n");
 	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
 		ft_usleep(philo, philo->data->time_to_eat);
 	return (routine_loop(philo));
@@ -73,8 +74,8 @@ int	main(int argc, char **argv)
 
 	if (arg_verif(argc, argv))
 		return (1);
-	data = malloc(sizeof(t_data));
-	if (stock_data(data, argc, argv))
+	data = stock_data(argc, argv);
+	if (!data)
 		return (1);
 	creat_list(&philos, data);
 	creat_thread(philos);
