@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/04 16:05:46 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:51:45 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,19 @@ void	creat_list(t_philosophers **philos, t_data *data)
 	}
 }
 
-int	stock_data(t_data *data, int argc, char **argv)
+t_data	*stock_data(int argc, char **argv)
 {
-	int	i;
+	int		i;
+	t_data	*data;
 
-	sem_init(&data->print, PTHREAD_PROCESS_SHARED, 0);
+	data = malloc(sizeof(t_data));
+	printf("%d.\n", sem_init(&data->print, PTHREAD_PROCESS_SHARED, 0));
 	data->number_of_philosophers = atoi(argv[1]);
 	data->forks = malloc(data->number_of_philosophers * \
 		sizeof(sem_t));
 	i = -1;
 	while (++i < data->number_of_philosophers)
-		sem_init(&data->forks[i], PTHREAD_PROCESS_SHARED, i + 1);
+		printf("%d.\n", sem_init(&data->forks[i], 0, i + 1));
 	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);
@@ -60,6 +62,6 @@ int	stock_data(t_data *data, int argc, char **argv)
 	if (argc == 6)
 		data->nbr_of_times_a_philo_must_eat = atoi(argv[5]);
 	if (data->time_to_sleep < 60 || data->time_to_eat < 60)
-		return (free_data(data), 1);
-	return (0);
+		return (free_data(data), NULL);
+	return (data);
 }

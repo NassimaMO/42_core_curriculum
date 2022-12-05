@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/04 16:13:23 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:12:37 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,44 @@ int	dying(t_philosophers *philo)
 	return (0);
 }
 
-void	lock_fork(t_philosophers *philo)
+int	lock_fork(t_philosophers *philo)
 {
-	sem_wait(&philo->data->forks[philo->philo_nbr - 1]);
+	int	i;
+
+	i = -1;
+	while (++i < philo->data->number_of_philosophers)
+	{
+		if (!sem_wait(&philo->data->forks[i]))
+			break ;
+	}
 	print_lock(philo, "has taken a fork");
-	if (philo->philo_nbr == philo->data->number_of_philosophers)
-		sem_wait(&philo->data->forks[0]);
-	else
-		sem_wait(&philo->data->forks[philo->philo_nbr]);
-	print_lock(philo, "has taken a fork");
+	return (i);
 }
 
-void	unlock_fork(t_philosophers *philo)
+void	unlock_fork(t_philosophers *philo, int n)
 {
-	sem_post(&philo->data->forks[philo->philo_nbr - 1]);
-	if (philo->philo_nbr == philo->data->number_of_philosophers)
-		sem_post(&philo->data->forks[0]);
-	else
-		sem_post(&philo->data->forks[philo->philo_nbr]);
+	int	i;
+
+	i = -1;
+	while (++i < philo->data->number_of_philosophers)
+	{
+		if (i == n)
+			return ((void)sem_post(&philo->data->forks[philo->philo_nbr - 1]));
+	}
 }
 
 void	eating(t_philosophers *philo)
 {
+	int	n;
+	
 	if (!dying(philo))
 	{
-		lock_fork(philo);
+		n = lock_fork(philo);
 		print_lock(philo, "is eating");
 		ft_usleep(philo, philo->data->time_to_eat);
 		philo->last_eaten = current_time();
 		if (philo->data->nbr_of_times_a_philo_must_eat >= 0)
 			philo->nbr_of_times_a_philo_has_eaten++;
-		unlock_fork(philo);
+		unlock_fork(philo, n);
 	}
 }

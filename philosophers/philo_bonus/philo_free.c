@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/04 16:11:37 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:37:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	free_data(t_data *data)
 {
-	/*int	i;
+	int	i;
 
-	sem_unlink(0);
+	sem_destroy(&data->print);
 	i = -1;
 	while (++i < data->number_of_philosophers)
-		sem_unlink(i + 1);
+		sem_destroy(&data->forks[i]);
 	free(data->forks);
-	free(data);*/
-	(void) data;
+	free(data);
 }
 
 void	free_list(t_philosophers *philos)
