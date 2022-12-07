@@ -56,10 +56,10 @@ ${NAME}:		${OBJ} ${LIB} ${MLX}
 				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
 
 ${NAME_BONUS}:	${OBJ_BONUS} ${LIB} ${MLX}
-				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
+				$(CC) $(CFLAGS) -o $@ $(OBJ_BONUS) -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
 
 ${NAME_LAPTOP}:	${OBJ_BONUS} ${LIB} ${MLX_LAPTOP}
-				$(CC) $(CFLAGS) -o $@ ${OBJ_BONUS} -L"minilibx-linux/" -lmlx_L -lXext -lX11 -lXrender -L. -lft
+				$(CC) $(CFLAGS) -o $@ $(OBJ_BONUS) -L"minilibx-linux/" -lmlx_L -lXext -lX11 -lXrender -L. -lft
 ${LIB}:
 				cd libft && make && mv $@ .. && cd ..
 
