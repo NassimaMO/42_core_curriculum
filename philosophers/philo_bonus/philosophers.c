@@ -16,7 +16,7 @@ void	*routine_loop(t_philosophers *philo)
 {
 	while (!dying(philo))
 	{
-		//eating(philo);
+		eating(philo);
 		print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
@@ -36,7 +36,6 @@ void	*routine(void *philosopher)
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
-	printf("heyy\n");
 	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
 		ft_usleep(philo, philo->data->time_to_eat);
 	return (routine_loop(philo));

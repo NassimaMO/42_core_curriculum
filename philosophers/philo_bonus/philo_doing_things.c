@@ -45,7 +45,7 @@ void	unlock_fork(t_philosophers *philo, int n)
 	while (++i < philo->data->number_of_philosophers)
 	{
 		if (i == n)
-			return ((void)sem_post(&philo->data->forks[philo->philo_nbr - 1]));
+			return (printf("%d.\n", philo->philo_nbr), (void)sem_post(&philo->data->forks[philo->philo_nbr - 1]));
 	}
 }
 

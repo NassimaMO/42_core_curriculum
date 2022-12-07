@@ -34,10 +34,9 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
-	printf("yea?\n");
-	printf("%d..\n", sem_wait(&philo->data->print));
+	sem_wait(&philo->data->print);
 	if (!philo->data->philo_stop)
 		printf("%ld %d %s\n", current_time() - philo->data->time, \
-				philo->philo_nbr, current_activity);
-	printf("%d..\n", sem_post(&philo->data->print));
+			philo->philo_nbr, current_activity);
+	sem_post(&philo->data->print);
 }

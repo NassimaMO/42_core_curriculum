@@ -46,13 +46,13 @@ t_data	*stock_data(int argc, char **argv)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-	printf("%d.\n", sem_init(&data->print, PTHREAD_PROCESS_SHARED, 0));
 	data->number_of_philosophers = atoi(argv[1]);
+	sem_init(&data->print, PTHREAD_PROCESS_SHARED, data->number_of_philosophers);
 	data->forks = malloc(data->number_of_philosophers * \
 		sizeof(sem_t));
 	i = -1;
 	while (++i < data->number_of_philosophers)
-		printf("%d.\n", sem_init(&data->forks[i], 0, i + 1));
+		sem_init(&data->forks[i], PTHREAD_PROCESS_SHARED, data->number_of_philosophers);
 	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);
