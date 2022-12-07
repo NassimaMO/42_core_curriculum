@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/05 11:31:39 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:53:31 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <semaphore.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/signal.h>
 # include <sys/time.h>
 
 # define INT_MAX 2147483647

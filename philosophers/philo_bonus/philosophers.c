@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/07 14:07:05 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:24:23 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	*routine(void *philosopher)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)philosopher;
-	printf("threads=%d.\n", getpid());
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
 	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
@@ -42,27 +41,18 @@ void	*routine(void *philosopher)
 	return (routine_loop(philo));
 }
 
-int	creat_thread(t_philosophers *philos)
+int	creat_thread(t_philosophers *philo)
 {
-	t_philosophers	*philo;
-	int				i;
+	int				pid;
 
-	philo = philos;
-	i = -1;
 	philo->data->time = current_time();
-	while (++i < philos->data->number_of_philosophers)
+	pid = fork();
+	if (pid == 0)
 	{
 		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (1);
-		philo = philo->next;
-	}
-	philo = philos;
-	i = -1;
-	while (++i < philos->data->number_of_philosophers)
-	{
 		if (pthread_join(philo->thread, NULL))
 			return (2);
-		philo = philo->next;
 	}
 	return (0);
 }
@@ -70,7 +60,9 @@ int	creat_thread(t_philosophers *philos)
 int	main(int argc, char **argv)
 {
 	t_philosophers	*philos;
+	t_philosophers	*philo;
 	t_data			*data;
+	int				i;
 
 	if (arg_verif(argc, argv))
 		return (1);
@@ -78,7 +70,13 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	creat_list(&philos, data);
-	printf("parent=%d.\n", getpid());
-	creat_thread(philos);
+	//printf("parent=%d.\n", getpid());
+	philo = philos;
+	while (++i < philos->data->number_of_philosophers)
+	{
+		creat_thread(philo);
+		philo = philo->next;
+	}
+  	waitpid(-1, NULL, 0);
 	free_list(philos);
 }

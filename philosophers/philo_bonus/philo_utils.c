@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/05 11:59:11 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:24:10 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
 	sem_wait(&philo->data->print);
+	//printf("threads=%d, philo=%d.\n", getpid(), philo->philo_nbr);
 	if (!philo->data->philo_stop)
 		printf("%ld %d %s\n", current_time() - philo->data->time, \
 			philo->philo_nbr, current_activity);
