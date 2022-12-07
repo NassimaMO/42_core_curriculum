@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/05 11:54:51 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:07:05 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*routine(void *philosopher)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)philosopher;
+	printf("threads=%d.\n", getpid());
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
 	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
@@ -77,6 +78,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	creat_list(&philos, data);
+	printf("parent=%d.\n", getpid());
 	creat_thread(philos);
 	free_list(philos);
 }
