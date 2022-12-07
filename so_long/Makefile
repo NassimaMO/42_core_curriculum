@@ -2,7 +2,13 @@ NAME		=	so_long
 
 NAME_BONUS	=	so_long_b
 
+NAME_LAPTOP	=	so_long_L
+
 LIB			=	libft.a
+
+MLX			=	libmlx.a
+
+MLX_LAPTOP	=	libmlx_L.a
 
 CC			=	gcc
 
@@ -36,6 +42,8 @@ all:			${NAME}
 
 bonus:			${NAME_BONUS}
 
+laptop:			${NAME_LAPTOP}
+
 $(OBJ_DIR)/%.o: %.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
@@ -44,15 +52,22 @@ $(OBJ_DIR_B)/%.o: so_long_bonus/%.c
 				@mkdir -p $(OBJ_DIR_B)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}:		${OBJ} ${LIB}
+${NAME}:		${OBJ} ${LIB} ${MLX}
 				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
 
-${NAME_BONUS}:	${OBJ_BONUS} ${LIB}
+${NAME_BONUS}:	${OBJ_BONUS} ${LIB} ${MLX}
 				$(CC) $(CFLAGS) $^ -o $@ -L"minilibx-linux/" -lmlx -lXext -lX11 -lXrender -L. -lft
 
+${NAME_LAPTOP}:	${OBJ_BONUS} ${LIB} ${MLX_LAPTOP}
+				$(CC) $(CFLAGS) -o $@ ${OBJ_BONUS} -L"minilibx-linux/" -lmlx_L -lXext -lX11 -lXrender -L. -lft
 ${LIB}:
 				cd libft && make && mv $@ .. && cd ..
-				cd minilibx-linux && make && cd ..
+
+${MLX}:
+				make -C minilibx-linux 
+
+${MLX_LAPTOP}:
+				make laptop -C minilibx-linux
 clean:
 				cd libft && make fclean && cd ..
 				cd minilibx-linux && make clean && cd ..

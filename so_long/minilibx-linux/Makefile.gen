@@ -20,6 +20,7 @@ ifeq ($(UNAME),FreeBSD)
 endif
 
 NAME		= libmlx.a
+NAME_L		= libmlx_L.a
 NAME_UNAME	= libmlx_$(UNAME).a
 
 SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
@@ -63,9 +64,9 @@ $(NAME)	: $(OBJ)
 	cp $(NAME) $(NAME_UNAME)
 
 laptop	: $(OBJ_L)
-	ar -r $(NAME) $(OBJ_L)
-	ranlib $(NAME)
-	cp $(NAME) $(NAME_UNAME)
+	ar -r $(NAME_L) $(OBJ_L)
+	ranlib $(NAME_L)
+	cp $(NAME_L) $(NAME_UNAME)
 
 check: all
 	@test/run_tests.sh
