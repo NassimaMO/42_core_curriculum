@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/07 15:24:23 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:01:26 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	creat_list(&philos, data);
-	//printf("parent=%d.\n", getpid());
 	philo = philos;
 	while (++i < philos->data->number_of_philosophers)
 	{
