@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/10 10:01:26 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/17 11:24:36 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char **argv)
 		return (1);
 	creat_list(&philos, data);
 	philo = philos;
+	i = -1;
 	while (++i < philos->data->number_of_philosophers)
 	{
 		creat_thread(philo);

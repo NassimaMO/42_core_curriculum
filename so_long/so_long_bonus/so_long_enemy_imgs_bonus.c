@@ -6,18 +6,18 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:48:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/10/10 13:28:34 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:48:40 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-//#include <time.h>
+#include <time.h>
 
 void	enemy_mvments(t_data *data)
 {
 	int	i;
 
-	//srand(time(NULL));
+	srand(time(NULL));
 	i = rand() % 4;
 	if (i == 0 && n_mv_up(data))
 		return ;
