@@ -35,7 +35,7 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
 	sem_wait(&philo->data->print);
-	printf("||||||||||||||||||||||||||||||||||||||||||| philo=%d, sem=%ld\n", philo->philo_nbr, philo->data->forks[philo->philo_nbr].__align);
+	//printf("||||||||||||||||||||||||||||||||||||||||||| philo=%d, sem=%ld\n", philo->philo_nbr, philo->data->forks[philo->philo_nbr].__align);
 	if (philo->data->forks[philo->philo_nbr - 1].__align >= 0)
 		printf("%ld %d %s\n", current_time() - philo->data->time, \
 			philo->philo_nbr, current_activity);

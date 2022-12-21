@@ -34,19 +34,21 @@ int	dying(t_philosophers *philo)
 int	lock_fork(t_philosophers *philo)
 {
 	int	i;
+	static sem_t forks = sem_open("/forks", O_CREAT, 0644, 0);
 
 	i = -1;
 	while (++i < philo->data->number_of_philosophers)
 	{
 		sem_wait(&philo->data->print);
-		printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||i=%d, align=%ld.\n", i, philo->data->forks[i].__align);
-		sem_post(&philo->data->print);
+		//printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||i=%d, align=%ld.\n", i, philo->data->forks[i].__align);
 		if (philo->data->forks[i].__align == 0)
 		{
 			philo->data->forks[i].__align++;
 			sem_wait(&philo->data->forks[i]);
+			sem_post(&philo->data->print);
 			break ;
 		}
+		sem_post(&philo->data->print);
 	}
 	print_lock(philo, "has taken a fork");
 	return (i);

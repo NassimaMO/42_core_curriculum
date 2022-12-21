@@ -27,7 +27,7 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 	time = current_time();
 	while (current_time() < time + time_to_do_smth)
 	{
-		if (philosopher->data->philo_stop || dying(philosopher))
+		if (philosopher->data->philo_stop >= philosopher->data->number_of_philosophers || dying(philosopher))
 			return ;
 	}
 }
@@ -35,7 +35,7 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
 	pthread_mutex_lock(&philo->data->print);
-	if (!philo->data->philo_stop)
+	if (philo->data->philo_stop < philo->data->number_of_philosophers)
 		printf("%ld %d %s\n", current_time() - philo->data->time, \
 				philo->philo_nbr, current_activity);
 	pthread_mutex_unlock(&philo->data->print);

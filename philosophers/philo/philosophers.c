@@ -22,9 +22,9 @@ void	*routine_loop(t_philosophers *philo)
 		if (!dying(philo))
 			print_lock(philo, "is thinking");
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
-		philo->nbr_of_times_a_philo_has_eaten >= \
+		philo->nbr_of_times_a_philo_has_eaten == \
 		philo->data->nbr_of_times_a_philo_must_eat))
-			return (NULL);
+			philo->data->philo_stop++;
 	}
 	return (NULL);
 }
