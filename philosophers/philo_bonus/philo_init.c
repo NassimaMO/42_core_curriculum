@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 19:52:23 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/24 20:09:55 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,9 @@ t_data	*stock_data(int argc, char **argv)
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
 	data->print = sem_open("/sem_print", O_CREAT, 0644, 1);
-	//sem_init(&data->print, 0, 1);
 	data->forks = sem_open("/sem_forks", O_CREAT, 0644, data->number_of_philosophers);
-	//sem_init(&data->forks, 1, data->number_of_philosophers);
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
-	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);
 	data->time_to_eat = atoi(argv[3]);
