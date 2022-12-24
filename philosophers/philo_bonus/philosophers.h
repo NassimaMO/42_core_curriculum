@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/07 14:53:31 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:39:15 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef struct s_data
 {
-	sem_t			print;
+	sem_t			*print;
 	sem_t			*forks;
 	int				philo_stop;
 	int				number_of_philosophers;

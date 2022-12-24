@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/17 15:58:36 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:53:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 	time = current_time();
 	while (current_time() < time + time_to_do_smth)
 	{
-		if (philosopher->data->forks[philosopher->philo_nbr - 1].__align < 0 || dying(philosopher))
+		if (philosopher->data->philo_stop >= philosopher->data->number_of_philosophers || dying(philosopher))
 			return ;
 	}
 }
 
 void	print_lock(t_philosophers *philo, char *current_activity)
 {
-	sem_wait(&philo->data->print);
-	//printf("||||||||||||||||||||||||||||||||||||||||||| philo=%d, sem=%ld\n", philo->philo_nbr, philo->data->forks[philo->philo_nbr].__align);
-	if (philo->data->forks[philo->philo_nbr - 1].__align >= 0)
+	sem_wait(philo->data->print);
+	if (philo->data->philo_stop < philo->data->number_of_philosophers)
 		printf("%ld %d %s\n", current_time() - philo->data->time, \
 			philo->philo_nbr, current_activity);
-	sem_post(&philo->data->print);
+	sem_post(philo->data->print);
 }

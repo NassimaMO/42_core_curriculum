@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/23 18:06:44 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:07:54 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	creat_thread(t_philosophers *philos)
 	{
 		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (1);
-		//usleep(10);
 		philo = philo->next;
 	}
 	philo = philos;
