@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 20:09:00 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:40:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <sys/signal.h>
 # include <sys/time.h>
+# include <string.h>
 
 # define INT_MAX 2147483647
 
@@ -29,6 +30,8 @@ typedef struct s_data
 {
 	sem_t			*print;
 	sem_t			*forks;
+	sem_t			*stop;
+	int				*pid;
 	int				number_of_philosophers;
 	long int		time;
 	int				time_to_die;

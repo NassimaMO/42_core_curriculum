@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 20:09:55 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/26 13:04:14 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@ t_data	*stock_data(int argc, char **argv)
 	data->number_of_philosophers = atoi(argv[1]);
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
+	sem_unlink("/sem_stop");
 	data->print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	data->forks = sem_open("/sem_forks", O_CREAT, 0644, data->number_of_philosophers);
+	data->stop = sem_open("/sem_stop", O_CREAT, 0644, data->number_of_philosophers);
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
+	sem_unlink("/sem_stop");
 	data->time = 0;
+	data->pid = malloc(sizeof(int) * data->number_of_philosophers);
+	memset(data->pid, 0, sizeof(int));
 	data->time_to_die = atoi(argv[2]);
 	data->time_to_eat = atoi(argv[3]);
 	data->time_to_sleep = atoi(argv[4]);

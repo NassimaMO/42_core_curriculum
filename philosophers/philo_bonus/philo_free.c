@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 19:43:29 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/26 13:09:58 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_data(t_data *data)
 {
 	sem_close(data->print);
 	sem_close(data->forks);
+	sem_close(data->stop);
+	free(data->pid);
 	free(data);
 }
 

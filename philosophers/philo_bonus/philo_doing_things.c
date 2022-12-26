@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 20:17:35 by nmouslim         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:38:43 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,21 @@ int	dying(t_philosophers *philo)
 	if (current_time() - philo->last_eaten >= philo->data->time_to_die)
 	{
 		print_lock(philo, "died");
-		kill(0, SIGTERM); //SIGINT, SIGKILL
+		sem_wait(philo->data->print);
+		/*printf("%ld %d %s\n", current_time() - philo->data->time, \
+		philo->philo_nbr, "died");*/
+		int	i = -1;
+		usleep(1);
+		/*while (++i < philo->data->number_of_philosophers)
+			printf("%d.\n", philo->data->pid[i]);
+		i = -1;*/
+		while (++i < philo->data->number_of_philosophers)
+		{
+			if (i != philo->philo_nbr - 1)
+				kill(philo->data->pid[i], SIGTERM);
+		}
+		kill(philo->data->pid[philo->philo_nbr - 1], SIGTERM);
+		sem_post(philo->data->print);
 		return (1);
 	}
 	return (0);
