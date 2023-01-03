@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/26 19:12:16 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:49:52 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*routine_loop(t_philosophers *philo)
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		philo->data->nbr_of_times_a_philo_must_eat))
-			{printf("align=%ld, %d\n", philo->data->stop->__align, sem_wait(philo->data->stop)); return (NULL);}
+			philo->data->stop->__align--;
 	}
 	return (NULL);
 }
@@ -45,11 +45,9 @@ int	get_pid_cp(int	pid, int p)
 {
 	static int id;
 
-	//printf("p=%d, pid=%d\n", p, pid);
 	if (p == 1)
 		return (id);
 	id = pid;
-	//printf("||||||||||||pid=%d\n", pid);
 	return (0);
 }
 
@@ -91,8 +89,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < philos->data->number_of_philosophers)
 	{
-		usleep(10);
-		if (creat_thread(philo, i) == 0)
+		if (creat_thread(philo, i) == 0) //take the return value and do smt with it in the loop or smt IDK its so weirdddd fuck this shit haaaaaaaaaaaaaaaaaaaa
 			break;
 		philo = philo->next;
 	}

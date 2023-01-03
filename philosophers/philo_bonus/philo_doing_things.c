@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/26 15:38:43 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:54:49 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ int	dying(t_philosophers *philo)
 {
 	if (philo->data->number_of_philosophers == 1)
 		usleep(philo->data->time_to_die * 1000);
-	if (current_time() - philo->last_eaten >= philo->data->time_to_die)
+	if (philo->data->stop->__align >= 0)
+	if (current_time() - philo->last_eaten >= philo->data->time_to_die || philo->data->stop->__align <= 0)
 	{
-		print_lock(philo, "died");
+		if (philo->data->stop->__align > 0)
+			print_lock(philo, "died");
 		sem_wait(philo->data->print);
-		/*printf("%ld %d %s\n", current_time() - philo->data->time, \
-		philo->philo_nbr, "died");*/
 		int	i = -1;
 		usleep(1);
-		/*while (++i < philo->data->number_of_philosophers)
-			printf("%d.\n", philo->data->pid[i]);
-		i = -1;*/
 		while (++i < philo->data->number_of_philosophers)
 		{
-			if (i != philo->philo_nbr - 1)
+			if (i != philo->philo_nbr - 1 && philo->data->pid[i] != 0)
+			{
+				printf("pid=%d\n", philo->data->pid[i]);
 				kill(philo->data->pid[i], SIGTERM);
+			}
 		}
 		kill(philo->data->pid[philo->philo_nbr - 1], SIGTERM);
 		sem_post(philo->data->print);
