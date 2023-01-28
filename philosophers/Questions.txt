@@ -1,0 +1,10 @@
+MANDATORY:
+
+- Should the philosphers stop eating when they ate number_of_times_a_philo_should_eat times or should they continue eating until everyone has at least this number ?
+- When there is a high number of philosophers, the creation of threads is not in sync, is that ok ?
+- I have sometimes neighbor philosophers that take their own fork at the same time and stay in a state of locked forks because they can't take the other ones fork but it only happens with valgrind so should I take care of it ?
+- If I have an action that happens at the same time as a philosopher dies, can I print it after I print that the philosopher died ?
+
+BONUS:
+
+- HOW TO KILL MY PROCESSES !!!!!???!??!?!?
