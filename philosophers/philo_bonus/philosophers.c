@@ -41,7 +41,7 @@ void	*routine(void *philosopher)
 	return (routine_loop(philo));
 }
 
-int	get_pid_cp(int	pid, int p)
+int	get_pid_cp(int pid, int p)
 {
 	static int id;
 
@@ -49,7 +49,7 @@ int	get_pid_cp(int	pid, int p)
 	if (p == 1)
 		return (id);
 	id = pid;
-	//printf("||||||||||||pid=%d\n", pid);
+	printf("||||||||||||pid=%d\n", pid);
 	return (0);
 }
 
@@ -60,12 +60,17 @@ int	creat_thread(t_philosophers *philo, int i)
 	philo->data->time = current_time();
 	pid = fork();
 	if (pid > 0)
+	{
 		get_pid_cp(pid, 0);
+		printf("1\n");
+	}
 	if (pid == 0)
 	{
-		philo->data->pid[i] = get_pid_cp(pid, 1);
-		//printf("|||||||||||child_pid=%d\n", philo->data->pid[i]);
-		//return (0);
+		usleep(10);
+		philo->data->pid[i] = get_pid_cp(philo, pid, 1);
+		printf("2\n");
+		printf("|||||||||||child_pid=%d\n", philo->data->pid[i]);
+		return (0);
 		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (-2);
 		if (pthread_join(philo->thread, NULL))
