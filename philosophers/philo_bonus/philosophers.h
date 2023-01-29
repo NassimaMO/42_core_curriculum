@@ -6,12 +6,12 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/26 12:40:03 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:50:31 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
-# define PHILOSPHERS_H
+# define PHILOSOPHERS_H
 
 # include <stdio.h>
 # include <stdlib.h>

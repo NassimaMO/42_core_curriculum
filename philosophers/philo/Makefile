@@ -4,7 +4,7 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
-SRCS		=	philosophers.c philo_verif.c philo_init.c \
+SRCS		=	main.c philo_verif.c philo_init.c \
 				philo_free.c philo_utils.c philo_doing_things.c
 
 OBJ_DIR		=	obj

@@ -20,7 +20,7 @@ int	dying(t_philosophers *philo)
 	if (philo->data->number_of_philosophers == 1)
 		usleep(philo->data->time_to_die * 1000);
 	if (current_time() - philo->last_eaten >= philo->data->time_to_die)
-	return (print_lock(philo, "died"), philo->data->philo_stop=philo->data->number_of_philosophers, 1);
+		return (print_lock(philo, "died"), philo->data->philo_stop=philo->data->number_of_philosophers, 1);
 	return (0);
 }
 
