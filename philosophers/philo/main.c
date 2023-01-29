@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/24 19:07:54 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:08:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int	creat_thread(t_philosophers *philos)
 	philo->data->time = current_time();
 	while (++i < philos->data->number_of_philosophers)
 	{
+		/*pthread_mutex_lock(&philo->data->print);
+		printf("heeyyy %d\n", i + 1);
+		pthread_mutex_unlock(&philo->data->print);*/
 		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (1);
 		philo = philo->next;

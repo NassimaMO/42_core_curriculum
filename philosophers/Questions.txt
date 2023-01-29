@@ -8,3 +8,6 @@ MANDATORY:
 BONUS:
 
 - HOW TO KILL MY PROCESSES !!!!!???!??!?!?
+
+
+fsanitize

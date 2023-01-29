@@ -21,6 +21,7 @@ $(OBJ_DIR)/%.o: %.c
 
 ${NAME}:		${OBJ} ${OBJ_CHANGES} philosophers.h
 				$(CC) $(CFLAGS) $^ -o $@ -lpthread
+#-fsanitize=thread
 
 clean:
 				${RM} -r ${OBJ_DIR}

@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/23 18:07:17 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:18:24 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,26 @@ int	dying(t_philosophers *philo)
 
 void	lock_fork(t_philosophers *philo)
 {
-	pthread_mutex_lock(&philo->data->forks[philo->philo_nbr - 1]);
-	print_lock(philo, "has taken a fork");
-	if (philo->philo_nbr == philo->data->number_of_philosophers)
-		pthread_mutex_lock(&philo->data->forks[0]);
+	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->philo_nbr - 1]);
+		print_lock(philo, "has taken a fork");
+		if (philo->philo_nbr == philo->data->number_of_philosophers)
+			pthread_mutex_lock(&philo->data->forks[0]);
+		else
+			pthread_mutex_lock(&philo->data->forks[philo->philo_nbr]);
+		print_lock(philo, "has taken a fork");
+	}
 	else
-		pthread_mutex_lock(&philo->data->forks[philo->philo_nbr]);
-	print_lock(philo, "has taken a fork");
+	{
+		if (philo->philo_nbr == philo->data->number_of_philosophers)
+			pthread_mutex_lock(&philo->data->forks[0]);
+		else
+			pthread_mutex_lock(&philo->data->forks[philo->philo_nbr]);
+		print_lock(philo, "has taken a fork");
+		pthread_mutex_lock(&philo->data->forks[philo->philo_nbr - 1]);
+		print_lock(philo, "has taken a fork");
+	}
 }
 
 void	unlock_fork(t_philosophers *philo)
