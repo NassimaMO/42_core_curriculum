@@ -4,7 +4,9 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
-SRCS		=	philosophers.c philo_verif.c philo_init.c \
+SRCS_DIR	=	srcs
+
+SRCS		=	main.c philo_verif.c philo_init.c \
 				philo_free.c philo_utils.c philo_doing_things.c
 
 OBJ_DIR		=	obj
@@ -15,12 +17,12 @@ RM			=	rm -f
 
 all:			${NAME}
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
 
 
-${NAME}:		${OBJ} ${OBJ_CHANGES} philosophers.h
+${NAME}:		${OBJ} ${OBJ_CHANGES} includes/philosophers.h
 				$(CC) $(CFLAGS) $^ -o $@ -lpthread
 
 
