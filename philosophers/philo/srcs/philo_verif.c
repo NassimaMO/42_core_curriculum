@@ -6,11 +6,11 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:55 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/27 14:25:05 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:13:27 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 static int	invalid_arg(char *arg)
 {

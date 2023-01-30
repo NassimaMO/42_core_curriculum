@@ -6,11 +6,11 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/11/27 14:30:56 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:13:31 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 void	free_data(t_data *data)
 {

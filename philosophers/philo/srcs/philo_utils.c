@@ -6,11 +6,11 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/23 18:06:50 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:13:30 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 long int	current_time(void)
 {
@@ -27,7 +27,8 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 	time = current_time();
 	while (current_time() < time + time_to_do_smth)
 	{
-		if (philosopher->data->philo_stop >= philosopher->data->number_of_philosophers || dying(philosopher))
+		if (philosopher->data->philo_stop >= \
+			philosopher->data->number_of_philosophers || dying(philosopher))
 			return ;
 	}
 }
