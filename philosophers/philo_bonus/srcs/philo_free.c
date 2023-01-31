@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:57:27 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:31:55 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	end(t_philosophers *philos)
 	if (WEXITSTATUS(status) == 1)
 	{
 		while (i < philos->data->number_of_philosophers)
-		{
 			kill(philos->data->pid[i++], SIGTERM);
-			//printf("philo=%d, pid=%d\n", i, philos->data->pid[i]);
-		}
+	}
+	else if (WEXITSTATUS(status) < 0)
+	{
+		while (i < philos->data->number_of_philosophers)
+			kill(philos->data->pid[i++], SIGTERM);
+		printf("Thread Error.\n");
 	}
 	else
 	{

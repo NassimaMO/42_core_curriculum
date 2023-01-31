@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:10 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:49:59 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	dying(t_philosophers *philo)
 		if (philo->data->stop->__align > 0)
 		{
 			print_lock(philo, "died");
+			philo->data->stop->__align = -1;
 			exit(1);
 		}
 		return (1);

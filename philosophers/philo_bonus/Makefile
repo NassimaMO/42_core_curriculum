@@ -24,6 +24,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 
 ${NAME}:		${OBJ} ${OBJ_CHANGES} includes/philosophers.h
 				$(CC) $(CFLAGS) $^ -o $@ -lpthread
+#-fsanitize=thread
 
 
 clean:

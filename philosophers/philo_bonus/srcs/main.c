@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 11:01:33 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:46:18 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ void	*routine(void *philosopher)
 	return (routine_loop(philo));
 }
 
-int	creat_thread(t_philosophers *philo, int i)
+void	creat_thread(t_philosophers *philo, int i)
 {
 	philo->data->time = current_time();
 	philo->data->pid[i] = fork();
 	if (philo->data->pid[i] == 0)
 	{
 		if (pthread_create(&philo->thread, NULL, routine, philo))
-			return (-2);
+			exit (-2);
 		if (pthread_join(philo->thread, NULL))
-			return (-1);
+			exit (-1);
+		exit (0);
 	}
-	return (philo->data->pid[i]);
 }
 
 int	main(int argc, char **argv)
@@ -72,8 +72,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < philos->data->number_of_philosophers)
 	{
-		if (creat_thread(philo, i) == 0) //take the return value and do smt with it in the loop or smt IDK its so weirdddd fuck this shit haaaaaaaaaaaaaaaaaaaa
-			break;
+		creat_thread(philo, i); //take the return value and do smt with it in the loop or smt IDK its so weirdddd fuck this shit haaaaaaaaaaaaaaaaaaaa
 		philo = philo->next;
 	}
 	end(philos);
