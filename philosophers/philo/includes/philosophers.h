@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2022/12/23 18:07:04 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:21:20 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef struct s_data
 {
+	pthread_mutex_t	stop;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	int				philo_stop;

@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:13:33 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:24:45 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 int	dying(t_philosophers *philo)
 {
+	pthread_mutex_lock(&philo->data->print);
 	if (philo->data->philo_stop >= philo->data->number_of_philosophers)
-		return (1);
+		return (pthread_mutex_unlock(&philo->data->print), 1);
+	pthread_mutex_unlock(&philo->data->print);
 	if (philo->data->number_of_philosophers == 1)
 		usleep(philo->data->time_to_die * 1000);
 	if (current_time() - philo->last_eaten >= philo->data->time_to_die)
-		return (print_lock(philo, "died"), philo->data->philo_stop = \
-			philo->data->number_of_philosophers, 1);
+	{
+		print_lock(philo, "died");
+		pthread_mutex_lock(&philo->data->print);
+		philo->data->philo_stop = philo->data->number_of_philosophers;
+		pthread_mutex_unlock(&philo->data->print);
+		return (1);
+	}
 	return (0);
 }
 

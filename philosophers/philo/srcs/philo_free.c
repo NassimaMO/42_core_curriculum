@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:27 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:13:31 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:21:08 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_data(t_data *data)
 {
 	int	i;
 
+	pthread_mutex_destroy(&data->stop);
 	pthread_mutex_destroy(&data->print);
 	i = -1;
 	while (++i < data->number_of_philosophers)

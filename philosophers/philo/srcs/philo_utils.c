@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:44 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:13:30 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:24:44 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ void	ft_usleep(t_philosophers *philosopher, long int time_to_do_smth)
 	time = current_time();
 	while (current_time() < time + time_to_do_smth)
 	{
+		pthread_mutex_lock(&philosopher->data->stop);
 		if (philosopher->data->philo_stop >= \
 			philosopher->data->number_of_philosophers || dying(philosopher))
+		{
+			pthread_mutex_unlock(&philosopher->data->stop);
 			return ;
+		}
+		pthread_mutex_unlock(&philosopher->data->stop);
 	}
 }
 

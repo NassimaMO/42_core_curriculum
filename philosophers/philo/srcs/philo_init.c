@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:13:07 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:21:05 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 {
 	int	i;
 
+	pthread_mutex_init(&data->stop, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	data->number_of_philosophers = atoi(argv[1]);
 	data->forks = malloc(data->number_of_philosophers * \
