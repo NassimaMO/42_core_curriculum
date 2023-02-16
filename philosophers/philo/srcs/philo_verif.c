@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:55 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 11:30:35 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:00:26 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	arg_verif(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (invalid_arg(argv[i]))
-			return (1);
+			return (printf("Invalid arguments.\n"), 1);
 		number = atoi(argv[i]);
 		if ((i == 2 && number == 0) || number > INT_MAX || number < 0)
-			return (1);
+			return (printf("Invalid arguments.\n"), 1);
 	}
 	return (0);
 }

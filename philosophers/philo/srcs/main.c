@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 16:25:03 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:36:41 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	*routine_loop(t_philosophers *philo)
 		if (!dying(philo))
 		{
 			print_lock(philo, "is thinking");
-			if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2 \
+			if (philo->philo_nbr % 2 > 0 \
 				&& philo->data->number_of_philosophers % 2 > 0)
-				ft_usleep(philo, philo->data->time_to_eat);
+				ft_usleep(philo, philo->data->time_to_eat - 10);
 		}
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
@@ -45,8 +45,8 @@ void	*routine(void *philosopher)
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
 	print_lock(philo, "is thinking");
-	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
-		ft_usleep(philo, philo->data->time_to_eat);
+	if (philo->philo_nbr % 2 > 0)
+		ft_usleep(philo, philo->data->time_to_eat - 10);
 	return (routine_loop(philo));
 }
 

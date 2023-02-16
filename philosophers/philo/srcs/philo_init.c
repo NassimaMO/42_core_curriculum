@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:34 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 11:10:30 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:53 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 	data->nbr_of_times_a_philo_must_eat = -1;
 	if (argc == 6)
 		data->nbr_of_times_a_philo_must_eat = atoi(argv[5]);
+	if (data->nbr_of_times_a_philo_must_eat == 0)
+		return (1);
 	return (0);
 }
