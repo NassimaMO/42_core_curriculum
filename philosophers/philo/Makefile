@@ -1,4 +1,4 @@
-NAME		=	philosophers
+NAME		=	philo
 
 CC			=	gcc
 
@@ -22,8 +22,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
 ${NAME}:		${OBJ} includes/philosophers.h
-				$(CC) $(CFLAGS) $^ -o $@ -lpthread
-#-fsanitize=thread
+				$(CC) $(CFLAGS) $^ -o $@ -lpthread -fsanitize=thread
 
 clean:
 				${RM} -r ${OBJ_DIR}

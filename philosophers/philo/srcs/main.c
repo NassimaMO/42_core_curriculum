@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/30 10:13:35 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:25:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ void	*routine_loop(t_philosophers *philo)
 		print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
+		{
 			print_lock(philo, "is thinking");
+			if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2 \
+				&& philo->data->number_of_philosophers % 2 > 0)
+				ft_usleep(philo, philo->data->time_to_eat);
+		}
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		philo->data->nbr_of_times_a_philo_must_eat))
+		{
+			pthread_mutex_lock(&philo->data->stop);
 			philo->data->philo_stop++;
+			pthread_mutex_unlock(&philo->data->stop);
+		}
 	}
 	return (NULL);
 }
@@ -53,6 +62,7 @@ int	creat_thread(t_philosophers *philos)
 	{
 		if (pthread_create(&philo->thread, NULL, routine, philo))
 			return (1);
+		usleep(500);
 		philo = philo->next;
 	}
 	philo = philos;
@@ -77,6 +87,7 @@ int	main(int argc, char **argv)
 	if (stock_data(data, argc, argv))
 		return (1);
 	creat_list(&philos, data);
-	creat_thread(philos);
+	if (creat_thread(philos))
+		return (printf("Thread error."), 1);
 	free_list(philos);
 }
