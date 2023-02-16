@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/15 10:47:49 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:28:51 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_philosophers
 	t_data					*data;
 	struct s_philosophers	*next;
 }				t_philosophers;
+
+typedef struct s_thread_creators
+{
+	pthread_t		thread;
+	int				number_of_philos;
+	t_philosophers	philos;
+}				t_thread_creators;
 
 int			arg_verif(int argc, char **argv);
 

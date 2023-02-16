@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 17:36:41 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:35:17 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,55 @@ void	*routine(void *philosopher)
 	return (routine_loop(philo));
 }
 
+void	*creating_threads(void	*creator)
+{
+	t_thread_creators	*crea;
+	t_philosophers		*tmp;
+	int					i;
+
+	crea = (t_thread_creators *)creator;
+	tmp = &crea->philos;
+	i = 0;
+	while (i < (crea->number_of_philos / ((crea->number_of_philos / 100) + 1)))
+	{
+		if (pthread_create(&tmp->thread, NULL, routine, tmp))
+			return (NULL);
+		tmp = tmp->next;
+		i++;
+	}
+	tmp = &crea->philos;
+	i = 0;
+	while (i < (crea->number_of_philos / ((crea->number_of_philos / 100) + 1)))
+	{
+		if (pthread_join(tmp->thread, NULL))
+			return (NULL);
+		tmp = tmp->next;
+		i++;
+	}
+	return (NULL);
+}
+
 int	creat_thread(t_philosophers *philos)
 {
-	t_philosophers	*philo;
-	int				i;
+	t_thread_creators	creator[(philos->data->number_of_philosophers / 100) + 1];
+	int					i;
 
-	philo = philos;
-	i = -1;
-	philo->data->time = current_time();
-	while (++i < philos->data->number_of_philosophers)
+	i = 0;
+	philos->data->time = current_time();
+	while (i < (philos->data->number_of_philosophers / 100) + 1)
 	{
-		if (pthread_create(&philo->thread, NULL, routine, philo))
+		creator[i].philos = philos[i * (philos->data->number_of_philosophers / ((philos->data->number_of_philosophers / 100) + 1))];
+		creator[i].number_of_philos = philos->data->number_of_philosophers;
+		if (pthread_create(&creator[i].thread, NULL, creating_threads, &creator))
 			return (1);
-		usleep(500);
-		philo = philo->next;
+		i++;
 	}
-	philo = philos;
-	i = -1;
-	while (++i < philos->data->number_of_philosophers)
+	i = 0;
+	while (i < (philos->data->number_of_philosophers / 100) + 1)
 	{
-		if (pthread_join(philo->thread, NULL))
+		if (pthread_join(creator[i].thread, NULL))
 			return (2);
-		philo = philo->next;
+		i++;
 	}
 	return (0);
 }
