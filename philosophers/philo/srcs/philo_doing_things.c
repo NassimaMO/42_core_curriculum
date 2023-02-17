@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:18 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 15:46:30 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:33:59 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	dying(t_philosophers *philo)
 
 void	lock_fork(t_philosophers *philo)
 {
-	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
+	if (philo->philo_nbr % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->philo_nbr - 1]);
 		print_lock(philo, "has taken a fork");
@@ -66,12 +66,16 @@ void	unlock_fork(t_philosophers *philo)
 
 void	eating(t_philosophers *philo)
 {
+	if (philo->data->time_to_sleep < philo->data->time_to_eat && \
+	(current_time() - philo->data->time) - (philo->last_eaten - \
+	philo->data->time) + (philo->data->time_to_eat - philo->data->time_to_sleep) > philo->data->time_to_die)
+		ft_usleep(philo, philo->data->time_to_eat - philo->data->time_to_sleep);
 	if (!dying(philo))
 	{
 		lock_fork(philo);
 		print_lock(philo, "is eating");
-		ft_usleep(philo, philo->data->time_to_eat);
 		philo->last_eaten = current_time();
+		ft_usleep(philo, philo->data->time_to_eat);
 		if (philo->data->nbr_of_times_a_philo_must_eat >= 0)
 			philo->nbr_of_times_a_philo_has_eaten++;
 		unlock_fork(philo);

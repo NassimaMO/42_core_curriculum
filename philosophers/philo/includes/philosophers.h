@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/16 20:28:51 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:03:58 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,15 @@ typedef struct s_thread_creators
 {
 	pthread_t		thread;
 	int				number_of_philos;
-	t_philosophers	philos;
+	t_philosophers	*philos;
 }				t_thread_creators;
+
+typedef struct s_checker
+{
+	pthread_t		thread;
+	t_philosophers	*philos;
+	t_data			*data;
+}				t_checker;
 
 int			arg_verif(int argc, char **argv);
 
@@ -60,6 +67,7 @@ int			stock_data(t_data *data, int argc, char **argv);
 void		ft_usleep(t_philosophers *philosopher, long int time_to_do_smth);
 long int	current_time(void);
 
+void		all_print(t_philosophers *philo, char *current_activity);
 void		print_lock(t_philosophers *philo, char *current_activity);
 int			dying(t_philosophers *philo);
 void		eating(t_philosophers *philo);
