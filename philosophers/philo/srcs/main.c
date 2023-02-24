@@ -20,12 +20,7 @@ void	*routine_loop(t_philosophers *philo)
 		print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
-		{
 			print_lock(philo, "is thinking");
-			if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2 \
-				&& philo->data->number_of_philosophers % 2 > 0)
-				ft_usleep(philo, philo->data->time_to_eat);
-		}
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		philo->data->nbr_of_times_a_philo_must_eat))
@@ -44,60 +39,38 @@ void	*routine(void *philosopher)
 
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
-	print_lock(philo, "is thinking");
-	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
-		ft_usleep(philo, philo->data->time_to_eat);
+	if (philo->philo_nbr % 2 > 0)
+	{
+		usleep(10);
+		/*print_lock(philo, "is sleeping");
+		ft_usleep(philo, philo->data->time_to_sleep);
+		print_lock(philo, "is thinking");*/
+	}
 	return (routine_loop(philo));
-}
-
-void	*creating_threads(void	*creator)
-{
-	t_thread_creators	*crea;
-	t_philosophers		*tmp;
-	int					i;
-
-	crea = (t_thread_creators *)creator;
-	tmp = &crea->philos;
-	i = 0;
-	while (i < (crea->number_of_philos / ((crea->number_of_philos / 100) + 1)))
-	{
-		if (pthread_create(&tmp->thread, NULL, routine, tmp))
-			return (NULL);
-		tmp = tmp->next;
-		i++;
-	}
-	tmp = &crea->philos;
-	i = 0;
-	while (i < (crea->number_of_philos / ((crea->number_of_philos / 100) + 1)))
-	{
-		if (pthread_join(tmp->thread, NULL))
-			return (NULL);
-		tmp = tmp->next;
-		i++;
-	}
-	return (NULL);
 }
 
 int	creat_thread(t_philosophers *philos)
 {
-	t_thread_creators	creator[(philos->data->number_of_philosophers / 100) + 1];
+	t_philosophers		*tmp;
 	int					i;
 
+	tmp = philos;
 	i = 0;
 	philos->data->time = current_time();
-	while (i < (philos->data->number_of_philosophers / 100) + 1)
+	while (i < philos->data->number_of_philosophers)
 	{
-		creator[i].philos = philos[i * (philos->data->number_of_philosophers / ((philos->data->number_of_philosophers / 100) + 1))];
-		creator[i].number_of_philos = philos->data->number_of_philosophers;
-		if (pthread_create(&creator[i].thread, NULL, creating_threads, &creator))
+		if (pthread_create(&tmp->thread, NULL, routine, tmp))
 			return (1);
+		tmp = tmp->next;
 		i++;
 	}
+	tmp = philos;
 	i = 0;
-	while (i < (philos->data->number_of_philosophers / 100) + 1)
+	while (i < philos->data->number_of_philosophers)
 	{
-		if (pthread_join(creator[i].thread, NULL))
+		if (pthread_join(tmp->thread, NULL))
 			return (2);
+		tmp = tmp->next;
 		i++;
 	}
 	return (0);
