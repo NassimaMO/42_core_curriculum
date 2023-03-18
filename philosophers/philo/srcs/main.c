@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/02/17 12:37:38 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/03/18 11:21:38 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine_loop(t_philosophers *philo)
 		print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
 		if (!dying(philo))
-			print_lock(philo, "is thinking"), usleep(1);
+			print_lock(philo, "is thinking");
 		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		philo->data->nbr_of_times_a_philo_must_eat))
@@ -39,43 +39,39 @@ void	*routine(void *philosopher)
 
 	philo = (t_philosophers *)philosopher;
 	philo->last_eaten = philo->data->time;
-	if (philo->philo_nbr % 2 == 0)
+	if (philo->philo_nbr % 2 > 0)
 	{
-		print_lock(philo, "is sleeping");
+		usleep(10);
+		/*print_lock(philo, "is sleeping");
 		ft_usleep(philo, philo->data->time_to_sleep);
-		print_lock(philo, "is thinking");
-		usleep(1);
-	}
-	else if (philo->data->number_of_philosophers > 1)
-	{
-		eating(philo);
-		print_lock(philo, "is sleeping");
-		ft_usleep(philo, philo->data->time_to_sleep);
+		print_lock(philo, "is thinking");*/
 	}
 	return (routine_loop(philo));
 }
 
 int	creat_thread(t_philosophers *philos)
 {
-	t_philosophers	*philo;
-	int				i;
+	t_philosophers		*tmp;
+	int					i;
 
-	philo = philos;
-	i = -1;
-	philo->data->time = current_time();
-	while (++i < philos->data->number_of_philosophers)
+	tmp = philos;
+	i = 0;
+	philos->data->time = current_time();
+	while (i < philos->data->number_of_philosophers)
 	{
-		if (pthread_create(&philo->thread, NULL, routine, philo))
+		if (pthread_create(&tmp->thread, NULL, routine, tmp))
 			return (1);
-		philo = philo->next;
+		tmp = tmp->next;
+		i++;
 	}
-	philo = philos;
-	i = -1;
-	while (++i < philos->data->number_of_philosophers)
+	tmp = philos;
+	i = 0;
+	while (i < philos->data->number_of_philosophers)
 	{
-		if (pthread_join(philo->thread, NULL))
+		if (pthread_join(tmp->thread, NULL))
 			return (2);
-		philo = philo->next;
+		tmp = tmp->next;
+		i++;
 	}
 	return (0);
 }
