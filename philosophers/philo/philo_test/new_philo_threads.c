@@ -18,9 +18,9 @@ void	*philo_routine(t_philo *philo, t_data *data)
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))
 		{
-			pthread_mutex_lock(&data->stop);
+			pthread_mutex_lock(&data->infos);
 			data->philo_stop++;
-			pthread_mutex_unlock(&data->stop);
+			pthread_mutex_unlock(&data->infos);
 		}
 	}
 	return (NULL);
@@ -32,10 +32,10 @@ void    *routine(void *struc)
 	t_philo philo;
 
 	data = (t_data *)struc;
-	philo_init(&philo, data->test);
-	pthread_mutex_lock(&data->stop);
-	/*while (data->time == 0)
-		usleep(1);*/
-	pthread_mutex_unlock(&data->stop);
+	philo_init(&philo, data);
+	/*pthread_mutex_lock(&data->stop);
+	while (data->time == 0)
+		usleep(1);
+	pthread_mutex_unlock(&data->stop);*/
 	return (philo_routine(&philo, data));
 }

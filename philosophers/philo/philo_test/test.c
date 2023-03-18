@@ -18,6 +18,8 @@ void    *routine(void *struc)
 	pthread_mutex_lock(&data->mutex);
 	data->num++;
 	pthread_mutex_unlock(&data->mutex);
+	if (data->num % 2 > 0)
+		usleep(20);
 	return (NULL);
 }
 
@@ -35,8 +37,8 @@ int     main(int argc, char **argv)
 	{
 		if (pthread_create(&threads[i], NULL, routine, &data))
 			return (1);
-		data.num++;
-		if (pthread_join(threads[i], NULL))
+/* 		data.num++;
+ */		if (pthread_join(threads[i], NULL))
 			return (2);
 		i++;
 	}

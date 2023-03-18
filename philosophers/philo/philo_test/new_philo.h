@@ -11,7 +11,7 @@
 
 typedef struct s_data
 {
-	pthread_mutex_t	stop;
+	pthread_mutex_t	infos;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	long int		time;
@@ -26,9 +26,9 @@ typedef struct s_data
 
 typedef struct	s_philo
 {
-	int		philo_nbr;
-	int		last_eaten;
-	int		nbr_of_times_a_philo_has_eaten;
+	int			philo_nbr;
+	long int	last_eaten;
+	int			nbr_of_times_a_philo_has_eaten;
 }				t_philo;
 
 /* new_philo_check.c */
@@ -36,7 +36,7 @@ int			arg_verif(int argc, char **argv);
 
 /* new_philo_init.c */
 int			stock_data(t_data *data, int argc, char **argv);
-void		philo_init(t_philo *philo, int num);
+void		philo_init(t_philo *philo, t_data *data);
 
 /* new_philo_threads.c */
 void		*routine(void *struc);

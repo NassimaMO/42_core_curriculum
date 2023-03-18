@@ -4,7 +4,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 {
 	int	i;
 
-	pthread_mutex_init(&data->stop, NULL);
+	pthread_mutex_init(&data->infos, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	data->number_of_philosophers = atoi(argv[1]);
 	data->forks = malloc(data->number_of_philosophers * \
@@ -20,13 +20,16 @@ int	stock_data(t_data *data, int argc, char **argv)
 	data->nbr_of_times_a_philo_must_eat = -1;
 	if (argc == 6)
 		data->nbr_of_times_a_philo_must_eat = atoi(argv[5]);
-	data->test = 0;
+	data->test = 1;
 	return (0);
 }
 
-void	philo_init(t_philo *philo, int num)
+void	philo_init(t_philo *philo, t_data *data)
 {
-	philo->philo_nbr = num;
-	philo->last_eaten = 0;
+	pthread_mutex_lock(&data->infos);
+	philo->philo_nbr = data->test;
+	data->test++;
+	pthread_mutex_unlock(&data->infos);
+	philo->last_eaten = data->time;
 	philo->nbr_of_times_a_philo_has_eaten = 0;
 }

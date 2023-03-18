@@ -15,13 +15,13 @@ int     main(int argc, char **argv)
  	data.time = current_time();
 	while (i < num_threads)
 	{
-		data.test++;
 		if (pthread_create(&threads[i], NULL, routine, &data))
 			return (3);
-		/*pthread_mutex_lock(&data.stop);
-		if (data.test == data.number_of_philosophers)
-			data.time = current_time();
-		pthread_mutex_unlock(&data.stop);*/
+		i++;
+	}
+	i = 0;
+	while (i < num_threads)
+	{
 		if (pthread_join(threads[i], NULL))
 			return (4);
 		i++;
