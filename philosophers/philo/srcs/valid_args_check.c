@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   valid_args_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/19 16:25:59 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/03/19 16:26:05 by nmouslim         ###   ########.fr       */
+/*   Created: 2023/03/19 16:26:31 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/03/19 16:26:33 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int argc, char **argv)
+static int	invalid_arg(char *arg)
 {
-	int			num_threads = atoi(argv[1]);
-	pthread_t	threads[num_threads + 1];
-	t_data		data;
+	int	i;
+
+	i = -1;
+	while (arg && arg[++i])
+	{
+		if (arg[i] < '0' || arg[i] > '9')
+			return (1);
+	}
+	return (0);
+}
+
+int	arg_verif(int argc, char **argv)
+{
+	long int	number;
 	int			i;
 
-	i = 0;
-	if (arg_verif(argc, argv))
+	if (argc < 5 || argc > 6)
 		return (1);
-	if (stock_data(&data, argc, argv))
-		return (2);
-	data.time = current_time();
-	while (i < num_threads)
-	{
-		if (pthread_create(&threads[i++], NULL, routine, &data))
-			return (3);
-	}
+	if (!argv[1])
+		return (1);
 	i = 0;
-	while (i < num_threads)
+	while (++i < argc)
 	{
-		if (pthread_join(threads[i++], NULL))
-			return (4);
+		if (invalid_arg(argv[i]))
+			return (1);
+		number = atoi(argv[i]);
+		if ((i == 2 && number == 0) || number > INT_MAX || number < 0)
+			return (1);
 	}
-	free_data(&data);
 	return (0);
 }

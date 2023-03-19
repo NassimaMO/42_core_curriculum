@@ -1,4 +1,16 @@
-#include "new_philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread_event.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/19 16:26:51 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/03/19 16:26:53 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/philo.h"
 
 int	dying(t_philo *philo, t_data *data)
 {
@@ -8,9 +20,6 @@ int	dying(t_philo *philo, t_data *data)
 	pthread_mutex_unlock(&data->infos);
 	if (data->number_of_philosophers == 1)
 		usleep(data->time_to_die * 1000);
-	/*pthread_mutex_lock(&data->print);
-	printf("1) %ld\n", current_time() - philo->last_eaten);
-	pthread_mutex_unlock(&data->print);*/
 	if (current_time() - philo->last_eaten >= data->time_to_die)
 	{
 		print_lock(philo, data, "died");
@@ -57,14 +66,13 @@ static void	unlock_fork(t_philo *philo, t_data *data)
 
 void	eating(t_philo *philo, t_data *data)
 {
-	/*pthread_mutex_lock(&data->print);
-	printf("2) %ld %d\n", current_time() - philo->last_eaten, philo->philo_nbr);
-	pthread_mutex_unlock(&data->print);*/
 	lock_fork(philo, data);
 	pthread_mutex_lock(&data->infos);
 	if (data->philo_stop < data->number_of_philosophers)
-		pthread_mutex_unlock(&data->infos), \
+	{
+		pthread_mutex_unlock(&data->infos);
 		print_lock(philo, data, "is eating");
+	}
 	else
 		pthread_mutex_unlock(&data->infos);
 	philo->last_eaten = current_time();

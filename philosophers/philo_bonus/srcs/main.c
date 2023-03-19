@@ -3,53 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 14:12:02 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/01/31 12:46:18 by nmouslim         ###   ########.fr       */
+/*   Created: 2023/03/19 16:34:05 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/03/19 16:34:06 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo_bonus.h"
 
-void	*routine_loop(t_philosophers *philo)
+/*
+	- memory leaks;
+	- time not printed correctly;
+	- 200 800 200 200;
+	- fork managment: need to see if someone already took a fork before someone else take it or smth like that;
+*/
+
+void	process_sig(t_data *data)
 {
-	while (!dying(philo))
+	int	i;
+	int	status;
+
+	i = 0;
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) == 1)
 	{
-		eating(philo);
-		print_lock(philo, "is sleeping");
-		ft_usleep(philo, philo->data->time_to_sleep);
-		if (!dying(philo))
-			print_lock(philo, "is thinking");
-		if ((philo->data->nbr_of_times_a_philo_must_eat >= 0 && \
-		philo->nbr_of_times_a_philo_has_eaten == \
-		philo->data->nbr_of_times_a_philo_must_eat))
-			philo->data->stop->__align--;
+		while (i < data->number_of_philosophers)
+			kill(data->pid[i++], SIGTERM);
 	}
-	return (NULL);
-}
-
-void	*routine(void *philosopher)
-{
-	t_philosophers	*philo;
-
-	philo = (t_philosophers *)philosopher;
-	philo->last_eaten = philo->data->time;
-	print_lock(philo, "is thinking");
-	if (philo->philo_nbr % 2 == philo->data->number_of_philosophers % 2)
-		ft_usleep(philo, philo->data->time_to_eat);
-	return (routine_loop(philo));
-}
-
-void	creat_thread(t_philosophers *philo, int i)
-{
-	philo->data->time = current_time();
-	philo->data->pid[i] = fork();
-	if (philo->data->pid[i] == 0)
+	else if (WEXITSTATUS(status) < 0)
 	{
-		if (pthread_create(&philo->thread, NULL, routine, philo))
+		while (i < data->number_of_philosophers)
+			kill(data->pid[i++], SIGTERM);
+		printf("Thread Error.\n");
+	}
+	else
+	{
+		while (i < data->number_of_philosophers)
+			waitpid(data->pid[i++], NULL, 0);
+	}
+}
+
+void	creating_threads(pthread_t thread, t_data *data, int i)
+{
+	data->time = current_time();
+	data->pid[i] = fork();
+	if (data->pid[i] == 0)
+	{
+		if (pthread_create(&thread, NULL, routine, data))
 			exit (-2);
-		if (pthread_join(philo->thread, NULL))
+		if (pthread_join(thread, NULL))
 			exit (-1);
 		exit (0);
 	}
@@ -57,24 +60,24 @@ void	creat_thread(t_philosophers *philo, int i)
 
 int	main(int argc, char **argv)
 {
-	t_philosophers	*philos;
-	t_philosophers	*philo;
-	t_data			*data;
-	int				i;
+	int			num_threads = atoi(argv[1]);
+	pthread_t	threads[num_threads + 1];
+	t_data		data;
+	int			i;
 
+	i = 0;
 	if (arg_verif(argc, argv))
 		return (1);
-	data = stock_data(argc, argv);
-	if (!data)
-		return (1);
-	creat_list(&philos, data);
-	philo = philos;
-	i = -1;
-	while (++i < philos->data->number_of_philosophers)
+	if (stock_data(&data, argc, argv))
+		return (2);
+	data.time = current_time();
+	while (i < num_threads)
 	{
-		creat_thread(philo, i); //take the return value and do smt with it in the loop or smt IDK its so weirdddd fuck this shit haaaaaaaaaaaaaaaaaaaa
-		philo = philo->next;
+		creating_threads(threads[i], &data, i);
+		data.test++;
+		i++;
 	}
-	end(philos);
-	free_list(philos);
+	process_sig(&data);
+	free(data.pid);
+	return (0);
 }

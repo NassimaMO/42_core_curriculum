@@ -6,8 +6,8 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 
 SRCS_DIR	=	srcs
 
-SRCS		=	main.c philo_verif.c philo_init.c \
-				philo_free.c philo_utils.c philo_doing_things.c
+SRCS		=	main.c valid_args_check.c struct_init.c thread_routine.c \
+				thread_utils.c thread_event.c struct_free.c
 
 OBJ_DIR		=	obj
 
@@ -21,7 +21,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 				@mkdir -p $(OBJ_DIR)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}:		${OBJ} includes/philosophers.h
+${NAME}:		${OBJ} includes/philo.h
 				$(CC) $(CFLAGS) $^ -o $@ -lpthread -fsanitize=thread
 
 clean:

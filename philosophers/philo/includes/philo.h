@@ -1,5 +1,17 @@
-#ifndef NEW_PHILO_H
-# define NEW_PHILO_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/19 16:32:32 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/03/19 16:32:33 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,7 +36,7 @@ typedef struct s_data
 	int				test;
 }				t_data;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int			philo_nbr;
 	long int	last_eaten;
@@ -43,13 +55,13 @@ void		*routine(void *struc);
 void		*philo_routine(t_philo *philo, t_data *data);
 
 /* new_philo_doing_things.c */
-int 		dying(t_philo *philo, t_data *data);
+int			dying(t_philo *philo, t_data *data);
 void		eating(t_philo *philo, t_data *data);
 
 /* new_philo_utils.c */
 long int	current_time(void);
 int			ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth);
-void	print_lock(t_philo *philo, t_data *data, char *current_activity);
+void		print_lock(t_philo *philo, t_data *data, char *current_activity);
 
 /* new_philo_free.c */
 void		free_data(t_data *data);
