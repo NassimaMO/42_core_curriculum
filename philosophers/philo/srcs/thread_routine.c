@@ -16,19 +16,21 @@ void	*philo_routine(t_philo *philo, t_data *data)
 {
 	if (philo->philo_nbr % 2 > 0)
 	{
-		print_lock(philo, data, "is sleeping");
+		print_lock(philo, data, SLEEP);
 		ft_usleep(philo, data, data->time_to_sleep);
-		print_lock(philo, data, "is thinking");
+		print_lock(philo, data, THINK);
 	}
 	while (!dying(philo, data))
 	{
 		eating(philo, data);
-		print_lock(philo, data, "is sleeping");
+		print_lock(philo, data, SLEEP);
 		ft_usleep(philo, data, data->time_to_sleep);
-		print_lock(philo, data, "is thinking");
+		print_lock(philo, data, THINK);
 		if (data->time_to_eat + (data->time_to_eat - data->time_to_sleep) * 2 > data->time_to_die)
 			ft_usleep(philo, data, data->time_to_die - \
 			(current_time() - philo->last_eaten));
+		if (!philo->philo_odd && data->number_of_philosophers % 2 > 0 && philo->philo_nbr == data->number_of_philosophers - 1)
+				ft_usleep(philo, data, data->time_to_eat + data->time_to_sleep), philo->philo_odd++;
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))

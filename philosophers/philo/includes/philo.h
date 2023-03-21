@@ -21,6 +21,12 @@
 
 # define INT_MAX 2147483647
 
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "died"
+
 typedef struct s_data
 {
 	pthread_mutex_t	infos;
@@ -41,6 +47,7 @@ typedef struct s_philo
 	int			philo_nbr;
 	long int	last_eaten;
 	int			nbr_of_times_a_philo_has_eaten;
+	int			philo_odd;
 }				t_philo;
 
 /* new_philo_check.c */

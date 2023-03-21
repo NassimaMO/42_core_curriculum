@@ -23,7 +23,7 @@ int	dying(t_philo *philo, t_data *data)
 	{
 		pthread_mutex_lock(&data->print);
 		printf("%ld %d %s\n", current_time() - data->time, \
-		philo->philo_nbr, "died");
+		philo->philo_nbr, DIE);
 		pthread_mutex_unlock(&data->print);
 		data->philo_stop = data->number_of_philosophers;
 		pthread_mutex_unlock(&data->infos);
@@ -37,13 +37,15 @@ static void	lock_fork(t_philo *philo, t_data *data)
 {
 	if (philo->philo_nbr % 2 > 0)
 	{
+		if (data->time_to_eat > data->time_to_sleep && data->number_of_philosophers % 2 > 0)
+			ft_usleep(philo, data, data->time_to_sleep + 1);
 		pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
-		print_lock(philo, data, "has taken a fork");
+		print_lock(philo, data, FORK);
 		if (philo->philo_nbr == data->number_of_philosophers)
 			pthread_mutex_lock(&data->forks[0]);
 		else
 			pthread_mutex_lock(&data->forks[philo->philo_nbr]);
-		print_lock(philo, data, "has taken a fork");
+		print_lock(philo, data, FORK);
 	}
 	else
 	{
@@ -51,9 +53,9 @@ static void	lock_fork(t_philo *philo, t_data *data)
 			pthread_mutex_lock(&data->forks[0]);
 		else
 			pthread_mutex_lock(&data->forks[philo->philo_nbr]);
-		print_lock(philo, data, "has taken a fork");
+		print_lock(philo, data, FORK);
 		pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
-		print_lock(philo, data, "has taken a fork");
+		print_lock(philo, data, FORK);
 	}
 }
 
@@ -69,7 +71,7 @@ static void	unlock_fork(t_philo *philo, t_data *data)
 void	eating(t_philo *philo, t_data *data)
 {
 	lock_fork(philo, data);
-	print_lock(philo, data, "is eating");
+	print_lock(philo, data, EAT);
 	philo->last_eaten = current_time();
 	ft_usleep(philo, data, data->time_to_eat);
 	if (data->nbr_of_times_a_philo_must_eat >= 0)

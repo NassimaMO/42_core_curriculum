@@ -44,4 +44,5 @@ void	philo_init(t_philo *philo, t_data *data)
 	pthread_mutex_unlock(&data->infos);
 	philo->last_eaten = data->time;
 	philo->nbr_of_times_a_philo_has_eaten = 0;
+	philo->philo_odd = 0;
 }
