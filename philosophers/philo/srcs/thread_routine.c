@@ -26,8 +26,7 @@ void	*philo_routine(t_philo *philo, t_data *data)
 		print_lock(philo, data, "is sleeping");
 		ft_usleep(philo, data, data->time_to_sleep);
 		print_lock(philo, data, "is thinking");
-		if (data->time_to_sleep < data->time_to_eat && \
-			data->time_to_die > current_time() - philo->last_eaten)
+		if (data->time_to_eat + (data->time_to_eat - data->time_to_sleep) * 2 > data->time_to_die)
 			ft_usleep(philo, data, data->time_to_die - \
 			(current_time() - philo->last_eaten));
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
