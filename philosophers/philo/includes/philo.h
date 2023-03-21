@@ -63,7 +63,7 @@ void		*philo_routine(t_philo *philo, t_data *data);
 
 /* new_philo_doing_things.c */
 int			dying(t_philo *philo, t_data *data);
-void		eating(t_philo *philo, t_data *data);
+int			eating(t_philo *philo, t_data *data);
 
 /* new_philo_utils.c */
 long int	current_time(void);
