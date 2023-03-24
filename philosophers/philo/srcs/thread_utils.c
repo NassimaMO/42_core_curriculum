@@ -42,7 +42,7 @@ void	print_lock(t_philo *philo, t_data *data, char *current_activity)
 	pthread_mutex_lock(&data->infos);
 	if (data->philo_stop >= data->number_of_philosophers \
 		|| current_time() - philo->last_eaten >= data->time_to_die)
-		return 	((void)pthread_mutex_unlock(&data->infos));
+		return (pthread_mutex_unlock(&data->infos), (void)dying(philo, data));
 	pthread_mutex_unlock(&data->infos);
 	pthread_mutex_lock(&data->print);
 	printf("%ld %d %s\n", current_time() - data->time, \

@@ -33,8 +33,6 @@ static void	lock_fork(t_philo *philo, t_data *data)
 {
 	if (philo->philo_nbr % 2 > 0)
 	{
-		/*if (data->time_to_eat > data->time_to_sleep && data->number_of_philosophers % 2 > 0)
-			ft_usleep(philo, data, data->time_to_sleep + 1);*/
 		if (data->number_of_philosophers == 1)
 			return (print_lock(philo, data, FORK), (void)usleep((data->time_to_die - (current_time() - philo->last_eaten)) * 1000));
 		pthread_mutex_lock(data->forks + (philo->philo_nbr - 1));

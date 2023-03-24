@@ -34,6 +34,8 @@ void	*philo_routine(t_philo *philo, t_data *data)
 			if (ft_usleep(philo, data, data->time_to_die - (current_time() - philo->last_eaten)))
 				break ;
 		}
+		if (!philo->philo_odd && data->number_of_philosophers % 2 > 0 && philo->philo_nbr == data->number_of_philosophers - 1)
+				ft_usleep(philo, data, data->time_to_eat + data->time_to_sleep), philo->philo_odd++;
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))
@@ -53,11 +55,11 @@ void	*routine(void *struc)
 
 	data = (t_data *)struc;
 	philo_init(&philo, data);
-	/*while (data->time == 0)
+	while (data->time == 0)
 	{
 		if (philo.philo_nbr == data->number_of_philosophers)
 			data->time = current_time();
 	}
-	philo.last_eaten = data->time;*/
+	philo.last_eaten = data->time;
 	return (philo_routine(&philo, data));
 }
