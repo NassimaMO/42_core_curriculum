@@ -28,7 +28,7 @@ int	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
 	while (current_time() < time + time_to_do_smth)
 	{
 		pthread_mutex_lock(&data->infos);
-		if (data->philo_stop >= data->number_of_philosophers)
+		if (data->philo_stop >= data->nbr_philos)
 			return (pthread_mutex_unlock(&data->infos), 1);
 		pthread_mutex_unlock(&data->infos);
 		if (current_time() - philo->last_eaten >= data->time_to_die)
@@ -40,7 +40,7 @@ int	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
 void	print_lock(t_philo *philo, t_data *data, char *current_activity)
 {
 	pthread_mutex_lock(&data->infos);
-	if (data->philo_stop >= data->number_of_philosophers \
+	if (data->philo_stop >= data->nbr_philos \
 		|| current_time() - philo->last_eaten >= data->time_to_die)
 		return (pthread_mutex_unlock(&data->infos), (void)dying(philo, data));
 	pthread_mutex_unlock(&data->infos);

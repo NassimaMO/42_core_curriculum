@@ -28,18 +28,18 @@ void	process_sig(t_data *data)
 	waitpid(-1, &status, 0);
 	if (WEXITSTATUS(status) == 1)
 	{
-		while (i < data->number_of_philosophers)
+		while (i < data->nbr_philos)
 			kill(data->pid[i++], SIGTERM);
 	}
 	else if (WEXITSTATUS(status) < 0)
 	{
-		while (i < data->number_of_philosophers)
+		while (i < data->nbr_philos)
 			kill(data->pid[i++], SIGTERM);
 		printf("Thread Error.\n");
 	}
 	else
 	{
-		while (i < data->number_of_philosophers)
+		while (i < data->nbr_philos)
 			waitpid(data->pid[i++], NULL, 0);
 	}
 }

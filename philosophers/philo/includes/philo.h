@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 # include <pthread.h>
 # include <sys/time.h>
 
@@ -32,9 +33,10 @@ typedef struct s_data
 	pthread_mutex_t	infos;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
+	int				*tab_forks;
 	long int		time;
 	int				philo_stop;
-	int				number_of_philosophers;
+	int				nbr_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;

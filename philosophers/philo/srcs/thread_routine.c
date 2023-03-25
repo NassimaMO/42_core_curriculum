@@ -14,12 +14,17 @@
 
 void	*philo_routine(t_philo *philo, t_data *data)
 {
-	if (philo->philo_nbr % 2 > 0)
+	if (philo->philo_nbr % 2 == 0)
 	{
 		print_lock(philo, data, SLEEP);
 		if (ft_usleep(philo, data, data->time_to_sleep))
 			return (NULL);
 		print_lock(philo, data, THINK);
+		if (data->time_to_sleep < data->time_to_eat)
+		{
+			if (ft_usleep(philo, data, data->time_to_eat - data->time_to_sleep))
+				return (NULL);
+		}
 	}
 	while (1)
 	{
@@ -29,13 +34,11 @@ void	*philo_routine(t_philo *philo, t_data *data)
 		if (ft_usleep(philo, data, data->time_to_sleep))
 			break ;
 		print_lock(philo, data, THINK);
-		if (data->time_to_eat + (data->time_to_eat - data->time_to_sleep) * 2 > data->time_to_die)
+		if (data->time_to_sleep < data->time_to_eat)
 		{
-			if (ft_usleep(philo, data, data->time_to_die - (current_time() - philo->last_eaten)))
-				break ;
+			if (ft_usleep(philo, data, data->time_to_eat - data->time_to_sleep))
+				break;
 		}
-		if (!philo->philo_odd && data->number_of_philosophers % 2 > 0 && philo->philo_nbr == data->number_of_philosophers - 1)
-				ft_usleep(philo, data, data->time_to_eat + data->time_to_sleep), philo->philo_odd++;
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))
@@ -57,7 +60,7 @@ void	*routine(void *struc)
 	philo_init(&philo, data);
 	while (data->time == 0)
 	{
-		if (philo.philo_nbr == data->number_of_philosophers)
+		if (philo.philo_nbr == data->nbr_philos)
 			data->time = current_time();
 	}
 	philo.last_eaten = data->time;

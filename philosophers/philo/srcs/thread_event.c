@@ -15,13 +15,13 @@
 int	dying(t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock(&data->infos);
-	if (data->philo_stop < data->number_of_philosophers)
+	if (data->philo_stop < data->nbr_philos)
 	{
 		pthread_mutex_lock(&data->print);
 		printf("%ld %d %s\n", current_time() - data->time, \
 		philo->philo_nbr, DIE);
 		pthread_mutex_unlock(&data->print);
-		data->philo_stop = data->number_of_philosophers;
+		data->philo_stop = data->nbr_philos;
 		pthread_mutex_unlock(&data->infos);
 		return (1);
 	}
@@ -31,43 +31,69 @@ int	dying(t_philo *philo, t_data *data)
 
 static void	lock_fork(t_philo *philo, t_data *data)
 {
-	if (philo->philo_nbr % 2 > 0)
+	if (philo->philo_nbr % 2 == 0)
 	{
-		if (data->number_of_philosophers == 1)
-			return (print_lock(philo, data, FORK), (void)usleep((data->time_to_die - (current_time() - philo->last_eaten)) * 1000));
-		pthread_mutex_lock(data->forks + (philo->philo_nbr - 1));
-		pthread_mutex_lock(data->forks + philo->philo_nbr % data->number_of_philosophers);
+		usleep(10);
+		while (1)
+		{
+			pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
+			pthread_mutex_lock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+			if (!data->tab_forks[philo->philo_nbr - 1] && !data->tab_forks[philo->philo_nbr % data->nbr_philos])
+				break ;
+			pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+			pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+		}
+		data->tab_forks[philo->philo_nbr - 1] = 1;
+		data->tab_forks[philo->philo_nbr % data->nbr_philos] = 1;
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
 		print_lock(philo, data, FORK);
 		print_lock(philo, data, FORK);
+		return ;
 	}
-	else
+	usleep(10);
+	while (1)
 	{
-		pthread_mutex_lock(data->forks + philo->philo_nbr % data->number_of_philosophers);
-		pthread_mutex_lock(data->forks + (philo->philo_nbr - 1));
-		print_lock(philo, data, FORK);
-		print_lock(philo, data, FORK);
+		pthread_mutex_lock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+		pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
+		if (!data->tab_forks[philo->philo_nbr - 1] && !data->tab_forks[philo->philo_nbr % data->nbr_philos])
+			break ;
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
 	}
+	data->tab_forks[philo->philo_nbr - 1] = 1;
+	data->tab_forks[philo->philo_nbr % data->nbr_philos] = 1;
+	pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+	pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+	print_lock(philo, data, FORK);
+	print_lock(philo, data, FORK);
 }
 
 static void	unlock_fork(t_philo *philo, t_data *data)
 {
 	if (philo->philo_nbr % 2 == 0)
 	{
-		pthread_mutex_unlock(data->forks + (philo->philo_nbr - 1));
-		pthread_mutex_unlock(data->forks + philo->philo_nbr % data->number_of_philosophers);
+		pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
+		pthread_mutex_lock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+		data->tab_forks[philo->philo_nbr - 1] = 0;
+		data->tab_forks[philo->philo_nbr % data->nbr_philos] = 0;
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+		pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+		return ;
 	}
-	else
-	{
-		pthread_mutex_unlock(data->forks + philo->philo_nbr % data->number_of_philosophers);
-		pthread_mutex_unlock(data->forks + (philo->philo_nbr - 1));
-	}
+	pthread_mutex_lock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+	pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
+	data->tab_forks[philo->philo_nbr - 1] = 0;
+	data->tab_forks[philo->philo_nbr % data->nbr_philos] = 0;
+	pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+	pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
 }
 
 int	eating(t_philo *philo, t_data *data)
 {
-	lock_fork(philo, data);
-	if (data->number_of_philosophers == 1)
+	if (data->nbr_philos == 1 && (print_lock(philo, data, FORK), usleep(1000 * data->time_to_die), 1))
 		return (dying(philo, data));
+	lock_fork(philo, data);
 	print_lock(philo, data, EAT);
 	philo->last_eaten = current_time();
 	if (ft_usleep(philo, data, data->time_to_eat))

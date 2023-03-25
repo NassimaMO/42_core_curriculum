@@ -14,19 +14,21 @@
 
 int	stock_data(t_data *data, int argc, char **argv)
 {
-	data->number_of_philosophers = atoi(argv[1]);
+	data->nbr_philos = atoi(argv[1]);
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
 	sem_unlink("/sem_stop");
 	data->print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	data->forks = sem_open("/sem_forks", O_CREAT, 0644, \
-	data->number_of_philosophers);
+	data->nbr_philos);
 	data->stop = sem_open("/sem_stop", O_CREAT, 0644, \
-	data->number_of_philosophers);
+	data->nbr_philos);
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_forks");
 	sem_unlink("/sem_stop");
-	data->pid = malloc(sizeof(int) * data->number_of_philosophers);
+	data->tab_forks = malloc(sizeof(int) * data->nbr_philos);
+	memset(data->tab_forks, 0, sizeof(int));
+	data->pid = malloc(sizeof(int) * data->nbr_philos);
 	memset(data->pid, 0, sizeof(int));
 	data->philo_stop = 0;
 	data->time = 0;

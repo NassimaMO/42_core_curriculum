@@ -18,12 +18,13 @@ int	stock_data(t_data *data, int argc, char **argv)
 
 	pthread_mutex_init(&data->infos, NULL);
 	pthread_mutex_init(&data->print, NULL);
-	data->number_of_philosophers = atoi(argv[1]);
-	data->forks = malloc(data->number_of_philosophers * \
+	data->nbr_philos = atoi(argv[1]);
+	data->forks = malloc(data->nbr_philos * \
 		sizeof(pthread_mutex_t));
+	data->tab_forks = malloc(data->nbr_philos * sizeof(int));
 	i = -1;
-	while (++i < data->number_of_philosophers)
-		pthread_mutex_init(&data->forks[i], NULL);
+	while (++i < data->nbr_philos)
+		pthread_mutex_init(&data->forks[i], NULL), data->tab_forks[i] = 0;
 	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);

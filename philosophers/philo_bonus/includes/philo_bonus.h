@@ -31,10 +31,11 @@ typedef struct s_data
 	sem_t			*stop;
 	sem_t			*print;
 	sem_t			*forks;
+	int				*tab_forks;
 	int				*pid;
 	long int		time;
 	int				philo_stop;
-	int				number_of_philosophers;
+	int				nbr_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;

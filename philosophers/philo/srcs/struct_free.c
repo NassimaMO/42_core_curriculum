@@ -19,7 +19,8 @@ void	free_data(t_data *data)
 	pthread_mutex_destroy(&data->infos);
 	pthread_mutex_destroy(&data->print);
 	i = 0;
-	while (i < data->number_of_philosophers)
+	while (i < data->nbr_philos)
 		pthread_mutex_destroy(&data->forks[i++]);
+	free(data->tab_forks);
 	free(data->forks);
 }
