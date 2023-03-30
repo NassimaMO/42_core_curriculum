@@ -20,7 +20,7 @@ long int	current_time(void)
 	return (time.tv_sec * 1000 + time. tv_usec / 1000);
 }
 
-void	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
+int	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
 {
 	long int	time;
 
@@ -28,8 +28,9 @@ void	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
 	while (current_time() < time + time_to_do_smth)
 	{
 		if (dying(philo, data))
-			return ;
+			return (1);
 	}
+	return (0);
 }
 
 void	print_lock(t_philo *philo, t_data *data, char *current_activity)

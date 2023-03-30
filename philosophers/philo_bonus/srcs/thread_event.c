@@ -32,10 +32,6 @@ int	dying(t_philo *philo, t_data *data)
 
 static void	lock_fork(t_philo *philo, t_data *data)
 {
-	/*while (tab[philo->philo_nbr] && tab[philo->nbr - 1 % data->nbr_philos])
-	{
-		if (dying)
-	}*/
 	sem_wait(data->forks);
 	print_lock(philo, data, "has taken a fork");
 	sem_wait(data->forks);
