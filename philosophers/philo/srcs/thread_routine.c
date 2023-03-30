@@ -25,6 +25,7 @@ void	*philo_routine(t_philo *philo, t_data *data)
 			if (ft_usleep(philo, data, data->time_to_eat - data->time_to_sleep))
 				return (NULL);
 		}
+		usleep(10);
 	}
 	while (1)
 	{
@@ -39,6 +40,7 @@ void	*philo_routine(t_philo *philo, t_data *data)
 			if (ft_usleep(philo, data, data->time_to_eat - data->time_to_sleep))
 				break;
 		}
+		usleep(10);
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))

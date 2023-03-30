@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	while (i < num_threads)
 	{
 		if (pthread_create(&threads[i++], NULL, routine, &data))
-			return (3);
+			return (3); 
 	}
 	i = 0;
 	while (i < num_threads)

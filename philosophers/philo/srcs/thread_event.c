@@ -33,7 +33,6 @@ static void	lock_fork(t_philo *philo, t_data *data)
 {
 	if (philo->philo_nbr % 2 == 0)
 	{
-		usleep(10);
 		while (1)
 		{
 			pthread_mutex_lock(&data->forks[philo->philo_nbr - 1]);
@@ -42,6 +41,7 @@ static void	lock_fork(t_philo *philo, t_data *data)
 				break ;
 			pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
 			pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
+			usleep(1);
 		}
 		data->tab_forks[philo->philo_nbr - 1] = 1;
 		data->tab_forks[philo->philo_nbr % data->nbr_philos] = 1;
@@ -60,6 +60,7 @@ static void	lock_fork(t_philo *philo, t_data *data)
 			break ;
 		pthread_mutex_unlock(&data->forks[philo->philo_nbr - 1]);
 		pthread_mutex_unlock(&data->forks[philo->philo_nbr % data->nbr_philos]);
+		usleep(1);
 	}
 	data->tab_forks[philo->philo_nbr - 1] = 1;
 	data->tab_forks[philo->philo_nbr % data->nbr_philos] = 1;
