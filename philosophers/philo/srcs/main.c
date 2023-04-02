@@ -12,6 +12,12 @@
 
 #include "../includes/philo.h"
 
+/*
+   Possible reasons of why it could take more time when thinking:
+	- the usleep just after thinking could lead to a longer sleeping time in some cases;
+	- it cannot take a fork immediately after thinking because there is too many philosophers on it at the same time;
+*/
+
 int	main(int argc, char **argv)
 {
 	int			num_threads = atoi(argv[1]);
