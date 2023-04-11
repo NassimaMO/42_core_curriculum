@@ -32,9 +32,15 @@ int	dying(t_philo *philo, t_data *data)
 
 static void	lock_fork(t_philo *philo, t_data *data)
 {
+	/*while (1)
+	{
+		if (data->forks->__align >= 2)
+			break ;
+	}
+	data->forks->__align -= 2;*/
+	sem_wait(data->forks);
 	sem_wait(data->forks);
 	print_lock(philo, data, "has taken a fork");
-	sem_wait(data->forks);
 	print_lock(philo, data, "has taken a fork");
 }
 
