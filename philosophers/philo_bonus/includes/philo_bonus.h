@@ -28,12 +28,10 @@
 
 typedef struct s_data
 {
-	sem_t			*stop;
 	sem_t			*print;
 	sem_t			*forks;
 	int				*pid;
 	long int		time;
-	int				philo_stop;
 	int				nbr_philos;
 	int				time_to_die;
 	int				time_to_eat;
@@ -47,6 +45,7 @@ typedef struct s_philo
 	int			philo_nbr;
 	long int	last_eaten;
 	int			nbr_of_times_a_philo_has_eaten;
+	int			stop;
 }				t_philo;
 
 /* new_philo_check.c */

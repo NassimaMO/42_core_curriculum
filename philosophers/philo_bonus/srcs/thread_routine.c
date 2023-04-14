@@ -29,7 +29,7 @@ void	*philo_routine(t_philo *philo, t_data *data)
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
 		philo->nbr_of_times_a_philo_has_eaten == \
 		data->nbr_of_times_a_philo_must_eat))
-			data->stop->__align--;
+			philo->stop = 2;
 	}
 	return (NULL);
 }

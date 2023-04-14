@@ -16,13 +16,11 @@ int	dying(t_philo *philo, t_data *data)
 {
 	if (data->nbr_philos == 1)
 		usleep(data->time_to_die * 1000);
-	if (current_time() - philo->last_eaten >= data->time_to_die \
-		|| data->stop->__align <= 0)
+	if (current_time() - philo->last_eaten >= data->time_to_die || philo->stop == 1)
 	{
-		if (data->stop->__align > 0)
+		if (!philo->stop)
 		{
 			print_lock(philo, data, "died");
-			data->stop->__align = -1;
 			exit(1);
 		}
 		return (1);
@@ -32,12 +30,6 @@ int	dying(t_philo *philo, t_data *data)
 
 static void	lock_fork(t_philo *philo, t_data *data)
 {
-	/*while (1)
-	{
-		if (data->forks->__align >= 2)
-			break ;
-	}
-	data->forks->__align -= 2;*/
 	sem_wait(data->forks);
 	sem_wait(data->forks);
 	print_lock(philo, data, "has taken a fork");

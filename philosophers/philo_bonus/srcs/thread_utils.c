@@ -36,8 +36,7 @@ int	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
 void	print_lock(t_philo *philo, t_data *data, char *current_activity)
 {
 	sem_wait(data->print);
-	if (data->stop->__align > 0)
-		printf("%ld %d %s\n", current_time() - data->time, \
-			philo->philo_nbr, current_activity);
+	printf("%ld %d %s\n", current_time() - data->time, \
+		philo->philo_nbr, current_activity);
 	sem_post(data->print);
 }

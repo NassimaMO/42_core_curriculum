@@ -24,11 +24,8 @@ int	stock_data(t_data *data, int argc, char **argv)
 	data->print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	data->forks = sem_open("/sem_forks", O_CREAT, 0644, \
 	data->nbr_philos);
-	data->stop = sem_open("/sem_stop", O_CREAT, 0644, \
-	data->nbr_philos);
 	data->pid = malloc(sizeof(int) * data->nbr_philos);
 	memset(data->pid, 0, sizeof(int));
-	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);
 	data->time_to_eat = atoi(argv[3]);
@@ -45,4 +42,5 @@ void	philo_init(t_philo *philo, t_data *data)
 	philo->philo_nbr = data->test;
 	philo->last_eaten = data->time;
 	philo->nbr_of_times_a_philo_has_eaten = 0;
+	philo->stop = 0;
 }
