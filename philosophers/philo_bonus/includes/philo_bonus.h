@@ -31,7 +31,6 @@ typedef struct s_data
 	sem_t			*stop;
 	sem_t			*print;
 	sem_t			*forks;
-	int				*tab_forks;
 	int				*pid;
 	long int		time;
 	int				philo_stop;
