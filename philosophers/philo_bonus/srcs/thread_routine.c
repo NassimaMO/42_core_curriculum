@@ -12,34 +12,39 @@
 
 #include "../includes/philo_bonus.h"
 
-void	*philo_routine(t_philo *philo, t_data *data)
+void	*waitingThread(void *struc)
 {
-	if (philo->philo_nbr % 2 > 0)
-	{
-		print_lock(philo, data, "is sleeping");
-		ft_usleep(philo, data, data->time_to_sleep);
-		print_lock(philo, data, "is thinking");
-	}
-	while (!dying(philo, data))
-	{
-		eating(philo, data);
-		print_lock(philo, data, "is sleeping");
-		ft_usleep(philo, data, data->time_to_sleep);
-		print_lock(philo, data, "is thinking");
-		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
-		philo->nbr_of_times_a_philo_has_eaten == \
-		data->nbr_of_times_a_philo_must_eat))
-			philo->stop = 2;
-	}
+	t_data	*data;
+
+	data = (t_data *)struc;
+	sem_wait(data->die);
+	sem_wait(data->sem_stop);
+	data->stop = 1;
+	sem_post(data->sem_stop);
 	return (NULL);
 }
 
 void	*routine(void *struc)
 {
 	t_data	*data;
-	t_philo	philo;
 
 	data = (t_data *)struc;
-	philo_init(&philo, data);
-	return (philo_routine(&philo, data));
+	if (data->philo_nbr % 2 == 0)
+	{
+		print_lock(data, "is sleeping");
+		ft_usleep(data, data->time_to_sleep);
+		print_lock(data, "is thinking");
+	}
+	while (!dying(data))
+	{
+		eating(data);
+		print_lock(data, "is sleeping");
+		ft_usleep(data, data->time_to_sleep);
+		print_lock(data, "is thinking");
+		/*if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
+		data->nbr_of_times_a_philo_has_eaten == \
+		data->nbr_of_times_a_philo_must_eat))
+			data->stop = 2;*/
+	}
+	return (NULL);
 }

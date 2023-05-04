@@ -12,28 +12,43 @@
 
 #include "../includes/philo_bonus.h"
 
-int	dying(t_philo *philo, t_data *data)
+int	dying(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	if (data->nbr_philos == 1)
 		usleep(data->time_to_die * 1000);
-	if (current_time() - philo->last_eaten >= data->time_to_die || philo->stop == 1)
+	sem_wait(data->sem_stop);
+	if (current_time() - data->last_eaten >= data->time_to_die)
 	{
-		if (!philo->stop)
+		print_lock(data, "died");
+		while (i < data->nbr_philos)
 		{
-			print_lock(philo, data, "died");
-			exit(1);
+			sem_post(data->die);
+			i++;
 		}
-		return (1);
 	}
+	if (data->stop) //data race ?
+	{
+		sem_post(data->sem_stop);
+		sem_post(data->die);
+		sem_close(data->forks);
+		sem_close(data->print);
+		sem_close(data->die);
+		sem_close(data->sem_stop);
+		exit(1);
+	}
+	sem_post(data->sem_stop);
 	return (0);
 }
 
-static void	lock_fork(t_philo *philo, t_data *data)
+static void	lock_fork(t_data *data)
 {
 	sem_wait(data->forks);
 	sem_wait(data->forks);
-	print_lock(philo, data, "has taken a fork");
-	print_lock(philo, data, "has taken a fork");
+	print_lock(data, "has taken a fork");
+	print_lock(data, "has taken a fork");
 }
 
 static void	unlock_fork(t_data *data)
@@ -42,13 +57,15 @@ static void	unlock_fork(t_data *data)
 	sem_post(data->forks);
 }
 
-void	eating(t_philo *philo, t_data *data)
+void	eating(t_data *data)
 {
-	lock_fork(philo, data);
-	print_lock(philo, data, "is eating");
-	philo->last_eaten = current_time();
-	ft_usleep(philo, data, data->time_to_eat);
+	lock_fork(data);
+	print_lock(data, "is eating");
+	sem_wait(data->sem_stop);
+	data->last_eaten = current_time();
+	sem_post(data->sem_stop);
+	ft_usleep(data, data->time_to_eat);
 	if (data->nbr_of_times_a_philo_must_eat >= 0)
-		philo->nbr_of_times_a_philo_has_eaten++;
+		data->nbr_of_times_a_philo_has_eaten++;
 	unlock_fork(data);
 }

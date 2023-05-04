@@ -20,23 +20,19 @@ long int	current_time(void)
 	return (time.tv_sec * 1000 + time. tv_usec / 1000);
 }
 
-int	ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth)
+void	ft_usleep(t_data *data, long int time_to_do_smth)
 {
 	long int	time;
 
 	time = current_time();
 	while (current_time() < time + time_to_do_smth)
-	{
-		if (dying(philo, data))
-			return (1);
-	}
-	return (0);
+		dying(data);
 }
 
-void	print_lock(t_philo *philo, t_data *data, char *current_activity)
+void	print_lock(t_data *data, char *current_activity)
 {
 	sem_wait(data->print);
-	printf("%ld %d %s\n", current_time() - data->time, \
-		philo->philo_nbr, current_activity);
+		printf("%ld %d %s\n", current_time() - data->time, \
+			data->philo_nbr, current_activity);
 	sem_post(data->print);
 }

@@ -19,7 +19,7 @@
 	- fork managment: need to see if someone already took a fork before someone else take it or smth like that;
 */
 
-void	process_sig(t_data *data)
+/*static void	process_sig(t_data *data, int *pid)
 {
 	int	i;
 	int	status;
@@ -29,31 +29,42 @@ void	process_sig(t_data *data)
 	if (WEXITSTATUS(status) == 1)
 	{
 		while (i < data->nbr_philos)
-			kill(data->pid[i++], SIGTERM);
+			kill(pid[i++], SIGTERM);
 	}
 	else if (WEXITSTATUS(status) < 0)
 	{
 		while (i < data->nbr_philos)
-			kill(data->pid[i++], SIGTERM);
+			kill(pid[i++], SIGTERM);
 		printf("Thread Error.\n");
 	}
 	else
 	{
 		while (i < data->nbr_philos)
-			waitpid(data->pid[i++], NULL, 0);
+			waitpid(pid[i++], NULL, 0);
 	}
 }
+*/
 
-void	creating_threads(pthread_t thread, t_data *data, int i)
+static void	creating_threads(pthread_t thread, t_data *data, int i)
 {
-	data->time = current_time();
-	data->pid[i] = fork();
-	if (data->pid[i] == 0)
+	int	pid;
+	pthread_t	waitingThread;
+
+	
+	pid = fork();
+	if (pid == 0)
 	{
+		data->philo_nbr = i;
+		data->time = current_time();
+		data->last_eaten = data->time;
 		if (pthread_create(&thread, NULL, routine, data))
 			exit (-2);
+		if (pthread_create(&waitingThread, NULL, routine, data))
+			exit (-4);
 		if (pthread_join(thread, NULL))
 			exit (-1);
+		if (pthread_join(waitingThread, NULL))
+			exit (-3);
 		exit (0);
 	}
 }
@@ -73,11 +84,8 @@ int	main(int argc, char **argv)
 	data.time = current_time();
 	while (i < num_threads)
 	{
-		creating_threads(threads[i], &data, i);
-		data.test++;
+		creating_threads(threads[i], &data, i + 1);
 		i++;
 	}
-	process_sig(&data);
-	free(data.pid);
 	return (0);
 }
