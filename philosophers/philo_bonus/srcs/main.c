@@ -1,91 +1,62 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/19 16:34:05 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/03/19 16:34:06 by nmouslim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/philo_lib.h"
 
-#include "../includes/philo_bonus.h"
-
-/*
-	- memory leaks;
-	- time not printed correctly;
-	- 200 800 200 200;
-	- fork managment: need to see if someone already took a fork before someone else take it or smth like that;
-*/
-
-/*static void	process_sig(t_data *data, int *pid)
+int main(int argc, char **argv)
 {
-	int	i;
-	int	status;
+    int			i;
+	int			*pid;
+    t_data		data;
+    pthread_t	*threads;
 
+    if (verif(argc, argv))
+        return (1);
+    init_data(&data, argc, argv);
+    threads = malloc(data.total_philos * sizeof(pthread_t));
+	pid = malloc((data.total_philos + 1) * sizeof(pthread_t));
 	i = 0;
-	waitpid(-1, &status, 0);
-	if (WEXITSTATUS(status) == 1)
+    while (i < data.total_philos)
 	{
-		while (i < data->nbr_philos)
-			kill(pid[i++], SIGTERM);
-	}
-	else if (WEXITSTATUS(status) < 0)
-	{
-		while (i < data->nbr_philos)
-			kill(pid[i++], SIGTERM);
-		printf("Thread Error.\n");
-	}
-	else
-	{
-		while (i < data->nbr_philos)
-			waitpid(pid[i++], NULL, 0);
-	}
-}
-*/
-
-static void	creating_threads(pthread_t thread, t_data *data, int i)
-{
-	int	pid;
-	pthread_t	waitingThread;
-
-	
-	pid = fork();
-	if (pid == 0)
-	{
-		data->philo_nbr = i;
-		data->time = current_time();
-		data->last_eaten = data->time;
-		if (pthread_create(&thread, NULL, routine, data))
-			exit (-2);
-		if (pthread_create(&waitingThread, NULL, routine, data))
-			exit (-4);
-		if (pthread_join(thread, NULL))
-			exit (-1);
-		if (pthread_join(waitingThread, NULL))
-			exit (-3);
-		exit (0);
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	int			num_threads = atoi(argv[1]);
-	pthread_t	threads[num_threads + 1];
-	t_data		data;
-	int			i;
-
-	i = 0;
-	if (arg_verif(argc, argv))
-		return (1);
-	if (stock_data(&data, argc, argv))
-		return (2);
-	data.time = current_time();
-	while (i < num_threads)
-	{
-		creating_threads(threads[i], &data, i + 1);
+		pid[i] = fork();
+		if (pid[i] == 0)
+		{
+			data.philo_nbr = i + 1;
+			if (creating_threads(threads[i], &data) < 0)
+				printf("An error occured while trying to create the thread of philo number %d...\n", data.philo_nbr), sem_post(data.sync_sem);
+			sem_close(data.forks_sem);
+			sem_close(data.print_sem);
+			sem_close(data.dead_sem);
+			sem_close(data.stop_sem);
+			sem_close(data.sync_sem);
+			sem_close(data.eaten_sem);
+			exit(0);
+		}
+		if (i == data.total_philos - 1)
+			sem_post(data.sync_sem);
 		i++;
 	}
+	if (data.nbr_of_times_a_philo_must_eat >= 0)
+	{
+		i = 0;
+		while (i < data.total_philos)
+		{
+			sem_wait(data.eaten_sem);
+			i++;
+		}
+		sem_wait(data.print_sem);
+		i = 0;
+		while (i < data.total_philos)
+		{
+			sem_post(data.dead_sem);
+			i++;
+		}
+		sem_post(data.print_sem);
+	}
+	i = 0;
+	while (i < data.total_philos)
+	{
+		waitpid(pid[i], NULL, 0);
+		i++;
+	}
+	free(threads);
+	free(pid);
 	return (0);
 }
