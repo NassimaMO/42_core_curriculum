@@ -1,17 +1,19 @@
 #include "../includes/philo_lib.h"
 
-// in the dying function do not forget to post the eaten_sems if nbr_of_times_a_philo_must_eat is equal or superior to 0.
+//prints after one has died
 
 int	dying(t_data *data)
 {
 	int	i;
 
-	/*if (data->nbr_philos == 1)
-		usleep(data->time_to_die * 1000);*/
-	sem_wait(data->stop_sem);
+	if (data->total_philos == 1)
+		print_lock(data, "has taken a fork"), usleep(data->time_to_die * 1000);
+	//sem_wait(data->stop_sem);
 	if (current_time() - data->last_eaten >= data->time_to_die)
 	{
+		//sem_post(data->stop_sem);
 		sem_wait(data->print_sem);
+		sem_wait(data->stop_sem);
 		if (!data->stop)
 		{
 			printf("%ld %d %s\n", current_time() - data->time, \
@@ -34,12 +36,15 @@ int	dying(t_data *data)
 					i++;
 				}
 			}
-			sem_post(data->print_sem);
 			sem_post(data->stop_sem);
+			usleep(300 * 1000);
+			sem_post(data->print_sem);
 			return (1);
 		}
 		sem_post(data->print_sem);
 	}
+	//sem_post(data->stop_sem);
+	sem_wait(data->stop_sem);
 	if (data->stop)
 	{
 		sem_post(data->stop_sem);

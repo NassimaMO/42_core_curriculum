@@ -24,7 +24,6 @@ int	ft_usleep(t_data *data, long int time_to_do_smth)
 void	print_lock(t_data *data, char *current_activity)
 {
 	sem_wait(data->print_sem);
-	usleep(1 * 1000);
 	sem_wait(data->stop_sem);
 	if (!data->stop)
 		printf("%ld %d %s\n", current_time() - data->time, \
