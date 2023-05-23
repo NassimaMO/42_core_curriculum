@@ -54,11 +54,13 @@ void	*routine(void *struc)
 
 	data = (t_data *)struc;
 	philo_init(&philo, data);
-	while (data->time == 0)
+	pthread_mutex_lock(&data->sync);
+	/*while (data->time == 0)
 	{
 		if (philo.philo_nbr == data->nbr_philos)
 			data->time = current_time();
-	}
+	}*/
+	pthread_mutex_unlock(&data->sync);
 	philo.last_eaten = data->time;
 	return (philo_routine(&philo, data));
 }

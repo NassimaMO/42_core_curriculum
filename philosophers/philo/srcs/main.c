@@ -30,11 +30,14 @@ int	main(int argc, char **argv)
 		return (1);
 	if (stock_data(&data, argc, argv))
 		return (2);
+	pthread_mutex_lock(&data.sync);
 	while (i < num_threads)
 	{
 		if (pthread_create(&threads[i++], NULL, routine, &data))
 			return (3); 
 	}
+	data.time = current_time();
+	pthread_mutex_unlock(&data.sync);
 	i = 0;
 	while (i < num_threads)
 	{

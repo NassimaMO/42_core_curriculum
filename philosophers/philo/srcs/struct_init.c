@@ -16,6 +16,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 {
 	int	i;
 
+	pthread_mutex_init(&data->sync, NULL);
 	pthread_mutex_init(&data->infos, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	data->nbr_philos = atoi(argv[1]);

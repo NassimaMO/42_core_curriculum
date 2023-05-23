@@ -21,7 +21,6 @@ int main(int argc, char **argv)
 			data.philo_nbr = i + 1;
 			if (creating_threads(threads[i], &data) < 0)
 				printf("An error occured while trying to create the thread of philo number %d...\n", data.philo_nbr), sem_post(data.sync_sem);
-			sem_post(data.print_sem);
 			usleep(100);
 			sem_close(data.forks_sem);
 			sem_close(data.print_sem);
@@ -47,14 +46,12 @@ int main(int argc, char **argv)
 			sem_wait(data.eaten_sem);
 			i++;
 		}
-		sem_wait(data.print_sem);
 		i = 0;
 		while (i < data.total_philos)
 		{
 			sem_post(data.dead_sem);
 			i++;
 		}
-		sem_post(data.print_sem);
 	}
 	i = 0;
 	while (i < data.total_philos)
