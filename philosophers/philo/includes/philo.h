@@ -32,7 +32,7 @@ typedef struct s_data
 {
 	pthread_mutex_t	infos;
 	pthread_mutex_t	print;
-	pthread_mutex_t sync;
+	pthread_mutex_t	sync;
 	pthread_mutex_t	*forks;
 	int				*tab_forks;
 	long int		time;

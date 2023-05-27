@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_lib.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 16:27:45 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/05/27 16:27:48 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PHILO_LIB_H
 # define PHILO_LIB_H
@@ -12,15 +23,13 @@
 # include <fcntl.h>
 # include <sys/time.h>
 
-
-
 typedef struct s_data
 {
 	sem_t			*dead_sem;
 	sem_t			*print_sem;
 	sem_t			*forks_sem;
 	sem_t			*stop_sem;
-    sem_t           *sync_sem;
+	sem_t			*sync_sem;
 	sem_t			*eaten_sem;
 	int				stop;
 	int				philo_nbr;

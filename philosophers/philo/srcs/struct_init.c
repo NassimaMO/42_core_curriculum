@@ -25,7 +25,10 @@ int	stock_data(t_data *data, int argc, char **argv)
 	data->tab_forks = malloc(data->nbr_philos * sizeof(int));
 	i = -1;
 	while (++i < data->nbr_philos)
-		pthread_mutex_init(&data->forks[i], NULL), data->tab_forks[i] = 0;
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
+		data->tab_forks[i] = 0;
+	}
 	data->philo_stop = 0;
 	data->time = 0;
 	data->time_to_die = atoi(argv[2]);

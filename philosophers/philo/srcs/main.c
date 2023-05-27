@@ -12,16 +12,9 @@
 
 #include "../includes/philo.h"
 
-/*
-   Possible reasons of why it could take more time when thinking:
-	- the usleep just after thinking could lead to a longer sleeping time in some cases;
-	- it cannot take a fork immediately after thinking because there is too many philosophers on it at the same time;
-*/
-
 int	main(int argc, char **argv)
 {
-	int			num_threads = atoi(argv[1]);
-	pthread_t	threads[num_threads + 1];
+	pthread_t	*threads;
 	t_data		data;
 	int			i;
 
@@ -30,20 +23,20 @@ int	main(int argc, char **argv)
 		return (1);
 	if (stock_data(&data, argc, argv))
 		return (2);
+	threads = malloc(data.nbr_philos * sizeof(pthread_t));
 	pthread_mutex_lock(&data.sync);
-	while (i < num_threads)
+	while (i < data.nbr_philos)
 	{
 		if (pthread_create(&threads[i++], NULL, routine, &data))
-			return (3); 
+			return (3);
 	}
-	data.time = current_time();
+	data.time = (usleep(50), current_time());
 	pthread_mutex_unlock(&data.sync);
 	i = 0;
-	while (i < num_threads)
+	while (i < data.nbr_philos)
 	{
 		if (pthread_join(threads[i++], NULL))
 			return (4);
 	}
-	free_data(&data);
-	return (0);
+	return (free(threads), free_data(&data), 0);
 }

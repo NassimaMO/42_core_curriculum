@@ -14,18 +14,6 @@
 
 void	*philo_routine(t_philo *philo, t_data *data)
 {
-	if (philo->philo_nbr % 2 > 0)
-	{
-		print_lock(philo, data, SLEEP);
-		if (ft_usleep(philo, data, data->time_to_sleep))
-			return (NULL);
-		print_lock(philo, data, THINK);
-		if (data->time_to_sleep < data->time_to_eat)
-		{
-			if (ft_usleep(philo, data, data->time_to_eat - data->time_to_sleep))
-				return (NULL);
-		}
-	}
 	while (1)
 	{
 		if (eating(philo, data))
@@ -55,12 +43,20 @@ void	*routine(void *struc)
 	data = (t_data *)struc;
 	philo_init(&philo, data);
 	pthread_mutex_lock(&data->sync);
-	/*while (data->time == 0)
-	{
-		if (philo.philo_nbr == data->nbr_philos)
-			data->time = current_time();
-	}*/
 	pthread_mutex_unlock(&data->sync);
 	philo.last_eaten = data->time;
+	if (philo.philo_nbr % 2 > 0)
+	{
+		print_lock(&philo, data, SLEEP);
+		if (ft_usleep(&philo, data, data->time_to_sleep))
+			return (NULL);
+		print_lock(&philo, data, THINK);
+		if (data->time_to_sleep < data->time_to_eat)
+		{
+			if (ft_usleep(&philo, data, data->time_to_eat - \
+			data->time_to_sleep))
+				return (NULL);
+		}
+	}
 	return (philo_routine(&philo, data));
 }

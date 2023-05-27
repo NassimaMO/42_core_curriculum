@@ -1,44 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 15:59:08 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/05/27 15:59:09 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo_lib.h"
 
-//prints after one has died
-
-int	dying(t_data *data)
+static void	one_died(t_data *data)
 {
 	int	i;
 
+	printf("%ld %d %s\n", current_time() - data->time, data->philo_nbr, "died");
+	if (data->nbr_of_times_a_philo_must_eat >= 0)
+	{
+		i = 0;
+		while (i < data->total_philos)
+		{
+			sem_post(data->eaten_sem);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < data->total_philos)
+		{
+			sem_post(data->dead_sem);
+			i++;
+		}
+	}
+	sem_post(data->stop_sem);
+	usleep(300 * 1000);
+	sem_post(data->print_sem);
+}
+
+int	dying(t_data *data)
+{
 	if (data->total_philos == 1)
-		print_lock(data, "has taken a fork"), usleep(data->time_to_die * 1000);
+	{
+		print_lock(data, "has taken a fork");
+		usleep(data->time_to_die * 1000);
+	}
 	if (current_time() - data->last_eaten >= data->time_to_die)
 	{
 		sem_wait(data->print_sem);
 		sem_wait(data->stop_sem);
 		if (!data->stop)
-		{
-			printf("%ld %d %s\n", current_time() - data->time, \
-				data->philo_nbr, "died");
-			if (data->nbr_of_times_a_philo_must_eat >= 0)
-			{
-				i = 0;
-				while (i < data->total_philos)
-				{
-					sem_post(data->eaten_sem);
-					i++;
-				}
-			}
-			else
-            {
-				i = 0;
-				while (i < data->total_philos)
-				{
-					sem_post(data->dead_sem);
-					i++;
-				}
-			}
-			sem_post(data->stop_sem);
-			usleep(300 * 1000);
-			sem_post(data->print_sem);
-			return (1);
-		}
+			return (one_died(data), 1);
 		sem_post(data->stop_sem);
 		sem_post(data->print_sem);
 	}
