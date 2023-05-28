@@ -32,7 +32,7 @@ static void	*fork_th(void *struc)
 	data = (t_data *)struc;
 	while (1)
 	{
-		if (dying(data) || (sem_wait(data->stop_sem), data->stop) || (sem_post(data->stop_sem), 0))
+		if (dying(data) || (sem_wait(data->stop_sem), data->stop))
 		{
 			i = 0;
 			while (i < data->total_philos)
@@ -42,6 +42,7 @@ static void	*fork_th(void *struc)
 			}
 			return (sem_post(data->stop_sem), NULL);
 		}
+		sem_post(data->stop_sem);
 	}
 	return (NULL);
 }
@@ -90,6 +91,8 @@ int	creating_threads(pthread_t thread, t_data *data)
 	pthread_t	waiting_thread;
 	pthread_t	fork_thread;
 
+	/*sem_unlink("/stop_sem");
+	data->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 1);*/
 	if (pthread_create(&thread, NULL, routine, data))
 		return (-2);
 	if (pthread_create(&waiting_thread, NULL, waiting_th, data))

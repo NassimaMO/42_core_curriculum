@@ -72,6 +72,7 @@ int			eating(t_philo *philo, t_data *data);
 long int	current_time(void);
 int			ft_usleep(t_philo *philo, t_data *data, long int time_to_do_smth);
 void		print_lock(t_philo *philo, t_data *data, char *current_activity);
+int			ft_atoi(const char *nptr);
 
 /* new_philo_free.c */
 void		free_data(t_data *data);

@@ -61,12 +61,8 @@ int	dying(t_data *data)
 	sem_post(data->last_eat_sem);
 	sem_wait(data->stop_sem);
 	if (data->stop)
-	{
-		sem_post(data->stop_sem);
-		return (1);
-	}
-	sem_post(data->stop_sem);
-	return (0);
+		return (sem_post(data->stop_sem), 1);
+	return (sem_post(data->stop_sem), 0);
 }
 
 static void	lock_fork(t_data *data)

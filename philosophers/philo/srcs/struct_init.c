@@ -19,7 +19,7 @@ int	stock_data(t_data *data, int argc, char **argv)
 	pthread_mutex_init(&data->sync, NULL);
 	pthread_mutex_init(&data->infos, NULL);
 	pthread_mutex_init(&data->print, NULL);
-	data->nbr_philos = atoi(argv[1]);
+	data->nbr_philos = ft_atoi(argv[1]);
 	data->forks = malloc(data->nbr_philos * \
 		sizeof(pthread_mutex_t));
 	data->tab_forks = malloc(data->nbr_philos * sizeof(int));
@@ -31,12 +31,12 @@ int	stock_data(t_data *data, int argc, char **argv)
 	}
 	data->philo_stop = 0;
 	data->time = 0;
-	data->time_to_die = atoi(argv[2]);
-	data->time_to_eat = atoi(argv[3]);
-	data->time_to_sleep = atoi(argv[4]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
 	data->nbr_of_times_a_philo_must_eat = -1;
 	if (argc == 6)
-		data->nbr_of_times_a_philo_must_eat = atoi(argv[5]);
+		data->nbr_of_times_a_philo_must_eat = ft_atoi(argv[5]);
 	data->test = 1;
 	return (0);
 }

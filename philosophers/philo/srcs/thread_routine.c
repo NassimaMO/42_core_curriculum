@@ -41,8 +41,8 @@ void	*routine(void *struc)
 	t_philo	philo;
 
 	data = (t_data *)struc;
-	philo_init(&philo, data);
 	pthread_mutex_lock(&data->sync);
+	philo_init(&philo, data);
 	pthread_mutex_unlock(&data->sync);
 	philo.last_eaten = data->time;
 	if (philo.philo_nbr % 2 > 0)
