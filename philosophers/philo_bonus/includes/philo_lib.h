@@ -29,8 +29,8 @@ typedef struct s_data
 	sem_t			*print_sem;
 	sem_t			*forks_sem;
 	sem_t			*stop_sem;
-	sem_t			*sync_sem;
 	sem_t			*eaten_sem;
+	sem_t			*last_eat_sem;
 	int				stop;
 	int				philo_nbr;
 	long int		last_eaten;
@@ -51,5 +51,6 @@ int			ft_usleep(t_data *data, long int time_to_do_smth);
 void		print_lock(t_data *data, char *current_activity);
 int			dying(t_data *data);
 int			eating(t_data *data);
+int			ft_atoi(const char *nptr);
 
 #endif

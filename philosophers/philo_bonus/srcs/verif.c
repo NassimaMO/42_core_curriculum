@@ -39,7 +39,7 @@ int	verif(int argc, char **argv)
 	{
 		if (invalid_arg(argv[i]))
 			return (1);
-		number = atoi(argv[i]);
+		number = ft_atoi(argv[i]);
 		if ((i == 2 && number == 0) || number > INT_MAX || number < 0)
 			return (1);
 	}

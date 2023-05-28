@@ -18,7 +18,7 @@ void	free_per_process(pthread_t *threads, t_data data, int *pid)
 	sem_close(data.print_sem);
 	sem_close(data.dead_sem);
 	sem_close(data.stop_sem);
-	sem_close(data.sync_sem);
+	sem_close(data.last_eat_sem);
 	sem_close(data.eaten_sem);
 	free(threads);
 	free(pid);
@@ -40,7 +40,6 @@ void	creating_processes(pthread_t *threads, t_data data, int *pid)
 			if (creating_threads(threads[i], &data) < 0)
 			{
 				printf("An error occured while trying to create a thread...\n");
-				sem_post(data.sync_sem);
 			}
 			usleep(100);
 			free_per_process(threads, data, pid);

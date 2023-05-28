@@ -43,3 +43,30 @@ void	print_lock(t_data *data, char *current_activity)
 	sem_post(data->stop_sem);
 	sem_post(data->print_sem);
 }
+
+int	ft_atoi(const char *nptr)
+{
+	long int	result;
+	int			minus;
+	int			i;
+
+	i = 0;
+	result = 0;
+	minus = 1;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			minus = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result += nptr[i] - 48;
+		if (nptr[i + 1] >= '0' && nptr[i + 1] <= '9')
+			result *= 10;
+		i++;
+	}
+	return (result * minus);
+}

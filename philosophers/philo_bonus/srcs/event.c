@@ -38,6 +38,7 @@ static void	one_died(t_data *data)
 	sem_post(data->stop_sem);
 	usleep(300 * 1000);
 	sem_post(data->print_sem);
+	sem_post(data->last_eat_sem);
 }
 
 int	dying(t_data *data)
@@ -47,6 +48,7 @@ int	dying(t_data *data)
 		print_lock(data, "has taken a fork");
 		usleep(data->time_to_die * 1000);
 	}
+	sem_wait(data->last_eat_sem);
 	if (current_time() - data->last_eaten >= data->time_to_die)
 	{
 		sem_wait(data->print_sem);
@@ -56,6 +58,7 @@ int	dying(t_data *data)
 		sem_post(data->stop_sem);
 		sem_post(data->print_sem);
 	}
+	sem_post(data->last_eat_sem);
 	sem_wait(data->stop_sem);
 	if (data->stop)
 	{
@@ -85,9 +88,9 @@ int	eating(t_data *data)
 {
 	lock_fork(data);
 	print_lock(data, "is eating");
-	sem_wait(data->stop_sem);
+	sem_wait(data->last_eat_sem);
 	data->last_eaten = current_time();
-	sem_post(data->stop_sem);
+	sem_post(data->last_eat_sem);
 	if (ft_usleep(data, data->time_to_eat) && (unlock_fork(data), 1))
 		return (1);
 	if (data->nbr_of_times_a_philo_must_eat >= 0)

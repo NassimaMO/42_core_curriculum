@@ -32,7 +32,7 @@ static void	*fork_th(void *struc)
 	data = (t_data *)struc;
 	while (1)
 	{
-		if (dying(data) || data->stop)
+		if (dying(data) || (sem_wait(data->stop_sem), data->stop) || (sem_post(data->stop_sem), 0))
 		{
 			i = 0;
 			while (i < data->total_philos)
@@ -40,7 +40,7 @@ static void	*fork_th(void *struc)
 				sem_post(data->forks_sem);
 				i++;
 			}
-			return (NULL);
+			return (sem_post(data->stop_sem), NULL);
 		}
 	}
 	return (NULL);
