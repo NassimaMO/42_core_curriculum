@@ -23,7 +23,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 
 ${NAME}:		${OBJ} includes/philo_lib.h
 				$(CC) $(CFLAGS) $^ -o $@ -lpthread
-#-fsanitize=thread
+#-fsanitize=thread 
 
 clean:
 				${RM} -r ${OBJ_DIR}

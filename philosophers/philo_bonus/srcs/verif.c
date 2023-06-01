@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verif.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 15:59:39 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/05/27 15:59:40 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo_lib.h"
 
 static int	invalid_arg(char *arg)
@@ -27,7 +39,7 @@ int	verif(int argc, char **argv)
 	{
 		if (invalid_arg(argv[i]))
 			return (1);
-		number = atoi(argv[i]);
+		number = ft_atoi(argv[i]);
 		if ((i == 2 && number == 0) || number > INT_MAX || number < 0)
 			return (1);
 	}

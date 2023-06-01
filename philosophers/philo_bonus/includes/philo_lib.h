@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_lib.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 16:27:45 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/05/27 16:27:48 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PHILO_LIB_H
 # define PHILO_LIB_H
@@ -12,16 +23,14 @@
 # include <fcntl.h>
 # include <sys/time.h>
 
-
-
 typedef struct s_data
 {
 	sem_t			*dead_sem;
 	sem_t			*print_sem;
 	sem_t			*forks_sem;
 	sem_t			*stop_sem;
-    sem_t           *sync_sem;
 	sem_t			*eaten_sem;
+	sem_t			*last_eat_sem;
 	int				stop;
 	int				philo_nbr;
 	long int		last_eaten;
@@ -42,5 +51,6 @@ int			ft_usleep(t_data *data, long int time_to_do_smth);
 void		print_lock(t_data *data, char *current_activity);
 int			dying(t_data *data);
 int			eating(t_data *data);
+int			ft_atoi(const char *nptr);
 
 #endif

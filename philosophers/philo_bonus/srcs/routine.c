@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 15:59:23 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/05/27 15:59:25 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo_lib.h"
 
-
-static void	*waitingThread(void *struc)
+static void	*waiting_th(void *struc)
 {
 	t_data	*data;
 
@@ -13,7 +24,7 @@ static void	*waitingThread(void *struc)
 	return (NULL);
 }
 
-static void *ForkThread(void *struc)
+static void	*fork_th(void *struc)
 {
 	int		i;
 	t_data	*data;
@@ -21,7 +32,7 @@ static void *ForkThread(void *struc)
 	data = (t_data *)struc;
 	while (1)
 	{
-		if (dying(data) || data->stop)
+		if (dying(data) || (sem_wait(data->stop_sem), data->stop))
 		{
 			i = 0;
 			while (i < data->total_philos)
@@ -29,23 +40,15 @@ static void *ForkThread(void *struc)
 				sem_post(data->forks_sem);
 				i++;
 			}
-			return (NULL);
+			return (sem_post(data->stop_sem), NULL);
 		}
+		sem_post(data->stop_sem);
 	}
 	return (NULL);
 }
 
 static void	*philo_routine(t_data *data)
 {
-	if (data->philo_nbr % 2 > 0)
-	{
-		print_lock(data, "is sleeping");
-		if (ft_usleep(data, data->time_to_sleep))
-			return (NULL);
-		print_lock(data, "is thinking");
-		if (data->time_to_eat > data->time_to_sleep && ft_usleep(data, data->time_to_eat - data->time_to_sleep))
-			return (NULL);
-	}
 	while (!dying(data))
 	{
 		if ((data->nbr_of_times_a_philo_must_eat >= 0 && \
@@ -53,12 +56,13 @@ static void	*philo_routine(t_data *data)
 		data->nbr_of_times_a_philo_must_eat))
 			sem_post(data->eaten_sem);
 		if (eating(data))
-			break;
+			break ;
 		print_lock(data, "is sleeping");
 		if (ft_usleep(data, data->time_to_sleep))
-			break;
+			break ;
 		print_lock(data, "is thinking");
-		if (data->time_to_eat > data->time_to_sleep && ft_usleep(data, data->time_to_eat - data->time_to_sleep))
+		if (data->time_to_eat > data->time_to_sleep && \
+		ft_usleep(data, data->time_to_eat - data->time_to_sleep))
 			return (NULL);
 	}
 	return (NULL);
@@ -69,23 +73,31 @@ static void	*routine(void *struc)
 	t_data	*data;
 
 	data = (t_data *)struc;
-	sem_wait(data->sync_sem);
-	data->time = current_time();
-	data->last_eaten = data->time;
+	if (data->philo_nbr % 2 > 0)
+	{
+		print_lock(data, "is sleeping");
+		if (ft_usleep(data, data->time_to_sleep))
+			return (NULL);
+		print_lock(data, "is thinking");
+		if (data->time_to_eat > data->time_to_sleep && ft_usleep(data, \
+		data->time_to_eat - data->time_to_sleep))
+			return (NULL);
+	}
 	return (philo_routine(data));
 }
 
-
-int creating_threads(pthread_t thread, t_data *data)
+int	creating_threads(pthread_t thread, t_data *data)
 {
 	pthread_t	waiting_thread;
 	pthread_t	fork_thread;
 
+	/*sem_unlink("/stop_sem");
+	data->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 1);*/
 	if (pthread_create(&thread, NULL, routine, data))
 		return (-2);
-	if (pthread_create(&waiting_thread, NULL, waitingThread, data))
+	if (pthread_create(&waiting_thread, NULL, waiting_th, data))
 		return (-4);
-	if (pthread_create(&fork_thread, NULL, ForkThread, data))
+	if (pthread_create(&fork_thread, NULL, fork_th, data))
 		return (-4);
 	if (pthread_join(thread, NULL))
 		return (-1);
