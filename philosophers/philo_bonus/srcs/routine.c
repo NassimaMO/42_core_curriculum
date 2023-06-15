@@ -32,6 +32,7 @@ static void	*fork_th(void *struc)
 	data = (t_data *)struc;
 	while (1)
 	{
+		usleep(10);
 		if (dying(data) || (sem_wait(data->stop_sem), data->stop))
 		{
 			i = 0;
