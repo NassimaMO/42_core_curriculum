@@ -2,7 +2,7 @@ NAME		=	philo_bonus
 
 CC			=	gcc
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror #-g3
 
 SRCS_DIR	=	srcs
 
@@ -22,7 +22,8 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
 ${NAME}:		${OBJ} includes/philo_lib.h
-				$(CC) $(CFLAGS) $^ -o $@ -lpthread -fsanitize=thread 
+				$(CC) $(CFLAGS) $^ -o $@ -lpthread 
+#-fsanitize=thread 
 
 clean:
 				${RM} -r ${OBJ_DIR}
