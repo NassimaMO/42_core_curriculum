@@ -20,13 +20,19 @@ void	free_per_process(pthread_t *threads, t_data data, int *pid)
 	sem_close(data.stop_sem);
 	sem_close(data.last_eat_sem);
 	sem_close(data.eaten_sem);
+	sem_unlink("/forks_sem");
+	sem_unlink("/print_sem");
+	sem_unlink("/dead_sem");
+	sem_unlink("/stop_sem");
+	sem_unlink("/last_eat_sem");
+	sem_unlink("/eaten_sem");
 	free(threads);
 	free(pid);
 }
 
 void	creating_processes(pthread_t *threads, t_data data, int *pid)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	data.time = current_time();

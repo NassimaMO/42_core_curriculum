@@ -38,8 +38,10 @@ void	print_lock(t_data *data, char *current_activity)
 	sem_wait(data->print_sem);
 	sem_wait(data->stop_sem);
 	if (!data->stop)
+	{
 		printf("%ld %d %s\n", current_time() - data->time, \
 			data->philo_nbr, current_activity);
+	}
 	sem_post(data->stop_sem);
 	sem_post(data->print_sem);
 }

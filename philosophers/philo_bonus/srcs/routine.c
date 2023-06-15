@@ -92,8 +92,6 @@ int	creating_threads(pthread_t thread, t_data *data)
 	pthread_t	waiting_thread;
 	pthread_t	fork_thread;
 
-	/*sem_unlink("/stop_sem");
-	data->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 1);*/
 	if (pthread_create(&thread, NULL, routine, data))
 		return (-2);
 	if (pthread_create(&waiting_thread, NULL, waiting_th, data))
