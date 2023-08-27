@@ -6,11 +6,13 @@ EXTENSION		=	.cpp
 
 CFLAGS			=	-Wall -Wextra -Werror -g -std=c++98
 
-SRCS			=	phonebook$(EXTENSION), contact$(EXTENSION)
+SRCS			=	Phonebook$(EXTENSION), Contact$(EXTENSION)
 
 OBJ_DIR			=	obj
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:%$(EXTENSION)=%.o))
+
+HEADER			= 	Phonebook.hpp
 
 RM				=	rm -f
 
@@ -20,7 +22,7 @@ $(OBJ_DIR)/%.o:		%.cpp
 					@mkdir -p $(OBJ_DIR)
 					$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}:			${OBJ}
+${NAME}:			${OBJ} ${HEADER}
 					$(CC) $(CFLAGS) $^ -o $@
 
 clean:
