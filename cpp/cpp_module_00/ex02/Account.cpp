@@ -6,7 +6,7 @@ Account::Account( int initial_deposit )
     //this->makeDeposit(initial_deposit);
     _nbAccounts++;
     _totalAmount += initial_deposit;
-    this->_amount += initial_deposit;
+    this->_amount = initial_deposit;
     this->_accountIndex = this->_nbAccounts;
     std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";created" << std::endl;
 }
@@ -54,8 +54,11 @@ bool	Account::makeWithdrawal( int withdrawal )
 {
     _totalNbWithdrawals++;
     this->_nbWithdrawals++;
+    if (this->_amount < withdrawal)
+        return (false);
     _totalAmount -= withdrawal;
     this->_amount -= withdrawal;
+    return (true);
 }
 
 int		Account::checkAmount( void ) const
