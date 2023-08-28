@@ -28,22 +28,22 @@ std::string    Contact::get_input( std::string str )
 
 void    Contact::init( int index )
 {
-    this->first_name = this->get_input( "Enter your first name: ");
-    this->last_name = this->get_input( "Enter your last name: " );
-    this->nickname = this->get_input( "Enter your nickname: " );
-    this->phone_number = this->get_input( "Enter your phone number: " );
-    this->darkest_secret = this->get_input( "Enter your darkest secret: " );
-    this->index = index;
+    this->m_first_name = this->get_input( "Enter your first name: ");
+    this->m_last_name = this->get_input( "Enter your last name: " );
+    this->m_nickname = this->get_input( "Enter your nickname: " );
+    this->m_phone_number = this->get_input( "Enter your phone number: " );
+    this->m_darkest_secret = this->get_input( "Enter your darkest secret: " );
+    this->m_index = index;
     std::cout << "Ouuhhh spicyyy !! " << std::endl;
 };
 
 void    Contact::display( void )
 {
-    std::cout << "First name: " << this->first_name << std::endl;
-    std::cout << "Last name: " << this->last_name << std::endl;
-    std::cout << "Nickname: " << this->nickname << std::endl;
-    std::cout << "Phone number: " << this->phone_number << std::endl;
-    std::cout << "Darkest secret: " << this->darkest_secret << std::endl;
+    std::cout << "First name: " << this->m_first_name << std::endl;
+    std::cout << "Last name: " << this->m_last_name << std::endl;
+    std::cout << "Nickname: " << this->m_nickname << std::endl;
+    std::cout << "Phone number: " << this->m_phone_number << std::endl;
+    std::cout << "Darkest secret: " << this->m_darkest_secret << std::endl;
 }
 
 std::string Contact::cut_string( std::string str)
@@ -53,11 +53,11 @@ std::string Contact::cut_string( std::string str)
     return (str);
 }
 
-void    Contact::info( int i )
+void    Contact::info( int index )
 {
-    std::cout << "|" << std::setw(10) << i << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->first_name) << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->last_name) << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->nickname) << std::flush;
+    std::cout << "|" << std::setw(10) << index << std::flush;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_first_name) << std::flush;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_last_name) << std::flush;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_nickname) << std::flush;
     std::cout << "|" << std::endl;
 }

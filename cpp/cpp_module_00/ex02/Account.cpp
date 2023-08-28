@@ -1,9 +1,13 @@
 #include <iostream>
 #include "Account.hpp"
 
+Account::Account( void )
+{
+    /**/
+}
+
 Account::Account( int initial_deposit )
 {
-    //this->makeDeposit(initial_deposit);
     _nbAccounts++;
     _totalAmount += initial_deposit;
     this->_amount = initial_deposit;
@@ -63,10 +67,16 @@ bool	Account::makeWithdrawal( int withdrawal )
 
 int		Account::checkAmount( void ) const
 {
-    //
+    return (_totalAmount);
 }
 
 void	Account::displayStatus( void ) const
 {
     //
 }
+
+void	_displayTimestamp( void )
+{
+    //
+}
+

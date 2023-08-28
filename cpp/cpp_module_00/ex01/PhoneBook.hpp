@@ -19,8 +19,8 @@ class PhoneBook
 
     private:
 
-    Contact contacts[8];
-    int     total_numbers;
+    Contact m_contacts[8];
+    int     m_total_numbers;
 
 };
 
