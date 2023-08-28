@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	accounts
 
 CC				=	g++
 
@@ -6,13 +6,13 @@ EXTENSION		=	.cpp
 
 CFLAGS			=	-Wall -Wextra -Werror -g -std=c++98
 
-SRCS			=	main$(EXTENSION) PhoneBook$(EXTENSION) Contact$(EXTENSION)
+SRCS			=	Account$(EXTENSION) tests$(EXTENSION)
 
 OBJ_DIR			=	obj
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:%$(EXTENSION)=%.o))
 
-HEADER			= 	PhoneBook.hpp Contact.hpp
+HEADER			= 	Account.hpp
 
 RM				=	rm -f
 

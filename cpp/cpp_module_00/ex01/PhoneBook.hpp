@@ -7,19 +7,21 @@
 
 class PhoneBook
 {
+
     public:
 
     PhoneBook( void );
     ~PhoneBook( void );
+    void    add( void );
+    void    search( void );
+    void    index( int index );
+    void    get_index( void );
 
     private:
 
     Contact contacts[8];
-    void    start( void );
-    void    add( void );
-    void    search( void );
-    void    index( int i );
-    
+    int     total_numbers;
+
 };
 
 #endif
