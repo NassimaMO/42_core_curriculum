@@ -1,6 +1,6 @@
 NAME			=	accounts
 
-CC				=	g++
+CC				=	c++
 
 EXTENSION		=	.cpp
 
@@ -12,7 +12,7 @@ OBJ_DIR			=	obj
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:%$(EXTENSION)=%.o))
 
-HEADER			= 	Account.hpp
+#HEADER			= 	Account.hpp
 
 RM				=	rm -f
 
@@ -21,8 +21,8 @@ all:				${NAME}
 $(OBJ_DIR)/%.o:		%.cpp
 					@mkdir -p $(OBJ_DIR)
 					$(CC) $(CFLAGS) -c $< -o $@
-
-${NAME}:			${OBJ} ${HEADER}
+#${HEADER}
+${NAME}:			${OBJ}
 					$(CC) $(CFLAGS) $^ -o $@
 
 clean:
