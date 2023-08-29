@@ -4,7 +4,7 @@ CC				=	g++
 
 EXTENSION		=	.cpp
 
-CFLAGS			=	-Wall -Wextra -Werror -g -std=c++98
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98
 
 SRCS			=	Account$(EXTENSION) tests$(EXTENSION)
 
