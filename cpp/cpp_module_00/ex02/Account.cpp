@@ -1,5 +1,6 @@
 #include "Account.hpp"
 #include <iostream>
+# include <iomanip>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount= 0;
@@ -8,19 +9,13 @@ int Account::_totalNbWithdrawals = 0;
 
 void	Account::_displayTimestamp( void )
 {
-    //test
-    time_t now	= time(0);
-	tm *ltm		= localtime(&now);
+    time_t  now = time(0);
+	tm      *current_time = localtime(&now);
 
-	std::cout << "[";
-	std::cout << 1900 + ltm->tm_year;
-	ltm->tm_mon < 10 ? std::cout << "0" << 1 + ltm->tm_mon : std::cout << 1 + ltm->tm_mon;
-	ltm->tm_mday < 10 ? std::cout << "0" << ltm->tm_mday : std::cout <<  ltm->tm_mday;
-	std::cout << "_";
-	ltm->tm_hour < 10 ? std::cout << "0" << ltm->tm_hour : std::cout << ltm->tm_hour;
-	ltm->tm_min < 10 ? std::cout << "0" << ltm->tm_min : std::cout <<  ltm->tm_min;
-	ltm->tm_sec < 10 ? std::cout << "0" << ltm->tm_sec : std::cout <<  ltm->tm_sec;
-	std::cout << "] ";
+	std::cout << "[" << std::flush;
+    std::cout << std::setfill('0') << current_time->tm_year + 1900 << std::setw(2) << current_time->tm_mon + 1 << std::setw(2) << current_time->tm_mday << "_" << std::flush;
+    std::cout << std::setfill('0') << std::setw(2) << current_time->tm_hour << std::setw(2) << current_time->tm_min << std::setw(2) << current_time->tm_sec << std::flush;
+	std::cout << "] " << std::flush;
 }
 
 Account::Account( void )

@@ -4,5 +4,6 @@
 
 void randomChump( std::string name )
 {
-    std::cout << "Hello, je m'appelle " << name << std::endl;
+    Zombie  zoom( name );
+    zoom.announce();
 }

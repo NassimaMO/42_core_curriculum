@@ -5,6 +5,5 @@ dehors de la portée de la fonction. */
 
 Zombie* newZombie( std::string name )
 {
-    Zombie  zoom;
-    return (&zoom);
+    return ( new Zombie ( name ) );
 }
