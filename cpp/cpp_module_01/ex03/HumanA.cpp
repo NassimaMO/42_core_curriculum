@@ -1,9 +1,8 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA( std::string name, Weapon &weapon )
+HumanA::HumanA( std::string name, Weapon &weapon ) : m_weapon(weapon), m_name(name)
 {
-    this->m_weapon = weapon;
-    this->m_name = name;
+    /**/
 }
 
 HumanA::~HumanA( void )
