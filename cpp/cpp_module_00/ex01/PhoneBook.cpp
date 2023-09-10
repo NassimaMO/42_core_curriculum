@@ -29,11 +29,10 @@ void    PhoneBook::add( void )
 {
     static int  num;
 
-    this->m_contacts[num].init(num);
+    this->m_contacts[ num  % 8 ].init( num % 8 );
     if (this->m_total_numbers < 8)
         this->m_total_numbers++;
-    if (num < 7)
-        num++;
+    num++;
     return ;
 }
 
@@ -50,7 +49,7 @@ void PhoneBook::get_index( void )
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
     while (true)
     {
-        std::cout << " - " /* << std::flush */;
+        std::cout << " - " /*<< std::flush */;
         std::cin >> index;
         if (std::cin.fail())
         {
