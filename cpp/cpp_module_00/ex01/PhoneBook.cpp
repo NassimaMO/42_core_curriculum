@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/10 17:26:52 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/10 17:43:25 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* instance : repertoire */
 
 #include "PhoneBook.hpp"
@@ -38,13 +50,13 @@ void PhoneBook::get_index( void )
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
     while (true)
     {
-        std::cout << " - " << std::flush;
+        std::cout << " - " /* << std::flush */;
         std::cin >> index;
         if (std::cin.fail())
         {
             std::cout << "Not what I asked. Bye" << std::endl;
-            std::cin.clear();
-            std::cin.ignore();
+            /* std::cin.clear();
+            std::cin.ignore(); */
             break;
         }
         else if (index > this->m_total_numbers - 1)
@@ -54,7 +66,7 @@ void PhoneBook::get_index( void )
         else
         {
             this->m_contacts[index].display();
-            std::cin.clear();
+            //std::cin.clear();
             break;
         }
     }
@@ -75,5 +87,5 @@ void    PhoneBook::search( void )
     std::cout << std::endl;
     std::cout << "Which contact do you want to display ?" << std::endl;
     this->get_index();
-    std::cin.ignore();
+    //std::cin.ignore();
 }

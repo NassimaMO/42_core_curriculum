@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/10 17:26:44 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/10 17:42:26 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* instance : contacts */
 
 #include "Contact.hpp"
@@ -16,11 +28,11 @@ std::string    Contact::get_input( std::string str )
 
     while (true)
     {
-        std::cout << str << std::flush;
+        std::cout << str /* << std::flush */;
         std::getline(std::cin, input);
         if (!input.empty())
             break;
-        std::cin.clear();
+        //std::cin.clear();
         std::cout << "naahhh come on, tell me." << std::endl;
     }
     return (input);
@@ -55,9 +67,9 @@ std::string Contact::cut_string( std::string str)
 
 void    Contact::info( int index )
 {
-    std::cout << "|" << std::setw(10) << index << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_first_name) << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_last_name) << std::flush;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_nickname) << std::flush;
+    std::cout << "|" << std::setw(10) << index /* << std::flush */;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_first_name) /* << std::flush */;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_last_name) /* << std::flush */;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_nickname) /* << std::flush */;
     std::cout << "|" << std::endl;
 }

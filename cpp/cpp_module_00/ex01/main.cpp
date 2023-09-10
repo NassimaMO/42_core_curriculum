@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/10 17:26:50 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/10 17:26:50 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <limits>
@@ -18,12 +30,15 @@ int main ( void )
     start();
     while (input.compare("EXIT"))
     {
+        
         if (!input.compare("ADD"))
             The_PhoneBook.add();
         else if (!input.compare("SEARCH"))
             The_PhoneBook.search();
         else if (!input.empty())
             std::cout << "WHAT EXACTLY DO YOU EXPECT FROM MEEEEE ?!?!??" << std::endl;
+        /*else if (input.compare("EXIT"))
+            return (0);*/
         std::cout << "SO WHAT DO YOU WANT ? ------> " << std::flush;
         std::getline(std::cin, input);
     }
