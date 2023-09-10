@@ -14,12 +14,12 @@
 
 HumanA::HumanA( std::string name, Weapon &weapon ) : m_weapon(weapon), m_name(name)
 {
-    /**/
+    std::cout << "HumanA \"" << m_name << "\" created." << std::endl;
 }
 
 HumanA::~HumanA( void )
 {
-    /**/
+    std::cout << "HumanA \"" << m_name << "\" destroyed." << std::endl;
 }
 
 void    HumanA::attack( void )

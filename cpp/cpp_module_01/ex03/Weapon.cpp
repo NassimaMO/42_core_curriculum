@@ -15,11 +15,12 @@
 Weapon::Weapon( std::string type )
 {
     this->m_type = type;
+    std::cout << "Weapon of type \"" << m_type << "\" created." << std::endl;
 }
 
 Weapon::~Weapon( void )
 {
-    /**/
+    std::cout << "Weapon of type \"" << m_type << "\" destroyed." << std::endl;
 }
 
 const std::string&  Weapon::getType( void )

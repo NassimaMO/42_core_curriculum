@@ -16,11 +16,12 @@
 HumanB::HumanB( std::string name )
 {
     this->m_name = name;
+    std::cout << "HumanB \"" << m_name << "\" created." << std::endl;
 }
 
 HumanB::~HumanB( void )
 {
-    /**/
+    std::cout << "HumanB \"" << m_name << "\" destroyed." << std::endl;
 }
 
 void    HumanB::attack( void )

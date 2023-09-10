@@ -23,7 +23,16 @@ Harl::~Harl( void )
 
 void    Harl::complain( std::string level )
 {
-    switch( level )
+    std::string tab[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
+    int lvl = 0;
+
+    while ( lvl < 4 )
+    {
+        if ( !level.compare( tab[lvl] ) )
+            break;
+        lvl++;
+    }
+    switch( lvl )
     {
         case DEBUG:
             debug();

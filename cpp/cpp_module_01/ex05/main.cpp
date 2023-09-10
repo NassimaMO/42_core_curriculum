@@ -20,6 +20,7 @@ int main( void )
     Harlette.complain( "INFO" );
     Harlette.complain( "WARNING" );
     Harlette.complain( "ERROR" );
+    Harlette.complain( "huhuh" );
     
     return (0);
 }
