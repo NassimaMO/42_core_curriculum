@@ -14,7 +14,7 @@
 
 #include "Contact.hpp"
 
-Contact::Contact(/* args */)
+Contact::Contact()
 {
 }
 
@@ -28,11 +28,10 @@ std::string    Contact::get_input( std::string str )
 
     while (true)
     {
-        std::cout << str /* << std::flush */;
+        std::cout << str;
         std::getline(std::cin, input);
         if (!input.empty())
             break;
-        //std::cin.clear();
         std::cout << "naahhh come on, tell me." << std::endl;
     }
     return (input);
@@ -67,9 +66,9 @@ std::string Contact::cut_string( std::string str)
 
 void    Contact::info( int index )
 {
-    std::cout << "|" << std::setw(10) << index /* << std::flush */;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_first_name) /* << std::flush */;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_last_name) /* << std::flush */;
-    std::cout << "|" << std::setw(10) << this->cut_string(this->m_nickname) /* << std::flush */;
+    std::cout << "|" << std::setw(10) << index;
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_first_name);
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_last_name);
+    std::cout << "|" << std::setw(10) << this->cut_string(this->m_nickname);
     std::cout << "|" << std::endl;
 }

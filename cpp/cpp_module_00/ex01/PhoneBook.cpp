@@ -49,15 +49,14 @@ void PhoneBook::get_index( void )
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
     while (true)
     {
-        std::cout << " - " /*<< std::flush */;
+        std::cout << " - ";
         std::cin >> index;
         if (std::cin.fail())
         {
-            std::cout << "Not what I asked. Bye" << std::endl;
-            /* std::cin.clear();
-            std::cin.ignore(); */
-            break;
-        }
+            std::cout << "Not what I asked." << std::endl;
+            std::cin.clear();
+            while ( std::cin.get() != '\n' )
+                continue;        }
         else if (index > this->m_total_numbers - 1)
             std::cout << "huuum look closely..." << std::endl;
         else if (index < 0 || index > 7)
@@ -65,7 +64,8 @@ void PhoneBook::get_index( void )
         else
         {
             this->m_contacts[index].display();
-            //std::cin.clear();
+            std::cin.clear();
+            std::cin.ignore();
             break;
         }
     }
@@ -86,5 +86,4 @@ void    PhoneBook::search( void )
     std::cout << std::endl;
     std::cout << "Which contact do you want to display ?" << std::endl;
     this->get_index();
-    //std::cin.ignore();
 }
