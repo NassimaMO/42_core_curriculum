@@ -39,13 +39,13 @@ void    Harl::complain( std::string level )
     {
         case DEBUG:
             debug();
-            break;
+            __attribute__ ((fallthrough));
         case INFO:
             info();
-            break;
+            __attribute__ ((fallthrough));
         case WARNING:
             warning();
-            break;
+            __attribute__ ((fallthrough));
         case ERROR:
             error();
             break;
