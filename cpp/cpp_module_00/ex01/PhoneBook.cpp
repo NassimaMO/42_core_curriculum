@@ -43,11 +43,28 @@ void    PhoneBook::index( int index )
 
 void PhoneBook::get_index( void )
 {
-    int index;
+    //int index;
+    std::string index;
+    std::string ValidNums( "01234567" );
+    size_t      found;
 
     if (this->m_total_numbers == 0)
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
     while (true)
+    {
+        std::cin >> index;
+        found = index.find_first_not_of(ValidNums);
+        if (found != std::string::npos || atoi(index.c_str()) > this->m_total_numbers - 1)
+            std::cout << "Not what I asked." << std::endl;
+        else
+        {                
+            this->m_contacts[atoi(index.c_str())].display();
+            std::cin.ignore();
+            break;
+        }
+    }
+
+    /*while (true)
     {
         std::cout << " - ";
         std::cin >> index;
@@ -64,11 +81,10 @@ void PhoneBook::get_index( void )
         else
         {
             this->m_contacts[index].display();
-            std::cin.clear();
             std::cin.ignore();
             break;
         }
-    }
+    }*/
 }
 
 void    PhoneBook::search( void )

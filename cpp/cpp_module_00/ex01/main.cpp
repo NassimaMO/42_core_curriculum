@@ -18,7 +18,7 @@
 void    start( void )
 {
     std::cout << "Welcome to YOUR personal phonebook !!" << std::endl;
-    std::cout << "You may ADD or even SEARCH for contacts ! WAOW !! Just say the word ! I mean write it." << std::endl;
+    std::cout << "You may ADD or SEARCH for contacts ! WAOW !! Just say the word ! I mean write it." << std::endl;
     std::cout << "Once you're done, you can EXIT whenever you want !" << std::endl;
 }
 
@@ -37,8 +37,6 @@ int main ( void )
             The_PhoneBook.search();
         else if (!input.empty())
             std::cout << "WHAT EXACTLY DO YOU EXPECT FROM MEEEEE ?!?!??" << std::endl;
-        /*else if (input.compare("EXIT"))
-            return (0);*/
         std::cout << "SO WHAT DO YOU WANT ? ------> " << std::flush;
         std::getline(std::cin, input);
     }
