@@ -1,6 +1,6 @@
 NAME			=	phonebook
 
-CC				=	g++
+CC				=	c++
 
 EXTENSION		=	.cpp
 

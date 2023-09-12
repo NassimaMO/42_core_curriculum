@@ -1,6 +1,6 @@
 NAME			=	megaphone
 
-CC				=	g++
+CC				=	c++
 
 EXTENSION		=	.cpp
 
