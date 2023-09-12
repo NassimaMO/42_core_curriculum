@@ -20,10 +20,10 @@ int main( int argc, char **argv )
         return ( std::cout << "Argument error." << std::endl, 1 );
     //args: filename, s1, s2
     //replace every occurence of s1 by s2 in filename to filename.replace
-    //std::string     filename( argv[1] );
     std::ifstream   file( argv[1] );
-    std::ofstream   anotherFile( "file.replace" );
-    //std::ofstream   anotherFile( filename + ".replace" );
+    std::string     filename( argv[1] );
+    filename += ".replace";
+    std::ofstream   anotherFile( filename.c_str() );
 
     if ( !file || !anotherFile )
         return ( std::cout << "Uhoh! A problem occured" << std::endl, 2 );
@@ -52,6 +52,4 @@ int main( int argc, char **argv )
     }
     else
         return ( std::cout << "Uhoh! A problem occured" << std::endl, 4 );
-    //str.find(s1);
-    //str.insert(num, s2);
 }
