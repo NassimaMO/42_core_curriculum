@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 17:26:52 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/09/10 17:43:25 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:04:37 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void    PhoneBook::index( int index )
 
 void PhoneBook::get_index( void )
 {
-    //int index;
     std::string index;
     std::string ValidNums( "01234567" );
     size_t      found;
@@ -52,39 +51,16 @@ void PhoneBook::get_index( void )
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
     while (true)
     {
-        std::cin >> index;
+        getline(std::cin, index);
         found = index.find_first_not_of(ValidNums);
         if (found != std::string::npos || atoi(index.c_str()) > this->m_total_numbers - 1)
             std::cout << "Not what I asked." << std::endl;
-        else
+        else if (!index.empty())
         {                
             this->m_contacts[atoi(index.c_str())].display();
-            std::cin.ignore();
             break;
         }
     }
-
-    /*while (true)
-    {
-        std::cout << " - ";
-        std::cin >> index;
-        if (std::cin.fail())
-        {
-            std::cout << "Not what I asked." << std::endl;
-            std::cin.clear();
-            while ( std::cin.get() != '\n' )
-                continue;        }
-        else if (index > this->m_total_numbers - 1)
-            std::cout << "huuum look closely..." << std::endl;
-        else if (index < 0 || index > 7)
-            std::cout << "NO" << std::endl;
-        else
-        {
-            this->m_contacts[index].display();
-            std::cin.ignore();
-            break;
-        }
-    }*/
 }
 
 void    PhoneBook::search( void )
