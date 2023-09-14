@@ -20,7 +20,7 @@ Zombie::Zombie( std::string name )
 
 Zombie::Zombie( void )
 {
-    /**/
+    std::cout << "Zombie" << " created." << std::endl;
 }
 
 Zombie::~Zombie( void )
