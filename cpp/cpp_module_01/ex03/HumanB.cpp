@@ -13,25 +13,25 @@
 // do not necessarily have a weapon
 #include "HumanB.hpp"
 
-HumanB::HumanB( std::string name )
+HumanB::HumanB( std::string _name )
 {
-    this->m_name = name;
-    std::cout << "HumanB \"" << m_name << "\" created." << std::endl;
+    this->name = _name;
+    std::cout << "HumanB \"" << name << "\" created." << std::endl;
 }
 
 HumanB::~HumanB( void )
 {
-    std::cout << "HumanB \"" << m_name << "\" destroyed." << std::endl;
+    std::cout << "HumanB \"" << name << "\" destroyed." << std::endl;
 }
 
 void    HumanB::attack( void )
 {
-    if (this->m_weapon->getType().empty())
-        return (std::cout << this->m_name << " don't have any weapon therefore" << this->m_name << " may not attack." << std::endl, void());
-    std::cout << this->m_name << " attacks with their " << this->m_weapon->getType() << std::endl;
+    if (this->weapon->getType().empty())
+        return (std::cout << this->name << " don't have any weapon therefore" << this->name << " may not attack." << std::endl, void());
+    std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
 }
 
-void    HumanB::setWeapon( Weapon  &weapon )
+void    HumanB::setWeapon( Weapon  &_weapon )
 {
-    this->m_weapon = &weapon;
+    this->weapon = &_weapon;
 }
