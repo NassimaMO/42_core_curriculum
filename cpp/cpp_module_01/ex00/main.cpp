@@ -21,5 +21,5 @@ int main( void )
     zombieTwo = newZombie( "Jeff" );
     zombieTwo->announce();
     randomChump( "Alejandro" );
-    zombieTwo->~Zombie();
+    delete ( zombieTwo );
 }
