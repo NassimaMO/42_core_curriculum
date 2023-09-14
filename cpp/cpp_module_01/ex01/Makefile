@@ -25,7 +25,7 @@ ${NAME}:			${OBJ}
 
 clean:
 					${RM} -r ${OBJ_DIR}
-					${RM} *.o
+#${RM} *.o
 
 fclean:				clean
 					${RM} ${NAME}
