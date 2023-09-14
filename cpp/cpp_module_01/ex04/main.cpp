@@ -14,19 +14,17 @@
 #include <fstream>
 #include <string>
 
+    //args: filename, s1, s2
+    //replace every occurence of s1 by s2 in filename to filename.replace
+
 int main( int argc, char **argv )
 {
     if ( argc != 4 )
         return ( std::cout << "Argument error." << std::endl, 1 );
-    //args: filename, s1, s2
-    //replace every occurence of s1 by s2 in filename to filename.replace
     std::ifstream   file( argv[1] );
     std::string     filename( argv[1] );
     filename += ".replace";
     std::ofstream   anotherFile( filename.c_str() );
-
-    if ( !file || !anotherFile )
-        return ( std::cout << "Uhoh! A problem occured" << std::endl, 2 );
     std::string     content;
 
     if ( file.is_open() )
@@ -38,7 +36,7 @@ int main( int argc, char **argv )
         {
             while ( getline( file, content ) )
             {
-                if ( content.find( s1 ) < content.length() )
+                while ( content.find( s1 ) < content.length() )
                 {
                     index = content.find( s1 );
                     content.erase(content.begin() + index, content.begin() + index + s1.size() );
@@ -48,8 +46,8 @@ int main( int argc, char **argv )
             }
         }
         else
-            return ( std::cout << "Uhoh! A problem occured" << std::endl, 3 );
+            return ( std::cout << "(1) Uhoh! A problem occured" << std::endl, 3 );
     }
     else
-        return ( std::cout << "Uhoh! A problem occured" << std::endl, 4 );
+        return ( std::cout << "(2) Uhoh! A problem occured" << std::endl, 4 );
 }
