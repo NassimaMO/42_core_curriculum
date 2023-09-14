@@ -27,7 +27,7 @@ class   Zombie
 
     private:
 
-    std::string m_name;
+    std::string name;
 };
 
 Zombie* newZombie( std::string name );
