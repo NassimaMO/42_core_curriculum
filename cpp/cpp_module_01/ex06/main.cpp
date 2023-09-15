@@ -12,21 +12,14 @@
 
 #include "Harl.hpp"
 
-int main( void )
+int main( int argc, char **argv )
 {
     Harl Harlette;
 
+    if ( argc != 2 )
+        return ( std::cout << "no" << std::endl, 1 );
     std::cout << std::endl;
-    Harlette.complain( "DEBUG" );
-    std::cout << std::endl;
-    Harlette.complain( "INFO" );
-    std::cout << std::endl;
-    Harlette.complain( "WARNING" );
-    std::cout << std::endl;
-    Harlette.complain( "ERROR" );
-    std::cout << std::endl;
-    Harlette.complain( "huhuh" );
-    std::cout << std::endl;
+    Harlette.complain( argv[1] );
     
-    return (0);
+    return ( 0 );
 }
