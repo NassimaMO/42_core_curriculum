@@ -23,6 +23,7 @@ Harl::~Harl( void )
 
 void    Harl::complain( std::string level )
 {
+    void		(Harl::*func_ptr[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     std::string tab[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
     int lvl = 0;
 
@@ -31,28 +32,13 @@ void    Harl::complain( std::string level )
         if ( !level.compare( tab[lvl] ) )
         {
             std::cout << "[ " << tab[lvl] << " ]" << std::endl;
+            (this->*func_ptr[lvl])();
             break;
         }
         lvl++;
     }
-    switch( lvl )
-    {
-        case DEBUG:
-            debug();
-            break;
-        case INFO:
-            info();
-            break;
-        case WARNING:
-            warning();
-            break;
-        case ERROR:
-            error();
-            break;
-        default:
+    if (lvl == 4)
             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-            break;
-    }
 }
 
 void    Harl::debug( void )
