@@ -1,5 +1,4 @@
 #include "Fixed.hpp"
-#include <iostream>
 
 Fixed::Fixed() : value(0)
 {
@@ -10,6 +9,16 @@ Fixed::Fixed( const Fixed& copy ) : value(copy.value)
 {
     std::cout << "Copy constructor called" << std::endl;
     setRawBits( copy.getRawBits() );
+}
+
+Fixed::Fixed( const int x )// : value(x)
+{
+    std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed( const float x )// : value(x)
+{
+    std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
@@ -33,4 +42,21 @@ int     Fixed::getRawBits( void ) const
 void    Fixed::setRawBits( int const raw )
 {
     value = raw;
+}
+
+std::ostream& operator<<(std::ostream& os, const Fixed& cp)
+{
+    //os << cp.toFloat();
+    //os << cp.toInt();
+    return os;
+}
+
+float   Fixed::toFloat( void ) const
+{
+/**/
+}
+
+int     Fixed::toInt( void ) const
+{
+/**/
 }
