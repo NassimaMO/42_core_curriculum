@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Fixed.cpp"
+#include "Fixed.hpp"
 
 int main( void )
 {

@@ -2,6 +2,7 @@
 # define FIXED_HPP
 
 #include <iostream>
+#include <cmath>
 
 class   Fixed
 {
@@ -21,9 +22,8 @@ class   Fixed
 
     private:
 
-    int                 floatValue;
-    float               intValue;
-    static const int    RawBits = 8; 
+    int                 value;
+    static const int    fractionalBits = 8; 
 
 };
 

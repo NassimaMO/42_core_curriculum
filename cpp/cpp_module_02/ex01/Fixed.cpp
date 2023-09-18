@@ -11,12 +11,12 @@ Fixed::Fixed( const Fixed& copy ) : value(copy.value)
     setRawBits( copy.getRawBits() );
 }
 
-Fixed::Fixed( const int x )// : value(x)
+Fixed::Fixed( const int x ) : value( x << fractionalBits )
 {
     std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed( const float x )// : value(x)
+Fixed::Fixed( const float x ) : value( roundf( x * ( 1 << fractionalBits ) ) )
 {
     std::cout << "Float constructor called" << std::endl;
 }
@@ -46,17 +46,16 @@ void    Fixed::setRawBits( int const raw )
 
 std::ostream& operator<<(std::ostream& os, const Fixed& cp)
 {
-    //os << cp.toFloat();
-    //os << cp.toInt();
+    os << cp.toFloat();
     return os;
 }
 
 float   Fixed::toFloat( void ) const
 {
-/**/
+    return ( static_cast<float>(value) / ( 1 << fractionalBits ) );
 }
 
 int     Fixed::toInt( void ) const
 {
-/**/
+    return ( value >> fractionalBits );
 }
