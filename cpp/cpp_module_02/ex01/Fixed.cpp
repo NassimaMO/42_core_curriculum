@@ -5,10 +5,10 @@ Fixed::Fixed() : value(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed( const Fixed& copy ) : value(copy.value)
+Fixed::Fixed( const Fixed& copy )
 {
     std::cout << "Copy constructor called" << std::endl;
-    setRawBits( copy.getRawBits() );
+    *this = copy;
 }
 
 Fixed::Fixed( const int x ) : value( x << fractionalBits )
@@ -46,7 +46,7 @@ void    Fixed::setRawBits( int const raw )
 
 std::ostream& operator<<(std::ostream& os, const Fixed& cp)
 {
-    os << cp.toFloat();
+    os << cp.toFloat(); 
     return os;
 }
 
