@@ -12,7 +12,7 @@ OBJ_DIR				= objs
 
 OBJ					= $(addprefix $(OBJ_DIR)/,$(SRCS:%$(EXTENSION)=%.o))
 
-RM					=	rm -f
+RM					= rm -f
 
 all:				${NAME}
 

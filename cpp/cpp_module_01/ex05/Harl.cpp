@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 17:26:00 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/09/12 16:03:22 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:05:15 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ void    Harl::complain( std::string level )
         {
             std::cout << "[ " << tab[lvl] << " ]" << std::endl;
             (this->*func_ptr[lvl])();
-            break;
+            return;
         }
         lvl++;
     }
-    if (lvl == 4)
-            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+    std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }
 
 void    Harl::debug( void )

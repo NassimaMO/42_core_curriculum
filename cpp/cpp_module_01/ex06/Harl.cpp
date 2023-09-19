@@ -6,7 +6,7 @@
 /*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 17:26:00 by nmouslim          #+#    #+#             */
-/*   Updated: 2023/09/12 16:03:26 by nmouslim         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:03:03 by nmouslim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,15 @@ void    Harl::complain( std::string level )
     {
         case DEBUG:
             debug();
-            __attribute__ ((fallthrough));
         case INFO:
             info();
-            __attribute__ ((fallthrough));
         case WARNING:
             warning();
-            __attribute__ ((fallthrough));
         case ERROR:
             error();
             break;
         default:
-            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl << std::endl;
+            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
             break;
     }
 }

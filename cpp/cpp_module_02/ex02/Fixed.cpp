@@ -74,78 +74,93 @@ int     Fixed::operator<( const Fixed& cp )
     return ( 0 );
 }
 
-int     Fixed::operator>=(const Fixed& cp)
+int     Fixed::operator>=( const Fixed& cp )
 {
     if ( this->toFloat() >= cp.toFloat() )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator<=(const Fixed& cp)
+int     Fixed::operator<=( const Fixed& cp )
 {
     if ( this->toFloat() <= cp.toFloat() )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator==(const Fixed& cp)
+int     Fixed::operator==( const Fixed& cp )
 {
     if ( this->toFloat() == cp.toFloat() )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator!=(const Fixed& cp)
+int     Fixed::operator!=( const Fixed& cp )
 {
     if ( this->toFloat() != cp.toFloat() )
         return ( 1 );
     return ( 0 );
 }
 
-float     Fixed::operator+(const Fixed& cp)
+float     Fixed::operator+( const Fixed& cp )
 {
     return ( this->toFloat() + cp.toFloat() );
 }
 
-float     Fixed::operator-(const Fixed& cp)
+float     Fixed::operator-( const Fixed& cp )
 {
     return ( this->toFloat() - cp.toFloat() );
 }
 
-float     Fixed::operator*(const Fixed& cp)
+float     Fixed::operator*( const Fixed& cp )
 {
     return ( this->toFloat() * cp.toFloat() );
 }
 
-float     Fixed::operator/(const Fixed& cp)
+float     Fixed::operator/( const Fixed& cp )
 {
     return ( this->toFloat() / cp.toFloat() );
 }
 
-Fixed& Fixed::min(Fixed& a, Fixed& b)
+Fixed& Fixed::min( Fixed& a, Fixed& b )
 {
-    if (a < b)
-        return (a);
-    return (b);
+    if ( a < b )
+        return ( a );
+    return ( b );
 }
 
-Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
 {
-    if (a < b)
-        return (a);
-    return (b);
+    if ( a.toFloat() < b.toFloat() )
+        return ( a );
+    return ( b );
 }
 
-Fixed& Fixed::max(Fixed& a, Fixed& b)
+Fixed& Fixed::max( Fixed& a, Fixed& b )
 {
-    if (a > b)
-        return (a);
-    return (b);
+    if ( a > b )
+        return ( a );
+    return ( b );
 }
 
-Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
 {
-    if (a > b)
-        return (a);
-    return (b);
+    if ( a.toFloat() > b.toFloat() )
+        return ( a );
+    return ( b );
+}
+
+Fixed     Fixed::operator--( void )
+{
+    this->value--;
+    return ( *this );
+}
+
+Fixed     Fixed::operator--( int x )
+{
+    Fixed   tmp(*this);
+
+    this->value--;
+    (void) x;
+    return ( tmp );
 }

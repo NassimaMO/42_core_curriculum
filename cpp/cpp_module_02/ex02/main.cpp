@@ -7,10 +7,12 @@ int main( void )
     Fixed c(1);
     Fixed const b( Fixed( 5.05f ) + Fixed( 2 ) );
 
-    /*std::cout << a << std::endl;
-    std::cout << ++a << std::endl;
     std::cout << a << std::endl;
-    std::cout << a++ << std::endl;
+    std::cout << --a << std::endl;
+    std::cout << a-- << std::endl;
+    std::cout << a << std::endl;
+    /*std::cout << a << std::endl;
+    std::cout << a-- << std::endl;
     std::cout << a << std::endl;*/
 
     std::cout << (c > a) << std::endl;

@@ -20,7 +20,7 @@ int main( void )
     std::string &stringREF( brain );
 
     std::cout << "address of brain: " << &brain << std::endl;
-    std::cout << "address of stringPTR: " << &stringPTR << std::endl;
+    std::cout << "address of stringPTR: " << stringPTR << std::endl;
     std::cout << "address of stringREF: " << &stringREF << std::endl;
     std::cout << std::endl;
     std::cout << "value of brain: " << brain << std::endl;

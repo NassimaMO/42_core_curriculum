@@ -13,6 +13,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <string.h>
 
     //args: filename, s1, s2
     //replace every occurence of s1 by s2 in filename to filename.replace
@@ -36,11 +37,13 @@ int main( int argc, char **argv )
         {
             while ( getline( file, content ) )
             {
-                while ( content.find( s1 ) < content.length() )
+                index = 0;
+                while ( content.find( s1, index ) != std::string::npos )
                 {
-                    index = content.find( s1 );
+                    index = content.find( s1, index );
                     content.erase(content.begin() + index, content.begin() + index + s1.size() );
                     content.insert(index, argv[3]);
+                    index += strlen(argv[3]);
                 }
                 anotherFile << content << std::endl;
             }
