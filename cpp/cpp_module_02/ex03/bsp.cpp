@@ -9,21 +9,34 @@ If P lies inside the triangle, then A1 + A2 + A3 must be equal to A.
 
 #include "Point.hpp"
 
-float   getTriangleArea( Point const p1, Point const p2, Point const p3 )
+/*int   getTriangleArea( Point const p1, Point const p2, Point const p3 )
 {
-    //std::cout << p1.getX().toFloat() * (p2.getY().toFloat() - p3.getY().toFloat()) << std::endl;
-    return (( p1.getX().toFloat() * (p2.getY().toFloat() - p3.getY().toFloat()) + p2.getX().toFloat() * (p3.getY().toFloat() - p1.getY().toFloat()) + p3.getX().toFloat() * (p1.getY().toFloat() - p2.getY().toFloat())) / 2 );
+    return (abs((( p1.getX() * (p2.getY() - p3.getY()) + p2.getX() * (p3.getY() - p1.getY()) + p3.getX() * (p1.getY() - p2.getY())) / 2 ).getRawBits()));
 }
 
 bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
-    float   AreaA = getTriangleArea(a, b , c);
-    float   AreaB = getTriangleArea(point, b , c);
-    float   AreaC = getTriangleArea(a, point , c);
-    float   AreaP = getTriangleArea(a, b , point);
+    Fixed   AreaA = getTriangleArea(a, b , c);
+    Fixed   AreaB = getTriangleArea(point, b , c);
+    Fixed   AreaC = getTriangleArea(a, point , c);
+    Fixed   AreaP = getTriangleArea(a, b , point);
 
-    //std::cout << "AreaA: " << AreaA << "AreaA: " << AreaB << "AreaA: " << AreaC << "AreaA: " << AreaP << std::endl;
+    std::cout << "AreaA: " << AreaA << "AreaB: " << AreaB << "AreaC: " << AreaC << "AreaP: " << AreaP << std::endl;
     if (AreaA == AreaB + AreaC + AreaP)
         return ( true );
     return ( false );
+}*/
+
+bool bsp( Point const a, Point const b, Point const c, Point const point)
+{
+	Fixed d1 = (point.getX() - a.getX()) * (b.getY() - a.getY()) - (b.getX() - a.getX()) * (point.getY() - a.getY());
+	Fixed d2 = (point.getX() - b.getX()) * (c.getY() - b.getY()) - (c.getX() - b.getX()) * (point.getY() - b.getY());
+	Fixed d3 = (point.getX() - c.getX()) * (a.getY() - c.getY()) - (a.getX() - c.getX()) * (point.getY() - c.getY());
+
+	if (d1 >= 0 && d2 >= 0 && d3 >= 0)
+		return true;
+	else if (d1 <= 0 && d2 <= 0 && d3 <= 0)
+		return true;
+	else
+		return false;
 }
