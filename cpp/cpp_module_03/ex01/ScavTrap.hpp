@@ -3,13 +3,17 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class   ScavTrap : public ClapTrap
 {
-    private:
-        /* data */
     public:
-        ScavTrap(/* args */);
-        ~ScavTrap();
+
+    ScavTrap( void );
+    ScavTrap( std::string name );
+    ~ScavTrap();
+
+    void guardGate( void );
+
+    private:
 };
 
 #endif

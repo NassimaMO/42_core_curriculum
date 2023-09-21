@@ -60,66 +60,70 @@ int     Fixed::toInt( void ) const
     return ( value >> fractionalBits );
 }
 
-int     Fixed::operator>( const Fixed& cp )
+bool     Fixed::operator>( const Fixed& cp ) const
 {
-    if ( this->toFloat() > cp.toFloat() )
+    if ( this->value > cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator<( const Fixed& cp )
+bool     Fixed::operator<( const Fixed& cp ) const
 {
-    if ( this->toFloat() < cp.toFloat() )
+    if ( this->value < cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator>=( const Fixed& cp )
+bool     Fixed::operator>=( const Fixed& cp ) const
 {
-    if ( this->toFloat() >= cp.toFloat() )
+    if ( this->value >= cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator<=( const Fixed& cp )
+bool     Fixed::operator<=( const Fixed& cp ) const
 {
-    if ( this->toFloat() <= cp.toFloat() )
+    if ( this->value <= cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator==( const Fixed& cp )
+bool     Fixed::operator==( const Fixed& cp ) const
 {
-    if ( this->toFloat() == cp.toFloat() )
+    if ( this->value == cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-int     Fixed::operator!=( const Fixed& cp )
+bool     Fixed::operator!=( const Fixed& cp ) const
 {
-    if ( this->toFloat() != cp.toFloat() )
+    if ( this->value != cp.value )
         return ( 1 );
     return ( 0 );
 }
 
-float     Fixed::operator+( const Fixed& cp )
+Fixed     Fixed::operator+( const Fixed& cp ) const
 {
-    return ( this->toFloat() + cp.toFloat() );
+    Fixed   fix;
+    fix.value = this->value + cp.value;
+    return ( fix );
 }
 
-float     Fixed::operator-( const Fixed& cp )
+Fixed     Fixed::operator-( const Fixed& cp ) const
 {
-    return ( this->toFloat() - cp.toFloat() );
+    Fixed   fix;//(this->toFloat() - cp.toFloat());
+    fix.value = this->value - cp.value;
+    return ( fix );
 }
 
-float     Fixed::operator*( const Fixed& cp )
+Fixed     Fixed::operator*( const Fixed& cp ) const
 {
-    return ( this->toFloat() * cp.toFloat() );
+    return ( this->value * cp.value );
 }
 
-float     Fixed::operator/( const Fixed& cp )
+Fixed     Fixed::operator/( const Fixed& cp ) const
 {
-    return ( this->toFloat() / cp.toFloat() );
+    return ( this->value / cp.value );
 }
 
 Fixed& Fixed::min( Fixed& a, Fixed& b )
@@ -131,7 +135,7 @@ Fixed& Fixed::min( Fixed& a, Fixed& b )
 
 const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
 {
-    if ( a.toFloat() < b.toFloat() )
+    if ( a.value < b.value )
         return ( a );
     return ( b );
 }
@@ -145,7 +149,7 @@ Fixed& Fixed::max( Fixed& a, Fixed& b )
 
 const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
 {
-    if ( a.toFloat() > b.toFloat() )
+    if ( a.value > b.value )
         return ( a );
     return ( b );
 }

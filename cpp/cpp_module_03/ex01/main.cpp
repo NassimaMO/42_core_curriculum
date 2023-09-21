@@ -1,35 +1,8 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main( void )
 {
-    ClapTrap clap("Ash");
+    ScavTrap    st;
 
-    clap.attack("Staff");
-    clap.takeDamage(9);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-
-    return 0;
+    st.attack("Jimmy");
 }

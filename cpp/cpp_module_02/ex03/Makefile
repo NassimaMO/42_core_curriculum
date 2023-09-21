@@ -6,7 +6,7 @@ CFLAGS				= -Wall -Wextra -Werror -g -std=c++98
 
 EXTENSION			= .cpp
 
-SRCS				= main$(EXTENSION) Fixed$(EXTENSION)
+SRCS				= main$(EXTENSION) Fixed$(EXTENSION) Point$(EXTENSION) bsp$(EXTENSION)
 
 OBJ_DIR				= objs
 

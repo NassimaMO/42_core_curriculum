@@ -15,17 +15,17 @@ class   Fixed
     ~Fixed();
 
     Fixed&  operator=(const Fixed& cp);
-    int     operator>(const Fixed& cp);
-    int     operator<(const Fixed& cp);
-    int     operator>=(const Fixed& cp);
-    int     operator<=(const Fixed& cp);
-    int     operator==(const Fixed& cp);
-    int     operator!=(const Fixed& cp);
+    bool     operator>(const Fixed& cp) const;
+    bool     operator<(const Fixed& cp) const;
+    bool     operator>=(const Fixed& cp) const;
+    bool     operator<=(const Fixed& cp) const;
+    bool     operator==(const Fixed& cp) const;
+    bool     operator!=(const Fixed& cp) const;
 
-    float     operator+(const Fixed& cp);
-    float     operator-(const Fixed& cp);
-    float     operator*(const Fixed& cp);
-    float     operator/(const Fixed& cp);
+    Fixed     operator+(const Fixed& cp) const;
+    Fixed     operator-(const Fixed& cp) const;
+    Fixed     operator*(const Fixed& cp) const;
+    Fixed     operator/(const Fixed& cp) const;
 
     Fixed     operator--(void);
     Fixed     operator--(int x);
