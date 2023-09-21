@@ -8,4 +8,6 @@ int main( void )
     Point   point( 1.5f, 5.4f );
 
     std::cout << bsp(pt, ptTwo, ptThree, point) << std::endl;
+
+    return 0;
 }
