@@ -38,7 +38,7 @@ int main( int argc, char **argv )
             while ( getline( file, content ) )
             {
                 index = 0;
-                while ( content.find( s1, index ) != std::string::npos )
+                while ( s1.compare("") && content.find( s1, index ) != std::string::npos )
                 {
                     index = content.find( s1, index );
                     content.erase(content.begin() + index, content.begin() + index + s1.size() );

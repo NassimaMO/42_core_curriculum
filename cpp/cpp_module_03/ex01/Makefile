@@ -1,4 +1,4 @@
-NAME				= RawBits
+NAME				= ClapTrap
 
 CC					= c++
 
@@ -6,7 +6,7 @@ CFLAGS				= -Wall -Wextra -Werror -g -std=c++98
 
 EXTENSION			= .cpp
 
-SRCS				= main$(EXTENSION) Fixed$(EXTENSION) Point$(EXTENSION) bsp$(EXTENSION)
+SRCS				= main$(EXTENSION) ClapTrap$(EXTENSION)
 
 OBJ_DIR				= objs
 
