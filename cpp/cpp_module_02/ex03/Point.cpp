@@ -18,17 +18,17 @@ Point::Point(const Point& cp) : x(0), y(0)
 
 Point::~Point()
 {
-    //std::cout << "Destructor called" << std::endl;
+    std::cout << "Destructor called" << std::endl;
 }
 
 const Fixed&    Point::getX( void ) const
 {
-    return ( this->x );
+    return ( x );
 }
 
 const Fixed&    Point::getY( void) const
 {
-    return ( this->y );
+    return ( y );
 }
 
 Point&   Point::operator=(const Point& cp)
