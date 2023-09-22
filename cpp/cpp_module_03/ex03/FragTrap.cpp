@@ -1,0 +1,28 @@
+#include "FragTrap.hpp"
+
+FragTrap::FragTrap()
+{
+    this->setName("default");
+    this->setHit(100);
+    this->setEnergy(100);
+    this->setAttack(30);
+}
+
+FragTrap::FragTrap( std::string name )
+{
+    this->setName(name);
+    this->setHit(100);
+    this->setEnergy(100);
+    this->setAttack(30);
+    std::cout << "FragTrap created." << std::endl;
+}
+
+FragTrap::~FragTrap()
+{
+    std::cout << "FragTrap destroyed." << std::endl;
+}
+
+void    FragTrap::highFivesGuys( void )
+{
+    std::cout << "A positive high fives request." << std::endl;
+}

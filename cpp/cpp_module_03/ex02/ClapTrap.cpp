@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap() : _name("default"), _hit(10), _energy(10), _attack(0)
 {
-    /**/
+    std::cout << "ClapTrap created." << std::endl;
 }
 
 ClapTrap::ClapTrap( std::string name ) : _name(name), _hit(10), _energy(10), _attack(0)
