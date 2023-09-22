@@ -10,9 +10,23 @@ ClapTrap::ClapTrap( std::string name ) : _name(name), _hit(10), _energy(10), _at
     std::cout << "ClapTrap " << _name << " created." << std::endl;
 }
 
+ClapTrap::ClapTrap( const ClapTrap& cp )
+{
+    *this = cp;
+}
+
 ClapTrap::~ClapTrap()
 {
     std::cout << "ClapTrap " << _name << " destroyed." << std::endl;
+}
+
+ClapTrap&   ClapTrap::operator=(const ClapTrap& cp)
+{
+    this->setName(cp._name);
+    this->setHit(cp._hit);
+    this->setEnergy(cp._energy);
+    this->setAttack(cp._attack);
+    return ( *this );
 }
 
 void    ClapTrap::attack( const std::string& target )

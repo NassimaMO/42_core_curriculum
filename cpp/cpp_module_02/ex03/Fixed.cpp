@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:24:08 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:41:35 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -60,9 +72,6 @@ int     Fixed::toInt( void ) const
     return ( value >> fractionalBits );
 }
 
-
-
-
 bool     Fixed::operator>( const Fixed& cp ) const
 {
     if ( this->toFloat() > cp.toFloat() )
@@ -105,10 +114,6 @@ bool     Fixed::operator!=( const Fixed& cp ) const
     return ( false );
 }
 
-
-
-
-
 Fixed     Fixed::operator+( const Fixed& cp ) const
 {
     return ( this->toFloat() + cp.toFloat() );
@@ -128,10 +133,6 @@ Fixed     Fixed::operator/( const Fixed& cp ) const
 {
     return ( this->toFloat() / cp.toFloat() );
 }
-
-
-
-
 
 Fixed& Fixed::min( Fixed& a, Fixed& b )
 {
@@ -160,10 +161,6 @@ const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
         return ( a );
     return ( b );
 }
-
-
-
-
 
 Fixed     Fixed::operator--( void )
 {

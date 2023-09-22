@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:22:44 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:34:41 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -35,7 +47,6 @@ Fixed& Fixed::operator=(const Fixed& copy)
 
 int     Fixed::getRawBits( void ) const
 {
-    std::cout << "getRawBits member function called" << std::endl;
     return ( value );
 }
 

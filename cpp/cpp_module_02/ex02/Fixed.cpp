@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:23:24 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:41:38 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -60,11 +72,7 @@ int     Fixed::toInt( void ) const
     return ( value >> fractionalBits );
 }
 
-
-
-
-
-bool     Fixed::operator>( const Fixed& cp ) const
+/*bool     Fixed::operator>( const Fixed& cp ) const
 {
     if ( this->value > cp.getRawBits() )
         return ( 1 );
@@ -104,11 +112,49 @@ bool     Fixed::operator!=( const Fixed& cp ) const
     if ( this->value != cp.getRawBits() )
         return ( 1 );
     return ( 0 );
+}*/
+
+bool     Fixed::operator>( const Fixed& cp ) const
+{
+    if ( this->toFloat() > cp.toFloat() )
+        return ( true );
+    return ( false );
 }
 
+bool     Fixed::operator<( const Fixed& cp ) const
+{
+    if ( this->toFloat() < cp.toFloat() )
+        return ( true );
+    return ( false );
+}
 
+bool     Fixed::operator>=( const Fixed& cp ) const
+{
+    if ( this->toFloat() >= cp.toFloat() )
+        return ( true );
+    return ( false );
+}
 
+bool     Fixed::operator<=( const Fixed& cp ) const
+{
+    if ( this->toFloat() <= cp.toFloat() )
+        return ( true );
+    return ( false );
+}
 
+bool     Fixed::operator==( const Fixed& cp ) const
+{
+    if ( this->toFloat() == cp.toFloat() )
+        return ( true );
+    return ( false );
+}
+
+bool     Fixed::operator!=( const Fixed& cp ) const
+{
+    if ( this->toFloat() != cp.toFloat() )
+        return ( true );
+    return ( false );
+}
 
 /*Fixed     Fixed::operator+( const Fixed& cp ) const
 {
@@ -121,20 +167,6 @@ Fixed     Fixed::operator-( const Fixed& cp ) const
 {
     Fixed   fix;
     fix.value = this->value - cp.getRawBits();
-    return ( fix );
-}
-
-Fixed     Fixed::operator*( const Fixed& cp ) const
-{
-    Fixed   fix;
-    fix.value = this->value * cp.getRawBits();
-    return ( fix );
-}
-
-Fixed     Fixed::operator/( const Fixed& cp ) const
-{
-    Fixed   fix;
-    fix.value = this->value / cp.getRawBits();
     return ( fix );
 }*/
 
@@ -158,11 +190,6 @@ Fixed     Fixed::operator/( const Fixed& cp ) const
     return ( this->toFloat() / cp.toFloat() );
 }
 
-
-
-
-
-
 Fixed& Fixed::min( Fixed& a, Fixed& b )
 {
     if ( a < b )
@@ -170,9 +197,16 @@ Fixed& Fixed::min( Fixed& a, Fixed& b )
     return ( b );
 }
 
-const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
+/*const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
 {
     if ( a.value < b.value )
+        return ( a );
+    return ( b );
+}*/
+
+const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
+{
+    if ( a.toFloat() < b.toFloat() )
         return ( a );
     return ( b );
 }
@@ -184,16 +218,19 @@ Fixed& Fixed::max( Fixed& a, Fixed& b )
     return ( b );
 }
 
-const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
+/*const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
 {
     if ( a.value > b.value )
         return ( a );
     return ( b );
+}*/
+
+const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
+{
+    if ( a.toFloat() > b.toFloat() )
+        return ( a );
+    return ( b );
 }
-
-
-
-
 
 Fixed     Fixed::operator--( void )
 {

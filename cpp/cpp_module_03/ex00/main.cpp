@@ -2,9 +2,9 @@
 
 int main( void )
 {
-    ClapTrap clap("Ash");
+    ClapTrap clap("Carol");
 
-    clap.attack("Staff");
+    clap.attack("Jimmy");
     clap.takeDamage(9);
     clap.beRepaired(5);
     clap.takeDamage(5);

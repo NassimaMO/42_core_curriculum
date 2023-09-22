@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bsp.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:23:58 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:23:59 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 Calculate the area of the given triangle, i.e., the area of the triangle ABC in the above diagram. 
 Area A = [ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2 
@@ -27,16 +39,27 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
     return ( false );
 }*/
 
+bool isSame(Point const a, Point const b, Point const c)
+{
+    if ((a.getX() == b.getX()  && a.getY() == b.getY())
+        || (a.getX() == c.getX()  && a.getY() == c.getY())
+        || ((c.getX() == b.getX()  && c.getY() == b.getY())))
+            return ( true );
+    return ( false );
+}
+
 bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
 	Fixed d1 = (point.getX() - a.getX()) * (b.getY() - a.getY()) - (b.getX() - a.getX()) * (point.getY() - a.getY());
 	Fixed d2 = (point.getX() - b.getX()) * (c.getY() - b.getY()) - (c.getX() - b.getX()) * (point.getY() - b.getY());
 	Fixed d3 = (point.getX() - c.getX()) * (a.getY() - c.getY()) - (a.getX() - c.getX()) * (point.getY() - c.getY());
 
-	if (d1 >= 0 && d2 >= 0 && d3 >= 0)
-		return true;
+    if (isSame(a, b, c))
+        return ( false );
+	else if (d1 >= 0 && d2 >= 0 && d3 >= 0)
+		return ( true );
 	else if (d1 <= 0 && d2 <= 0 && d3 <= 0)
-		return true;
+		return ( true );
 	else
-		return false;
+		return ( false );
 }

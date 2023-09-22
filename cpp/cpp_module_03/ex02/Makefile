@@ -1,4 +1,4 @@
-NAME				= ScavTrap
+NAME				= FragTrap
 
 CC					= c++
 
@@ -6,7 +6,7 @@ CFLAGS				= -Wall -Wextra -Werror -g -std=c++98
 
 EXTENSION			= .cpp
 
-SRCS				= main$(EXTENSION) ClapTrap$(EXTENSION) ScavTrap$(EXTENSION)
+SRCS				= main$(EXTENSION) ClapTrap$(EXTENSION) ScavTrap$(EXTENSION) FragTrap$(EXTENSION)
 
 OBJ_DIR				= objs
 

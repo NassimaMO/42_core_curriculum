@@ -10,6 +10,8 @@ class   ClapTrap
 
     ClapTrap( void );
     ClapTrap( std::string name );
+    ClapTrap( const ClapTrap& cp );
+    ClapTrap&   operator=( const ClapTrap& clap );
     ~ClapTrap();
 
     void    attack( const std::string& target );

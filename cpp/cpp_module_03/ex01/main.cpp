@@ -2,7 +2,33 @@
 
 int main( void )
 {
-    ScavTrap    st;
+    ScavTrap    st("Carol");
 
     st.attack("Jimmy");
+
+    st.takeDamage(9);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
+    st.beRepaired(5);
+    st.takeDamage(5);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:23:44 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:38:15 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Fixed.hpp"
 
@@ -9,11 +21,11 @@ int main( void )
     Fixed const d( Fixed( 5.357342f ) / Fixed( 5.2574896f ) );
 
     std::cout << "1." << a << std::endl;
-    std::cout << "2." << --a << std::endl;
-    std::cout << "3." << a-- << std::endl;
+    std::cout << "2." << ++a << std::endl;
+    std::cout << "3." << a++ << std::endl;
     std::cout << "4." << a << std::endl;
-    std::cout << "5." << ++a << std::endl;
-    std::cout << "6." << a++ << std::endl;
+    std::cout << "5." << --a << std::endl;
+    std::cout << "6." << a-- << std::endl;
     std::cout << "7." << a << std::endl;
 
     std::cout << "8." << (c > a) << std::endl;
