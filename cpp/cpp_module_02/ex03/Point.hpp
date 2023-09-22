@@ -19,8 +19,8 @@ class   Point
 
     private:
 
-    /*const */Fixed x;
-    /*const */Fixed y;
+    const Fixed& x;
+    const Fixed& y;
 };
 
 bool bsp( Point const a, Point const b, Point const c, Point const point);

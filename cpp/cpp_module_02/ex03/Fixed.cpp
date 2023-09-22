@@ -18,7 +18,7 @@ Fixed::Fixed( const int x ) : value( x << fractionalBits )
 
 Fixed::Fixed( const float x ) : value( roundf( x * ( 1 << fractionalBits ) ) )
 {
-    //std::cout << "Float constructor called" << std::endl;
+    std::cout << "Fixed Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed()

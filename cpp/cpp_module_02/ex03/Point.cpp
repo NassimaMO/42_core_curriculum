@@ -7,10 +7,10 @@ Point::Point( void ) : x(0), y(0)
 
 Point::Point( const float _x, const float _y ) : x(_x), y(_y)
 {
-    //std::cout << "Default constructor called" << std::endl;
+    std::cout << "Point Default constructor called" << std::endl;
 }
 
-Point::Point(const Point& cp)
+Point::Point(const Point& cp) : x(0), y(0)
 {
     //std::cout << "Copy constructor called" << std::endl;
     *this = cp;
@@ -19,12 +19,6 @@ Point::Point(const Point& cp)
 Point::~Point()
 {
     //std::cout << "Destructor called" << std::endl;
-}
-
-void    Point::setCoord( const Fixed& _x, const Fixed& _y )
-{
-    x = _x;
-    y = _y;
 }
 
 const Fixed&    Point::getX( void ) const
@@ -39,6 +33,6 @@ const Fixed&    Point::getY( void) const
 
 Point&   Point::operator=(const Point& cp)
 {
-    setCoord( cp.getX(), cp.getY() );
+    (void) cp;
     return ( *this );
 }
