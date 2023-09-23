@@ -6,6 +6,7 @@ FragTrap::FragTrap()
     _hit = 100;
     _energy = 100;
     _attack = 30;
+    std::cout << "Default FragTrap created." << std::endl;
 }
 
 FragTrap::FragTrap( std::string name )

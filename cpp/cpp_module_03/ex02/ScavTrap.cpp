@@ -6,6 +6,7 @@ ScavTrap::ScavTrap()
     _hit = 100;
     _energy = 50;
     _attack = 20;
+    std::cout << "Default ScavTrap created." << std::endl;
 }
 
 ScavTrap::ScavTrap( std::string name )

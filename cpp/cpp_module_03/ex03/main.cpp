@@ -43,6 +43,7 @@ int main( void )
         finalBoss.attack( "Bob" );
         bystander.takeDamage( finalBoss.getAttack() );
     }
-
+    finalBoss.takeDamage(101);
+    std::cout << finalBoss.getHit() << std::endl;
     return 0;
 }
