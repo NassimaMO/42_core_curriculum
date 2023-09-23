@@ -22,10 +22,10 @@ ClapTrap::~ClapTrap()
 
 ClapTrap&   ClapTrap::operator=(const ClapTrap& cp)
 {
-    this->setName(cp._name);
-    this->setHit(cp._hit);
-    this->setEnergy(cp._energy);
-    this->setAttack(cp._attack);
+    _name = cp._name;
+    _hit = cp._hit;
+    _energy = cp._energy;
+    _attack = cp._attack;
     return ( *this );
 }
 
@@ -59,5 +59,20 @@ void    ClapTrap::beRepaired( unsigned int amount )
         _energy--;
     }
     else if (!_energy)
-        std::cout << " ClapTrap " << _name << " has no energy points left." << std::endl;
+        std::cout << "ClapTrap " << _name << " has no energy points left." << std::endl;
+}
+
+int    ClapTrap::getHit( void )
+{
+    return ( _hit );
+}
+
+int    ClapTrap::getEnergy( void )
+{
+    return ( _energy );
+}
+
+int    ClapTrap::getAttack( void )
+{
+    return ( _attack );
 }

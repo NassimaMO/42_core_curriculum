@@ -1,29 +1,36 @@
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
 int main( void )
 {
-    ScavTrap    sT("Hello");
-    FragTrap    fT("Shane");
+    ClapTrap    clap("Carol");
+    ClapTrap    target("Jimmy");
+    ScavTrap    another("Karl");
+    FragTrap    bystander("Bob");
 
-    sT.attack("Jimmy");    
-    fT.attack("Jimmy");
-    fT.takeDamage(9);
-    fT.beRepaired(5);
-    sT.takeDamage(5);
-    sT.beRepaired(5);
-    sT.takeDamage(5);
-    sT.beRepaired(5);
-    fT.takeDamage(5);
-    fT.beRepaired(5);
-    fT.takeDamage(5);
-    fT.beRepaired(5);
-    fT.takeDamage(5);
-    fT.beRepaired(5);
-    fT.takeDamage(5);
-    fT.beRepaired(5);
+    std::cout << std:: endl << "Carol: Jimmy ! You stole my lunch money, fight me !" << std::endl << std:: endl;
+    while (target.getEnergy() && target.getEnergy() && target.getHit() && target.getHit())
+    {
+        clap.attack("Jimmy");
+        target.takeDamage(clap.getAttack());
+        target.beRepaired(5);
+    }
+    target.takeDamage(clap.getAttack());
+    target.beRepaired(5);
+    std::cout << std:: endl << "Karl: What is happening here ??" << std:: endl << std:: endl;
 
-    sT.guardGate();
-    fT.highFivesGuys();
+    while (another.getEnergy() && clap.getHit())
+    {
+        another.attack("Carol");
+        clap.takeDamage(another.getAttack());
+    }
 
+    another.guardGate();
+
+    std::cout << std::endl << "Bob: Be cool maannn... Don't fight guyyyys...another" << std:: endl << std:: endl;
+
+    bystander.highFivesGuys();
+
+    return 0;
 }

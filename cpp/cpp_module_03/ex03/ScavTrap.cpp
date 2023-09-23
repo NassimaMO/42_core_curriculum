@@ -2,19 +2,33 @@
 
 ScavTrap::ScavTrap()
 {
-    this->setName("default");
-    this->setHit(100);
-    this->setEnergy(50);
-    this->setAttack(20);
+    _name = "default";
+    _hit = 100;
+    _energy = 50;
+    _attack = 20;
 }
 
 ScavTrap::ScavTrap( std::string name )
 {
-    this->setName(name);
-    this->setHit(100);
-    this->setEnergy(50);
-    this->setAttack(20);
+    _name = name;
+    _hit = 100;
+    _energy = 50;
+    _attack = 20;
     std::cout << "ScavTrap created." << std::endl;
+}
+
+ScavTrap::ScavTrap( const ScavTrap& cp )
+{
+    *this = cp;
+}
+
+ScavTrap&   ScavTrap::operator=(const ScavTrap& cp)
+{
+    _name = cp._name;
+    _hit = cp._hit;
+    _energy = cp._energy;
+    _attack = cp._attack;
+    return ( *this );
 }
 
 ScavTrap::~ScavTrap()
