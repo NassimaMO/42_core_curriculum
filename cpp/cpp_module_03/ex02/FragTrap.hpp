@@ -11,7 +11,8 @@ class   FragTrap : public ClapTrap
     FragTrap( std::string name );
     ~FragTrap();
 
-    void highFivesGuys( void );
+    void    attack( const std::string& target );
+    void    highFivesGuys( void );
 
     private:
 

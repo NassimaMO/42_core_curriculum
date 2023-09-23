@@ -2,18 +2,20 @@
 
 DiamondTrap::DiamondTrap()
 {
-    this->setName("default");
-    this->setHit(100);
-    this->setEnergy(50);
-    this->setAttack(20);
+    _name = "default";
+    this->ClapTrap::_name = _name + "_clap_name";
+    this->FragTrap::_hit = 100;
+    this->ScavTrap::_energy = 50;
+    this->FragTrap::_attack = 30;
 }
 
 DiamondTrap::DiamondTrap( std::string name )
 {
-    this->setName(name);
-    this->setHit(100);
-    this->setEnergy(50);
-    this->setAttack(20);
+    _name = name;
+    this->ClapTrap::_name = _name + "_clap_name";
+    this->FragTrap::_hit = 100;
+    this->ScavTrap::_energy = 50;
+    this->FragTrap::_attack = 30;
     std::cout << "ScavTrap created." << std::endl;
 }
 
@@ -24,5 +26,5 @@ DiamondTrap::~DiamondTrap()
 
 void    DiamondTrap::whoAmI( void )
 {
-    std::cout << _name << " or " << _name << std::endl;
+    std::cout << _name << " or " << this->ClapTrap::_name << std::endl;
 }

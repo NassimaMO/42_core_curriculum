@@ -31,4 +31,5 @@ int main( void )
     st.takeDamage(5);
     st.beRepaired(5);
     st.takeDamage(5);
+    st.guardGate();
 }
