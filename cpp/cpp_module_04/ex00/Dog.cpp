@@ -14,7 +14,10 @@ Dog::Dog( const Dog& cp )
 
 Dog& Dog::operator=( const Dog& cp)
 {
-    type = "Dog";
+    if (this != &cp)
+    {
+        type = "Dog";
+    }
     return ( *this );
 }
 

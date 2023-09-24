@@ -1,18 +1,18 @@
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include "Animal.hpp"
 # include "Brain.hpp"
 # include <string>
 
-class       Dog : public Animal
+class       Cat : public Animal
 {
     public:
 
-    Dog( void );
-    Dog( const Dog& cp );
-    Dog&   operator=( const Dog& cp );
-    virtual ~Dog();
+    Cat( void );
+    Cat( const Cat& cp );
+    Cat&   operator=( const Cat& cp );
+    virtual~Cat();
 
     std::string getType( void ) const;
 
@@ -23,6 +23,7 @@ class       Dog : public Animal
     private:
 
     Brain *brain;
+
 };
 
 #endif

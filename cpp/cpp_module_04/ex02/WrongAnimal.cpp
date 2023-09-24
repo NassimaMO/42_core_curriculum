@@ -13,10 +13,7 @@ WrongAnimal::WrongAnimal( const WrongAnimal& cp )
 
 WrongAnimal& WrongAnimal::operator=( const WrongAnimal& cp)
 {
-    if (this != &cp)
-    {
-        type = cp.type;
-    }
+    type = cp.type;
     return ( *this );
 }
 

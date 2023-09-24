@@ -14,7 +14,10 @@ WrongCat::WrongCat( const WrongCat& cp )
 
 WrongCat& WrongCat::operator=( const WrongCat& cp)
 {
-    type = "WrongCat";
+    if (this != &cp)
+    {
+        type = "WrongCat";
+    }
     return ( *this );
 }
 
@@ -23,10 +26,10 @@ WrongCat::~WrongCat( void )
     std::cout << "WrongCat destroyed." << std::endl;
 }
 
-/*void WrongCat::makeSound( void ) const
+void WrongCat::makeSound( void ) const
 {
     std::cout << "*WrongCat noise*" << std::endl;
-}*/
+}
 
 std::string WrongCat::getType( void ) const
 {

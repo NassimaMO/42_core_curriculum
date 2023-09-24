@@ -5,6 +5,7 @@
 
 int main()
 {
+    /*Animal test;*/
     Dog   ani;
     Dog   mal = ani;
 

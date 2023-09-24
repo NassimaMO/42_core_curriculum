@@ -11,7 +11,7 @@ class       Cat : public Animal
     Cat( void );
     Cat( const Cat& cp );
     Cat&   operator=( const Cat& clap );
-    ~Cat();
+    virtual ~Cat();
 
     std::string getType( void ) const;
 

@@ -14,7 +14,10 @@ Cat::Cat( const Cat& cp )
 
 Cat& Cat::operator=( const Cat& cp)
 {
-    type = "Cat";
+    if (this != &cp)
+    {
+        type = "Cat";
+    }
     return ( *this );
 }
 
