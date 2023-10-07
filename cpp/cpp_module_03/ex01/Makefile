@@ -6,7 +6,7 @@ CFLAGS				= -Wall -Wextra -Werror -g -std=c++98
 
 EXTENSION			= .cpp
 
-SRCS				= main$(EXTENSION) ClapTrap$(EXTENSION)
+SRCS				= main$(EXTENSION) ClapTrap$(EXTENSION) ScavTrap$(EXTENSION)
 
 OBJ_DIR				= objs
 

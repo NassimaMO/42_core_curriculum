@@ -2,34 +2,18 @@
 
 int main( void )
 {
-    ClapTrap clap("Ash");
+    ClapTrap clap("Carol");
+    ClapTrap target("Jimmy");
 
-    clap.attack("Staff");
-    clap.takeDamage(9);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-    clap.beRepaired(5);
-    clap.takeDamage(5);
-
+    std::cout << "Jimmy ! You stole my lunch money, fight me !" << std::endl;
+    while (target.getEnergy() && target.getEnergy())
+    {
+        clap.attack("Jimmy");
+        target.takeDamage(clap.getAttack());
+        target.beRepaired(5);
+    }
+    clap.attack("Jimmy");
+    target.takeDamage(clap.getAttack());
+    target.beRepaired(5);
     return 0;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmouslim <nmouslim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 13:24:08 by nmouslim          #+#    #+#             */
+/*   Updated: 2023/09/22 13:41:35 by nmouslim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -18,7 +30,7 @@ Fixed::Fixed( const int x ) : value( x << fractionalBits )
 
 Fixed::Fixed( const float x ) : value( roundf( x * ( 1 << fractionalBits ) ) )
 {
-    //std::cout << "Float constructor called" << std::endl;
+    //std::cout << "Fixed Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
@@ -59,9 +71,6 @@ int     Fixed::toInt( void ) const
 {
     return ( value >> fractionalBits );
 }
-
-
-
 
 bool     Fixed::operator>( const Fixed& cp ) const
 {
@@ -105,10 +114,6 @@ bool     Fixed::operator!=( const Fixed& cp ) const
     return ( false );
 }
 
-
-
-
-
 Fixed     Fixed::operator+( const Fixed& cp ) const
 {
     return ( this->toFloat() + cp.toFloat() );
@@ -128,10 +133,6 @@ Fixed     Fixed::operator/( const Fixed& cp ) const
 {
     return ( this->toFloat() / cp.toFloat() );
 }
-
-
-
-
 
 Fixed& Fixed::min( Fixed& a, Fixed& b )
 {
@@ -160,10 +161,6 @@ const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
         return ( a );
     return ( b );
 }
-
-
-
-
 
 Fixed     Fixed::operator--( void )
 {
