@@ -49,7 +49,7 @@ void PhoneBook::get_index( void )
 
     if (this->m_total_numbers == 0)
         return (void(std::cout << "Nevermind. You have no friends. Go outside and touch some grass." << std::endl));
-    while (true)
+    while (std::cin.good())
     {
         getline(std::cin, index);
         found = index.find_first_not_of(ValidNums);

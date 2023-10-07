@@ -26,13 +26,14 @@ std::string    Contact::get_input( std::string str )
 {
     std::string input = "";
 
-    while (true)
+    while (std::cin.good())
     {
         std::cout << str;
         std::getline(std::cin, input);
         if (!input.empty())
             break;
-        std::cout << "naahhh come on, tell me." << std::endl;
+        if (std::cin.good())
+            std::cout << "naahhh come on, tell me." << std::endl;
     }
     return (input);
 };
@@ -45,7 +46,8 @@ void    Contact::init( int index )
     this->m_phone_number = this->get_input( "Enter your phone number: " );
     this->m_darkest_secret = this->get_input( "Enter your darkest secret: " );
     this->m_index = index;
-    std::cout << "Ouuhhh spicyyy !! " << std::endl;
+    if (std::cin.good())
+        std::cout << "Ouuhhh spicyyy !! " << std::endl;
 };
 
 void    Contact::display( void )

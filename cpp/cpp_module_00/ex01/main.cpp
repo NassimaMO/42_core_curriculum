@@ -28,7 +28,7 @@ int main ( void )
     PhoneBook The_PhoneBook;
 
     start();
-    while (input.compare("EXIT"))
+    while (std::cin.good() && input.compare("EXIT"))
     {
         
         if (!input.compare("ADD"))
@@ -37,7 +37,8 @@ int main ( void )
             The_PhoneBook.search();
         else if (!input.empty())
             std::cout << "WHAT EXACTLY DO YOU EXPECT FROM MEEEEE ?!?!??" << std::endl;
-        std::cout << "SO WHAT DO YOU WANT ? ------> " << std::flush;
+        if (std::cin.good())
+            std::cout << "SO WHAT DO YOU WANT ? ------> " << std::flush;
         std::getline(std::cin, input);
     }
 }
