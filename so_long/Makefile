@@ -6,7 +6,7 @@ NAME_LAPTOP	=	so_long_L
 
 LIB			=	libft.a
 
-MLX			=	libmlx.a
+MLX			=	minilibx-linux/libmlx.a
 
 MLX_LAPTOP	=	libmlx_L.a
 
