@@ -2,34 +2,35 @@
 
 AMateria::AMateria( std::string const & type )
 {
-    type = type;
+    this->type = type;
 }
 
 AMateria::AMateria( const AMateria& cp )
 {
-    this = cp;
+    *this = cp;
 }
 
-AMateria::AMateria& operator=( const AMateria& cp )
+AMateria& AMateria::operator=( const AMateria& cp )
 {
-    type = cp->type;
+    type = cp.type;
+    return ( *this );
 }
 
-Ice::~Ice( void )
+AMateria::~AMateria( void )
 {
 }
 
-AMateria::std::string const & getType( void ) const
+std::string const & AMateria::getType( void ) const
 {
     return (type);
 }
 
-AMateria::AMateria* clone( void )
+AMateria* AMateria::clone( void ) const
 {
-    return (new AMateria(type));
+    /*return (new AMateria(*this));*/
 }
 
-AMateria::virtual void use( ICharacter& target )
+void AMateria::use( ICharacter& target )
 {
-    std::cout << "* Using AMateria on " << target->name << " *" << std::endl;
+    std::cout << "* Using AMateria on " << target.getName() << " *" << std::endl;
 }

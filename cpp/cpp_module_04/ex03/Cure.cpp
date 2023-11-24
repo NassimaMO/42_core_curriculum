@@ -7,24 +7,25 @@ Cure::Cure( void )
 
 Cure::Cure( const Cure& cp )
 {
-    this = cp;
+    *this = cp;
 }
 
-Cure::Cure& operator=( const Cure& cp )
+Cure& Cure::operator=( const Cure& cp )
 {
-    return (new Cure());
+    type = cp.type;
+    return ( *this );
 }
 
 Cure::~Cure( void )
 {
 }
 
-Cure::Cure* clone( void )
+Cure* Cure::clone( void )
 {
     return (new Cure());
 }
 
-Cure::void use( ICharacter& target )
+void Cure::use( ICharacter& target )
 {
     std::cout << "* heals " << target->name << "'s wounds *" << std::endl;
 }

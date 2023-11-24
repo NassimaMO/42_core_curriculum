@@ -7,24 +7,25 @@ Ice::Ice( void )
 
 Ice::Ice( const Ice& cp )
 {
-    this = cp;
+    *this = cp;
 }
 
-Ice::Ice& operator=( const Ice& cp )
+Ice& Ice::operator=( const Ice& cp )
 {
-    return (new Ice());
+    type = cp.type;
+    return ( *this );
 }
 
 Ice::~Ice( void )
 {
 }
 
-Ice::Ice* clone( void )
+Ice* Ice::clone( void )
 {
     return (new Ice());
 }
 
-Ice::void use( ICharacter& target )
+void Ice::use( ICharacter& target )
 {
     std::cout << "* shoots an ice bolt at " << target->name << " *" << std::endl;
 }
