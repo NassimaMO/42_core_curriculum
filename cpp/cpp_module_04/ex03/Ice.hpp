@@ -11,11 +11,11 @@ class Ice : public AMateria
 
     Ice( void );
     Ice( const Ice& cp );
-    Ice&            operator=( const Ice& cp );
-    Ice*            clone( void );
-    void            use( ICharacter& target );
+    Ice&        operator=( const Ice& cp );
+    AMateria*   clone( void ) const;
+    void        use( ICharacter& target );
     ~Ice( void );
 
-}
+};
 
 #endif

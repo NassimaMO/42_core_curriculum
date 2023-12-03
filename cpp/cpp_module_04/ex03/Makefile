@@ -1,4 +1,4 @@
-NAME				= Animal
+NAME				= Interfaces
 
 CC					= c++
 
@@ -6,7 +6,7 @@ CFLAGS				= -Wall -Wextra -Werror -g -std=c++98
 
 EXTENSION			= .cpp
 
-SRCS				= AMateria$(EXTENSION) Cure$(EXTENSION) Ice$(EXTENSION) ICharacter$(EXTENSION) IMateriaSource$(EXTENSION) main$(EXTENSION)
+SRCS				= AMateria$(EXTENSION) Cure$(EXTENSION) Ice$(EXTENSION) Character$(EXTENSION) MateriaSource$(EXTENSION) main$(EXTENSION)
 
 OBJ_DIR				= objs
 

@@ -1,4 +1,9 @@
-int main()
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
+
+int main( void )
 {
     IMateriaSource* src = new MateriaSource();
 
@@ -21,6 +26,21 @@ int main()
     delete bob;
     delete me;
     delete src;
+
+
+    /*IMateriaSource* src = new MateriaSource();
+    AMateria * test = new Ice();
+    src->learnMateria(test);
+    src->learnMateria(new Cure());
+    delete src;*/
+
+    /*IMateriaSource* src = new MateriaSource();
+    ICharacter* me = new Character("me");
+    AMateria * tmp;
+    tmp = src->createMateria("ice");
+    me->equip(tmp);
+    delete me;
+    delete src;*/
 
     return 0;
 

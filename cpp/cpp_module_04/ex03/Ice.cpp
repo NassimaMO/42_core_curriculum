@@ -1,32 +1,35 @@
 #include "Ice.hpp"
 
-Ice::Ice( void )
+Ice::Ice( void ) : AMateria("ice")
 {
-    type = "ice";
+    std::cout << "Ice type AMateria created." << std::endl;
 }
 
-Ice::Ice( const Ice& cp )
+Ice::Ice( const Ice& cp ) : AMateria("ice")
 {
     *this = cp;
 }
 
 Ice& Ice::operator=( const Ice& cp )
 {
-    type = cp.type;
+    //this->type = cp.type;
+    ( void )cp;
     return ( *this );
 }
 
 Ice::~Ice( void )
 {
+    std::cout << "Ice type AMateria destroyed." << std::endl;
 }
 
-Ice* Ice::clone( void )
+AMateria* Ice::clone( void ) const
 {
-    return (new Ice());
+    std::cout << "Cloning Ice AMateria." << std::endl;
+    return ( ( AMateria * ) this );
 }
 
 void Ice::use( ICharacter& target )
 {
-    std::cout << "* shoots an ice bolt at " << target->name << " *" << std::endl;
+    std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 

@@ -1,7 +1,14 @@
 #include "AMateria.hpp"
 
+AMateria::AMateria( void )
+{
+    std::cout << "AMateria created." << std::endl;
+    type = "unknown";
+}
+
 AMateria::AMateria( std::string const & type )
 {
+    std::cout << "AMateria created." << std::endl;
     this->type = type;
 }
 
@@ -12,12 +19,13 @@ AMateria::AMateria( const AMateria& cp )
 
 AMateria& AMateria::operator=( const AMateria& cp )
 {
-    type = cp.type;
+    this->type = cp.type;
     return ( *this );
 }
 
 AMateria::~AMateria( void )
 {
+    std::cout << "AMateria destroyed." << std::endl;
 }
 
 std::string const & AMateria::getType( void ) const
@@ -27,7 +35,8 @@ std::string const & AMateria::getType( void ) const
 
 AMateria* AMateria::clone( void ) const
 {
-    /*return (new AMateria(*this));*/
+    std::cout << "Cloning AMateria." << std::endl;
+    return ( (AMateria *) this );
 }
 
 void AMateria::use( ICharacter& target )

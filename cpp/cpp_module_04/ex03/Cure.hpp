@@ -11,11 +11,11 @@ class Cure : public AMateria
 
     Cure( void );
     Cure( const Cure& cp );
-    Cure&            operator=( const Cure& cp );
-    Cure*            clone( void );
-    void             use( ICharacter& target );
+    Cure&       operator=( const Cure& cp );
+    AMateria*   clone( void ) const;
+    void        use( ICharacter& target );
     ~Cure( void );
 
-}
+};
 
 #endif
