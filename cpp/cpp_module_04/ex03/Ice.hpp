@@ -12,7 +12,7 @@ class Ice : public AMateria
     Ice( void );
     Ice( const Ice& cp );
     Ice&        operator=( const Ice& cp );
-    AMateria*   clone( void ) const;
+    Ice*   clone( void ) const;
     void        use( ICharacter& target );
     ~Ice( void );
 
