@@ -25,7 +25,7 @@ Ice::~Ice( void )
 AMateria* Ice::clone( void ) const
 {
     std::cout << "Cloning Ice AMateria." << std::endl;
-    return ( ( AMateria * ) this );
+    return ( new Ice( *this ) );
 }
 
 void Ice::use( ICharacter& target )

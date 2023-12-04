@@ -22,7 +22,7 @@ MateriaSource& MateriaSource::operator=( const MateriaSource& cp )
 
 MateriaSource::~MateriaSource( void )
 {
-    for ( int i = 0; i < 4; i++)
+    for ( int i = 0; i < 4; i++ )
     {
         if (tab[i])
             delete tab[i];
@@ -38,7 +38,7 @@ void    MateriaSource::learnMateria( AMateria* cp )
     {
         if (tab[i] == 0)
         {
-            tab[i] = cp->clone();
+            tab[i] = cp;
             return ;
         }
     }

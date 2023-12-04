@@ -23,24 +23,18 @@ Character::Character( const ICharacter& cp )
     *this = cp;
 }
 
-void copy_tab( AMateria** replace, AMateria** copy )
-{
-    for (int i = 0; i < 4; i++)
-        replace[i] = copy[i];
-}
-
 Character& Character::operator=( const Character& cp )
 {
     this->m_num = m_num;
     for(int i = 0; i < 4; i++ )
-        tab[i] = cp.tab[i];
+        tab[i] = cp.tab[i]->clone();
     this->name = name;
     return ( *this );
 }
 
 Character::~Character( void )
 {
-    for ( int i = 0; i < 4; i++)
+    for ( int i = 0; i < 4; i++ )
     {
         if (tab[i])
             delete tab[i];
@@ -61,7 +55,7 @@ void    Character::equip( AMateria* m )
     {
         if (tab[i] == 0)
         {
-            tab[i] = m->clone();
+            tab[i] = m;
             return ;
         }
     }
