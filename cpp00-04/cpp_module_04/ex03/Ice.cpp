@@ -12,7 +12,6 @@ Ice::Ice( const Ice& cp ) : AMateria("ice")
 
 Ice& Ice::operator=( const Ice& cp )
 {
-    //this->type = cp.type;
     ( void )cp;
     return ( *this );
 }
@@ -22,7 +21,7 @@ Ice::~Ice( void )
     std::cout << "Ice type AMateria destroyed." << std::endl;
 }
 
-AMateria* Ice::clone( void ) const
+Ice* Ice::clone( void ) const
 {
     std::cout << "Cloning Ice AMateria." << std::endl;
     return ( new Ice( *this ) );

@@ -15,8 +15,11 @@ MateriaSource::MateriaSource( const IMateriaSource& cp ) : IMateriaSource()
 
 MateriaSource& MateriaSource::operator=( const MateriaSource& cp )
 {
-    for(int i = 0; i < 4; i++ )
-        tab[i] = cp.tab[i];
+    if (this != &cp)
+    {
+        for(int i = 0; i < 4; i++ )
+            tab[i] = cp.tab[i];
+    }
     return ( *this );
 }
 

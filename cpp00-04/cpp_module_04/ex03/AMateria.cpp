@@ -19,7 +19,8 @@ AMateria::AMateria( const AMateria& cp )
 
 AMateria& AMateria::operator=( const AMateria& cp )
 {
-    this->type = cp.type;
+    if (this != &cp)
+        this->type = cp.type;
     return ( *this );
 }
 

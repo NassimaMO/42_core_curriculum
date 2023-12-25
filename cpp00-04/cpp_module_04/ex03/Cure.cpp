@@ -12,7 +12,6 @@ Cure::Cure( const Cure& cp ) : AMateria("cure")
 
 Cure& Cure::operator=( const Cure& cp )
 {
-    //this->type = cp.type;
     ( void )cp;
     return ( *this );
 }
@@ -22,7 +21,7 @@ Cure::~Cure( void )
     std::cout << "Cure type AMateria destroyed." << std::endl;
 }
 
-AMateria* Cure::clone( void ) const
+Cure* Cure::clone( void ) const
 {
     std::cout << "Cloning Cure AMateria." << std::endl;
     return ( new Cure( *this ) );

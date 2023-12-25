@@ -17,7 +17,6 @@ int main( void )
     me->equip(tmp);
     tmp = src->createMateria("cure");
     me->equip(tmp);
-    me->unequip(1);
 
     ICharacter* bob = new Character("bob");
 
@@ -27,6 +26,11 @@ int main( void )
     delete bob;
     delete me;
     delete src;
+
+    /*Ice * tmp = new Ice();
+    AMateria * test = tmp;
+    std::cout << test->getType() << std::endl;
+    delete tmp;*/
 
 
     /*IMateriaSource* src = new MateriaSource();
