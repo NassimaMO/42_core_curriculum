@@ -1,0 +1,8 @@
+ex00:
+
+- do you need to copy the name when using the assignement constructor ?
+
+ex01:
+
+- need to do some tests concerning the copy thingy...
+beExecuted();
