@@ -119,7 +119,7 @@ static void    convertFloat( float f )
         std::cout << "char: Impossible" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    if ( f >= INT_MIN && f <= INT_MAX )
+    if ( f > INT_MIN && f < INT_MAX )
         std::cout << "int: "  << static_cast<int>( f ) << std::endl;
     else
         std::cout << "int: Impossible" << std::endl;
@@ -143,7 +143,7 @@ static void    convertDouble( double d )
         std::cout << "char: Impossible" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    if  ( d >= INT_MIN && d <= INT_MAX )
+    if  ( d > INT_MIN && d < INT_MAX )
         std::cout << "int: "  << static_cast<int>( d ) << std::endl;
     else
         std::cout << "int: Impossible" << std::endl;
