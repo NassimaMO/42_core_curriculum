@@ -23,8 +23,7 @@ ${NAME}:			${OBJ}
 
 clean:
 				${RM} -r ${OBJ_DIR}
-				${RM} *.o
-				${RM} *_shrubbery
+				${RM} ${OBJ}
 
 fclean:			clean
 				${RM} ${NAME}

@@ -23,7 +23,7 @@ ${NAME}:			${OBJ}
 
 clean:
 				${RM} -r ${OBJ_DIR}
-				${RM} *.o
+				${RM} ${OBJ}
 
 fclean:			clean
 				${RM} ${NAME}

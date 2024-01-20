@@ -1,10 +1,10 @@
-NAME			=	whatever
+NAME			=	span
 
 CC				=	c++
 
 CFLAGS			=	-Wall -Wextra -Werror -g -std=c++98
 
-SRCS			=	main.cpp
+SRCS			=	main.cpp Span.cpp
 
 OBJ_DIR			=	obj
 
