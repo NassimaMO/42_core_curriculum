@@ -83,7 +83,6 @@ std::ostream& operator<<( std::ostream& o, const Array<T>& a )
 {
     for( unsigned int i = 0; i < a.size(); i++ )
         o << a[i] << " ";
-    o << std::endl;
     return o;
 }
 
