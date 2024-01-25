@@ -4,62 +4,84 @@ Span::Span( int N ) : _N(N)
 {
 }
 
-Span::Span( const Span &s )
+Span::Span( const Span &s ) : _N(s._N)
 {
-    this = s;
+    *this = s;
 }
 
 Span&   Span::operator=( const Span &s )
 {
     if ( this != &s )
     {
-        this->num = s.num;
+        this->_N = s._N;
+        this->stock = s.stock;
     }
     return ( *this );
 }
 
-void    Span::addNumber( long int value )
+const std::list<int>* Span::getList( void ) const
 {
-    if ( num.size() == num.max_size())
+    return ( &this->stock );
+}
+
+unsigned int    Span::getN( void ) const
+{
+    return ( _N );
+}
+
+void    Span::addNumber( int value )
+{
+    if ( stock.size() >= this->_N)
         throw Span::SpanFull();
-    num.assign(1, value);
+    stock.insert(stock.end(), value);
 }
 
-void    Span::rangeIterator( T start, T end, long int value )
+void    Span::rangeIterator( const std::list<int>::iterator start, const std::list<int>::iterator end )
 {
-    if ( start && end && end <= num.end())
+    if ( distance(start, end) + stock.size() >= _N )
     {
-        while ( start != end )
-        {
-            insert(start, value);
-            start++;
-        }
+        std::list<int>::iterator    tmp = start;
+        std::advance(tmp, _N - std::distance( stock.begin(), stock.end() ) );
+        stock.insert(stock.end(), start, tmp);
+        throw Span::SpanFull();
     }
+    stock.insert(stock.end(), start, end);
 }
 
-long int       Span::shortestSpan( void )
+int       Span::shortestSpan( void ) const
 {
-    T           start = num.begin();
-    T           end = num.end();
-    int         i_start, i_end = 0;
-    long int    tmp = abs(start - end);
+    std::list<int>::const_iterator   start = stock.begin();
+    std::list<int>::const_iterator   next;
+    int    tmp = this->longestSpan();
 
-    while ( i_start < i_end )
-    {
-        if ( tmp > abs(start - end) )
-            tmp = abs(start - end);
-        i_start++;
-        i_end--;
-    }
-}
-
-long int       Span::longestSpan()
-{
-    long int   tmp;
-
-    if ( num.size() <= 1 )
+    if ( stock.size() <= 1 )
         throw Span::NotEnoughNumbers();
-    tmp = std::max_element(num.begin(), num.end()) - std::min_element(num.begin(), num.end());
+    if ( tmp == 0 )
+        throw Span::NoIntervalFound();
+    while ( start != stock.end() )
+    {
+        next = start;
+        next++;
+        while ( next != stock.end() )
+        {
+            if ( abs(*start - *next) && tmp > abs(*start - *next) )
+                tmp = abs(*start - *next);
+            if ( tmp == 1 )
+                break;
+            next++;
+        }
+        start++;
+    }
+    return ( tmp );
+}
+
+int       Span::longestSpan( void ) const
+{
+    int   tmp;
+
+    if ( stock.size() <= 1 )
+        throw Span::NotEnoughNumbers();
+    tmp = *std::max_element(stock.begin(), stock.end()) - *std::min_element(stock.begin(), stock.end());
     if ( tmp == 0 )
         throw Span::NoIntervalFound();
     return ( tmp );
@@ -67,4 +89,33 @@ long int       Span::longestSpan()
 
 Span::~Span()
 {
+}
+
+const char* Span::SpanFull::what() const throw()
+{
+    return ( "Span already full." );
+}
+
+const char* Span::NotEnoughNumbers::what() const throw()
+{
+    return ( "Not enough numbers." );
+}
+
+const char* Span::NoIntervalFound::what() const throw()
+{
+    return ( "No interval found." );
+}
+
+std::ostream& operator<<( std::ostream& o, const Span& s )
+{
+    std::list<int>::const_iterator tmp = s.getList()->begin();
+    if ( s.getList()->size() )
+    {
+        while ( tmp != s.getList()->end() )
+        {
+            o << (*tmp) << ' ';
+            tmp++;
+        }
+    }
+    return ( o );
 }
