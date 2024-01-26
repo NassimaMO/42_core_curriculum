@@ -20,7 +20,7 @@ class   Span
     const std::list<int>*   getList( void ) const;
     unsigned int            getN( void ) const ;
     void                    addNumber( int value );
-    void                    rangeIterator( const std::list<int>::iterator start, const std::list<int>::iterator end );
+    void                    rangeIterator( const std::list<int> l );
     int                     shortestSpan( void ) const;
     int                     longestSpan( void ) const;
     ~Span();
