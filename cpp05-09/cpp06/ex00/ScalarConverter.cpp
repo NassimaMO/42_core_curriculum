@@ -92,7 +92,7 @@ static bool    isDouble( std::string str )
 
 static void    convertChar( char c )
 {
-    std::cout << "char: " << c << std::endl;
+    std::cout << "char: '" << c << "'" << std::endl;
     std::cout << "int: "  << static_cast<int>( c ) << std::endl;
     std::cout << "float: " << static_cast<float>( c ) << ".0f" << std::endl;
     std::cout << "double: " << static_cast<double>( c ) << ".0" << std::endl;
@@ -101,7 +101,7 @@ static void    convertChar( char c )
 static void    convertInt( int n )
 {
     if ( isprint( static_cast<char>( n ) ) )
-        std::cout << "char: " << static_cast<char>( n ) << std::endl;
+        std::cout << "char: '" << static_cast<char>( n ) << "'" << std::endl;
     else if ( n < 0 || n > 255 )
         std::cout << "char: Impossible" << std::endl;
     else
@@ -114,12 +114,12 @@ static void    convertInt( int n )
 static void    convertFloat( float f )
 {
     if ( isprint( static_cast<char>( f ) ) )
-        std::cout << "char: " << static_cast<char>( f ) << std::endl;
+        std::cout << "char: '" << static_cast<char>( f ) << "'" << std::endl;
     else if ( f < 0 || f > 255 || isnan( f ) )
         std::cout << "char: Impossible" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    if ( f > INT_MIN && f < INT_MAX )
+    if ( f > INT_MIN && f < static_cast<float>(INT_MAX) )
         std::cout << "int: "  << static_cast<int>( f ) << std::endl;
     else
         std::cout << "int: Impossible" << std::endl;
@@ -138,12 +138,12 @@ static void    convertFloat( float f )
 static void    convertDouble( double d )
 {
     if ( isprint( static_cast<char>( d ) ) )
-        std::cout << "char: " << static_cast<char>( d ) << std::endl;
+        std::cout << "char: '" << static_cast<char>( d ) << "'" << std::endl;
     else if ( d < 0 || d > 255 || isnan( d ) )
         std::cout << "char: Impossible" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    if  ( d > INT_MIN && d < INT_MAX )
+    if  ( d > INT_MIN && d < static_cast<float>(INT_MAX) )
         std::cout << "int: "  << static_cast<int>( d ) << std::endl;
     else
         std::cout << "int: Impossible" << std::endl;
