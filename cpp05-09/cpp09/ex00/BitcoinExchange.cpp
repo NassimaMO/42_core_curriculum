@@ -157,7 +157,5 @@ int BitcoinExchange::BitcoinValueTab( std::ifstream& file, std::ifstream& data )
         else
             std::cout << date << " => " << value << " = " << f->getValue(value, f->searchValue(date, myMap)) << std::endl;
     }
-    (void)value;
-    (void)data;
     return (0);
 }

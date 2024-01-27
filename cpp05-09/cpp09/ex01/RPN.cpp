@@ -37,7 +37,7 @@ void    RPN::calculate( std::string expression )
     while ( !expression.empty() )
     {
         //stock_operations( expression );
-        expression = expression.substr(expression.find_first_not_of("/ *-+"), expression.length());
+        expression = expression.substr(expression.find_first_not_of("0123456789 "), expression.length());
         while ( index < expression.length() && !isspace(expression[index]) && isdigit( expression[index] ))
             nums.push(strtoi(expression.substr(index, expression.find(' ')))), index++;
         expression = expression.substr(expression.find_first_not_of("0123456789 "), expression.length());
