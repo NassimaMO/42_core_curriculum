@@ -36,14 +36,12 @@ void    Span::addNumber( int value )
     stock.insert(stock.end(), value);
 }
 
-void    Span::rangeIterator( const std::list<int> l )
+void    Span::rangeIterator( std::list<int>::const_iterator start, std::list<int>::const_iterator end )
 {
-    std::list<int>::const_iterator    start = l.begin();
-    std::list<int>::const_iterator    end = l.end();
     if ( distance(start, end) + stock.size() >= _N )
     {
         std::list<int>::const_iterator    tmp = start;
-        std::advance(tmp, _N - std::distance( stock.begin(), stock.end() ) );
+        std::advance(tmp, _N - stock.size() );
         stock.insert(stock.end(), start, tmp);
         throw Span::SpanFull();
     }

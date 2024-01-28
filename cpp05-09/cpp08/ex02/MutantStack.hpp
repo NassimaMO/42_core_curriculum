@@ -13,14 +13,13 @@ class MutantStack : public std::stack< T >
     MutantStack( const MutantStack &m ){ *this = m; }
     MutantStack&    operator=( const MutantStack &m )
     {
-        if ( this != *m )
+        if ( this != &m )
         {
             *this = m;
         }
         return ( &this );
     }
     ~MutantStack(){}
- // Container_Type: This parameter is the type of container for which the iterator is declared.
     typedef typename std::stack< T >::container_type::iterator    iterator;
 
     iterator begin( void )
