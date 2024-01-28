@@ -26,9 +26,20 @@ int   strtoi( std::string line )
     return (num);
 }
 
+std::string    trim( std::string str )
+{
+    size_t start = 0;
+    size_t end = str.length();
+
+    while (start < end && isspace(str[start]))
+        start++;
+    while (end > start && isspace(str[end - 1]))
+        end--;
+    return str.substr(start, end - start);
+}
+
 void    RPN::calculate( std::string expression )
 {
-    size_t index = 0;
     int one;
     int two;
 
@@ -36,36 +47,47 @@ void    RPN::calculate( std::string expression )
         throw RPN::BadExpression();
     while ( !expression.empty() )
     {
-        //stock_operations( expression );
-        expression = expression.substr(expression.find_first_not_of("0123456789 "), expression.length());
-        while ( index < expression.length() && !isspace(expression[index]) && isdigit( expression[index] ))
-            nums.push(strtoi(expression.substr(index, expression.find(' ')))), index++;
-        expression = expression.substr(expression.find_first_not_of("0123456789 "), expression.length());
-        std::cout << expression << "    " << expression.length() << std::endl;
-        for ( size_t i = expression.find_first_not_of("/ *-+"); i > 0 && !isspace(expression[i - 1]) && !isdigit( expression[i - 1] ); i--)
-            ops.push(expression[i - 1]);
-        one = nums.top();
-        nums.pop();
-        if ( !nums.empty() )
-        {two = nums.top();
-        nums.pop();}
-        //std::cout << "operation: (" << two << ")"<< ops.top() << "(" << one << ")" << std::endl;
-        switch ( ops.top() )
+        while ( expression.find_first_not_of("0123456789 ") )
         {
-            case '+':
-                two += one;
-                break;
-            case '-':
-                two -= one;
-                break;
-            case '/':
-                two /= one;
-                break;
-            case '*':
-                two *= one;
+            if ( !isspace(expression[0]) )
+                nums.push(strtoi(expression.substr(0, expression.find(' '))));
+            expression = expression.substr(1, expression.length());
         }
-        ops.pop();
-        nums.push(two);
+        for ( size_t i = expression.find_first_not_of("/*-+ "); i > 0 && i < INT_MAX ; i--)
+                isspace(expression[i - 1]) ? (void)42 : ops.push(expression[i - 1]);
+        if ( expression.find_first_not_of("/*-+ ") > INT_MAX )
+        {
+            for ( size_t i = expression.length(); i > 0; i--)
+                isspace(expression[i - 1]) ? (void)42 : ops.push(expression[i - 1]);
+            expression = "";
+        }
+        else
+            expression = expression.substr(expression.find_first_not_of("/*-+ "), expression.length());
+        while ( !ops.empty() )
+        {
+            one = nums.top();
+            nums.pop();
+            if ( !nums.empty() )
+            {two = nums.top();
+            nums.pop();}
+            //std::cout << "operation: (" << two << ")"<< ops.top() << "(" << one << ")" << std::endl;
+            switch ( ops.top() )
+            {
+                case '+':
+                    two += one;
+                    break;
+                case '-':
+                    two -= one;
+                    break;
+                case '/':
+                    two /= one;
+                    break;
+                case '*':
+                    two *= one;
+            }
+            ops.pop();
+            nums.push(two);
+        }
     }
     std::cout << two << std::endl;
 }
@@ -75,6 +97,7 @@ int RPN::isExpressionValid( std::string expression ) // The numbers used in this
     int num = 0;
     int op = 0;
 
+    expression = trim( expression );
     for ( int i = 0; expression[i]; i++ )
     {
         if ( !isspace( expression[i] ) && isdigit( expression[i] ) && (num++, strtoi(expression.substr(i, expression.find(' ') ) ) ) >= 10 )
@@ -107,27 +130,6 @@ int RPN::isExpressionValid( std::string expression ) // The numbers used in this
     if ( op != num - 1 )
         return ( 0 );
     return ( 1 );
-}
-
-void    RPN::stock_operations( std::string& expression )
-{
-    size_t index = 0;
-    while ( index < expression.length() && !isspace(expression[index]) && isdigit( expression[index] ))
-        nums.push(strtoi(expression.substr(index, expression.find(' ')))), index++;
-    expression = expression.substr(expression.find_first_not_of("0123456789 "), expression.length());
-    //std::cout << expression << "     " << expression.substr(0, expression.find_first_not_of("+-/* ")).length() << std::endl;
-    for ( size_t i = expression.length() - expression.substr(0, expression.find_first_not_of("+-/* ")).length(); i > 0 && !isspace(expression[i - 1]) && !isdigit( expression[i - 1] ); i--)
-        ops.push(expression[i - 1]);
-    /*for ( size_t i = 0; i < expression.length(); i++)
-    {
-        if ( !isspace(expression[i]) && isdigit( expression[i] ) )
-            nums.push(strtoi(expression.substr(i, expression.find(' '))));
-    }
-    for ( size_t i = expression.length(); i > 0; i--)
-    {
-        if ( !isspace(expression[i - 1]) && !isdigit( expression[i - 1] ) )
-            ops.push(expression[i - 1]);
-    }*/
 }
 
 const char * RPN::BadExpression::what() const throw()

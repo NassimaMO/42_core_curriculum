@@ -6,6 +6,7 @@
 # include <cstring>
 # include <cstdlib>
 # include <sstream>
+# include <limits.h>
 
 class RPN
 {
@@ -14,8 +15,7 @@ class RPN
 
         std::stack<int>     nums;
         std::stack<char>    ops;
-        int             isExpressionValid( std::string expression );
-        void            stock_operations( std::string &expression );
+        int                 isExpressionValid( std::string expression );
 
     public:
 
