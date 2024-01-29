@@ -17,41 +17,67 @@ float   strtoi( std::string line )
     return (num);
 }
 
+std::string    trim( std::string str )
+{
+    size_t start = 0;
+    size_t end = str.length();
+
+    while (start < end && isspace(str[start]))
+        start++;
+    while (end > start && isspace(str[end - 1]))
+        end--;
+    return str.substr(start, end - start);
+}
+
 const std::map<std::string, float> BitcoinExchange::stock_data( std::ifstream& data )
 {
     std::string line;
     std::string date;
     std::map<std::string, float> myMap;
+    float   num;
+    std::string str;
+    std::string tmp;
 
     getline(data, line);
-    while ( getline( data, line ) )
-        myMap[line.substr( 0, line.find( ',' ) )] = strtoi( line.substr( line.find( ',' ) + 1 ) );
-    return ( myMap );
-
-    /*std::string line;
-    std::string date;
-
-
-    
-    std::cout << line << std::endl;
-    getline(data, line);
-    std::cout << line << std::endl;
     while ( getline( data, line ) )
     {
-        size_t commaPos = line.find(',');
-        if (commaPos != std::string::npos)
+        tmp = line;
+        str = trim(line.substr(0, line.find(',')));
+        if (str.empty())
+            continue;
+        size_t i = 0;
+        while ( str[i] )
         {
-            std::string date = line.substr(0, commaPos);
-            try {
-                float value = strtoi(line.substr(commaPos + 1));
-                // Assuming you want to store the value as a float in the map
-                myMap[date] = value;
-            } catch (const std::invalid_argument& e) {
-                // Handle the exception or log the error
-                std::cerr << "Error processing line: " << e.what() << std::endl;
-            }
+            if (std::isdigit(str[i]))
+                break;
+            i++;
         }
-    }*/
+        if (i == str.length())
+            continue;
+        num = strtoi(line.substr(0, line.find('-')));
+        if ( num < 0 || static_cast<long int>(num) > INT_MAX)
+            continue;
+        line = line.substr(line.find('-') + 1);
+        num = strtoi(line.substr(0, line.find('-')));
+        if ( line.find('-') >= line.length() || num > 31 || num < 1 )
+            continue;
+        line = line.substr(line.find('-') + 1);
+        num = strtoi(line.substr(0, line.find('-')));
+        if ( num > 31 || num < 1 )
+            continue;
+        if ( line.find(',') >= line.length() || strtoi(line.substr(line.find(',') + 1)) != strtoi(line.substr(line.find(',') + 1)))
+            continue;
+        i = 0;
+        while ( line[i] )
+        {
+            if (std::isalpha(line[i]))
+                continue;
+            i++;
+        }
+        if ( tmp.find( ',' ) < tmp.size() && trim(tmp.substr( tmp.find( ',' ) + 1 )).find_first_not_of("0123456789.") > INT_MAX)
+            myMap[trim(tmp.substr( 0, tmp.find( ',' ) ))] = strtoi( trim(tmp.substr( tmp.find( ',' ) + 1 )) );
+    }
+    return ( myMap );
 }
 
 
@@ -67,7 +93,6 @@ float BitcoinExchange::searchValue( const std::string& targetDate, const std::ma
     if ( it != myMap.end() && it->first == targetDate )
         return it->second;
 
-    // If the targetDate is not found, find the closest lower date
     if ( it != myMap.begin() )
     {
         --it;
@@ -77,17 +102,6 @@ float BitcoinExchange::searchValue( const std::string& targetDate, const std::ma
         return (0.0);
 }
 
-std::string    trim( std::string str )
-{
-    size_t start = 0;
-    size_t end = str.length();
-
-    while (start < end && isspace(str[start]))
-        start++;
-    while (end > start && isspace(str[end - 1]))
-        end--;
-    return str.substr(start, end - start);
-}
 
 int validLine( std::string line )
 {
@@ -143,16 +157,16 @@ int BitcoinExchange::BitcoinValueTab( std::ifstream& file, std::ifstream& data )
     myMap = f->stock_data( data );
     while (getline(file, line))
     {
-        if (validLine( line )) // need to take care of spaces in case there is no value after the |
+        date = trim(line.substr(0, line.find('|')));
+        value = strtoi(line.substr(line.find('|') + 1));
+        if (validLine( line ) || trim(line.substr(line.find('|') + 1)).find_first_not_of("0123456789.-") < INT_MAX || date.find_first_not_of("0123456789-") < INT_MAX)
         {
             std::cout << "Error: bad input => " << line << std::endl;
             continue;
         }
-        date = trim(line.substr(0, line.find('|')));
-        value = strtoi(line.substr(line.find('|') + 1));
         if (value < 0)
             std::cout << "Error: not a positive number." << std::endl;
-        else if (static_cast<long int>(value) > INT_MAX)
+        else if (static_cast<long int>(value) >= 1000)
             std::cout << "Error: too large a number." << std::endl;
         else
             std::cout << date << " => " << value << " = " << f->getValue(value, f->searchValue(date, myMap)) << std::endl;

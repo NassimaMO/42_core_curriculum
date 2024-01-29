@@ -90,9 +90,11 @@ void    RPN::calculate( std::string expression )
         }
     }
     std::cout << two << std::endl;
+    ops = std::stack<char>();
+    nums = std::stack<int>();
 }
 
-int RPN::isExpressionValid( std::string expression ) // The numbers used in this operation and passed as arguments will always be less than 10 ???
+int RPN::isExpressionValid( std::string expression )
 {
     int num = 0;
     int op = 0;
@@ -100,9 +102,9 @@ int RPN::isExpressionValid( std::string expression ) // The numbers used in this
     expression = trim( expression );
     for ( int i = 0; expression[i]; i++ )
     {
-        if ( !isspace( expression[i] ) && isdigit( expression[i] ) && (num++, strtoi(expression.substr(i, expression.find(' ') ) ) ) >= 10 )
+        if ( !isspace( expression[i] ) && isdigit( expression[i] ) && ((num++, strtoi(expression.substr(i, expression.find(' ') ) ) ) >= 10  || (i += expression.substr(i, expression.size()).find_first_not_of("0123456789") ), 0))
             return ( 0 );
-        else if ( !isspace( expression[i] ) && !isdigit( expression[i] ) )
+        else if ( expression[i] && !isspace( expression[i] ) && !isdigit( expression[i] ) )
         {
             switch ( expression[i] )
             {
@@ -115,6 +117,8 @@ int RPN::isExpressionValid( std::string expression ) // The numbers used in this
                     return ( 0 );
             }
             op++;
+            if ( expression[i + 1] && isdigit(expression[i + 1]) )
+                return ( 0 );
         }
     }
     switch ( expression[expression.length() - 1] )
