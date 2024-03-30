@@ -19,7 +19,7 @@ static int validPassword(std::string password)
 
 int validArgs( std::string port, std::string password )
 {
-	if (validPort(port) && validPassword(password))
+	if (validPort(port) || validPassword(password))
 		return (1);
 	return (0);
 }

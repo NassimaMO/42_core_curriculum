@@ -4,7 +4,9 @@ CC				=	c++
 
 CFLAGS			=	-Wall -Wextra -Werror -g -std=c++98
 
-SRCS			=	main.cpp Server.cpp	validArgs.cpp
+SRCS			=	main.cpp	validArgs.cpp	\
+					Server.cpp	ServerGetSet.cpp	ServerReply.cpp	 ServerVerifInfoClient.cpp \
+					Clients.cpp	ClientsSendRPLErr.cpp \
 
 OBJ_DIR			=	obj
 

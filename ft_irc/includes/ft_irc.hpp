@@ -14,6 +14,7 @@
 
 # include "Clients.hpp"
 # include "Server.hpp"
+# include "Reply.hpp"
 
 int	strtoint(std::string src);
 int validArgs( std::string port, std::string password );
