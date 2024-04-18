@@ -2,16 +2,27 @@
 # define FT_IRC_HPP
 
 # include <string>
+# include <sstream>
+# include <arpa/inet.h>
+# include <functional>
+# include <sys/socket.h>
 # include <iostream>
-# include <cstdlib>
-# include <ctime>
 # include <unistd.h>
-# include <fstream>
+# include <errno.h>
+# include <poll.h>
+# include <cstdlib>
+# include <vector>
+# include <map>
+# include <algorithm>
+# include <csignal>
 
-#include <poll.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+# include "Clients.hpp"
+# include "Server.hpp"
+# include "Channels.hpp"
 
-int validArgs(char **argv);
+int	strtoint(std::string src);
+std::string	inttostr(int src);
+int validArgs( std::string port, std::string password );
+
 
 #endif
