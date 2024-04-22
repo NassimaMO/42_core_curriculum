@@ -5,7 +5,7 @@ std::string		Channels::execInvite(int key)
 	_invite = key;
 	if (key == -1 && (_access == 2 || _access == 3))
 		return (_access -= CH_INVITE, std::cout << _name << ": Mode: Invitation mode removed." << std::endl, "Invitation mode removed.");
-	else if (_access == 1 || _access == 0)
+	else if (key == 1 && (_access == 1 || _access == 0))
 		return (_access += CH_INVITE, std::cout << _name << ": Mode: Invitation mode set." << std::endl, "Invitation mode set.");
 	return ("Invitation already set.");
 }

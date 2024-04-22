@@ -6,17 +6,13 @@
 
 class Clients;
 
-<<<<<<< HEAD
 class Channels;
 
-=======
->>>>>>> d716035d2eb73105aa66ebd283be720780c86a21
 class Server
 {
     private:
 
 		std::vector<Clients>		_client;
-<<<<<<< HEAD
 		std::vector<Channels>		_channel;
 	    std::vector<struct pollfd>	_fds;
 	    std::string					_password;
@@ -25,14 +21,6 @@ class Server
 		int                         _totalClients;
 		int							_totalChannels;
 		static int					_ext;
-=======
-	    std::vector<struct pollfd>  _fds;
-	    std::string                 _password;
-	    std::string                 _port;
-	    int                         _sockfd;
-		int                         _totalClients;
-		int							_ext;
->>>>>>> d716035d2eb73105aa66ebd283be720780c86a21
 	    struct  sockaddr_in         serv_addr;
 
 		/////////////////////Init Serv/////////////////////
@@ -51,7 +39,6 @@ class Server
 		int							getTotalClients(void);
 		int							getExt(void);
 
-<<<<<<< HEAD
 		////////////////////// Exec //////////////////////
 		int							execSwitch( ssize_t it);
 		int							execWelcome( ssize_t it);
@@ -62,21 +49,11 @@ class Server
 		int							execInvite(ssize_t it);
 		int							execKick(ssize_t it);
 		int							execTopic(ssize_t it);
-=======
-		////////////////////// Reply //////////////////////
-		int							RPLSwitch( ssize_t it);
-		int							replyVoid(ssize_t it);
-		int							replyWelcome( ssize_t it);
-		int							replyJoin(ssize_t it);
-
-		void						replyPong(ssize_t it);
->>>>>>> d716035d2eb73105aa66ebd283be720780c86a21
 
 	    void						waitClients(void);
 	    void						receiveMsgs(void);
 	    int							sendMsgs(void);
 		void						parseMsgs(void);
-<<<<<<< HEAD
 		int							privMsg(ssize_t it);
 		int							channelMsg(ssize_t it);
 
@@ -101,12 +78,6 @@ class Server
 		void						serverErr(std::string key, std::string msg, ssize_t it, int idx);
 
 
-=======
-
-		////////////////////// Verif //////////////////////
-		int							verif(ssize_t it);
-		void						deleteClient(ssize_t it);
->>>>>>> d716035d2eb73105aa66ebd283be720780c86a21
 };
 
 #endif
